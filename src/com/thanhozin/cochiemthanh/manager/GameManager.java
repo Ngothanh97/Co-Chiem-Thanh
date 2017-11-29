@@ -193,31 +193,6 @@ public class GameManager {
         char coordinatesOfX = coverXLocation(xOnClick);
         int coordinatesOfY = coverYLocation(yOnClick);
 
-        for (int i = 0; i < chesses.size(); i++) {
-            Chess chess = chesses.get(i);
-            if (coordinatesOfX == coverXLocation(chess.getX()) && coordinatesOfY == coverYLocation(chess.getY())) {
-                if (chessIsLastMove != null) {
-                    if (chessIsLastMove.getType() != chess.getType()) {
-                        if (luotdi==3 || luotdi == 0) {
-                            System.out.println("thah");
-                            if (kiemTraQuanCoTrang(chess)) {
-                                countOfChesss = 1;
-                                break;
-                            }
-                            tempChess = i;
-                        } else if (!kiemTraQuanCoTrang(chess)) {
-                            countOfChesss = 1;
-                            tempChess = i;
-                            break;
-                        }
-                    } else tempChess = i;
-                } else {
-                    tempChess = i;
-                    countOfChesss = 1;
-                    break;
-                }
-            }
-        }
 
         for (int i = 0; i < abilities.size(); i++) {
             Ability ability = abilities.get(i);
@@ -227,13 +202,61 @@ public class GameManager {
             }
         }
 
+        for (int i = 0; i < chesses.size(); i++) {
+            Chess chess = chesses.get(i);
+            if (coordinatesOfX == coverXLocation(chess.getX()) && coordinatesOfY == coverYLocation(chess.getY())) {
+                if (chessIsLastMove != null) {
+                    if (chessIsLastMove.getType() != chess.getType()) {
+                        if (luotdi > 2 || luotdi == 0) {
+                            if (kiemTraQuanCoTrang(chess)) {
+                                countOfChesss = 1;
+                                tempChess = i;
+                                break;
+                            } else {
+                                if (countOfAbility == 1) {
+                                    countOfChesss = 1;
+                                    tempChess = i;
+                                }
+                            }
+
+                        } else {
+                            if (!kiemTraQuanCoTrang(chess)) {
+                                countOfChesss = 1;
+                                tempChess = i;
+                                break;
+                            } else {
+                                if (countOfAbility == 1) {
+                                    countOfChesss = 1;
+                                    tempChess = i;
+                                }
+                            }
+                        }
+                    } else {
+                        if (kiemTraQuanCoTrang(chessIsLastMove)) {
+                            if (!kiemTraQuanCoTrang(chess) && luotdi < 3 && luotdi > 0) {
+                                countOfChesss = 1;
+                            }
+                        } else {
+                            if (kiemTraQuanCoTrang(chess) && luotdi == 3 || kiemTraQuanCoTrang(chess) && luotdi == 0) {
+                                countOfChesss = 1;
+                            }
+                        }
+                    }
+                } else {
+                    tempChess = i;
+                    countOfChesss = 1;
+                    break;
+                }
+            }
+        }
+
         //Kiểm tra xem vị trí vừa click chứa quân cờ hay khả năng di chuyển
         if (countOfChesss == 1 && countOfAbility == 1) {
             /*Nếu vị trí vừa click chứa quân cờ và ô khả năng
             -> Thì thay chỗ quân cò đối phương bằng quân cờ được lưu tại chessRemember
             -> Và xóa hết tất cả các ô khă năng (Ability)
             */
-            System.out.println("thanh");
+
             chesses.remove(tempChess);
             abilities.clear();
             moveChess(coordinatesOfX, coordinatesOfY);
@@ -248,6 +271,7 @@ public class GameManager {
             Nếu vị trí click là 1 quân cờ
             -> Thì xóa hết các ô khẳ năng cũ và cập nhật ô khả năng mới cho quân cơ
              */
+
                 if (!flagsFly) {
                     chessRemember = chesses.get(tempChess);
                     abilities.clear();
@@ -276,7 +300,6 @@ public class GameManager {
             }
 
         }
-        System.out.println(chesses.size());
     }
 
     //Kiểm tra tạo ra các ô khả năng
@@ -519,7 +542,28 @@ public class GameManager {
         if (luotdi == 0) {
             luotdi = 4;
         }
-        luotdi--;
+        if (!flagsFly) {
+            int countTrang = 0;
+            int countDen = 0;
+            for (int i = 0; i < chesses.size(); i++) {
+                if (kiemTraQuanCoTrang(chesses.get(i))) {
+                    countTrang++;
+                } else {
+                    countDen++;
+                }
+            }
+            System.out.println(countDen + ", " + countTrang);
+            if (luotdi == 4) {
+                if (countTrang == 1) {
+                    luotdi -= 2;
+                } else luotdi--;
+            } else if (luotdi == 2) {
+                if (countDen == 1) {
+                    luotdi -= 2;
+                } else luotdi--;
+            } else
+                luotdi--;
+        }
         chessIsLastMove = chessRemember;
     }
 

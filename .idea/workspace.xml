@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d866875-70b3-4364-9e60-d437d584af07" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/res/drawable/khung luot di.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/res/drawable/quan den.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/res/drawable/quan trang.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel$2.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/ImageStore.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/ImageStore.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel$1.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/ImageStore.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/ImageStore.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/GamePanel.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/GamePanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -80,8 +67,8 @@
       <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="201" column="52" lean-forward="false" selection-start-line="201" selection-start-column="52" selection-end-line="201" selection-end-column="52" />
+            <state relative-caret-position="249">
+              <caret line="560" column="36" lean-forward="true" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
               <folding>
                 <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
                 <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
@@ -148,7 +135,6 @@
     <findStrings>
       <find>Sys</find>
       <find>system</find>
-      <find>print</find>
       <find>add</find>
       <find>273, 238, 300, 225, null</find>
       <find>mỗi ưo</find>
@@ -165,9 +151,10 @@
       <find>mỗi lư</find>
       <find>mỗi l</find>
       <find>mỗi</find>
-      <find>mỗi</find>
       <find>mỗ</find>
       <find>m</find>
+      <find>prin</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -231,9 +218,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
-      <pane id="PackagesPane" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -350,6 +336,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -626,6 +613,14 @@
       <workItem from="1510853237035" duration="540000" />
       <workItem from="1510886467403" duration="845000" />
     </task>
+    <task id="LOCAL-00001" summary="ahihi dồ qốk">
+      <created>1511926313768</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1511926313768</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -673,7 +668,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="ahihi dồ qốk" />
+    <option name="LAST_COMMIT_MESSAGE" value="ahihi dồ qốk" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1107,8 +1103,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="201" column="52" lean-forward="false" selection-start-line="201" selection-start-column="52" selection-end-line="201" selection-end-column="52" />
+        <state relative-caret-position="249">
+          <caret line="560" column="36" lean-forward="true" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
           <folding>
             <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
             <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
