@@ -4,7 +4,6 @@ import com.thanhozin.cochiemthanh.manager.GameManager;
 import com.thanhozin.cochiemthanh.manager.ImageStore;
 
 import java.awt.*;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -63,11 +62,9 @@ public class GamePanel extends BasePanel implements Runnable {
 
                         }
                         if (flagVanMoi) {
-
-gameManager= new GameManager();
-flagShowTB=false;
-
-
+                            gameManager = new GameManager();
+                            flagShowTB = false;
+                            flagOkInTB = false;
                         }
                         if (flagHome) {
                             onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_TO_MENU_PANEL);
@@ -75,6 +72,14 @@ flagShowTB=false;
                         if (flagThoat) {
                             System.exit(0);
                         }
+                    }
+                } else if (gameManager.checkWin() != 0) {
+                    if (x > 350 && x < 430 && y > 420 && y < 446) {
+                        System.exit(0);
+                    }
+                    if (x > 475 && x < 552 && y > 420 && y < 446) {
+                        gameManager = new GameManager();
+                        flagOkInTB = false;
                     }
                 } else if (flagFrameTamDung) {
                     if (x > 295 && x < 456 && y > 498 && y < 550) {
@@ -109,6 +114,13 @@ flagShowTB=false;
                     if (x > 475 && x < 552 && y > 420 && y < 446) {
                         flagOkInTB = true;
                     } else flagOkInTB = false;
+                } else if (gameManager.checkWin() != 0) {
+                    if (x > 350 && x < 430 && y > 420 && y < 446) {
+                        flagBackInTB = true;
+                    } else flagBackInTB = false;
+                    if (x > 475 && x < 552 && y > 420 && y < 446) {
+                        flagOkInTB = true;
+                    } else flagOkInTB = false;
                 } else if (flagFrameTamDung) {
                     if (x > 295 && x < 456 && y > 498 && y < 550) {
                         flagTiepTuc = true;
@@ -132,33 +144,7 @@ flagShowTB=false;
         };
 
         addMouseListener(mouseAdapter);
-
         addMouseMotionListener(mouseAdapter);
-
-        KeyAdapter keyAdapter = new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-                super.keyTyped(e);
-                System.out.println("thanh1");
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                super.keyPressed(e);
-                System.out.println("thanh2");
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                super.keyReleased(e);
-                System.out.println("thanh3");
-
-            }
-        };
-
-        addKeyListener(keyAdapter);
-
     }
 
     @Override
@@ -224,6 +210,27 @@ flagShowTB=false;
         gameManager.drawAbility(graphics2D);
         gameManager.drawChess(graphics2D);
         graphics2D.drawImage(ImageStore.IMG_FRAME, 700, 0, 145, 709, null);
+        Font font = new Font("Arial", Font.BOLD | Font.ITALIC, 24);
+        graphics2D.setFont(font);
+        graphics2D.setColor(Color.BLACK);
+        graphics2D.drawString("Lượt Chơi", 710, 55);
+        graphics2D.drawImage(ImageStore.IMG_FRAME_QUAN_TRANG, 710, 70, 125, 40, null);
+        graphics2D.drawImage(ImageStore.IMG_FRAME_QUAN_DEN, 710, 120, 125, 40, null);
+        switch (gameManager.luotdi) {
+            case 4:
+            case 0:
+                graphics2D.drawImage(ImageStore.IMG_FRAME_KHUNG_LUOT_CHOI, 710, 70, 125, 40, null);
+                break;
+            case 3:
+                graphics2D.drawImage(ImageStore.IMG_FRAME_KHUNG_LUOT_CHOI, 710, 70, 63, 40, null);
+                break;
+            case 2:
+                graphics2D.drawImage(ImageStore.IMG_FRAME_KHUNG_LUOT_CHOI, 710, 120, 125, 40, null);
+                break;
+            case 1:
+                graphics2D.drawImage(ImageStore.IMG_FRAME_KHUNG_LUOT_CHOI, 710, 120, 63, 40, null);
+                break;
+        }
         graphics2D.drawImage(ImageStore.IMG_BUTTON_THOAT1, 710, 630, 128, 36, null);
         graphics2D.drawImage(ImageStore.IMG_BUTTON_HOME_1, 710, 570, 128, 36, null);
         graphics2D.drawImage(ImageStore.IMG_BUTTON_VANMOI1, 710, 510, 128, 36, null);
@@ -253,6 +260,26 @@ flagShowTB=false;
             graphics2D.drawImage(ImageStore.IMG_XAC_NHAN_ROI_BAN, 273, 238, 300, 225, null);
             if (flagBackInTB) {
                 graphics2D.drawImage(ImageStore.IMG_BUTTON_TRO_VE, 345, 418, 90, 28, null);
+            }
+            if (flagOkInTB) {
+                graphics2D.drawImage(ImageStore.IMG_BUTTON_OK, 469, 418, 90, 28, null);
+
+            }
+        }
+        if (gameManager.checkWin() == 1) {
+            graphics2D.drawImage(ImageStore.IMG_FRAME_TRANG_THANG, 273, 238, 300, 225, null);
+            if (flagBackInTB) {
+                graphics2D.drawImage(ImageStore.IMG_BUTTON_THOAT2, 345, 418, 90, 28, null);
+            }
+            if (flagOkInTB) {
+                graphics2D.drawImage(ImageStore.IMG_BUTTON_OK, 469, 418, 90, 28, null);
+
+            }
+        }
+        if (gameManager.checkWin() == 2) {
+            graphics2D.drawImage(ImageStore.IMG_FRAME_DEN_THANG, 273, 238, 300, 225, null);
+            if (flagBackInTB) {
+                graphics2D.drawImage(ImageStore.IMG_BUTTON_THOAT2, 345, 418, 90, 28, null);
             }
             if (flagOkInTB) {
                 graphics2D.drawImage(ImageStore.IMG_BUTTON_OK, 469, 418, 90, 28, null);

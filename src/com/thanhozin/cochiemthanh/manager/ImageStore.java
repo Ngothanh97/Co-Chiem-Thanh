@@ -12,6 +12,11 @@ public class ImageStore {
     public static final Image IMG_MENU_SELECT = getImage("/res/drawable/ic-menu-luachon.png");
     public static final Image IMG_FRAME = getImage("/res/drawable/frame.png");
     public static final Image IMG_FRAME_TAM_DUNG = getImage("/res/drawable/img_tamdung.png");
+    public static final Image IMG_FRAME_TRANG_THANG = getImage("/res/drawable/ic-thong-bao-trang-thang.png");
+    public static final Image IMG_FRAME_DEN_THANG = getImage("/res/drawable/ic-thong-bao-den-thang.png");
+    public static final Image IMG_FRAME_QUAN_DEN = getImage("/res/drawable/quan den.png");
+    public static final Image IMG_FRAME_QUAN_TRANG = getImage("/res/drawable/quan trang.png");
+    public static final Image IMG_FRAME_KHUNG_LUOT_CHOI= getImage("/res/drawable/khung luot di.png");
 
     public static final Image IMG_BUTTON_CHIEN_DAU= getImage("/res/drawable/ic-chiendau2.png");
     public static final Image IMG_BUTTON_CAI_DAT= getImage("/res/drawable/ic-caidat2.png");
