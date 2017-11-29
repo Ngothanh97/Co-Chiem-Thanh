@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d866875-70b3-4364-9e60-d437d584af07" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -67,8 +67,8 @@
       <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="560" column="36" lean-forward="true" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
+            <state relative-caret-position="147">
+              <caret line="554" column="61" lean-forward="true" selection-start-line="554" selection-start-column="61" selection-end-line="554" selection-end-column="61" />
               <folding>
                 <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
                 <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
@@ -620,7 +620,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511926313768</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="chức năng chia lượt chơi">
+      <created>1511944863298</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1511944863298</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -669,7 +676,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ahihi dồ qốk" />
-    <option name="LAST_COMMIT_MESSAGE" value="ahihi dồ qốk" />
+    <MESSAGE value="chức năng chia lượt chơi" />
+    <option name="LAST_COMMIT_MESSAGE" value="chức năng chia lượt chơi" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1103,8 +1111,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="560" column="36" lean-forward="true" selection-start-line="560" selection-start-column="36" selection-end-line="560" selection-end-column="36" />
+        <state relative-caret-position="147">
+          <caret line="554" column="61" lean-forward="true" selection-start-line="554" selection-start-column="61" selection-end-line="554" selection-end-column="61" />
           <folding>
             <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
             <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
