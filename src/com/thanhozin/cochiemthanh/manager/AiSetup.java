@@ -33,34 +33,7 @@ public class AiSetup {
         tempChessIsRuns = new ArrayList<>();
     }
 
-    public AiSetup(ArrayList<Chess> chessWhite, ArrayList<Chess> chessBlack) {
-        this.chessWhite = chessWhite;
-        this.chessBlack = chessBlack;
-    }
-
-    public int getScore(){
-        int score = 0;
-        for (int i = 0; i<chessBlack.size(); i++){
-            int x = coverXVeSoThuTu(chessBlack.get(i).getX());
-            int y = coverYVeSoThuTu(chessBlack.get(i).getY());
-            if (computerIsFirst){
-                score -= diemBanCoCuaNguoiChoi[x][y];
-            } else {
-                score += diemBanCoCuaMay[x][y];
-            }
-        }
-        for (int i = 0; i < chessWhite.size(); i++){
-            int x = coverXVeSoThuTu(chessWhite.get(i).getX());
-            int y = coverYVeSoThuTu(chessWhite.get(i).getY());
-            if (computerIsFirst){
-                score += diemBanCoCuaMay[x][y];
-            } else {
-                score -= diemBanCoCuaNguoiChoi[x][y];
-            }
-        }
-        return score;
-    }
-
+    //Tạo ra điểm của bàn cờ được dùng để xét điểm
     private void setDiemBanCo() {
         diemBanCoCuaMay[1][1] = 60;
         diemBanCoCuaMay[2][1] = 30;
@@ -207,8 +180,50 @@ public class AiSetup {
         diemBanCoCuaNguoiChoi[8][8] = 60;
     }
 
+    //Tính tổng số điểm ở trường hợp hiện tại
+    public int getScore() {
+        int score = 0;
+        for (int i = 0; i < chessBlack.size(); i++) {
+            int x = coverXVeSoThuTu(chessBlack.get(i).getX());
+            int y = coverYVeSoThuTu(chessBlack.get(i).getY());
+            if (computerIsFirst) {
+                score -= diemBanCoCuaNguoiChoi[x][y];
+            } else {
+                score += diemBanCoCuaMay[x][y];
+            }
+        }
+        for (int i = 0; i < chessWhite.size(); i++) {
+            int x = coverXVeSoThuTu(chessWhite.get(i).getX());
+            int y = coverYVeSoThuTu(chessWhite.get(i).getY());
+            if (computerIsFirst) {
+                score += diemBanCoCuaMay[x][y];
+            } else {
+                score -= diemBanCoCuaNguoiChoi[x][y];
+            }
+        }
+        return score;
+    }
+
+    //Yeens
+    public AiSetup(ArrayList<Chess> chessWhite, ArrayList<Chess> chessBlack) {
+        this.chessWhite = chessWhite;
+        this.chessBlack = chessBlack;
+    }
+
     //Phương thức dành cho GameManager gọi
     public String playAi(ArrayList<Chess> chesses) {
+        tachQuanTrangVoiDenTuMang(chesses);
+        tempChessIsRuns.add(new TempChessIsRun(chessWhite, chessBlack, null, 0));
+        return "";
+    }
+
+
+    /*
+    Được dùng để tạo ra mảng các quân cờ đen và trắng trước khi tạo các khả năng
+    dựa vào đối tượng đã lưu TempChesIsRun
+    <----------------------------------------------------------------------------------------------->
+     */
+    private void tachQuanTrangVoiDenTuMang(ArrayList<Chess> chesses) {
         for (int i = 0; i < chesses.size(); i++) {
             if (chesses.get(i).getType() == Chess.WHILE_K
                     || chesses.get(i).getType() == Chess.WHILE_L
@@ -216,41 +231,51 @@ public class AiSetup {
                 chessWhite.add(chesses.get(i));
             } else chessBlack.add(chesses.get(i));
         }
-        return "";
     }
+    /*
+    <----------------------------------------------------------------------------------------------->
+     */
 
-    private void go() {
-        if (computerIsFirst) {
 
-        }
-    }
 
-    private void taoTruongHopNuocDi(ArrayList<Chess> chesses) {
-        if (chesses.size() == 3) {
-            Chess tempChess = chesses.get(0);
-            int x = coverXVeSoThuTu(tempChess.getX());
-            int y = coverYVeSoThuTu(tempChess.getY());
-            switch (kiemTraKhaNangBuocHuongLen(chesses.get(0))) {
-                case 1:
-                    chesses.get(0).setX(x-1);
-                    chesses.get(0).setY(y-2);
-                    break;
-                case 2:
-                    break;
-                case 12:
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
 
+    /*
+    Sinh ra các trường hợp.
+    đây là một phương thức quan trọng, cần cẩn thận
+    Lưu ý:
+        - Trước khi lưu các trường hợp, xóa quân cờ được di chuyển trong trường hợp đó khỏi mảng
+        - Sau khi lưu các trường hợp xóa hai mảng quân đen và quân trắng, để có thể dùng cho trường hợp sau
+    <------------------------------------------------------------------------------------------------------------->
+    <-------------------------------------------------------------------------------->
+     */
     private void sinhNuocDi(Chess chess1, Chess chess2) {
         int xChess1 = chess1.getX();
         int yChess1 = chess1.getY();
         int xChess2 = chess2.getX();
         int yChess2 = chess2.getY();
         switch (kiemTraHuong(chess1)) {
+            case 1:
+                break;
+            case 12:
+                break;
+            case 13:
+                break;
+            case 14:
+                break;
+            case 2:
+                break;
+            case 23:
+                break;
+            case 24:
+                break;
+            case 3:
+                break;
+            case 34:
+                break;
+            case 4:
+                break;
+            case 123:
+                break;
             case 124:
                 if (kiemTraNuocDiHuongLen(chess1)) {
                     int x1 = coverXVeSoThuTu(xChess1) - 1;
@@ -278,225 +303,191 @@ public class AiSetup {
                 }
 //                if (che)
 //                    kiemTraNuocDiHuongLen(chess1);
-
+                break;
+            case 134:
                 break;
             case 234:
                 break;
             case 1234:
                 break;
-            case 12:
-                break;
-            case 23:
-                break;
-            case 123:
-                break;
-            case 14:
-                break;
-            case 34:
-                break;
-            case 134:
-                break;
             default:
                 break;
-
         }
     }
+    /*
+    <-------------------------------------------------------------------------------->
+    <------------------------------------------------------------------------------------------------------------->
+     */
 
-    private void kiemTraNuocBuocDenCoQuan(int x, int y, String type) {
-        for (int i = 0; i < chessBlack.size(); i++){
 
-        }
-    }
 
+    /*
+    Kiểm tra ô chuẩn bị bước đến có hợp lệ hay không
+    (Không chứa quân mình và có thể ăn quân)
+    Kiểu tra về:
+        1: ô bên trái hoặc ô bên trên
+        2: ô bên phải hoặc ô bên dưới
+    <----------------------------------------------------------------------------------------->
+    <---------------------------------------------------------------->
+     */
     private int kiemTraKhaNangBuocHuongLen(Chess chess) {
-        if (kiemTraNuocDiHuongLen(chess)) {
-            int x1 = coverXVeSoThuTu(chess.getX()) - 1;
-            int x2 = coverXVeSoThuTu(chess.getX()) + 1;
-            int y = coverYVeSoThuTu(chess.getY()) - 2;
-            int temp = 0;
-            if (chess.getType() == Chess.WHILE_K || chess.getType() == Chess.WHILE_L || chess.getType() == Chess.WHILE_M) {
-                for (int i = 0; i < chessWhite.size(); i++) {
-                    if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x1
-                            && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
-                        temp = 1;
-                    }
-                    if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x2
-                            && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
-                        temp = 2;
-                    }
+        int x1 = coverXVeSoThuTu(chess.getX()) - 1;
+        int x2 = coverXVeSoThuTu(chess.getX()) + 1;
+        int y = coverYVeSoThuTu(chess.getY()) - 2;
+        int temp = 0;
+        if (kiemTraQuanCoTrang(chess)) {
+            for (int i = 0; i < chessWhite.size(); i++) {
+                int xChess = chessWhite.get(i).getX();
+                int yChess = chessWhite.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x1 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 1;
                 }
-            } else {
-                for (int i = 0; i < chessBlack.size(); i++) {
-                    if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x1
-                            && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
-                        temp = 1;
-                    }
-                    if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x2
-                            && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
-                        temp = 2;
-                    }
+                if (coverXVeSoThuTu(xChess) == x2 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 2;
                 }
             }
-            if (temp == 0) {
-                return 12;
-            } else if (temp != 1) {
-                return 1;
-            } else return 2;
-        } else return 0;
+        } else {
+            for (int i = 0; i < chessBlack.size(); i++) {
+                int xChess = chessBlack.get(i).getX();
+                int yChess = chessBlack.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x1 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 1;
+                }
+                if (coverXVeSoThuTu(xChess) == x2 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 2;
+                }
+            }
+        }
+        if (temp == 0) {
+            return 12;
+        } else if (temp != 1) {
+            return 1;
+        } else return 2;
     }
 
     private int kiemTraKhaNangBuocSangPhai(Chess chess) {
-        if (kiemTraNuocDiHuongLen(chess)) {
-            int x = coverXVeSoThuTu(chess.getX()) + 2;
-            int y1 = coverYVeSoThuTu(chess.getY()) - 1;
-            int y2 = coverYVeSoThuTu(chess.getY()) + 1;
-            int temp = 0;
-            if (chess.getType() == Chess.WHILE_K || chess.getType() == Chess.WHILE_L || chess.getType() == Chess.WHILE_M) {
-                for (int i = 0; i < chessWhite.size(); i++) {
-                    if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
-                            && coverYVeSoThuTu(chessWhite.get(i).getY()) == y1) {
-                        temp = 1;
-                    }
-                    if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
-                            && coverYVeSoThuTu(chessWhite.get(i).getY()) == y2) {
-                        temp = 2;
-                    }
+        int x = coverXVeSoThuTu(chess.getX()) + 2;
+        int y1 = coverYVeSoThuTu(chess.getY()) - 1;
+        int y2 = coverYVeSoThuTu(chess.getY()) + 1;
+        int temp = 0;
+        if (kiemTraQuanCoTrang(chess)) {
+            for (int i = 0; i < chessWhite.size(); i++) {
+                int xChess = chessWhite.get(i).getX();
+                int yChess = chessWhite.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y1) {
+                    temp = 1;
                 }
-            } else {
-                for (int i = 0; i < chessBlack.size(); i++) {
-                    if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
-                            && coverYVeSoThuTu(chessBlack.get(i).getY()) == y1) {
-                        temp = 1;
-                    }
-                    if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
-                            && coverYVeSoThuTu(chessBlack.get(i).getY()) == y2) {
-                        temp = 2;
-                    }
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y2) {
+                    temp = 2;
                 }
             }
-            if (temp == 0) {
-                return 12;
-            } else if (temp != 1) {
-                return 1;
-            } else return 2;
-        } else return 0;
-    }
-
-    private int kiemTraHuong(Chess chess) {
-        /*
-        return
-        1: Hướng lên
-        2: Hướng sang phải
-        3: Hướng xuống
-        4: Hướng sang trái
-         */
-        if (coverXVeSoThuTu(chess.getX()) > 2 && coverXVeSoThuTu(chess.getX()) < 7) {
-            if (kiemTraTheoChieuY(chess) == 1) {
-                return 124;
-            } else if (kiemTraTheoChieuY(chess) == 2) {
-                return 234;
-            } else return 1234;
-        } else if (coverXVeSoThuTu(chess.getX()) <= 2) {
-            if (kiemTraTheoChieuY(chess) == 1) {
-                return 12;
-            } else if (kiemTraTheoChieuY(chess) == 2) {
-                return 23;
-            } else return 123;
         } else {
-            if (kiemTraTheoChieuY(chess) == 1) {
-                return 14;
-            } else if (kiemTraTheoChieuY(chess) == 2) {
-                return 34;
-            } else return 134;
+            for (int i = 0; i < chessBlack.size(); i++) {
+                int xChess = chessBlack.get(i).getX();
+                int yChess = chessBlack.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y1) {
+                    temp = 1;
+                }
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y2) {
+                    temp = 2;
+                }
+            }
         }
-    }
-
-    private int kiemTraTheoChieuY(Chess chess) {
-        /*
-        return
-        1: Hướng lên
-        2: Hướng xuống
-         */
-        if (coverYVeSoThuTu(chess.getY()) > 2 && coverYVeSoThuTu(chess.getY()) < 7) {
+        if (temp == 0) {
             return 12;
-        } else if (coverYVeSoThuTu(chess.getY()) <= 2) {
-            return 2;
-        } else {
+        } else if (temp != 1) {
             return 1;
-        }
+        } else return 2;
     }
 
-    private boolean kiemTraNuocDiHuongLen(Chess chess) {
-        int x = coverXVeSoThuTu(chess.getX());
-        int y = coverYVeSoThuTu(chess.getY()) - 1;
-        for (int i = 0; i < chessWhite.size(); i++) {
-            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
-                return false;
+    private int kiemTraKhaNangBuocHuongXuong(Chess chess) {
+        int x1 = coverXVeSoThuTu(chess.getX()) - 1;
+        int x2 = coverXVeSoThuTu(chess.getX()) + 1;
+        int y = coverYVeSoThuTu(chess.getY()) + 2;
+        int temp = 0;
+        if (kiemTraQuanCoTrang(chess)) {
+            for (int i = 0; i < chessWhite.size(); i++) {
+                int xChess = chessWhite.get(i).getX();
+                int yChess = chessWhite.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x1 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 1;
+                }
+                if (coverXVeSoThuTu(xChess) == x2 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 2;
+                }
+            }
+        } else {
+            for (int i = 0; i < chessBlack.size(); i++) {
+                int xChess = chessBlack.get(i).getX();
+                int yChess = chessBlack.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x1 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 1;
+                }
+                if (coverXVeSoThuTu(xChess) == x2 && coverYVeSoThuTu(yChess) == y) {
+                    temp = 2;
+                }
             }
         }
-        for (int i = 0; i < chessBlack.size(); i++) {
-            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
-                return false;
-            }
-        }
-        return true;
+        if (temp == 0) {
+            return 12;
+        } else if (temp != 1) {
+            return 1;
+        } else return 2;
     }
 
-    private boolean kiemTraNuocDiSangPhai(Chess chess) {
-        int x = coverXVeSoThuTu(chess.getX()) + 1;
-        int y = coverYVeSoThuTu(chess.getY());
-        for (int i = 0; i < chessWhite.size(); i++) {
-            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
-                return false;
+    private int kiemTraKhaNangBuocSangTrai(Chess chess) {
+        int x = coverXVeSoThuTu(chess.getX()) - 2;
+        int y1 = coverYVeSoThuTu(chess.getY()) - 1;
+        int y2 = coverYVeSoThuTu(chess.getY()) + 1;
+        int temp = 0;
+        if (kiemTraQuanCoTrang(chess)) {
+            for (int i = 0; i < chessWhite.size(); i++) {
+                int xChess = chessWhite.get(i).getX();
+                int yChess = chessWhite.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y1) {
+                    temp = 1;
+                }
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y2) {
+                    temp = 2;
+                }
+            }
+        } else {
+            for (int i = 0; i < chessBlack.size(); i++) {
+                int xChess = chessBlack.get(i).getX();
+                int yChess = chessBlack.get(i).getY();
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y1) {
+                    temp = 1;
+                }
+                if (coverXVeSoThuTu(xChess) == x && coverYVeSoThuTu(yChess) == y2) {
+                    temp = 2;
+                }
             }
         }
-        for (int i = 0; i < chessBlack.size(); i++) {
-            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
-                return false;
-            }
-        }
-        return true;
+        if (temp == 0) {
+            return 12;
+        } else if (temp != 1) {
+            return 1;
+        } else return 2;
+    }
+    /*
+    <----------------------------------------------------------------------------------------->
+    <---------------------------------------------------------------->
+     */
+
+
+    private boolean kiemTraQuanCoTrang(Chess chess) {
+        if (chess.getType() == Chess.WHILE_K
+                || chess.getType() == Chess.WHILE_L
+                || chess.getType() == Chess.WHILE_M) {
+            return true;
+        } else return false;
     }
 
-    private boolean kiemTraNuocDiHuongXuong(Chess chess) {
-        int x = coverXVeSoThuTu(chess.getX());
-        int y = coverYVeSoThuTu(chess.getY()) + 1;
-        for (int i = 0; i < chessWhite.size(); i++) {
-            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
-                return false;
-            }
-        }
-        for (int i = 0; i < chessBlack.size(); i++) {
-            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
-                return false;
-            }
-        }
-        return true;
-    }
 
-    private boolean kiemTraNuocDiSangTrai(Chess chess) {
-        int x = coverXVeSoThuTu(chess.getX()) - 1;
-        int y = coverYVeSoThuTu(chess.getY());
-        for (int i = 0; i < chessWhite.size(); i++) {
-            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
-                return false;
-            }
-        }
-        for (int i = 0; i < chessBlack.size(); i++) {
-            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
-                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
-                return false;
-            }
-        }
-        return true;
-    }
+    /*Chuyển đổi qua lại tọa độ quân cờ
+    <---------------------------------------------------------------------------------------->
+    <-------------------------------------------------------->
+    */
 
     public int coverXVeSoThuTu(int xLocation) {
         if (xLocation >= 34 && xLocation < 111) {
@@ -526,52 +517,6 @@ public class AiSetup {
         return 0;
     }
 
-    public int unCoverXVeToaDoMay(int numberOfX) {
-        switch (numberOfX) {
-            case 1:
-                return 36;
-            case 2:
-                return 116;
-            case 3:
-                return 194;
-            case 4:
-                return 273;
-            case 5:
-                return 353;
-            case 6:
-                return 432;
-            case 7:
-                return 512;
-            case 8:
-                return 589;
-            default:
-                return 0;
-        }
-    }
-
-    public int unCoverYLocation(int intY) {
-        switch (intY) {
-            case 1:
-                return 37;
-            case 2:
-                return 115;
-            case 3:
-                return 195;
-            case 4:
-                return 274;
-            case 5:
-                return 354;
-            case 6:
-                return 432;
-            case 7:
-                return 512;
-            case 8:
-                return 590;
-            default:
-                return 0;
-        }
-    }
-
     public int coverYVeSoThuTu(int yLocation) {
         if (yLocation >= 35 && yLocation < 110) {
             return 1;
@@ -599,4 +544,426 @@ public class AiSetup {
         }
         return 0;
     }
+
+    public int unCoverXVeToaDoMay(int numberOfX) {
+        switch (numberOfX) {
+            case 1:
+                return 36;
+            case 2:
+                return 116;
+            case 3:
+                return 194;
+            case 4:
+                return 273;
+            case 5:
+                return 353;
+            case 6:
+                return 432;
+            case 7:
+                return 512;
+            case 8:
+                return 589;
+            default:
+                return 0;
+        }
+    }
+
+    public int unCoverYVeToaDoMay(int intY) {
+        switch (intY) {
+            case 1:
+                return 37;
+            case 2:
+                return 115;
+            case 3:
+                return 195;
+            case 4:
+                return 274;
+            case 5:
+                return 354;
+            case 6:
+                return 432;
+            case 7:
+                return 512;
+            case 8:
+                return 590;
+            default:
+                return 0;
+        }
+    }
+    /*
+    <---------------------------------------------------------------------------------------->
+    <-------------------------------------------------------->
+     */
+
+
+    /*Kiểm tra xem quân cờ đi được về những hướng nào.
+    <-------------------------------------------------------------------------------------->
+    <--------------------------------------------------------------->
+    */
+    private int kiemTraHuong(Chess chess) {
+        /*
+        return
+        1: Hướng lên
+        2: Hướng sang phải
+        3: Hướng xuống
+        4: Hướng sang trái
+         */
+        if (coverXVeSoThuTu(chess.getX()) > 2 && coverXVeSoThuTu(chess.getX()) < 7) {
+            //Nếu quân cờ không thể đi xuống
+            if (kiemTraTheoChieuY(chess) == 1) {
+                if (kiemTraNuocDiHuongLen(chess)) {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 124;
+                        } else {
+                            return 12;
+                        }
+                    } else {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 14;
+                        } else {
+                            return 1;
+                        }
+                    }
+                } else {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 24;
+                        } else {
+                            return 2;
+                        }
+                    } else {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 34;
+                        } else {
+                            return 3;
+                        }
+                    }
+                }
+            } else
+                //Nếu quân cờ k thể đi lên
+                if (kiemTraTheoChieuY(chess) == 2) {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        if (kiemTraNuocDiHuongXuong(chess)) {
+                            if (kiemTraNuocDiSangTrai(chess)) {
+                                return 234;
+                            } else {
+                                return 23;
+                            }
+                        } else {
+                            if (kiemTraNuocDiSangTrai(chess)) {
+                                return 24;
+                            } else {
+                                return 2;
+                            }
+                        }
+                    } else {
+                        if (kiemTraNuocDiHuongXuong(chess)) {
+                            if (kiemTraNuocDiSangTrai(chess)) {
+                                return 34;
+                            } else {
+                                return 3;
+                            }
+                        } else {
+                            if (kiemTraNuocDiSangTrai(chess)) {
+                                return 4;
+                            } else {
+                                return 0;
+                            }
+                        }
+                    }
+                } else
+                //Quân cờ k bị giới hạn hướng
+                {
+                    if (kiemTraNuocDiHuongLen(chess)) {
+                        if (kiemTraNuocDiSangPhai(chess)) {
+                            if (kiemTraNuocDiHuongXuong(chess)) {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 1234;
+                                } else {
+                                    return 123;
+                                }
+                            } else {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 124;
+                                } else {
+                                    return 12;
+                                }
+                            }
+                        } else {
+                            if (kiemTraNuocDiHuongXuong(chess)) {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 134;
+                                } else {
+                                    return 13;
+                                }
+                            } else {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 14;
+                                } else {
+                                    return 1;
+                                }
+                            }
+                        }
+                    } else {
+                        if (kiemTraNuocDiSangPhai(chess)) {
+                            if (kiemTraNuocDiHuongXuong(chess)) {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 234;
+                                } else {
+                                    return 23;
+                                }
+                            } else {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 24;
+                                } else {
+                                    return 2;
+                                }
+                            }
+                        } else {
+                            if (kiemTraNuocDiHuongXuong(chess)) {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 34;
+                                } else {
+                                    return 3;
+                                }
+                            } else {
+                                if (kiemTraNuocDiSangTrai(chess)) {
+                                    return 4;
+                                } else {
+                                    return 0;
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+        } else if (coverXVeSoThuTu(chess.getX()) <= 2) {
+            //Nếu quân cờ bị chặn sang trái, xuống
+            if (kiemTraTheoChieuY(chess) == 1) {
+                if (kiemTraNuocDiHuongLen(chess)) {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        return 12;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        return 2;
+                    } else {
+                        return 0;
+                    }
+                }
+
+                //Nếu quân cờ bị chặn sang trái và lên.
+            } else if (kiemTraTheoChieuY(chess) == 2) {
+                if (kiemTraNuocDiSangPhai(chess)) {
+                    if (kiemTraNuocDiHuongXuong(chess)) {
+                        return 23;
+                    } else {
+                        return 2;
+                    }
+                } else {
+                    if (kiemTraNuocDiHuongXuong(chess)) {
+                        return 3;
+                    } else {
+                        return 0;
+                    }
+                }
+            } else {
+                //Nếu quân cờ bi chan sang trai
+                if (kiemTraNuocDiHuongLen(chess)) {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        if (kiemTraNuocDiHuongXuong(chess)) {
+                            return 123;
+                        } else {
+                            return 12;
+                        }
+                    } else {
+                        if (kiemTraNuocDiHuongXuong(chess)) {
+                            return 13;
+                        } else {
+                            return 1;
+                        }
+                    }
+                } else {
+                    if (kiemTraNuocDiSangPhai(chess)) {
+                        if (kiemTraNuocDiHuongXuong(chess)) {
+                            return 23;
+                        } else {
+                            return 2;
+                        }
+                    } else {
+                        if (kiemTraNuocDiHuongXuong(chess)) {
+                            return 3;
+                        } else {
+                            return 0;
+                        }
+                    }
+                }
+            }
+        } else {
+            //Nếu quân cờ bị chặn phải, dưới
+            if (kiemTraTheoChieuY(chess) == 1) {
+                if (kiemTraNuocDiHuongLen(chess)) {
+                    if (kiemTraNuocDiSangTrai(chess)) {
+                        return 14;
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    if (kiemTraNuocDiSangTrai(chess)) {
+                        return 4;
+                    } else {
+                        return 0;
+                    }
+                }
+
+                //Nếu quân cờ bị chặn sang phải, Lên
+            } else if (kiemTraTheoChieuY(chess) == 2) {
+                if (kiemTraNuocDiHuongXuong(chess)) {
+                    if (kiemTraNuocDiSangTrai(chess)) {
+                        return 34;
+                    } else {
+                        return 3;
+                    }
+                } else {
+                    if (kiemTraNuocDiSangTrai(chess)) {
+                        return 4;
+                    } else {
+                        return 0;
+                    }
+                }
+
+                //Nếu quân cờ bị chặn Phải
+            } else {
+                if (kiemTraNuocDiHuongLen(chess)) {
+                    if (kiemTraNuocDiHuongXuong(chess)) {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 134;
+                        } else {
+                            return 13;
+                        }
+                    } else {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 14;
+                        } else {
+                            return 1;
+                        }
+                    }
+                } else {
+                    if (kiemTraNuocDiHuongXuong(chess)) {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 34;
+                        } else {
+                            return 3;
+                        }
+                    } else {
+                        if (kiemTraNuocDiSangTrai(chess)) {
+                            return 4;
+                        } else {
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    //Kiểm tra biên bàn cờ
+    private int kiemTraTheoChieuY(Chess chess) {
+        /*
+        return
+        1: Hướng lên
+        2: Hướng xuống
+         */
+        if (coverYVeSoThuTu(chess.getY()) > 2 && coverYVeSoThuTu(chess.getY()) < 7) {
+            return 12;
+        } else if (coverYVeSoThuTu(chess.getY()) <= 2) {
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    //Kiểm tra ô liền kề phía trên
+    private boolean kiemTraNuocDiHuongLen(Chess chess) {
+        int x = coverXVeSoThuTu(chess.getX());
+        int y = coverYVeSoThuTu(chess.getY()) - 1;
+        for (int i = 0; i < chessWhite.size(); i++) {
+            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        for (int i = 0; i < chessBlack.size(); i++) {
+            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Kiểm tra ô liền kề bên phải
+    private boolean kiemTraNuocDiSangPhai(Chess chess) {
+        int x = coverXVeSoThuTu(chess.getX()) + 1;
+        int y = coverYVeSoThuTu(chess.getY());
+        for (int i = 0; i < chessWhite.size(); i++) {
+            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        for (int i = 0; i < chessBlack.size(); i++) {
+            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Kiểm tra ô liền kề phía dưới
+    private boolean kiemTraNuocDiHuongXuong(Chess chess) {
+        int x = coverXVeSoThuTu(chess.getX());
+        int y = coverYVeSoThuTu(chess.getY()) + 1;
+        for (int i = 0; i < chessWhite.size(); i++) {
+            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        for (int i = 0; i < chessBlack.size(); i++) {
+            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //Kiểm tra ô liền kề bên trái
+    private boolean kiemTraNuocDiSangTrai(Chess chess) {
+        int x = coverXVeSoThuTu(chess.getX()) - 1;
+        int y = coverYVeSoThuTu(chess.getY());
+        for (int i = 0; i < chessWhite.size(); i++) {
+            if (coverXVeSoThuTu(chessWhite.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessWhite.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        for (int i = 0; i < chessBlack.size(); i++) {
+            if (coverXVeSoThuTu(chessBlack.get(i).getX()) == x
+                    && coverYVeSoThuTu(chessBlack.get(i).getY()) == y) {
+                return false;
+            }
+        }
+        return true;
+    }
+    /*
+    <------------------------------------------------------------->
+    <----------------------------------------------------------------------------------------->
+     */
 }

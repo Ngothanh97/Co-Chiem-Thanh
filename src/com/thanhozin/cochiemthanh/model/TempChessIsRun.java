@@ -1,21 +1,39 @@
 package com.thanhozin.cochiemthanh.model;
 
+import sun.plugin.javascript.navig.Array;
+
+import java.util.ArrayList;
+
 /**
  * Created by ThanhND on 11/28/2017.
  */
 public class TempChessIsRun {
-    private String chessType;
-    private int xChess;
-    private int yChess;
+    private Chess quanDaDiChuyen;
+    private ArrayList<Chess> arrayChess;
     private int value;
 
-    public TempChessIsRun(String chessType, int xChess, int yChess){
-        this.chessType= chessType;
-        this.xChess= xChess;
-        this.yChess= yChess;
+    public TempChessIsRun(ArrayList<Chess> quanTrang, ArrayList<Chess> quanDen, Chess quanDaDiChuyen, int value){
+        arrayChess= new ArrayList<>();
+        for (int i=0;i<quanDen.size();i++){
+            arrayChess.add(quanDen.get(i));
+        }
+        for (int i=0; i<quanTrang.size();i++){
+            arrayChess.add(quanTrang.get(i));
+        }
+        if (quanDaDiChuyen!=null) {
+            arrayChess.add(quanDaDiChuyen);
+        }
+        this.value=value;
     }
-
     public void setValue(int value) {
         this.value = value;
+    }
+
+    public ArrayList<Chess> getArrayChess() {
+        return arrayChess;
+    }
+
+    public int getValue() {
+        return value;
     }
 }
