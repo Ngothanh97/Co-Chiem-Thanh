@@ -317,7 +317,6 @@ public class GameManager {
             }
         }
 
-
         //Kiểm tra theo hường bắc
         if (yOfChessOnSelect > 2) {
             int tempIndexOfX = indexOfXInList;
@@ -351,7 +350,6 @@ public class GameManager {
             }
         }
 
-
         //Kiểm tra theo hướng Đông
         if (indexOfXInList < 6) {
             int tempIndexOfX = indexOfXInList;
@@ -383,7 +381,6 @@ public class GameManager {
             }
         }
 
-
         //Kiểm tra theo hướng nam
         if (yOfChessOnSelect < 7) {
             int tempIndexOfX = indexOfXInList;
@@ -414,7 +411,6 @@ public class GameManager {
                 }
             }
         }
-
 
         //Kiểm tra theo hướng Tây
         if (indexOfXInList > 1) {
@@ -460,10 +456,9 @@ public class GameManager {
         if (temp >= 0) {
             if (chesses.get(temp).coverType(chesses.get(temp).getType()) == typeChess) {
                 return true;
-            } else
-                return false;
-        } else
-            return false;
+            }
+        }
+        return false;
     }
 
     private void moveChess(char coordinatesOfX, int coordinatesOfY) {

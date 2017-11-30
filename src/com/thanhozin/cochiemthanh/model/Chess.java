@@ -77,17 +77,17 @@ public class Chess {
     }
 
     public char coverType(String type) {
-        switch (type) {
-            case WHILE_K:
-            case WHILE_L:
-            case WHILE_M:
-                return 'W';
-            case BLACK_O:
-            case BLACK_P:
-            case BLACK_Q:
-                return 'B';
-            default:
-                return ' ';
-        }
+    switch (type) {
+        case WHILE_K:
+        case WHILE_L:
+        case WHILE_M:
+            return 'W';
+        case BLACK_O:
+        case BLACK_P:
+        case BLACK_Q:
+            return 'B';
+        default:
+            return ' ';
+    }
     }
 }

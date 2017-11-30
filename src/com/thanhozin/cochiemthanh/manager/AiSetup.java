@@ -19,7 +19,6 @@ public class AiSetup {
     private int[][] diemBanCoCuaNguoiChoi;
     private ArrayList<TempChessIsRun> tempChessIsRuns;
 
-
     public AiSetup() {
         menuSelect = new MenuSelect();
         if (menuSelect.getCheckClickPlay() == 2) {
@@ -32,6 +31,34 @@ public class AiSetup {
         chessWhite = new ArrayList<>();
         chessBlack = new ArrayList<>();
         tempChessIsRuns = new ArrayList<>();
+    }
+
+    public AiSetup(ArrayList<Chess> chessWhite, ArrayList<Chess> chessBlack) {
+        this.chessWhite = chessWhite;
+        this.chessBlack = chessBlack;
+    }
+
+    public int getScore(){
+        int score = 0;
+        for (int i = 0; i<chessBlack.size(); i++){
+            int x = coverXVeSoThuTu(chessBlack.get(i).getX());
+            int y = coverYVeSoThuTu(chessBlack.get(i).getY());
+            if (computerIsFirst){
+                score -= diemBanCoCuaNguoiChoi[x][y];
+            } else {
+                score += diemBanCoCuaMay[x][y];
+            }
+        }
+        for (int i = 0; i < chessWhite.size(); i++){
+            int x = coverXVeSoThuTu(chessWhite.get(i).getX());
+            int y = coverYVeSoThuTu(chessWhite.get(i).getY());
+            if (computerIsFirst){
+                score += diemBanCoCuaMay[x][y];
+            } else {
+                score -= diemBanCoCuaNguoiChoi[x][y];
+            }
+        }
+        return score;
     }
 
     private void setDiemBanCo() {
@@ -180,7 +207,6 @@ public class AiSetup {
         diemBanCoCuaNguoiChoi[8][8] = 60;
     }
 
-
     //Phương thức dành cho GameManager gọi
     public String playAi(ArrayList<Chess> chesses) {
         for (int i = 0; i < chesses.size(); i++) {
@@ -219,7 +245,7 @@ public class AiSetup {
         }
     }
 
-    private void sinhNươcDi(Chess chess1, Chess chess2) {
+    private void sinhNuocDi(Chess chess1, Chess chess2) {
         int xChess1 = chess1.getX();
         int yChess1 = chess1.getY();
         int xChess2 = chess2.getX();
@@ -274,7 +300,6 @@ public class AiSetup {
                 break;
 
         }
-
     }
 
     private void kiemTraNuocBuocDenCoQuan(int x, int y, String type) {
@@ -473,7 +498,7 @@ public class AiSetup {
         return true;
     }
 
-    private int coverXVeSoThuTu(int xLocation) {
+    public int coverXVeSoThuTu(int xLocation) {
         if (xLocation >= 34 && xLocation < 111) {
             return 1;
         }
@@ -501,7 +526,7 @@ public class AiSetup {
         return 0;
     }
 
-    private int unCoverXVeToaDoMay(int numberOfX) {
+    public int unCoverXVeToaDoMay(int numberOfX) {
         switch (numberOfX) {
             case 1:
                 return 36;
@@ -524,8 +549,30 @@ public class AiSetup {
         }
     }
 
+    public int unCoverYLocation(int intY) {
+        switch (intY) {
+            case 1:
+                return 37;
+            case 2:
+                return 115;
+            case 3:
+                return 195;
+            case 4:
+                return 274;
+            case 5:
+                return 354;
+            case 6:
+                return 432;
+            case 7:
+                return 512;
+            case 8:
+                return 590;
+            default:
+                return 0;
+        }
+    }
 
-    private int coverYVeSoThuTu(int yLocation) {
+    public int coverYVeSoThuTu(int yLocation) {
         if (yLocation >= 35 && yLocation < 110) {
             return 1;
         }

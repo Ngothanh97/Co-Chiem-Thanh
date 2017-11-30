@@ -194,8 +194,8 @@ public class MenuSelect extends BasePanel implements Setup {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
-        graphics2D.drawImage(ImageStore.IMG_MENU_SELECT, 0, 0, 708, 709, null);
-        graphics2D.drawImage(ImageStore.IMG_FRAME,700,0,145,709,null);
+        graphics2D.drawImage(ImageStore.IMG_MENU_SELECT, 0, 0, 850, 709, null);
+//        graphics2D.drawImage(ImageStore.IMG_FRAME,700,0,145,709,null);
 
         if (flagPeVsCo) {
             graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 36, 110, 37, 37, null);
