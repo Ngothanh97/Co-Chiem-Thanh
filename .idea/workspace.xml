@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d866875-70b3-4364-9e60-d437d584af07" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,8 +81,8 @@
       <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="208" column="104" lean-forward="false" selection-start-line="208" selection-start-column="104" selection-end-line="208" selection-end-column="104" />
+            <state relative-caret-position="-3591">
+              <caret line="208" column="100" lean-forward="false" selection-start-line="208" selection-start-column="100" selection-end-line="208" selection-end-column="100" />
               <folding>
                 <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
                 <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
@@ -620,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512063542938</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="thử ai">
+      <created>1512108158802</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1512108158802</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1118,8 +1121,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="276">
-          <caret line="208" column="104" lean-forward="false" selection-start-line="208" selection-start-column="104" selection-end-line="208" selection-end-column="104" />
+        <state relative-caret-position="-3591">
+          <caret line="208" column="100" lean-forward="false" selection-start-line="208" selection-start-column="100" selection-end-line="208" selection-end-column="100" />
           <folding>
             <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
             <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />

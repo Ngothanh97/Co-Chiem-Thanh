@@ -206,7 +206,7 @@ public class GameManager {
                 if (value.length>3){
                     if (chesses.get(i).getType()==value[3]){
                         chessRemember= chesses.get(i);
-                        moveChess(listXLocation[Integer.parseInt(value[4])],Integer.parseInt(value[5    ]));
+                        moveChess(listXLocation[Integer.parseInt(value[4])],Integer.parseInt(value[5]));
                     }
                 }
             }
