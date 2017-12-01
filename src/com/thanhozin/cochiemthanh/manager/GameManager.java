@@ -25,6 +25,7 @@ public class GameManager {
     private ArrayList<Ability> abilities;
     private Chess chessRemember;
     private Chess chessIsLastMove;
+    private AiSetup aiSetup;
     private char[] listXLocation = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     private boolean flagsFly;
     public int luotdi;
@@ -193,6 +194,23 @@ public class GameManager {
         char coordinatesOfX = coverXLocation(xOnClick);
         int coordinatesOfY = coverYLocation(yOnClick);
 
+        //Khởi chạy ai
+        if (luotdi > 2 || luotdi == 0) {
+            String ketQua = aiSetup.playAi(chesses);
+            String[] value= ketQua.split(" ");
+            for (int i=0;i<chesses.size();i++){
+                if (chesses.get(i).getType()==value[0]){
+                    chessRemember= chesses.get(i);
+                    moveChess(listXLocation[Integer.parseInt(value[1])],Integer.parseInt(value[2]));
+                }
+                if (value.length>3){
+                    if (chesses.get(i).getType()==value[3]){
+                        chessRemember= chesses.get(i);
+                        moveChess(listXLocation[Integer.parseInt(value[4])],Integer.parseInt(value[5    ]));
+                    }
+                }
+            }
+        }
 
         for (int i = 0; i < abilities.size(); i++) {
             Ability ability = abilities.get(i);
@@ -587,6 +605,9 @@ public class GameManager {
     }
 
     public int checkWin() {
+        int countTrang = 0;
+        int countDen = 0;
+
         for (int i = 0; i < chesses.size(); i++) {
             if (coverXLocation(chesses.get(i).getX()) == 'e' && coverYLocation(chesses.get(i).getY()) == 1) {
                 if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
@@ -598,8 +619,18 @@ public class GameManager {
                     return 2;
                 }
             }
+            if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
+                countTrang++;
+            }
+            if (chesses.get(i).getType() == Chess.BLACK_O || chesses.get(i).getType() == Chess.BLACK_P || chesses.get(i).getType() == Chess.BLACK_Q) {
+                countDen++;
+            }
         }
-        return 0;
+        if (countTrang == 0) {
+            return 2;
+        } else if (countDen == 0) {
+            return 1;
+        } else return 0;
     }
 }
 

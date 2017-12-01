@@ -11,14 +11,12 @@ public class TempChessIsRun {
     private Chess quanDaDiChuyen;
     private ArrayList<Chess> arrayChess;
     private int value;
+    int luotdi;
 
-    public TempChessIsRun(ArrayList<Chess> quanTrang, ArrayList<Chess> quanDen, Chess quanDaDiChuyen, int value){
+    public TempChessIsRun(ArrayList<Chess> chess, Chess quanDaDiChuyen, int value, int luotdi){
         arrayChess= new ArrayList<>();
-        for (int i=0;i<quanDen.size();i++){
-            arrayChess.add(quanDen.get(i));
-        }
-        for (int i=0; i<quanTrang.size();i++){
-            arrayChess.add(quanTrang.get(i));
+        for (int i=0;i<chess.size();i++){
+            arrayChess.add(chess.get(i));
         }
         if (quanDaDiChuyen!=null) {
             arrayChess.add(quanDaDiChuyen);
@@ -35,5 +33,13 @@ public class TempChessIsRun {
 
     public int getValue() {
         return value;
+    }
+
+    public Chess getQuanDaDiChuyen() {
+        return quanDaDiChuyen;
+    }
+
+    public int getLuotdi() {
+        return luotdi;
     }
 }

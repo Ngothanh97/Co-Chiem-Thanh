@@ -16,7 +16,7 @@ public class TempChessTable {
         this.us = us;
         this.their = their;
         ai = new AiSetup(us, their);
-        score = ai.getScore();
+        score = ai.countScore();
         addChosen();
     }
 

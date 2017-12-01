@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d866875-70b3-4364-9e60-d437d584af07" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java" />
     </list>
@@ -21,15 +23,20 @@
       <file leaf-file-name="AiSetup.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="914">
-              <caret line="243" column="51" lean-forward="false" selection-start-line="243" selection-start-column="51" selection-end-line="243" selection-end-column="51" />
+            <state relative-caret-position="-357">
+              <caret line="253" column="22" lean-forward="false" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#setDiemBanCo#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#getScore#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#countScore#0;class#AiSetup#0" expanded="false" />
                 <element signature="method#AiSetup#1;class#AiSetup#0" expanded="false" />
                 <element signature="method#tachQuanTrangVoiDenTuMang#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#sinhNuocDi#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#layRaCapQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#layRaQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#taoTruongHopBuocLen#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#taoTruongHopBuocSangPhai#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#taoTruongHopBuocXuong#0;class#AiSetup#0" expanded="false" />
+                <element signature="method#taoTruongHopBuocSangTrai#0;class#AiSetup#0" expanded="false" />
                 <element signature="method#kiemTraKhaNangBuocHuongLen#0;class#AiSetup#0" expanded="false" />
                 <element signature="method#kiemTraKhaNangBuocSangPhai#0;class#AiSetup#0" expanded="false" />
                 <element signature="method#kiemTraKhaNangBuocHuongXuong#0;class#AiSetup#0" expanded="false" />
@@ -49,17 +56,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TempChessIsRun.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TempChessIsRun.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+            <state relative-caret-position="544">
+              <caret line="38" column="8" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#882#883#0" expanded="true" />
-                <element signature="e#915#916#0" expanded="true" />
-                <element signature="e#944#945#0" expanded="true" />
-                <element signature="e#972#973#0" expanded="true" />
+                <element signature="e#903#904#0" expanded="true" />
+                <element signature="e#940#941#0" expanded="true" />
+                <element signature="e#970#971#0" expanded="true" />
+                <element signature="e#999#1000#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -68,9 +75,33 @@
       <file leaf-file-name="TempChessTable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+            <state relative-caret-position="850">
+              <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="208" column="104" lean-forward="false" selection-start-line="208" selection-start-column="104" selection-end-line="208" selection-end-column="104" />
+              <folding>
+                <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
+                <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
+                <element signature="method#coverYLocation#0;class#GameManager#0" expanded="false" />
+                <element signature="method#unCoverYLocation#0;class#GameManager#0" expanded="false" />
+                <element signature="method#initalizeChess#0;class#GameManager#0" expanded="false" />
+                <element signature="method#drawChess#0;class#GameManager#0" expanded="false" />
+                <element signature="method#drawAbility#0;class#GameManager#0" expanded="false" />
+                <element signature="method#checkType#0;class#GameManager#0" expanded="false" />
+                <element signature="method#initalizeAbility#0;class#GameManager#0" expanded="false" />
+                <element signature="method#checkColor#0;class#GameManager#0" expanded="false" />
+                <element signature="method#supreAbility#0;class#GameManager#0" expanded="false" />
+                <element signature="method#kiemTraQuanCoTrang#0;class#GameManager#0" expanded="false" />
+                <element signature="method#checkWin#0;class#GameManager#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -136,10 +167,10 @@
         <option value="$PROJECT_DIR$/CoChiemThanh.iml" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/ImageStore.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/GamePanel.java" />
-        <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java" />
+        <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java" />
       </list>
     </option>
   </component>
@@ -173,6 +204,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -289,9 +323,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -308,122 +339,6 @@
       <recent name="D:\ThanhND\Tai Lieu\Ky 1-Nam 3\Tri Tue Nhan Tao\Co-Chiem-Thanh\src\res\drawable" />
       <recent name="D:\ThanhND\T3H\Code\CoChiemThanh\src\res\drawable" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/MenuSelect.class</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/Chess.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/MenuSelect.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -698,7 +613,14 @@
       <option name="project" value="LOCAL" />
       <updated>1511944863298</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="chưa có thêm j">
+      <created>1512063542938</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1512063542938</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -717,7 +639,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32043344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -731,33 +653,12 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4945055" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4945055" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32043344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22474378" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -770,7 +671,8 @@
     <MESSAGE value="ahihi dồ qốk" />
     <MESSAGE value="chức năng chia lượt chơi" />
     <MESSAGE value="chưa có thêm j" />
-    <option name="LAST_COMMIT_MESSAGE" value="chưa có thêm j" />
+    <MESSAGE value="thử ai" />
+    <option name="LAST_COMMIT_MESSAGE" value="thử ai" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1150,25 +1052,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/MenuSelect.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="84" column="67" lean-forward="false" selection-start-line="84" selection-start-column="67" selection-end-line="84" selection-end-column="67" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="52" column="13" lean-forward="true" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
+        <state relative-caret-position="850">
+          <caret line="52" column="13" lean-forward="false" selection-start-line="52" selection-start-column="13" selection-end-line="52" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="38" column="8" lean-forward="false" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#903#904#0" expanded="true" />
+            <element signature="e#940#941#0" expanded="true" />
+            <element signature="e#970#971#0" expanded="true" />
+            <element signature="e#999#1000#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="914">
-          <caret line="243" column="51" lean-forward="false" selection-start-line="243" selection-start-column="51" selection-end-line="243" selection-end-column="51" />
+        <state relative-caret-position="-357">
+          <caret line="253" column="22" lean-forward="false" selection-start-line="253" selection-start-column="22" selection-end-line="253" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#setDiemBanCo#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#getScore#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#countScore#0;class#AiSetup#0" expanded="false" />
             <element signature="method#AiSetup#1;class#AiSetup#0" expanded="false" />
             <element signature="method#tachQuanTrangVoiDenTuMang#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#sinhNuocDi#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#layRaCapQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#layRaQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#taoTruongHopBuocLen#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#taoTruongHopBuocSangPhai#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#taoTruongHopBuocXuong#0;class#AiSetup#0" expanded="false" />
+            <element signature="method#taoTruongHopBuocSangTrai#0;class#AiSetup#0" expanded="false" />
             <element signature="method#kiemTraKhaNangBuocHuongLen#0;class#AiSetup#0" expanded="false" />
             <element signature="method#kiemTraKhaNangBuocSangPhai#0;class#AiSetup#0" expanded="false" />
             <element signature="method#kiemTraKhaNangBuocHuongXuong#0;class#AiSetup#0" expanded="false" />
@@ -1187,18 +1116,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/MenuSelect.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="84" column="67" lean-forward="false" selection-start-line="84" selection-start-column="67" selection-end-line="84" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="546" column="31" lean-forward="false" selection-start-line="546" selection-start-column="31" selection-end-line="546" selection-end-column="31" />
+        <state relative-caret-position="276">
+          <caret line="208" column="104" lean-forward="false" selection-start-line="208" selection-start-column="104" selection-end-line="208" selection-end-column="104" />
           <folding>
             <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
             <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
@@ -1209,22 +1130,10 @@
             <element signature="method#drawAbility#0;class#GameManager#0" expanded="false" />
             <element signature="method#checkType#0;class#GameManager#0" expanded="false" />
             <element signature="method#initalizeAbility#0;class#GameManager#0" expanded="false" />
-            <marker date="1512053334242" expanded="false" signature="22029:22763" ph="{...}" />
-            <marker date="1512053334242" expanded="false" signature="23025:23765" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#882#883#0" expanded="true" />
-            <element signature="e#915#916#0" expanded="true" />
-            <element signature="e#944#945#0" expanded="true" />
-            <element signature="e#972#973#0" expanded="true" />
+            <element signature="method#checkColor#0;class#GameManager#0" expanded="false" />
+            <element signature="method#supreAbility#0;class#GameManager#0" expanded="false" />
+            <element signature="method#kiemTraQuanCoTrang#0;class#GameManager#0" expanded="false" />
+            <element signature="method#checkWin#0;class#GameManager#0" expanded="false" />
           </folding>
         </state>
       </provider>
