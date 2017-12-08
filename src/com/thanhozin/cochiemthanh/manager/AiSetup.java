@@ -20,7 +20,7 @@ public class AiSetup {
     private int[][] diemBanCoCuaNguoiChoi;
     private ArrayList<TempChessIsRun> tempChessIsRuns;
     private Chess[] tempChessWhite;
-    private Chess quanCoSeDiChuye;
+    private Chess quanCoSeDiChuyen;
     private int capTruongHopDiQuan;
     private boolean timCapQuan;
     private int lanChonRaQuanTuMang;
