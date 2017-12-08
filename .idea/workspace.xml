@@ -2,11 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9d866875-70b3-4364-9e60-d437d584af07" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/manager/GameManager.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel$1.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/GamePanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/MenuSelect$1.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/MenuSelect$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/MenuSelect.class" afterPath="$PROJECT_DIR$/out/production/CoChiemThanh/com/thanhozin/cochiemthanh/view/MenuSelect.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -28,29 +23,19 @@
       <file leaf-file-name="AiSetup.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="232" column="55" lean-forward="false" selection-start-line="232" selection-start-column="55" selection-end-line="232" selection-end-column="55" />
+            <state relative-caret-position="2703">
+              <caret line="233" column="29" lean-forward="false" selection-start-line="233" selection-start-column="29" selection-end-line="233" selection-end-column="29" />
               <folding>
-                <element signature="method#setDiemBanCo#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#countScore#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#AiSetup#1;class#AiSetup#0" expanded="false" />
-                <element signature="method#tachQuanTrangVoiDenTuMang#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#layRaCapQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#layRaQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraKhaNangBuocHuongLen#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraKhaNangBuocSangPhai#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraKhaNangBuocHuongXuong#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraKhaNangBuocSangTrai#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#coverXVeSoThuTu#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#coverYVeSoThuTu#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#unCoverXVeToaDoMay#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#unCoverYVeToaDoMay#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraHuong#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraTheoChieuY#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraNuocDiHuongLen#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraNuocDiSangPhai#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraNuocDiHuongXuong#0;class#AiSetup#0" expanded="false" />
-                <element signature="method#kiemTraNuocDiSangTrai#0;class#AiSetup#0" expanded="false" />
+                <marker date="1512713941181" expanded="false" signature="41959:42647" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="42695:43383" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="43434:43910" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="43956:44427" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="44870:55151" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="55227:55553" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="55645:56259" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="56350:56964" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="57058:57672" ph="{...}" />
+                <marker date="1512713941181" expanded="false" signature="57763:58377" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -60,8 +45,21 @@
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="357">
-              <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-              <folding />
+              <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+              <folding>
+                <marker date="1512713732015" expanded="true" signature="72:116" ph="/**...*/" />
+                <marker date="1512713732015" expanded="true" signature="356:640" ph="{...}" />
+                <marker date="1512713732015" expanded="false" signature="676:687" ph=" { " />
+                <marker date="1512713732015" expanded="false" signature="706:712" ph=" }" />
+                <marker date="1512713732015" expanded="false" signature="757:768" ph=" { " />
+                <marker date="1512713732015" expanded="false" signature="786:792" ph=" }" />
+                <marker date="1512713732015" expanded="false" signature="819:830" ph=" { " />
+                <marker date="1512713732015" expanded="false" signature="843:849" ph=" }" />
+                <marker date="1512713732015" expanded="false" signature="887:898" ph=" { " />
+                <marker date="1512713732015" expanded="false" signature="920:926" ph=" }" />
+                <marker date="1512713732015" expanded="false" signature="954:965" ph=" { " />
+                <marker date="1512713732015" expanded="false" signature="979:985" ph=" }" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,19 +122,33 @@
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1921">
-              <caret line="206" column="13" lean-forward="false" selection-start-line="203" selection-start-column="10" selection-end-line="206" selection-end-column="13" />
+              <caret line="207" column="13" lean-forward="false" selection-start-line="204" selection-start-column="10" selection-end-line="207" selection-end-column="13" />
               <folding>
-                <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
-                <element signature="method#coverYLocation#0;class#GameManager#0" expanded="false" />
-                <element signature="method#unCoverYLocation#0;class#GameManager#0" expanded="false" />
-                <element signature="method#drawChess#0;class#GameManager#0" expanded="false" />
-                <element signature="method#drawAbility#0;class#GameManager#0" expanded="false" />
-                <element signature="method#checkType#0;class#GameManager#0" expanded="false" />
-                <element signature="method#initalizeAbility#0;class#GameManager#0" expanded="false" />
-                <element signature="method#checkColor#0;class#GameManager#0" expanded="false" />
-                <element signature="method#supreAbility#0;class#GameManager#0" expanded="false" />
-                <element signature="method#kiemTraQuanCoTrang#0;class#GameManager#0" expanded="false" />
-                <element signature="method#checkWin#0;class#GameManager#0" expanded="false" />
+                <marker date="1512713732172" expanded="true" signature="1483:2189" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="2293:2781" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="2887:3575" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="3677:4148" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="4183:4983" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="5034:5152" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="5205:5329" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="5370:5709" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="5768:9464" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="6625:6712" ph="//..." />
+                <marker date="1512713732172" expanded="true" signature="7369:7479" ph="//..." />
+                <marker date="1512713732172" expanded="true" signature="8083:8221" ph="//..." />
+                <marker date="1512713732172" expanded="true" signature="9523:13892" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="12624:12793" ph="//..." />
+                <marker date="1512713732172" expanded="false" signature="13967:20476" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="14150:14284" ph="//..." />
+                <marker date="1512713732172" expanded="true" signature="15084:15189" ph="//..." />
+                <marker date="1512713732172" expanded="false" signature="20590:21041" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="21111:26160" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="21806:21959" ph="//..." />
+                <marker date="1512713732172" expanded="true" signature="25330:25396" ph="//..." />
+                <marker date="1512713732172" expanded="false" signature="26193:26927" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="26980:27161" ph="{...}" />
+                <marker date="1512713732172" expanded="false" signature="27189:28557" ph="{...}" />
+                <marker date="1512713732172" expanded="true" signature="27245:28532" ph="//..." />
               </folding>
             </state>
           </provider>
@@ -147,7 +159,58 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="11679">
               <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-              <folding />
+              <folding>
+                <element signature="e#0#78800#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#5559#5560#0" expanded="false" />
+                <element signature="e#5600#5601#0" expanded="false" />
+                <element signature="e#6682#6683#0" expanded="false" />
+                <element signature="e#6722#6723#0" expanded="false" />
+                <element signature="e#14781#14782#0" expanded="false" />
+                <element signature="e#14845#14846#0" expanded="false" />
+                <element signature="e#15465#15466#0" expanded="false" />
+                <element signature="e#15531#15532#0" expanded="false" />
+                <element signature="e#15719#15720#0" expanded="false" />
+                <element signature="e#15790#15791#0" expanded="false" />
+                <element signature="e#17000#17001#0" expanded="false" />
+                <element signature="e#17067#17068#0" expanded="false" />
+                <element signature="e#17373#17374#0" expanded="false" />
+                <element signature="e#17414#17415#0" expanded="false" />
+                <element signature="e#18332#18333#0" expanded="false" />
+                <element signature="e#18374#18375#0" expanded="false" />
+                <element signature="e#18886#18887#0" expanded="false" />
+                <element signature="e#18929#18930#0" expanded="false" />
+                <element signature="e#21229#21230#0" expanded="false" />
+                <element signature="e#21273#21274#0" expanded="false" />
+                <element signature="e#33342#33343#0" expanded="false" />
+                <element signature="e#33399#33400#0" expanded="false" />
+                <element signature="e#36463#36464#0" expanded="false" />
+                <element signature="e#36521#36522#0" expanded="false" />
+                <element signature="e#37058#37059#0" expanded="false" />
+                <element signature="e#37101#37102#0" expanded="false" />
+                <element signature="e#38375#38376#0" expanded="false" />
+                <element signature="e#38420#38421#0" expanded="false" />
+                <element signature="e#42710#42711#0" expanded="false" />
+                <element signature="e#42741#42742#0" expanded="false" />
+                <element signature="e#43723#43724#0" expanded="false" />
+                <element signature="e#43750#43751#0" expanded="false" />
+                <element signature="e#44007#44008#0" expanded="false" />
+                <element signature="e#44035#44036#0" expanded="false" />
+                <element signature="e#44893#44894#0" expanded="false" />
+                <element signature="e#44962#44963#0" expanded="false" />
+                <element signature="e#46295#46296#0" expanded="false" />
+                <element signature="e#46368#46369#0" expanded="false" />
+                <element signature="e#50830#50831#0" expanded="false" />
+                <element signature="e#50892#50893#0" expanded="false" />
+                <element signature="e#51986#51987#0" expanded="false" />
+                <element signature="e#52015#52016#0" expanded="false" />
+                <element signature="e#65766#65767#0" expanded="false" />
+                <element signature="e#65792#65793#0" expanded="false" />
+                <element signature="e#75772#75773#0" expanded="false" />
+                <element signature="e#75844#75845#0" expanded="false" />
+                <element signature="e#77030#77031#0" expanded="false" />
+                <element signature="e#77065#77066#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -253,6 +316,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -369,9 +435,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
   </component>
@@ -388,6 +451,117 @@
       <recent name="D:\ThanhND\Tai Lieu\Ky 1-Nam 3\Tri Tue Nhan Tao\Co-Chiem-Thanh\src\res\drawable" />
       <recent name="D:\ThanhND\T3H\Code\CoChiemThanh\src\res\drawable" />
     </key>
+  </component>
+  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
+    <UpdatedFiles>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Updated from server" />
+        <option name="myStatusName" value="Changed on server" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="CHANGED_ON_SERVER" />
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Updated" />
+          <option name="myStatusName" value="Changed" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java</PATH>
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Created" />
+          <option name="myStatusName" value="Created" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="CREATED" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Deleted" />
+          <option name="myStatusName" value="Deleted" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="true" />
+          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+        </FILE-GROUP>
+        <FILE-GROUP>
+          <option name="myUpdateName" value="Restored" />
+          <option name="myStatusName" value="Will be restored" />
+          <option name="mySupportsDeletion" value="false" />
+          <option name="myCanBeAbsent" value="false" />
+          <option name="myId" value="RESTORED" />
+        </FILE-GROUP>
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Modified" />
+        <option name="myStatusName" value="Modified" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MODIFIED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Skipped" />
+        <option name="myStatusName" value="Skipped" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SKIPPED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with conflicts" />
+        <option name="myStatusName" value="Will be merged with conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_CONFLICTS" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with tree conflicts" />
+        <option name="myStatusName" value="Merged with tree conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged with property conflicts" />
+        <option name="myStatusName" value="Will be merged with property conflicts" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Merged" />
+        <option name="myStatusName" value="Will be merged" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="MERGED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Not in repository" />
+        <option name="myStatusName" value="Not in repository" />
+        <option name="mySupportsDeletion" value="true" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="UNKNOWN" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally added" />
+        <option name="myStatusName" value="Locally added" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_ADDED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Locally removed" />
+        <option name="myStatusName" value="Locally removed" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="LOCALLY_REMOVED" />
+      </FILE-GROUP>
+      <FILE-GROUP>
+        <option name="myUpdateName" value="Switched" />
+        <option name="myStatusName" value="Switched" />
+        <option name="mySupportsDeletion" value="false" />
+        <option name="myCanBeAbsent" value="false" />
+        <option name="myId" value="SWITCHED" />
+      </FILE-GROUP>
+    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -693,7 +867,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512706216097</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="thth">
+      <created>1512713607304</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1512713607304</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -701,7 +882,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -711,13 +891,13 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.50292826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32972136" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32043344" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17935579" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17935579" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1110,8 +1290,21 @@
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/TempChessIsRun.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="23" column="25" lean-forward="false" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="25" />
-          <folding />
+          <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+          <folding>
+            <marker date="1512713732015" expanded="true" signature="72:116" ph="/**...*/" />
+            <marker date="1512713732015" expanded="true" signature="356:640" ph="{...}" />
+            <marker date="1512713732015" expanded="false" signature="676:687" ph=" { " />
+            <marker date="1512713732015" expanded="false" signature="706:712" ph=" }" />
+            <marker date="1512713732015" expanded="false" signature="757:768" ph=" { " />
+            <marker date="1512713732015" expanded="false" signature="786:792" ph=" }" />
+            <marker date="1512713732015" expanded="false" signature="819:830" ph=" { " />
+            <marker date="1512713732015" expanded="false" signature="843:849" ph=" }" />
+            <marker date="1512713732015" expanded="false" signature="887:898" ph=" { " />
+            <marker date="1512713732015" expanded="false" signature="920:926" ph=" }" />
+            <marker date="1512713732015" expanded="false" signature="954:965" ph=" { " />
+            <marker date="1512713732015" expanded="false" signature="979:985" ph=" }" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1143,26 +1336,91 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11679">
           <caret line="744" column="0" lean-forward="false" selection-start-line="744" selection-start-column="0" selection-end-line="744" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#0#78800#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#5559#5560#0" expanded="false" />
+            <element signature="e#5600#5601#0" expanded="false" />
+            <element signature="e#6682#6683#0" expanded="false" />
+            <element signature="e#6722#6723#0" expanded="false" />
+            <element signature="e#14781#14782#0" expanded="false" />
+            <element signature="e#14845#14846#0" expanded="false" />
+            <element signature="e#15465#15466#0" expanded="false" />
+            <element signature="e#15531#15532#0" expanded="false" />
+            <element signature="e#15719#15720#0" expanded="false" />
+            <element signature="e#15790#15791#0" expanded="false" />
+            <element signature="e#17000#17001#0" expanded="false" />
+            <element signature="e#17067#17068#0" expanded="false" />
+            <element signature="e#17373#17374#0" expanded="false" />
+            <element signature="e#17414#17415#0" expanded="false" />
+            <element signature="e#18332#18333#0" expanded="false" />
+            <element signature="e#18374#18375#0" expanded="false" />
+            <element signature="e#18886#18887#0" expanded="false" />
+            <element signature="e#18929#18930#0" expanded="false" />
+            <element signature="e#21229#21230#0" expanded="false" />
+            <element signature="e#21273#21274#0" expanded="false" />
+            <element signature="e#33342#33343#0" expanded="false" />
+            <element signature="e#33399#33400#0" expanded="false" />
+            <element signature="e#36463#36464#0" expanded="false" />
+            <element signature="e#36521#36522#0" expanded="false" />
+            <element signature="e#37058#37059#0" expanded="false" />
+            <element signature="e#37101#37102#0" expanded="false" />
+            <element signature="e#38375#38376#0" expanded="false" />
+            <element signature="e#38420#38421#0" expanded="false" />
+            <element signature="e#42710#42711#0" expanded="false" />
+            <element signature="e#42741#42742#0" expanded="false" />
+            <element signature="e#43723#43724#0" expanded="false" />
+            <element signature="e#43750#43751#0" expanded="false" />
+            <element signature="e#44007#44008#0" expanded="false" />
+            <element signature="e#44035#44036#0" expanded="false" />
+            <element signature="e#44893#44894#0" expanded="false" />
+            <element signature="e#44962#44963#0" expanded="false" />
+            <element signature="e#46295#46296#0" expanded="false" />
+            <element signature="e#46368#46369#0" expanded="false" />
+            <element signature="e#50830#50831#0" expanded="false" />
+            <element signature="e#50892#50893#0" expanded="false" />
+            <element signature="e#51986#51987#0" expanded="false" />
+            <element signature="e#52015#52016#0" expanded="false" />
+            <element signature="e#65766#65767#0" expanded="false" />
+            <element signature="e#65792#65793#0" expanded="false" />
+            <element signature="e#75772#75773#0" expanded="false" />
+            <element signature="e#75844#75845#0" expanded="false" />
+            <element signature="e#77030#77031#0" expanded="false" />
+            <element signature="e#77065#77066#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1921">
-          <caret line="206" column="13" lean-forward="false" selection-start-line="203" selection-start-column="10" selection-end-line="206" selection-end-column="13" />
+          <caret line="207" column="13" lean-forward="false" selection-start-line="204" selection-start-column="10" selection-end-line="207" selection-end-column="13" />
           <folding>
-            <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#coverYLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#unCoverYLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#drawChess#0;class#GameManager#0" expanded="false" />
-            <element signature="method#drawAbility#0;class#GameManager#0" expanded="false" />
-            <element signature="method#checkType#0;class#GameManager#0" expanded="false" />
-            <element signature="method#initalizeAbility#0;class#GameManager#0" expanded="false" />
-            <element signature="method#checkColor#0;class#GameManager#0" expanded="false" />
-            <element signature="method#supreAbility#0;class#GameManager#0" expanded="false" />
-            <element signature="method#kiemTraQuanCoTrang#0;class#GameManager#0" expanded="false" />
-            <element signature="method#checkWin#0;class#GameManager#0" expanded="false" />
+            <marker date="1512713732172" expanded="true" signature="1483:2189" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="2293:2781" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="2887:3575" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="3677:4148" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="4183:4983" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="5034:5152" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="5205:5329" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="5370:5709" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="5768:9464" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="6625:6712" ph="//..." />
+            <marker date="1512713732172" expanded="true" signature="7369:7479" ph="//..." />
+            <marker date="1512713732172" expanded="true" signature="8083:8221" ph="//..." />
+            <marker date="1512713732172" expanded="true" signature="9523:13892" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="12624:12793" ph="//..." />
+            <marker date="1512713732172" expanded="false" signature="13967:20476" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="14150:14284" ph="//..." />
+            <marker date="1512713732172" expanded="true" signature="15084:15189" ph="//..." />
+            <marker date="1512713732172" expanded="false" signature="20590:21041" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="21111:26160" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="21806:21959" ph="//..." />
+            <marker date="1512713732172" expanded="true" signature="25330:25396" ph="//..." />
+            <marker date="1512713732172" expanded="false" signature="26193:26927" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="26980:27161" ph="{...}" />
+            <marker date="1512713732172" expanded="false" signature="27189:28557" ph="{...}" />
+            <marker date="1512713732172" expanded="true" signature="27245:28532" ph="//..." />
           </folding>
         </state>
       </provider>
@@ -1181,29 +1439,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="232" column="55" lean-forward="false" selection-start-line="232" selection-start-column="55" selection-end-line="232" selection-end-column="55" />
+        <state relative-caret-position="2703">
+          <caret line="233" column="29" lean-forward="false" selection-start-line="233" selection-start-column="29" selection-end-line="233" selection-end-column="29" />
           <folding>
-            <element signature="method#setDiemBanCo#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#countScore#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#AiSetup#1;class#AiSetup#0" expanded="false" />
-            <element signature="method#tachQuanTrangVoiDenTuMang#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#layRaCapQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#layRaQuanDiChuyen#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraKhaNangBuocHuongLen#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraKhaNangBuocSangPhai#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraKhaNangBuocHuongXuong#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraKhaNangBuocSangTrai#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#coverXVeSoThuTu#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#coverYVeSoThuTu#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#unCoverXVeToaDoMay#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#unCoverYVeToaDoMay#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraHuong#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraTheoChieuY#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraNuocDiHuongLen#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraNuocDiSangPhai#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraNuocDiHuongXuong#0;class#AiSetup#0" expanded="false" />
-            <element signature="method#kiemTraNuocDiSangTrai#0;class#AiSetup#0" expanded="false" />
+            <marker date="1512713941181" expanded="false" signature="41959:42647" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="42695:43383" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="43434:43910" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="43956:44427" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="44870:55151" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="55227:55553" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="55645:56259" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="56350:56964" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="57058:57672" ph="{...}" />
+            <marker date="1512713941181" expanded="false" signature="57763:58377" ph="{...}" />
           </folding>
         </state>
       </provider>
