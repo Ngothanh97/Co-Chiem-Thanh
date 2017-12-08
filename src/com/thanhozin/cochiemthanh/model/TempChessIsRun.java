@@ -22,6 +22,7 @@ public class TempChessIsRun {
             arrayChess.add(quanDaDiChuyen);
         }
         this.value=value;
+        this.luotdi=luotdi;
     }
     public void setValue(int value) {
         this.value = value;

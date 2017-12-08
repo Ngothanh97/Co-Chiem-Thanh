@@ -5,6 +5,7 @@ import com.thanhozin.cochiemthanh.model.Chess;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 /**
  * Created by ThanhND on 10/23/2017.
@@ -32,6 +33,7 @@ public class GameManager {
 
 
     public GameManager() {
+        aiSetup = new AiSetup();
         luotdi = 4;
         chesses = new ArrayList<>();
         abilities = new ArrayList<>();
@@ -146,18 +148,18 @@ public class GameManager {
     }
 
     public void initalizeChess() {
-        Chess chessWhileK = new Chess(unCoverXLocation('a'), unCoverYLocation(8), Chess.WHILE_K);
+        Chess chessWhileK = new Chess(unCoverXLocation('a'), unCoverYLocation(1), Chess.WHILE_K);
         chesses.add(chessWhileK);
-        Chess chessWhileL = new Chess(unCoverXLocation('d'), unCoverYLocation(8), Chess.WHILE_L);
+        Chess chessWhileL = new Chess(unCoverXLocation('e'), unCoverYLocation(1), Chess.WHILE_L);
         chesses.add(chessWhileL);
-        Chess chessWhileM = new Chess(unCoverXLocation('h'), unCoverYLocation(8), Chess.WHILE_M);
+        Chess chessWhileM = new Chess(unCoverXLocation('h'), unCoverYLocation(1), Chess.WHILE_M);
         chesses.add(chessWhileM);
 
-        Chess chessBlackO = new Chess(unCoverXLocation('a'), unCoverYLocation(1), Chess.BLACK_O);
+        Chess chessBlackO = new Chess(unCoverXLocation('a'), unCoverYLocation(8), Chess.BLACK_O);
         chesses.add(chessBlackO);
-        Chess chessBlackP = new Chess(unCoverXLocation('e'), unCoverYLocation(1), Chess.BLACK_P);
+        Chess chessBlackP = new Chess(unCoverXLocation('d'), unCoverYLocation(8), Chess.BLACK_P);
         chesses.add(chessBlackP);
-        Chess chessBlackQ = new Chess(unCoverXLocation('h'), unCoverYLocation(1), Chess.BLACK_Q);
+        Chess chessBlackQ = new Chess(unCoverXLocation('h'), unCoverYLocation(8), Chess.BLACK_Q);
         chesses.add(chessBlackQ);
     }
 
@@ -187,6 +189,78 @@ public class GameManager {
         }
     }
 
+    public void khoiChayAi() throws InterruptedException {
+//        chessRemember = null;
+        if (luotdi == 0) {
+            luotdi = 4;
+        }
+        if (luotdi == 4) {
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+
+            }
+            Thread.sleep(2000);
+            ArrayList<Chess> tempChesses = chesses;
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+
+            }
+            String ketQua = aiSetup.playAi(tempChesses);
+            String[] value = ketQua.split(" ");
+//            System.out.println(chesses.size());
+            System.out.println(ketQua);
+//            System.out.println(value[0]);
+//            System.out.println(value[3]);
+            System.out.println("sau ai");
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+
+            }
+
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + ", Kiểm tra đi");
+                chessRemember = chesses.get(i);
+                if (value.length > 3) {
+//                    System.out.println(chesses.get(i).getType()+"vào"+ value[3]);
+                    if (Objects.equals(chesses.get(i).getType(), value[3])) {
+//                        System.out.println("vào");
+//                        chessRemember = chesses.get(i);
+                        System.out.println(chessRemember.getType());
+                        moveChess(coverXLocation(Integer.parseInt(value[4])), coverYLocation(Integer.parseInt(value[5])));
+                    } else
+                        for (int j = 0; j < chesses.size(); j++) {
+                            System.out.println(chesses.get(j).getType() + " -- " + coverXLocation(chesses.get(j).getX()) + ", " + coverYLocation(chesses.get(j).getY()));
+
+                        }
+//                        System.out.println("3");
+                    if (value[0].equals(chesses.get(i).getType())) {
+//                        chessRemember = chesses.get(i);
+//                        System.out.println(chessRemember.getType() + " sdfg");
+                        System.out.println(coverXLocation(Integer.parseInt(value[1])) + ", " + coverYLocation(Integer.parseInt(value[2])));
+                        moveChess(coverXLocation(Integer.parseInt(value[1])), coverYLocation(Integer.parseInt(value[2])));
+//                        break;
+                    }
+                } else
+                    for (int j = 0; j < chesses.size(); j++) {
+                        System.out.println(chesses.get(j).getType() + " -- " + coverXLocation(chesses.get(j).getX()) + ", " + coverYLocation(chesses.get(j).getY()));
+
+                    }
+                {
+                    if (value[0].equals(chesses.get(i).getType())) {
+                        System.out.println(chessRemember.getType() + "     gdgs");
+//                        chessRemember = chesses.get(i);
+                        moveChess(coverXLocation(Integer.parseInt(value[1])), coverYLocation(Integer.parseInt(value[2])));
+                    }
+                }
+
+            }
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+            }
+        }
+
+    }
+
     public void checkOnClick(int xOnClick, int yOnClick) {
         int tempChess = -1;
         int countOfChesss = 0;
@@ -194,23 +268,6 @@ public class GameManager {
         char coordinatesOfX = coverXLocation(xOnClick);
         int coordinatesOfY = coverYLocation(yOnClick);
 
-        //Khởi chạy ai
-        if (luotdi > 2 || luotdi == 0) {
-            String ketQua = aiSetup.playAi(chesses);
-            String[] value= ketQua.split(" ");
-            for (int i=0;i<chesses.size();i++){
-                if (chesses.get(i).getType()==value[0]){
-                    chessRemember= chesses.get(i);
-                    moveChess(listXLocation[Integer.parseInt(value[1])],Integer.parseInt(value[2]));
-                }
-                if (value.length>3){
-                    if (chesses.get(i).getType()==value[3]){
-                        chessRemember= chesses.get(i);
-                        moveChess(listXLocation[Integer.parseInt(value[4])],Integer.parseInt(value[5]));
-                    }
-                }
-            }
-        }
 
         for (int i = 0; i < abilities.size(); i++) {
             Ability ability = abilities.get(i);
@@ -480,20 +537,28 @@ public class GameManager {
     }
 
     private void moveChess(char coordinatesOfX, int coordinatesOfY) {
-        int tempChess = 0;
-        char xOfChessOnSelect = coverXLocation(chessRemember.getX());
-        int yOfChessOnSelect = coverYLocation(chessRemember.getY());
+        int tempChess = -1;
+        String type = chessRemember.getType();
+        String tempType = null;
         for (int i = 0; i < chesses.size(); i++) {
-            if (coverXLocation(chesses.get(i).getX()) == xOfChessOnSelect && coverYLocation(chesses.get(i).getY()) == yOfChessOnSelect) {
+            tempType = chesses.get(i).getType();
+            if (chesses.get(i).getType().equals(type)) {
+                System.out.println(chesses.get(i).getType() + " thuchei");
                 tempChess = i;
+
                 break;
             }
         }
-        chesses.get(tempChess).setX(unCoverXLocation(coordinatesOfX));
-        chesses.get(tempChess).setY(unCoverYLocation(coordinatesOfY));
+        if (tempChess != -1) {
+            Chess chess = new Chess(unCoverXLocation(coordinatesOfX), unCoverYLocation(coordinatesOfY), tempType);
+            System.out.println(chesses.get(tempChess).getType() + "  aFFAFFAFFFSAF");
+            chesses.set(tempChess, chess);
+//            chesses.get(tempChess).setX(unCoverXLocation(coordinatesOfX));
+//            chesses.get(tempChess).setY(unCoverYLocation(coordinatesOfY));
+        }
 
         if (coordinatesOfX == 'd' && coordinatesOfY == 1) {
-            if (chessRemember.coverType(chessRemember.getType()) == 'W') {
+            if (chessRemember.coverType(chessRemember.getType()) == 'B') {
                 abilities.clear();
                 supreAbility();
                 Ability ability1 = new Ability(unCoverXLocation('c') - 2, unCoverYLocation(6) - 2);
@@ -522,7 +587,7 @@ public class GameManager {
             }
         }
         if (coordinatesOfX == 'e' && coordinatesOfY == 8) {
-            if (chessRemember.coverType(chessRemember.getType()) == 'B') {
+            if (chessRemember.coverType(chessRemember.getType()) == 'W') {
                 abilities.clear();
                 supreAbility();
                 Ability ability1 = new Ability(unCoverXLocation('e') - 2, unCoverYLocation(1) - 2);
@@ -552,9 +617,9 @@ public class GameManager {
                 flagsFly = true;
             }
         }
-        if (luotdi == 0) {
-            luotdi = 4;
-        }
+//        if (luotdi == 0) {
+//            luotdi = 4;
+//        }
         if (!flagsFly) {
             int countTrang = 0;
             int countDen = 0;
@@ -607,30 +672,31 @@ public class GameManager {
     public int checkWin() {
         int countTrang = 0;
         int countDen = 0;
-
-        for (int i = 0; i < chesses.size(); i++) {
-            if (coverXLocation(chesses.get(i).getX()) == 'e' && coverYLocation(chesses.get(i).getY()) == 1) {
-                if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
-                    return 1;
-                }
-            }
-            if (coverXLocation(chesses.get(i).getX()) == 'd' && coverYLocation(chesses.get(i).getY()) == 8) {
-                if (chesses.get(i).getType() == Chess.BLACK_O || chesses.get(i).getType() == Chess.BLACK_P || chesses.get(i).getType() == Chess.BLACK_Q) {
-                    return 2;
-                }
-            }
-            if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
-                countTrang++;
-            }
-            if (chesses.get(i).getType() == Chess.BLACK_O || chesses.get(i).getType() == Chess.BLACK_P || chesses.get(i).getType() == Chess.BLACK_Q) {
-                countDen++;
-            }
-        }
-        if (countTrang == 0) {
-            return 2;
-        } else if (countDen == 0) {
-            return 1;
-        } else return 0;
+//
+//        for (int i = 0; i < chesses.size(); i++) {
+//            if (coverXLocation(chesses.get(i).getX()) == 'e' && coverYLocation(chesses.get(i).getY()) == 1) {
+//                if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
+//                    return 1;
+//                }
+//            }
+//            if (coverXLocation(chesses.get(i).getX()) == 'd' && coverYLocation(chesses.get(i).getY()) == 8) {
+//                if (chesses.get(i).getType() == Chess.BLACK_O || chesses.get(i).getType() == Chess.BLACK_P || chesses.get(i).getType() == Chess.BLACK_Q) {
+//                    return 2;
+//                }
+//            }
+//            if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
+//                countTrang++;
+//            }
+//            if (chesses.get(i).getType() == Chess.BLACK_O || chesses.get(i).getType() == Chess.BLACK_P || chesses.get(i).getType() == Chess.BLACK_Q) {
+//                countDen++;
+//            }
+//        }
+//        if (countTrang == 0) {
+//            return 2;
+//        } else if (countDen == 0) {
+//            return 1;
+//        } else return 0;
+        return 10;
     }
 }
 

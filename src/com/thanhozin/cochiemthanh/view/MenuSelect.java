@@ -87,32 +87,32 @@ public class MenuSelect extends BasePanel implements Setup {
                     }
 
                 } else {
-                    if (x > 36 && x < 70 && y > 110 && y < 145) {
+                    if (x > 43 && x < 77 && y > 110 && y < 145) {
                         checkClickPlay = 1;
                     }
-                    if (x > 140 && x < 175 && y > 190 && y < 225) {
+                    if (x > 170 && x < 210 && y > 190 && y < 225) {
                         checkClickPlay = 2;
                     }
-                    if (x > 140 && x < 175 && y > 247 && y < 282) {
+                    if (x > 170 && x < 210 && y > 247 && y < 282) {
                         checkClickPlay = 3;
                     }
-                    if (x > 113 && x < 149 && y > 426 && y < 459) {
+                    if (x > 136 && x < 178 && y > 426 && y < 459) {
                         checkClickLevel = 1;
                     }
-                    if (x > 258 && x < 293 && y > 426 && y < 459) {
+                    if (x > 308 && x < 352 && y > 426 && y < 459) {
                         checkClickLevel = 2;
                     }
-                    if (x > 531 && x < 566 && y > 426 && y < 459) {
+                    if (x > 646 && x < 690 && y > 426 && y < 459) {
                         checkClickLevel = 3;
                     }
-                    if (x > 45 && x < 80 && y > 512 && y < 547) {
+                    if (x > 53 && x < 97 && y > 512 && y < 547) {
                         checkClickPlay = 4;
                     }
-                    if (x > 85 && x < 250 && y > 582 && y < 638) {
+                    if (x > 84 && x < 290 && y > 582 && y < 638) {
 //                    flagBack = true;
                         onScreenSwitchListener.switchScreen(Gui.SCREEN_MENU_SELECT_TO_MENU_PANEL);
                     }
-                    if (x > 471 && x < 629 && y > 582 && y < 638) {
+                    if (x > 565 && x < 771 && y > 582 && y < 638) {
 //                    flagPlay = true;
                         if (checkClickPlay <=1) {
                             flagTBChonLoaiChoi = true;
@@ -125,7 +125,6 @@ public class MenuSelect extends BasePanel implements Setup {
                             onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_PLAY);
                     }
                 }
-
                 repaint();
             }
 
@@ -148,32 +147,32 @@ public class MenuSelect extends BasePanel implements Setup {
                         flagClickOkInChonLevel = true;
                     } else flagClickOkInChonLevel = false;
                 } else {
-                    if (x > 36 && x < 70 && y > 110 && y < 145) {
+                    if (x > 43 && x < 77 && y > 110 && y < 145) {
                         flagPeVsCo = true;
                     } else
                         flagPeVsCo = false;
-                    if (x > 140 && x < 175 && y > 190 && y < 225) {
+                    if (x > 170 && x < 210 && y > 190 && y < 225) {
                         flagCoIsFirt = true;
                     } else flagCoIsFirt = false;
-                    if (x > 140 && x < 175 && y > 247 && y < 282) {
+                    if (x > 170 && x < 210 && y > 247 && y < 282) {
                         flagPeIsFirt = true;
                     } else flagPeIsFirt = false;
-                    if (x > 113 && x < 149 && y > 426 && y < 459) {
+                    if (x > 136 && x < 178 && y > 426 && y < 459) {
                         flagLevelDe = true;
                     } else flagLevelDe = false;
-                    if (x > 258 && x < 293 && y > 426 && y < 459) {
+                    if (x > 308 && x < 352 && y > 426 && y < 459) {
                         flagLevelTrungBinh = true;
                     } else flagLevelTrungBinh = false;
-                    if (x > 531 && x < 566 && y > 426 && y < 459) {
+                    if (x > 646 && x < 690 && y > 426 && y < 459) {
                         flagLevelKho = true;
                     } else flagLevelKho = false;
-                    if (x > 45 && x < 80 && y > 512 && y < 547) {
+                    if (x > 53 && x < 97 && y > 512 && y < 547) {
                         flagPeVsPe = true;
                     } else flagPeVsPe = false;
-                    if (x > 85 && x < 250 && y > 582 && y < 638) {
+                    if (x > 84 && x < 290 && y > 582 && y < 638) {
                         flagBack = true;
                     } else flagBack = false;
-                    if (x > 471 && x < 629 && y > 582 && y < 638) {
+                    if (x > 565 && x < 771 && y > 582 && y < 638) {
                         flagPlay = true;
                     } else flagPlay = false;
                 }
@@ -198,48 +197,48 @@ public class MenuSelect extends BasePanel implements Setup {
 //        graphics2D.drawImage(ImageStore.IMG_FRAME,700,0,145,709,null);
 
         if (flagPeVsCo) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 36, 110, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 43, 110, 44, 37, null);
         }
         if (flagCoIsFirt) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 140, 192, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 170, 192, 40, 37, null);
         }
         if (flagPeIsFirt) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 140, 250, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 170, 250, 40, 37, null);
         }
         if (flagLevelDe) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 112, 429, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 136, 429, 42, 37, null);
         }
         if (flagLevelTrungBinh) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 257, 432, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 308, 432, 44, 37, null);
         }
         if (flagLevelKho) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 538, 433, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 646, 433, 44, 37, null);
         }
         if (flagPeVsPe) {
-            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 43, 518, 37, 37, null);
+            graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 53, 518, 44, 37, null);
         }
         if (flagBack) {
-            graphics2D.drawImage(ImageStore.IMG_BUTTON_TRO_VE, 67, 586, 175, 60, null);
+            graphics2D.drawImage(ImageStore.IMG_BUTTON_TRO_VE, 84, 586, 206, 60, null);
         }
         if (flagPlay) {
-            graphics2D.drawImage(ImageStore.IMG_BUTTON_PLAY, 471, 586, 168, 60, null);
+            graphics2D.drawImage(ImageStore.IMG_BUTTON_PLAY, 565, 586, 206, 60, null);
         }
 
 
         switch (checkClickPlay) {
             case 1:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 36, 110, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 110, 44, 37, null);
                 break;
             case 2:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 36, 110, 37, 37, null);
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 140, 192, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 110, 44, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 170, 192, 40, 37, null);
                 break;
             case 3:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 36, 110, 37, 37, null);
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 140, 250, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 110, 44, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 170, 250, 40, 37, null);
                 break;
             case 4:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 518, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 53, 518, 44, 37, null);
                 checkClickLevel = 0;
                 break;
             default:
@@ -247,16 +246,16 @@ public class MenuSelect extends BasePanel implements Setup {
         }
         switch (checkClickLevel) {
             case 1:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 36, 110, 37, 37, null);
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 112, 429, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 110, 44, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 136, 429, 42, 37, null);
                 break;
             case 2:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 36, 110, 37, 37, null);
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 257, 432, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 110, 44, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 308, 432, 44, 37, null);
                 break;
             case 3:
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 36, 110, 37, 37, null);
-                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 538, 433, 37, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 43, 110, 44, 37, null);
+                graphics2D.drawImage(ImageStore.IMG_CHECK_FINISH, 646, 433, 44, 37, null);
                 break;
             default:
                 break;

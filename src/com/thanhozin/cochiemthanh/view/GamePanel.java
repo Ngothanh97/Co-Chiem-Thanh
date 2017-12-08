@@ -4,7 +4,6 @@ import com.thanhozin.cochiemthanh.manager.GameManager;
 import com.thanhozin.cochiemthanh.manager.ImageStore;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.BitSet;
@@ -98,8 +97,8 @@ public class GamePanel extends BasePanel implements Runnable {
                     if (x > 715 && x < 835 && y > 450 && y < 486) {
                         flagFrameTamDung = true;
                     }
-                    gameManager.checkOnClick(e.getX(), e.getY());
                 }
+                gameManager.checkOnClick(e.getX(), e.getY());
                 repaint();
             }
 
@@ -142,7 +141,6 @@ public class GamePanel extends BasePanel implements Runnable {
                 repaint();
             }
         };
-
         addMouseListener(mouseAdapter);
         addMouseMotionListener(mouseAdapter);
     }
@@ -158,38 +156,15 @@ public class GamePanel extends BasePanel implements Runnable {
         String typeOfChessToSelect = "";
 
         while (true) {
-//            String typeOfChessToSelect="";
-            if (bitSet.get(KeyEvent.VK_O)) {
-                System.out.println("o");
-                typeOfChessToSelect = "O1";
+            try {
+                gameManager.khoiChayAi();
+//                break;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            if (bitSet.get(KeyEvent.VK_P)) {
-                System.out.println("p");
-
-                typeOfChessToSelect = "P1";
-            }
-            if (bitSet.get(KeyEvent.VK_Q)) {
-                typeOfChessToSelect = "Q1";
-            }
-            if (bitSet.get(KeyEvent.VK_K)) {
-                typeOfChessToSelect = "K1";
-            }
-            if (bitSet.get(KeyEvent.VK_L)) {
-                typeOfChessToSelect = "L1";
-            }
-            if (bitSet.get(KeyEvent.VK_M)) {
-                typeOfChessToSelect = "M1";
-            }
-            if (bitSet.get(KeyEvent.VK_SPACE)) {
-                typeOfChessToSelect = "SPACE";
-            }
-            if (bitSet.get(KeyEvent.VK_ENTER)) {
-                typeOfChessToSelect = "ENTER";
-            }
-            gameManager.checkType(typeOfChessToSelect);
             repaint();
             try {
-                Thread.sleep(1);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
