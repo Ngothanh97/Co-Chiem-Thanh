@@ -39,6 +39,7 @@ public class GameManager {
         abilities = new ArrayList<>();
         flagsFly = false;
         initalizeChess();
+        aiSetup = new AiSetup();
     }
 
     //chuyển từ tọa độ x của máy ra ký hiệu tọa độ bàn cờ

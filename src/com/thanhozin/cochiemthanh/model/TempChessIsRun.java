@@ -1,7 +1,5 @@
 package com.thanhozin.cochiemthanh.model;
 
-import sun.plugin.javascript.navig.Array;
-
 import java.util.ArrayList;
 
 /**
