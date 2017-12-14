@@ -44,6 +44,9 @@ public class GameManager {
 
     public void khoiChayAi() throws InterruptedException {
         ai = new AI(new TempChessTable(chesses, true));
+        TempChessTable best = ai.getBest();
+        chesses = best.getThem();
+        chesses.addAll(best.getUs());
         /*
 //        chessRemember = null;
         if (luotdi == 0) {

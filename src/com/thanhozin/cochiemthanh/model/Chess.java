@@ -26,6 +26,17 @@ public class Chess {
         this.type = type;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        Chess c = (Chess) o;
+        return c.getType().equalsIgnoreCase(((Chess) o).getType()) && c.getX() == ((Chess) o).getX() && c.getY() == ((Chess) o).getY();
+    }
+
+    @Override
+    public String toString() {
+        return "\nChess type: " + type + " x:" + x + " y:" + y;
+    }
+
     public int getX() {
         return x;
     }
@@ -35,7 +46,7 @@ public class Chess {
     }
 
     public String getType() {
-        return type;
+        return String.valueOf(coverType(type));
     }
 
     public void setX(int x) {
@@ -77,17 +88,17 @@ public class Chess {
     }
 
     public char coverType(String type) {
-    switch (type) {
-        case WHILE_K:
-        case WHILE_L:
-        case WHILE_M:
-            return 'W';
-        case BLACK_O:
-        case BLACK_P:
-        case BLACK_Q:
-            return 'B';
-        default:
-            return ' ';
-    }
+        switch (type) {
+            case WHILE_K:
+            case WHILE_L:
+            case WHILE_M:
+                return 'W';
+            case BLACK_O:
+            case BLACK_P:
+            case BLACK_Q:
+                return 'B';
+            default:
+                return ' ';
+        }
     }
 }

@@ -1,7 +1,5 @@
 package com.thanhozin.cochiemthanh.model;
 
-import com.thanhozin.cochiemthanh.manager.AI;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -23,15 +21,40 @@ public class TempChessTable {
         ArrayList<Chess> u = new ArrayList<>();
         ArrayList<Chess> t = new ArrayList<>();
         for (Chess chess:chesses){
-            if (chess.getType().equalsIgnoreCase(isWhite?"W":"B")){
+            if (chess.getType().equalsIgnoreCase(String.valueOf(isWhite?'W':'B'))){
                 u.add(chess);
             } else {
                 t.add(chess);
             }
         }
+        this.us = u;
+        this.them = t;
+        setDiemBanCo();
+        score = countScore();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        boolean check = true;
+        TempChessTable t = (TempChessTable) o;
+        for (Chess u:us){
+            if (!t.isHas(u)) check = false;
+        }
+        for (Chess c:them){
+            if (!t.isHas(c)) check = false;
+        }
+        return check;
+    }
 
+    private boolean isHas(Chess c){
+        for (Chess u:us){
+            if (u.equals(c)) return true;
+        }
+        for (Chess t:them){
+            if (t.equals(c)) return true;
+        }
+        return false;
+    }
 
     //Tạo ra điểm của bàn cờ được dùng để xét điểm
     private void setDiemBanCo() {
@@ -188,9 +211,9 @@ public class TempChessTable {
             int y = coverY(us.get(i).getY());
             score += diemBanCoCuaMay[x][y];
         }
-        for (int i = 0; i<them.size(); i++){
-            int x = coverX(us.get(i).getX());
-            int y = coverY(us.get(i).getY());
+        for (int i = 0; i < them.size(); i++){
+            int x = coverX(them.get(i).getX());
+            int y = coverY(them.get(i).getY());
             score -= diemBanCoCuaMay[x][y];
         }
         score += new Random().nextInt(20);
@@ -276,56 +299,56 @@ public class TempChessTable {
         String type = chess.getType();
         if(x-1 > 0 && y-2 > 0){
             if(null == isHaving(x, y-1)){
-                if (type.equalsIgnoreCase(isHaving(x-1, y-2).getType())){
+                if (isHaving(x-1, y-2) == null || type.equalsIgnoreCase(isHaving(x-1, y-2).getType())){
                     abilities.add(1);  // 1: top, left, top + clock
                 }
             }
         }
         if(x+1 <= 8 && y-2 > 0){
             if(null == isHaving(x, y-1)){
-                if (type.equalsIgnoreCase(isHaving(x+1, y-2).getType())){
+                if (isHaving(x+1, y-2) == null || type.equalsIgnoreCase(isHaving(x+1, y-2).getType())){
                     abilities.add(2);  // 2: top, right, top + clock
                 }
             }
         }
         if(x+2 <= 8 && y-1 > 0){
             if(null == isHaving(x+1, y)){
-                if (type.equalsIgnoreCase(isHaving(x+2, y-1).getType())){
+                if (isHaving(x+2, y-1) == null || type.equalsIgnoreCase(isHaving(x+2, y-1).getType())){
                     abilities.add(3);
                 }
             }
         }
         if(x+2 <= 8 && y+1 <= 8){
             if(null == isHaving(x+1, y)){
-                if (type.equalsIgnoreCase(isHaving(x+2, y+1).getType())){
+                if (isHaving(x+2, y+1) == null || type.equalsIgnoreCase(isHaving(x+2, y+1).getType())){
                     abilities.add(4);
                 }
             }
         }
         if(x+1 <= 8 && y+2 <= 8){
             if(null == isHaving(x, y+1)){
-                if (type.equalsIgnoreCase(isHaving(x+1, y+2).getType())){
+                if (isHaving(x+1, y+2) == null || type.equalsIgnoreCase(isHaving(x+1, y+2).getType())){
                     abilities.add(5);
                 }
             }
         }
         if(x-1 > 0 && y+2 <= 8){
             if(null == isHaving(x, y+1)){
-                if (type.equalsIgnoreCase(isHaving(x-1, y+2).getType())){
+                if (isHaving(x-1, y+2) == null || type.equalsIgnoreCase(isHaving(x-1, y+2).getType())){
                     abilities.add(6);
                 }
             }
         }
         if(x-2 > 0 && y+1 <= 8){
             if(null == isHaving(x-1, y)){
-                if (type.equalsIgnoreCase(isHaving(x-2, y+1).getType())){
+                if (isHaving(x-2, y+1) == null || type.equalsIgnoreCase(isHaving(x-2, y+1).getType())){
                     abilities.add(7);
                 }
             }
         }
         if(x-2 > 0 && y-1 > 0){
             if(null == isHaving(x-1, y)){
-                if (type.equalsIgnoreCase(isHaving(x-2, y-1).getType())){
+                if (isHaving(x-2, y-1) == null || type.equalsIgnoreCase(isHaving(x-2, y-1).getType())){
                     abilities.add(8);
                 }
             }
@@ -354,7 +377,6 @@ public class TempChessTable {
     ** cover: bot -> view
     * uncover: view -> bot
     */
-
     public int coverX(int xLocation) {
         if (xLocation >= 34 && xLocation < 111) {
             return 1;
@@ -456,6 +478,7 @@ public class TempChessTable {
                 return 0;
         }
     }
+    /*----------------------------*/
 
     public ArrayList<Chess> getThem() {
         return them;
@@ -471,5 +494,9 @@ public class TempChessTable {
 
     public void setUs(ArrayList<Chess> us) {
         this.us = us;
+    }
+
+    public int getScore() {
+        return score;
     }
 }
