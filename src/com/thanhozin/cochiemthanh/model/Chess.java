@@ -9,13 +9,14 @@ import java.awt.*;
  */
 public class Chess {
     public static final int SIZE = 70;
-
-    public static final String WHILE_K = "K1";
-    public static final String WHILE_L = "L1";
-    public static final String WHILE_M = "M1";
-    public static final String BLACK_O = "O1";
-    public static final String BLACK_P = "P1";
-    public static final String BLACK_Q = "Q1";
+    public static final String WHIlE ="while";
+    public static final String BLACK ="black";
+    public static final String WHILE_K = "k1";
+    public static final String WHILE_L = "l1";
+    public static final String WHILE_M = "m1";
+    public static final String BLACK_O = "o1";
+    public static final String BLACK_P = "p1";
+    public static final String BLACK_Q = "q1";
     private int x;
     private int y;
     private String type;
