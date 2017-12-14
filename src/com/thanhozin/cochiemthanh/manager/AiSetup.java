@@ -5,6 +5,7 @@ import com.thanhozin.cochiemthanh.model.TempChessIsRun;
 import com.thanhozin.cochiemthanh.view.MenuSelect;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Created by ThanhND on 11/27/2017.
@@ -206,6 +207,7 @@ public class AiSetup {
                 } else score += diemBanCoCuaMay[x][y];
             }
         }
+        score += new Random().nextInt(20);
         return score;
     }
 

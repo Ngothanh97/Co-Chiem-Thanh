@@ -2,6 +2,7 @@ package com.thanhozin.cochiemthanh.manager;
 
 import com.thanhozin.cochiemthanh.model.Ability;
 import com.thanhozin.cochiemthanh.model.Chess;
+import com.thanhozin.cochiemthanh.model.TempChessTable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -30,16 +31,88 @@ public class GameManager {
     private char[] listXLocation = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     private boolean flagsFly;
     public int luotdi;
-
+    private AI ai;
 
     public GameManager() {
-        aiSetup = new AiSetup();
         luotdi = 4;
         chesses = new ArrayList<>();
         abilities = new ArrayList<>();
         flagsFly = false;
         initalizeChess();
         aiSetup = new AiSetup();
+    }
+
+    public void khoiChayAi() throws InterruptedException {
+        ai = new AI(new TempChessTable(chesses, true));
+        /*
+//        chessRemember = null;
+        if (luotdi == 0) {
+            luotdi = 4;
+        }
+        if (luotdi == 4) {
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+
+            }
+            Thread.sleep(2000);
+            ArrayList<Chess> tempChesses = chesses;
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+
+            }
+            String ketQua = aiSetup.playAi(tempChesses);
+            String[] value = ketQua.split(" ");
+//            System.out.println(chesses.size());
+            System.out.println(ketQua);
+//            System.out.println(value[0]);
+//            System.out.println(value[3]);
+            System.out.println("sau ai");
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+
+            }
+
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + ", Kiểm tra đi");
+                chessRemember = chesses.get(i);
+                if (value.length > 3) {
+//                    System.out.println(chesses.get(i).getType()+"vào"+ value[3]);
+                    if (Objects.equals(chesses.get(i).getType(), value[3])) {
+//                        System.out.println("vào");
+//                        chessRemember = chesses.get(i);
+                        System.out.println(chessRemember.getType());
+                        moveChess(coverXLocation(Integer.parseInt(value[4])), coverYLocation(Integer.parseInt(value[5])));
+                    } else
+                        for (int j = 0; j < chesses.size(); j++) {
+                            System.out.println(chesses.get(j).getType() + " -- " + coverXLocation(chesses.get(j).getX()) + ", " + coverYLocation(chesses.get(j).getY()));
+
+                        }
+//                        System.out.println("3");
+                    if (value[0].equals(chesses.get(i).getType())) {
+//                        chessRemember = chesses.get(i);
+//                        System.out.println(chessRemember.getType() + " sdfg");
+                        System.out.println(coverXLocation(Integer.parseInt(value[1])) + ", " + coverYLocation(Integer.parseInt(value[2])));
+                        moveChess(coverXLocation(Integer.parseInt(value[1])), coverYLocation(Integer.parseInt(value[2])));
+//                        break;
+                    }
+                } else
+                    for (int j = 0; j < chesses.size(); j++) {
+                        System.out.println(chesses.get(j).getType() + " -- " + coverXLocation(chesses.get(j).getX()) + ", " + coverYLocation(chesses.get(j).getY()));
+
+                    }
+                {
+                    if (value[0].equals(chesses.get(i).getType())) {
+                        System.out.println(chessRemember.getType() + "     gdgs");
+//                        chessRemember = chesses.get(i);
+                        moveChess(coverXLocation(Integer.parseInt(value[1])), coverYLocation(Integer.parseInt(value[2])));
+                    }
+                }
+
+            }
+            for (int i = 0; i < chesses.size(); i++) {
+                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
+            }
+        }*/
     }
 
     //chuyển từ tọa độ x của máy ra ký hiệu tọa độ bàn cờ
@@ -188,78 +261,6 @@ public class GameManager {
                 }
             }
         }
-    }
-
-    public void khoiChayAi() throws InterruptedException {
-//        chessRemember = null;
-        if (luotdi == 0) {
-            luotdi = 4;
-        }
-        if (luotdi == 4) {
-            for (int i = 0; i < chesses.size(); i++) {
-                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
-
-            }
-            Thread.sleep(2000);
-            ArrayList<Chess> tempChesses = chesses;
-            for (int i = 0; i < chesses.size(); i++) {
-                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
-
-            }
-            String ketQua = aiSetup.playAi(tempChesses);
-            String[] value = ketQua.split(" ");
-//            System.out.println(chesses.size());
-            System.out.println(ketQua);
-//            System.out.println(value[0]);
-//            System.out.println(value[3]);
-            System.out.println("sau ai");
-            for (int i = 0; i < chesses.size(); i++) {
-                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
-
-            }
-
-            for (int i = 0; i < chesses.size(); i++) {
-                System.out.println(chesses.get(i).getType() + ", Kiểm tra đi");
-                chessRemember = chesses.get(i);
-                if (value.length > 3) {
-//                    System.out.println(chesses.get(i).getType()+"vào"+ value[3]);
-                    if (Objects.equals(chesses.get(i).getType(), value[3])) {
-//                        System.out.println("vào");
-//                        chessRemember = chesses.get(i);
-                        System.out.println(chessRemember.getType());
-                        moveChess(coverXLocation(Integer.parseInt(value[4])), coverYLocation(Integer.parseInt(value[5])));
-                    } else
-                        for (int j = 0; j < chesses.size(); j++) {
-                            System.out.println(chesses.get(j).getType() + " -- " + coverXLocation(chesses.get(j).getX()) + ", " + coverYLocation(chesses.get(j).getY()));
-
-                        }
-//                        System.out.println("3");
-                    if (value[0].equals(chesses.get(i).getType())) {
-//                        chessRemember = chesses.get(i);
-//                        System.out.println(chessRemember.getType() + " sdfg");
-                        System.out.println(coverXLocation(Integer.parseInt(value[1])) + ", " + coverYLocation(Integer.parseInt(value[2])));
-                        moveChess(coverXLocation(Integer.parseInt(value[1])), coverYLocation(Integer.parseInt(value[2])));
-//                        break;
-                    }
-                } else
-                    for (int j = 0; j < chesses.size(); j++) {
-                        System.out.println(chesses.get(j).getType() + " -- " + coverXLocation(chesses.get(j).getX()) + ", " + coverYLocation(chesses.get(j).getY()));
-
-                    }
-                {
-                    if (value[0].equals(chesses.get(i).getType())) {
-                        System.out.println(chessRemember.getType() + "     gdgs");
-//                        chessRemember = chesses.get(i);
-                        moveChess(coverXLocation(Integer.parseInt(value[1])), coverYLocation(Integer.parseInt(value[2])));
-                    }
-                }
-
-            }
-            for (int i = 0; i < chesses.size(); i++) {
-                System.out.println(chesses.get(i).getType() + " -- " + coverXLocation(chesses.get(i).getX()) + ", " + coverYLocation(chesses.get(i).getY()));
-            }
-        }
-
     }
 
     public void checkOnClick(int xOnClick, int yOnClick) {
