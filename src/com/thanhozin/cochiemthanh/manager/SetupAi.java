@@ -24,7 +24,7 @@ nếu vào ô sân bay
 	c2: xét trong quá trình chạy ai, tìm cách  lưu vị trí nó khi qua ô sân bay, để sau
 	khi thoát ai, cho nó bước vào ô sân bay và bước đi
  */
-public class Ai {
+public class SetupAi {
     private int[][] diemBanCoCuaMay;
     private int[][] diemBanCoCuaNguoiChoi;
     private boolean computerIsFirst;
@@ -39,7 +39,7 @@ public class Ai {
     private int doSau;
     private MenuSelect menuSelect;
 
-    public Ai() {
+    public SetupAi() {
         arryChess = new ArrayList<>();
         arryChessNhos = new ArrayList<>();
         quanDen = new ArrayList<>();
@@ -547,35 +547,44 @@ public class Ai {
             boolean vi_tri_1 = true;
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
-                //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                if (kiemTraQuanCoTrang(arryChess.get(i))) {
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (x1 != 0) {
-                        if (xChess == x1 && yChess == yTemp) {
+                if (x1 != 0) {
+                    if (xChess == x1 && yChess == yTemp) {
+                        //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_1 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x1 = 0;
-                        }
-                    } else vi_tri_1 = false;
 
-                    if (x2 != 0) {
-                        if (xChess == x2 && yChess == yTemp) {
+
+                            //Nếu nó là quân đen thì thịt nó.
+                        } else {
+                            arryChess.remove(i);
+                        }
+                    }
+
+                } else vi_tri_1 = false;
+
+                if (x2 != 0) {
+                    if (xChess == x2 && yChess == yTemp) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_2 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x2 = 0;
+
+
+                            //Nếu nó là quân đen thì thịt nó.
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
-
-                    //Nếu nó là quân đen thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -612,34 +621,37 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                if (!kiemTraQuanCoTrang(arryChess.get(i))) {
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (x1 != 0) {
-                        if (xChess == x1 && yChess == yTemp) {
+                if (x1 != 0) {
+                    if (xChess == x1 && yChess == yTemp) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_1 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (x2 != 0) {
-                        if (xChess == x2 && yChess == yTemp) {
+                if (x2 != 0) {
+                    if (xChess == x2 && yChess == yTemp) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_2 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân trắng thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -695,34 +707,37 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                if (kiemTraQuanCoTrang(arryChess.get(i))) {
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (y1 != 0) {
-                        if (xChess == xTemp && yChess == y1) {
+                if (y1 != 0) {
+                    if (xChess == xTemp && yChess == y1) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_1 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             y1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (y2 != 0) {
-                        if (xChess == xTemp && yChess == y2) {
+                if (y2 != 0) {
+                    if (xChess == xTemp && yChess == y2) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_2 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             y2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân đen thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -759,34 +774,37 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                if (!kiemTraQuanCoTrang(arryChess.get(i))) {
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (y1 != 0) {
-                        if (xChess == xTemp && yChess == y1) {
+                if (y1 != 0) {
+                    if (xChess == xTemp && yChess == y1) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_1 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             y1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (y2 != 0) {
-                        if (xChess == xTemp && yChess == y2) {
+                if (y2 != 0) {
+                    if (xChess == xTemp && yChess == y2) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_2 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             y2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân trắng thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -842,34 +860,37 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                if (kiemTraQuanCoTrang(arryChess.get(i))) {
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (x1 != 0) {
-                        if (xChess == x1 && yChess == yTemp) {
+                if (x1 != 0) {
+                    if (xChess == x1 && yChess == yTemp) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_1 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (x2 != 0) {
-                        if (xChess == x2 && yChess == yTemp) {
+                if (x2 != 0) {
+                    if (xChess == x2 && yChess == yTemp) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
                             vi_tri_2 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân đen thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -906,7 +927,6 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                if (!kiemTraQuanCoTrang(arryChess.get(i))) {
                     int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
                     int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
@@ -915,25 +935,30 @@ public class Ai {
                      */
                     if (x1 != 0) {
                         if (xChess == x1 && yChess == yTemp) {
-                            vi_tri_1 = false;
-                            //Tiết kiệm lần duyệt cho những vòng for sau
-                            x1 = 0;
+                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                                vi_tri_1 = false;
+                                //Tiết kiệm lần duyệt cho những vòng for sau
+                                x1 = 0;
+                            } else {
+                                arryChess.remove(i);
+                            }
                         }
                     } else vi_tri_1 = false;
 
                     if (x2 != 0) {
                         if (xChess == x2 && yChess == yTemp) {
-                            vi_tri_2 = false;
-                            //Tiết kiệm lần duyệt cho những vòng for sau
-                            x2 = 0;
+                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                                vi_tri_2 = false;
+                                //Tiết kiệm lần duyệt cho những vòng for sau
+                                x2 = 0;
+                            } else {
+                                arryChess.remove(i);
+                            }
                         }
                     } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân đen thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
+
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -989,7 +1014,6 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                if (kiemTraQuanCoTrang(arryChess.get(i))) {
                     int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
                     int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
@@ -998,25 +1022,29 @@ public class Ai {
                      */
                     if (y1 != 0) {
                         if (xChess == xTemp && yChess == y1) {
-                            vi_tri_1 = false;
-                            //Tiết kiệm lần duyệt cho những vòng for sau
-                            y1 = 0;
+                            if (kiemTraQuanCoTrang(arryChess.get(i))) {
+                                vi_tri_1 = false;
+                                //Tiết kiệm lần duyệt cho những vòng for sau
+                                y1 = 0;
+                            }else {
+                                arryChess.remove(i);
+                            }
                         }
                     } else vi_tri_1 = false;
 
                     if (y2 != 0) {
                         if (xChess == xTemp && yChess == y2) {
-                            vi_tri_2 = false;
-                            //Tiết kiệm lần duyệt cho những vòng for sau
-                            y2 = 0;
+                            if (kiemTraQuanCoTrang(arryChess.get(i))) {
+                                vi_tri_2 = false;
+                                //Tiết kiệm lần duyệt cho những vòng for sau
+                                y2 = 0;
+                            }else {
+                                arryChess.remove(i);
+                            }
                         }
                     } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân đen thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {
@@ -1053,7 +1081,6 @@ public class Ai {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                if (!kiemTraQuanCoTrang(arryChess.get(i))) {
                     int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
                     int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
@@ -1062,25 +1089,29 @@ public class Ai {
                      */
                     if (y1 != 0) {
                         if (xChess == xTemp && yChess == y1) {
-                            vi_tri_1 = false;
-                            //Tiết kiệm lần duyệt cho những vòng for sau
-                            y1 = 0;
+                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                                vi_tri_1 = false;
+                                //Tiết kiệm lần duyệt cho những vòng for sau
+                                y1 = 0;
+                            }else {
+                                arryChess.remove(i);
+                            }
                         }
                     } else vi_tri_1 = false;
 
                     if (y2 != 0) {
                         if (xChess == xTemp && yChess == y2) {
-                            vi_tri_2 = false;
-                            //Tiết kiệm lần duyệt cho những vòng for sau
-                            y2 = 0;
+                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                                vi_tri_2 = false;
+                                //Tiết kiệm lần duyệt cho những vòng for sau
+                                y2 = 0;
+                            }else {
+                                arryChess.remove(i);
+                            }
                         }
                     } else vi_tri_2 = false;
 
 
-                    //Nếu nó là quân đen thì thịt nó.
-                } else {
-                    arryChess.remove(i);
-                }
             }
             //Nếu cả 2 vị trí đều có quân k thể di chuyển
             if (!vi_tri_1 && !vi_tri_2) {

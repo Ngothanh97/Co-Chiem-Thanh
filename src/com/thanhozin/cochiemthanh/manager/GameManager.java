@@ -31,7 +31,7 @@ public class GameManager {
     private char[] listXLocation = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     private boolean flagsFly;
     public int luotdi;
-    private AI ai;
+//    private AI ai;
 
     public GameManager() {
         luotdi = 4;
@@ -43,10 +43,10 @@ public class GameManager {
     }
 
     public void khoiChayAi() throws InterruptedException {
-        ai = new AI(new TempChessTable(chesses, true));
-        TempChessTable best = ai.getBest();
-        chesses = best.getThem();
-        chesses.addAll(best.getUs());
+//        ai = new AI(new TempChessTable(chesses, true));
+//        TempChessTable best = ai.getBest();
+//        chesses = best.getThem();
+//        chesses.addAll(best.getUs());
         /*
 //        chessRemember = null;
         if (luotdi == 0) {
