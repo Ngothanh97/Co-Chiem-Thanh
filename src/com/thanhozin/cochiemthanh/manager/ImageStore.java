@@ -66,9 +66,9 @@ public class ImageStore {
     public static final Image IMG_CHECK_BOX= getImage("/res/drawable/ic-check2.png");
     public static final Image IMG_CHECK_FINISH= getImage("/res/drawable/ic-tick.png");
 
-    public static final Image IMG_WHILE_K_1 = getImage("/res/drawable/t_k_1.png");
-    public static final Image IMG_WHILE_L_1 = getImage("/res/drawable/t_l_1.png");
-    public static final Image IMG_WHILE_M_1 = getImage("/res/drawable/t_m_1.png");
+    public static final Image IMG_WHITE_K_1 = getImage("/res/drawable/t_k_1.png");
+    public static final Image IMG_WHITE_L_1 = getImage("/res/drawable/t_l_1.png");
+    public static final Image IMG_WHITE_M_1 = getImage("/res/drawable/t_m_1.png");
     public static final Image IMG_BLACK_O_1 = getImage("/res/drawable/d_o_1.png");
     public static final Image IMG_BLACK_P_1 = getImage("/res/drawable/d_p_1.png");
     public static final Image IMG_BLACK_Q_1 = getImage("/res/drawable/d_q_1.png");

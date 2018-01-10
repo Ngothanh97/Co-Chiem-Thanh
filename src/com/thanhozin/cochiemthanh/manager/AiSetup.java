@@ -297,9 +297,9 @@ public class AiSetup {
             chessWhite.clear();
         }
         for (int i = 0; i < chesses.size(); i++) {
-            if (chesses.get(i).getType() == Chess.WHILE_K
-                    || chesses.get(i).getType() == Chess.WHILE_L
-                    || chesses.get(i).getType() == Chess.WHILE_M) {
+            if (chesses.get(i).getType() == Chess.WHITE_K
+                    || chesses.get(i).getType() == Chess.WHITE_L
+                    || chesses.get(i).getType() == Chess.WHITE_M) {
                 chessWhite.add(chesses.get(i));
             } else chessBlack.add(chesses.get(i));
         }
@@ -1019,9 +1019,9 @@ public class AiSetup {
 
 
     private boolean kiemTraQuanCoTrang(Chess chess) {
-        if (chess.getType() == Chess.WHILE_K
-                || chess.getType() == Chess.WHILE_L
-                || chess.getType() == Chess.WHILE_M) {
+        if (chess.getType() == Chess.WHITE_K
+                || chess.getType() == Chess.WHITE_L
+                || chess.getType() == Chess.WHITE_M) {
             return true;
         } else return false;
     }

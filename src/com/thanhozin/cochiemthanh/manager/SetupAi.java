@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /*
 Độ sâu tìm kiếm cần set
-    Dế: 2
+    Dễ: 2
     Trung Bình:4
     Khó :6
 
@@ -19,7 +19,7 @@ nếu vào ô sân bay
 	Nhược điểm: không thể vừa vẽ, vừa tính toán được.
 
 	c1: vẫn thực hiện hết 2 nước đi. sau đó kiểm tra nếu tồn tại ô sân bay, tạo riêng
-	hàm sét ai tại tất cả các khả nawng có thể có và nước đi tiếp theo của đối phương
+	hàm sét ai tại tất cả các khả năng có thể có và nước đi tiếp theo của đối phương
 
 	c2: xét trong quá trình chạy ai, tìm cách  lưu vị trí nó khi qua ô sân bay, để sau
 	khi thoát ai, cho nó bước vào ô sân bay và bước đi
@@ -39,6 +39,8 @@ public class SetupAi {
     private int doSau;
     private MenuSelect menuSelect;
 
+    ArrayList<Nut> nuts = new ArrayList<>();
+
     public SetupAi() {
         arryChess = new ArrayList<>();
         arryChessNhos = new ArrayList<>();
@@ -57,9 +59,8 @@ public class SetupAi {
         } else if (menuSelect.getCheckClickLevel() == 3) {
             doSau = 6;
         }
-        if (menuSelect.getCheckClickPlay() == 2) {
-            computerIsFirst = true;
-        } else computerIsFirst = false;
+
+        computerIsFirst = menuSelect.getCheckClickPlay() == 2;
     }
 
     private void setDiemBanCo() {
@@ -233,17 +234,36 @@ public class SetupAi {
         nut.setChesses(aryChess);
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
         nut.setGiaTri(0);
-        taoCayTroChoi(nut);
-        duyetCay();
+        nuts.clear();
+
+        // get next best nut
+        duyetCay(taoCayTroChoi(nut));
     }
 
 
     //Hàm Duyệt cây
-    private void duyetCay() {
+    private Nut duyetCay(Nut nut) {
         //TODO
+        Nut bestNut = null;
+        if (nut != null){
+            bestNut = nut;
+            if (nut.getNuts() == null){
+                 if (nut.getGiaTri() > bestNut.getGiaTri()){
+                     bestNut = nut;
+                 }
+            } else {
+                for (Nut n : nut.getNuts()){
+                    Nut kq = duyetCay(n);
+                    if (kq.getGiaTri() > bestNut.getGiaTri()){
+                        bestNut = kq;
+                    }
+                }
+            }
+        }
+        return bestNut;
     }
 
-    private void taoCayTroChoi(Nut nuted) {
+    private Nut taoCayTroChoi(Nut nuted) {
         String mauQuanSeDiChuyen = nuted.getMauQuanDiChuyen();
         arryChess.clear();
         arryChessNhos.clear();
@@ -252,7 +272,7 @@ public class SetupAi {
 
         tachQuanTrangVsDen();
         int temp = 0;
-        if (mauQuanSeDiChuyen.equals(Chess.WHIlE)) {
+        if (mauQuanSeDiChuyen.equals(Chess.WHITE)) {
             temp = quanTrang.size();
         } else temp = quanDen.size();
         lanLayCapQuan = 1;
@@ -270,14 +290,13 @@ public class SetupAi {
             for (int k = 0; k < temp2; k++) {
                 Chess quanDiChuyen = layRaQuanDiChuyen();
 
-
                 //Tạo ra các trường hợp, các con của nut.
                 if (k != 1) {
                     sinhNuocDi(quanDiChuyen);
                 } else {
-                    for (int j = 0; j < aryChessIsRuns.size(); j++) {
-                        arryChess = aryChessIsRuns.get(j).getChess();
-                        arryChessNhos = aryChessIsRuns.get(j).getChess();
+                    for (AryChessIsRun aryChessIsRun : aryChessIsRuns) {
+                        arryChess = aryChessIsRun.getChess();
+                        arryChessNhos = aryChessIsRun.getChess();
                         sinhNuocDi(quanDiChuyen);
                     }
                 }
@@ -285,10 +304,10 @@ public class SetupAi {
             }
         }
 
-        ArrayList<Nut> nuts = new ArrayList<>();
         for (int i = 0; i < aryChessIsRuns.size(); i++) {
+            AryChessIsRun aryChessIsRun = aryChessIsRuns.get(i);
             Nut nut = new Nut();
-            nut.setChesses(aryChessIsRuns.get(i).getChess());
+            nut.setChesses(aryChessIsRun.getChess());
             nut.setGiaTri(tinhDiem(nut.getChesses()));
             nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
             nuts.add(nut);
@@ -298,14 +317,13 @@ public class SetupAi {
 
         doSau--;
         if (doSau == 0) {
-            return;
+            return null;
         }
         //Kiểm tra nước đi tiếp theo của quân đối phương. sau đây mới kết thúc một độ sâu tìm kiếm
         for (int i = 0; i < nuts.size(); i++) {
             taoCayTroChoi(nuts.get(i));
         }
-
-
+        return nuted;
     }
 
     private void sinhNuocDi(Chess quanCoDiChuyen) {
@@ -446,7 +464,7 @@ public class SetupAi {
     }
 
     private void layRaCapQuanDiChuyen(String mauCuaQuanCo) {
-        if (mauCuaQuanCo.equals(Chess.WHIlE)) {
+        if (mauCuaQuanCo.equals(Chess.WHITE)) {
             if (quanTrang.size() == 3) {
                 if (lanLayCapQuan == 1) {
                     capQuanSeDiChuyen[0] = quanTrang.get(0);
@@ -1247,23 +1265,23 @@ public class SetupAi {
     <------------------------------------------------------------------------->
      */
     private boolean kiemTraQuanCoTrang(Chess chess) {
-        if (chess.getType().equals(Chess.WHILE_K)
-                || chess.getType().equals(Chess.WHILE_L)
-                || chess.getType().equals(Chess.WHILE_M)) {
+        if (chess.getType().equals(Chess.WHITE_K)
+                || chess.getType().equals(Chess.WHITE_L)
+                || chess.getType().equals(Chess.WHITE_M)) {
             return true;
         } else return false;
     }
 
     private String layRaMauCuaQuan(Chess chess) {
         if (kiemTraQuanCoTrang(chess)) {
-            return Chess.WHIlE;
+            return Chess.WHITE;
         } else return Chess.BLACK;
     }
 
     private String daoMauQuan(String mauQuanHienTai) {
-        if (mauQuanHienTai.equals(Chess.WHIlE)) {
+        if (mauQuanHienTai.equals(Chess.WHITE)) {
             return Chess.BLACK;
-        } else return Chess.WHIlE;
+        } else return Chess.WHITE;
     }
     /*
     <=========================================================================>

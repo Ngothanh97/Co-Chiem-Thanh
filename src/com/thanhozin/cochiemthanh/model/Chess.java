@@ -9,11 +9,11 @@ import java.awt.*;
  */
 public class Chess {
     public static final int SIZE = 70;
-    public static final String WHIlE ="while";
+    public static final String WHITE ="white";
     public static final String BLACK ="black";
-    public static final String WHILE_K = "k1";
-    public static final String WHILE_L = "l1";
-    public static final String WHILE_M = "m1";
+    public static final String WHITE_K = "k1";
+    public static final String WHITE_L = "l1";
+    public static final String WHITE_M = "m1";
     public static final String BLACK_O = "o1";
     public static final String BLACK_P = "p1";
     public static final String BLACK_Q = "q1";
@@ -64,14 +64,14 @@ public class Chess {
 
     public void drawChess(Graphics2D graphics2D) {
         switch (type) {
-            case WHILE_K:
-                graphics2D.drawImage(ImageStore.IMG_WHILE_K_1, x, y, SIZE, SIZE, null);
+            case WHITE_K:
+                graphics2D.drawImage(ImageStore.IMG_WHITE_K_1, x, y, SIZE, SIZE, null);
                 break;
-            case WHILE_L:
-                graphics2D.drawImage(ImageStore.IMG_WHILE_L_1, x, y, SIZE, SIZE, null);
+            case WHITE_L:
+                graphics2D.drawImage(ImageStore.IMG_WHITE_L_1, x, y, SIZE, SIZE, null);
                 break;
-            case WHILE_M:
-                graphics2D.drawImage(ImageStore.IMG_WHILE_M_1, x, y, SIZE, SIZE, null);
+            case WHITE_M:
+                graphics2D.drawImage(ImageStore.IMG_WHITE_M_1, x, y, SIZE, SIZE, null);
                 break;
             case BLACK_O:
                 graphics2D.drawImage(ImageStore.IMG_BLACK_O_1, x, y, SIZE, SIZE, null);
@@ -90,9 +90,9 @@ public class Chess {
 
     public char coverType(String type) {
         switch (type) {
-            case WHILE_K:
-            case WHILE_L:
-            case WHILE_M:
+            case WHITE_K:
+            case WHITE_L:
+            case WHITE_M:
                 return 'W';
             case BLACK_O:
             case BLACK_P:

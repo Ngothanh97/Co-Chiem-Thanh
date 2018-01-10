@@ -39,7 +39,9 @@ public class GameManager {
         abilities = new ArrayList<>();
         flagsFly = false;
         initalizeChess();
-        aiSetup = new AiSetup();
+//        aiSetup = new AiSetup();
+        SetupAi ai = new SetupAi();
+        ai.khoiChayAi(chesses, "white");
     }
 
     public void khoiChayAi() throws InterruptedException {
@@ -225,11 +227,11 @@ public class GameManager {
     }
 
     public void initalizeChess() {
-        Chess chessWhileK = new Chess(unCoverXLocation('a'), unCoverYLocation(1), Chess.WHILE_K);
+        Chess chessWhileK = new Chess(unCoverXLocation('a'), unCoverYLocation(1), Chess.WHITE_K);
         chesses.add(chessWhileK);
-        Chess chessWhileL = new Chess(unCoverXLocation('e'), unCoverYLocation(1), Chess.WHILE_L);
+        Chess chessWhileL = new Chess(unCoverXLocation('e'), unCoverYLocation(1), Chess.WHITE_L);
         chesses.add(chessWhileL);
-        Chess chessWhileM = new Chess(unCoverXLocation('h'), unCoverYLocation(1), Chess.WHILE_M);
+        Chess chessWhileM = new Chess(unCoverXLocation('h'), unCoverYLocation(1), Chess.WHITE_M);
         chesses.add(chessWhileM);
 
         Chess chessBlackO = new Chess(unCoverXLocation('a'), unCoverYLocation(8), Chess.BLACK_O);
@@ -669,7 +671,7 @@ public class GameManager {
     }
 
     public boolean kiemTraQuanCoTrang(Chess chess) {
-        if (chess.getType() == Chess.WHILE_K || chess.getType() == Chess.WHILE_L || chess.getType() == Chess.WHILE_M) {
+        if (chess.getType() == Chess.WHITE_K || chess.getType() == Chess.WHITE_L || chess.getType() == Chess.WHITE_M) {
             return true;
         } else return false;
     }
@@ -680,7 +682,7 @@ public class GameManager {
 //
 //        for (int i = 0; i < chesses.size(); i++) {
 //            if (coverXLocation(chesses.get(i).getX()) == 'e' && coverYLocation(chesses.get(i).getY()) == 1) {
-//                if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
+//                if (chesses.get(i).getType() == Chess.WHITE_K || chesses.get(i).getType() == Chess.WHITE_L || chesses.get(i).getType() == Chess.WHITE_M) {
 //                    return 1;
 //                }
 //            }
@@ -689,7 +691,7 @@ public class GameManager {
 //                    return 2;
 //                }
 //            }
-//            if (chesses.get(i).getType() == Chess.WHILE_K || chesses.get(i).getType() == Chess.WHILE_L || chesses.get(i).getType() == Chess.WHILE_M) {
+//            if (chesses.get(i).getType() == Chess.WHITE_K || chesses.get(i).getType() == Chess.WHITE_L || chesses.get(i).getType() == Chess.WHITE_M) {
 //                countTrang++;
 //            }
 //            if (chesses.get(i).getType() == Chess.BLACK_O || chesses.get(i).getType() == Chess.BLACK_P || chesses.get(i).getType() == Chess.BLACK_Q) {
