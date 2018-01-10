@@ -37,6 +37,7 @@ public class SetupAi {
     private int lanLayQuanTuMang;
     private ArrayList<AryChessIsRun> aryChessIsRuns;
     private int doSau;
+    private int countArray;
     private MenuSelect menuSelect;
 
     ArrayList<Nut> nuts = new ArrayList<>();
@@ -319,6 +320,8 @@ public class SetupAi {
         if (doSau == 0) {
             return null;
         }
+
+        countArray= nuts.size();
         //Kiểm tra nước đi tiếp theo của quân đối phương. sau đây mới kết thúc một độ sâu tìm kiếm
         for (int i = 0; i < nuts.size(); i++) {
             taoCayTroChoi(nuts.get(i));

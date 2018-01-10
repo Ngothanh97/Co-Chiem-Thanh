@@ -19,7 +19,7 @@ import java.util.Objects;
  lượt 4 hướng dông, tây, nam, bắc. Nếu hướng nào bị chặn thì k tạo các ô khả năng có thể bước đến của quân cờ và ngược lại
  và lưu lại quân cờ được click vào một biến nhớ chessRemember
  - Xét di chuyên nếu khi click vào 1 vị trí mà vị trí đấy là một ô khả năng thì set lại tọa độ cho quân cờ đã được lưu
- đến vị trí mới là vị trí click
+ đến vị trí mới là vị trí clickf
  KẾT THÚC THUẬT TOÁN
  */
 public class GameManager {
