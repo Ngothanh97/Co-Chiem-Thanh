@@ -3,20 +3,23 @@ package com.thanhozin.cochiemthanh.model;
 import java.util.ArrayList;
 
 public class Nut {
-    private ArrayList<Nut> nuts;
+    private int tempLevel; // đếm số thứ tự của nút trong lượt di chuyển quân bắt đầu từ 0 ở nút gốc
+    private ArrayList<Nut> nuts;  // Các nút con của nut
     private int giaTri;
     private ArrayList<Chess> chesses;
-    private String mauQuanDiChuyen;
+    private String mauQuanDiChuyen;  // Màu của quân sẽ di chuyển ở lượt xét nut tiếp theo
+    private Nut nutFather;
 
     public Nut(){
 
     }
 
-    public Nut(ArrayList<Nut> nuts, int value, ArrayList<Chess> chessesValue, String mau){
+    public Nut(ArrayList<Nut> nuts, int value, ArrayList<Chess> chessesValue, String mau, int tempLevel){
         this.nuts= nuts;
         this.giaTri= value;
         this.chesses= chessesValue;
         this.mauQuanDiChuyen=mau;
+        this.tempLevel= tempLevel;
 
     }
 
@@ -50,5 +53,21 @@ public class Nut {
 
     public void setMauQuanDiChuyen(String mauQuanDiChuyen) {
         this.mauQuanDiChuyen = mauQuanDiChuyen;
+    }
+
+    public int getTempLevel() {
+        return tempLevel;
+    }
+
+    public void setTempLevel(int tempLevel) {
+        this.tempLevel = tempLevel;
+    }
+
+    public Nut getNutFather() {
+        return nutFather;
+    }
+
+    public void setNutFather(Nut nutFather) {
+        this.nutFather = nutFather;
     }
 }

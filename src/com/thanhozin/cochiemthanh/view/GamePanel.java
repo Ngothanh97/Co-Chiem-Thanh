@@ -24,6 +24,8 @@ public class GamePanel extends BasePanel implements Runnable {
     private boolean flagOkInTB;
     private boolean flagShowTB;
     private boolean flagTiepTuc;
+    private int kieuChoi;
+    private int level;
 
 
     public GamePanel() {

@@ -35,12 +35,20 @@ public class SetupAi {
     private Chess[] capQuanSeDiChuyen;
     private int lanLayCapQuan;
     private int lanLayQuanTuMang;
+    private int level;
+    private ArrayList<AryChessIsRun> arrTempChessIsRun = new ArrayList<>();
+
+
+    private Nut nutDuocChonDiChuyen; // dùng cho lúc tìm nut cha
+
+
+    //Mảng chứa các nhánh của cây, lưu trữ các
     private ArrayList<AryChessIsRun> aryChessIsRuns;
     private int doSau;
     private int countArray;
     private MenuSelect menuSelect;
 
-    ArrayList<Nut> nuts = new ArrayList<>();
+//    ArrayList<Nut> nuts = new ArrayList<>(); // Cây trò chơi
 
     public SetupAi() {
         arryChess = new ArrayList<>();
@@ -53,161 +61,313 @@ public class SetupAi {
         capQuanSeDiChuyen = new Chess[2];
         setDiemBanCo();
         menuSelect = new MenuSelect();
-        if (menuSelect.getCheckClickLevel() == 1) {
+        int templevel = MenuSelect.level;
+        if (templevel == GameManager.LEVEL_DE) {
             doSau = 2;
-        } else if (menuSelect.getCheckClickLevel() == 2) {
+            level = GameManager.LEVEL_DE;
+        } else if (templevel == GameManager.LEVEL_TRUNG_BINH) {
             doSau = 4;
-        } else if (menuSelect.getCheckClickLevel() == 3) {
+            level = GameManager.LEVEL_TRUNG_BINH;
+        } else if (templevel == GameManager.LEVEL_KHO) {
             doSau = 6;
+            level = GameManager.LEVEL_KHO;
         }
 
-        computerIsFirst = menuSelect.getCheckClickPlay() == 2;
+        if (MenuSelect.kieuChoi == GameManager.MAY_DANH_TRUOC) {
+            computerIsFirst = true;
+        }
     }
 
     private void setDiemBanCo() {
-        diemBanCoCuaMay[1][1] = 60;
-        diemBanCoCuaMay[2][1] = 30;
-        diemBanCoCuaMay[3][1] = 60;
-        diemBanCoCuaMay[4][1] = 30;
-        diemBanCoCuaMay[5][1] = 60;
-        diemBanCoCuaMay[6][1] = 30;
-        diemBanCoCuaMay[7][1] = 60;
-        diemBanCoCuaMay[8][1] = 30;
+        if (computerIsFirst) {
+            diemBanCoCuaMay[1][1] = 60;
+            diemBanCoCuaMay[2][1] = 30;
+            diemBanCoCuaMay[3][1] = 60;
+            diemBanCoCuaMay[4][1] = 30;
+            diemBanCoCuaMay[5][1] = 60;
+            diemBanCoCuaMay[6][1] = 30;
+            diemBanCoCuaMay[7][1] = 60;
+            diemBanCoCuaMay[8][1] = 30;
 
-        diemBanCoCuaMay[1][2] = 125;
-        diemBanCoCuaMay[2][2] = 60;
-        diemBanCoCuaMay[3][2] = 125;
-        diemBanCoCuaMay[4][2] = 60;
-        diemBanCoCuaMay[5][2] = 125;
-        diemBanCoCuaMay[6][2] = 60;
-        diemBanCoCuaMay[7][2] = 125;
-        diemBanCoCuaMay[8][2] = 60;
+            diemBanCoCuaMay[1][2] = 125;
+            diemBanCoCuaMay[2][2] = 60;
+            diemBanCoCuaMay[3][2] = 125;
+            diemBanCoCuaMay[4][2] = 60;
+            diemBanCoCuaMay[5][2] = 125;
+            diemBanCoCuaMay[6][2] = 60;
+            diemBanCoCuaMay[7][2] = 125;
+            diemBanCoCuaMay[8][2] = 60;
 
-        diemBanCoCuaMay[1][3] = 60;
-        diemBanCoCuaMay[2][3] = 125;
-        diemBanCoCuaMay[3][3] = 60;
-        diemBanCoCuaMay[4][3] = 125;
-        diemBanCoCuaMay[5][3] = 60;
-        diemBanCoCuaMay[6][3] = 125;
-        diemBanCoCuaMay[7][3] = 60;
-        diemBanCoCuaMay[8][3] = 125;
+            diemBanCoCuaMay[1][3] = 60;
+            diemBanCoCuaMay[2][3] = 125;
+            diemBanCoCuaMay[3][3] = 60;
+            diemBanCoCuaMay[4][3] = 125;
+            diemBanCoCuaMay[5][3] = 60;
+            diemBanCoCuaMay[6][3] = 125;
+            diemBanCoCuaMay[7][3] = 60;
+            diemBanCoCuaMay[8][3] = 125;
 
-        diemBanCoCuaMay[1][4] = 125;
-        diemBanCoCuaMay[2][4] = 250;
-        diemBanCoCuaMay[3][4] = 125;
-        diemBanCoCuaMay[4][4] = 250;
-        diemBanCoCuaMay[5][4] = 125;
-        diemBanCoCuaMay[6][4] = 250;
-        diemBanCoCuaMay[7][4] = 125;
-        diemBanCoCuaMay[8][4] = 60;
+            diemBanCoCuaMay[1][4] = 125;
+            diemBanCoCuaMay[2][4] = 250;
+            diemBanCoCuaMay[3][4] = 125;
+            diemBanCoCuaMay[4][4] = 250;
+            diemBanCoCuaMay[5][4] = 125;
+            diemBanCoCuaMay[6][4] = 250;
+            diemBanCoCuaMay[7][4] = 125;
+            diemBanCoCuaMay[8][4] = 60;
 
-        diemBanCoCuaMay[1][5] = 250;
-        diemBanCoCuaMay[2][5] = 125;
-        diemBanCoCuaMay[3][5] = 250;
-        diemBanCoCuaMay[4][5] = 125;
-        diemBanCoCuaMay[5][5] = 250;
-        diemBanCoCuaMay[6][5] = 125;
-        diemBanCoCuaMay[7][5] = 250;
-        diemBanCoCuaMay[8][5] = 125;
+            diemBanCoCuaMay[1][5] = 250;
+            diemBanCoCuaMay[2][5] = 125;
+            diemBanCoCuaMay[3][5] = 250;
+            diemBanCoCuaMay[4][5] = 125;
+            diemBanCoCuaMay[5][5] = 250;
+            diemBanCoCuaMay[6][5] = 125;
+            diemBanCoCuaMay[7][5] = 250;
+            diemBanCoCuaMay[8][5] = 125;
 
-        diemBanCoCuaMay[1][6] = 125;
-        diemBanCoCuaMay[2][6] = 60;
-        diemBanCoCuaMay[3][6] = 500;
-        diemBanCoCuaMay[4][6] = 250;
-        diemBanCoCuaMay[5][6] = 500;
-        diemBanCoCuaMay[6][6] = 60;
-        diemBanCoCuaMay[7][6] = 125;
-        diemBanCoCuaMay[8][6] = 250;
+            diemBanCoCuaMay[1][6] = 125;
+            diemBanCoCuaMay[2][6] = 60;
+            diemBanCoCuaMay[3][6] = 500;
+            diemBanCoCuaMay[4][6] = 250;
+            diemBanCoCuaMay[5][6] = 500;
+            diemBanCoCuaMay[6][6] = 60;
+            diemBanCoCuaMay[7][6] = 125;
+            diemBanCoCuaMay[8][6] = 250;
 
-        diemBanCoCuaMay[1][7] = 250;
-        diemBanCoCuaMay[2][7] = 500;
-        diemBanCoCuaMay[3][7] = 250;
-        diemBanCoCuaMay[4][7] = 125;
-        diemBanCoCuaMay[5][7] = 250;
-        diemBanCoCuaMay[6][7] = 500;
-        diemBanCoCuaMay[7][7] = 250;
-        diemBanCoCuaMay[8][7] = 125;
+            diemBanCoCuaMay[1][7] = 250;
+            diemBanCoCuaMay[2][7] = 500;
+            diemBanCoCuaMay[3][7] = 250;
+            diemBanCoCuaMay[4][7] = 125;
+            diemBanCoCuaMay[5][7] = 250;
+            diemBanCoCuaMay[6][7] = 500;
+            diemBanCoCuaMay[7][7] = 250;
+            diemBanCoCuaMay[8][7] = 125;
 
-        diemBanCoCuaMay[1][8] = 125;
-        diemBanCoCuaMay[2][8] = 250;
-        diemBanCoCuaMay[3][8] = 125;
-        diemBanCoCuaMay[4][8] = 2000;
-        diemBanCoCuaMay[5][8] = 300;
-        diemBanCoCuaMay[6][8] = 250;
-        diemBanCoCuaMay[7][8] = 125;
-        diemBanCoCuaMay[8][8] = 250;
+            diemBanCoCuaMay[1][8] = 125;
+            diemBanCoCuaMay[2][8] = 250;
+            diemBanCoCuaMay[3][8] = 125;
+            diemBanCoCuaMay[4][8] = 2000;
+            diemBanCoCuaMay[5][8] = 300;
+            diemBanCoCuaMay[6][8] = 250;
+            diemBanCoCuaMay[7][8] = 125;
+            diemBanCoCuaMay[8][8] = 250;
 
-        diemBanCoCuaNguoiChoi[1][1] = 250;
-        diemBanCoCuaNguoiChoi[2][1] = 125;
-        diemBanCoCuaNguoiChoi[3][1] = 250;
-        diemBanCoCuaNguoiChoi[4][1] = 300;
-        diemBanCoCuaNguoiChoi[5][1] = 2000;
-        diemBanCoCuaNguoiChoi[6][1] = 125;
-        diemBanCoCuaNguoiChoi[7][1] = 250;
-        diemBanCoCuaNguoiChoi[8][1] = 125;
+            diemBanCoCuaNguoiChoi[1][1] = 250;
+            diemBanCoCuaNguoiChoi[2][1] = 125;
+            diemBanCoCuaNguoiChoi[3][1] = 250;
+            diemBanCoCuaNguoiChoi[4][1] = 300;
+            diemBanCoCuaNguoiChoi[5][1] = 2000;
+            diemBanCoCuaNguoiChoi[6][1] = 125;
+            diemBanCoCuaNguoiChoi[7][1] = 250;
+            diemBanCoCuaNguoiChoi[8][1] = 125;
 
-        diemBanCoCuaNguoiChoi[1][2] = 125;
-        diemBanCoCuaNguoiChoi[2][2] = 250;
-        diemBanCoCuaNguoiChoi[3][2] = 500;
-        diemBanCoCuaNguoiChoi[4][2] = 250;
-        diemBanCoCuaNguoiChoi[5][2] = 125;
-        diemBanCoCuaNguoiChoi[6][2] = 250;
-        diemBanCoCuaNguoiChoi[7][2] = 500;
-        diemBanCoCuaNguoiChoi[8][2] = 250;
+            diemBanCoCuaNguoiChoi[1][2] = 125;
+            diemBanCoCuaNguoiChoi[2][2] = 250;
+            diemBanCoCuaNguoiChoi[3][2] = 500;
+            diemBanCoCuaNguoiChoi[4][2] = 250;
+            diemBanCoCuaNguoiChoi[5][2] = 125;
+            diemBanCoCuaNguoiChoi[6][2] = 250;
+            diemBanCoCuaNguoiChoi[7][2] = 500;
+            diemBanCoCuaNguoiChoi[8][2] = 250;
 
-        diemBanCoCuaNguoiChoi[1][3] = 250;
-        diemBanCoCuaNguoiChoi[2][3] = 125;
-        diemBanCoCuaNguoiChoi[3][3] = 60;
-        diemBanCoCuaNguoiChoi[4][3] = 500;
-        diemBanCoCuaNguoiChoi[5][3] = 250;
-        diemBanCoCuaNguoiChoi[6][3] = 500;
-        diemBanCoCuaNguoiChoi[7][3] = 60;
-        diemBanCoCuaNguoiChoi[8][3] = 125;
+            diemBanCoCuaNguoiChoi[1][3] = 250;
+            diemBanCoCuaNguoiChoi[2][3] = 125;
+            diemBanCoCuaNguoiChoi[3][3] = 60;
+            diemBanCoCuaNguoiChoi[4][3] = 500;
+            diemBanCoCuaNguoiChoi[5][3] = 250;
+            diemBanCoCuaNguoiChoi[6][3] = 500;
+            diemBanCoCuaNguoiChoi[7][3] = 60;
+            diemBanCoCuaNguoiChoi[8][3] = 125;
 
-        diemBanCoCuaNguoiChoi[1][4] = 125;
-        diemBanCoCuaNguoiChoi[2][4] = 250;
-        diemBanCoCuaNguoiChoi[3][4] = 125;
-        diemBanCoCuaNguoiChoi[4][4] = 250;
-        diemBanCoCuaNguoiChoi[5][4] = 125;
-        diemBanCoCuaNguoiChoi[6][4] = 250;
-        diemBanCoCuaNguoiChoi[7][4] = 125;
-        diemBanCoCuaNguoiChoi[8][4] = 250;
+            diemBanCoCuaNguoiChoi[1][4] = 125;
+            diemBanCoCuaNguoiChoi[2][4] = 250;
+            diemBanCoCuaNguoiChoi[3][4] = 125;
+            diemBanCoCuaNguoiChoi[4][4] = 250;
+            diemBanCoCuaNguoiChoi[5][4] = 125;
+            diemBanCoCuaNguoiChoi[6][4] = 250;
+            diemBanCoCuaNguoiChoi[7][4] = 125;
+            diemBanCoCuaNguoiChoi[8][4] = 250;
 
-        diemBanCoCuaNguoiChoi[1][5] = 60;
-        diemBanCoCuaNguoiChoi[2][5] = 125;
-        diemBanCoCuaNguoiChoi[3][5] = 250;
-        diemBanCoCuaNguoiChoi[4][5] = 125;
-        diemBanCoCuaNguoiChoi[5][5] = 250;
-        diemBanCoCuaNguoiChoi[6][5] = 125;
-        diemBanCoCuaNguoiChoi[7][5] = 250;
-        diemBanCoCuaNguoiChoi[8][5] = 125;
+            diemBanCoCuaNguoiChoi[1][5] = 60;
+            diemBanCoCuaNguoiChoi[2][5] = 125;
+            diemBanCoCuaNguoiChoi[3][5] = 250;
+            diemBanCoCuaNguoiChoi[4][5] = 125;
+            diemBanCoCuaNguoiChoi[5][5] = 250;
+            diemBanCoCuaNguoiChoi[6][5] = 125;
+            diemBanCoCuaNguoiChoi[7][5] = 250;
+            diemBanCoCuaNguoiChoi[8][5] = 125;
 
-        diemBanCoCuaNguoiChoi[1][6] = 125;
-        diemBanCoCuaNguoiChoi[2][6] = 60;
-        diemBanCoCuaNguoiChoi[3][6] = 125;
-        diemBanCoCuaNguoiChoi[4][6] = 60;
-        diemBanCoCuaNguoiChoi[5][6] = 125;
-        diemBanCoCuaNguoiChoi[6][6] = 60;
-        diemBanCoCuaNguoiChoi[7][6] = 125;
-        diemBanCoCuaNguoiChoi[8][6] = 60;
+            diemBanCoCuaNguoiChoi[1][6] = 125;
+            diemBanCoCuaNguoiChoi[2][6] = 60;
+            diemBanCoCuaNguoiChoi[3][6] = 125;
+            diemBanCoCuaNguoiChoi[4][6] = 60;
+            diemBanCoCuaNguoiChoi[5][6] = 125;
+            diemBanCoCuaNguoiChoi[6][6] = 60;
+            diemBanCoCuaNguoiChoi[7][6] = 125;
+            diemBanCoCuaNguoiChoi[8][6] = 60;
 
-        diemBanCoCuaNguoiChoi[1][7] = 60;
-        diemBanCoCuaNguoiChoi[2][7] = 125;
-        diemBanCoCuaNguoiChoi[3][7] = 60;
-        diemBanCoCuaNguoiChoi[4][7] = 125;
-        diemBanCoCuaNguoiChoi[5][7] = 60;
-        diemBanCoCuaNguoiChoi[6][7] = 125;
-        diemBanCoCuaNguoiChoi[7][7] = 60;
-        diemBanCoCuaNguoiChoi[8][7] = 125;
+            diemBanCoCuaNguoiChoi[1][7] = 60;
+            diemBanCoCuaNguoiChoi[2][7] = 125;
+            diemBanCoCuaNguoiChoi[3][7] = 60;
+            diemBanCoCuaNguoiChoi[4][7] = 125;
+            diemBanCoCuaNguoiChoi[5][7] = 60;
+            diemBanCoCuaNguoiChoi[6][7] = 125;
+            diemBanCoCuaNguoiChoi[7][7] = 60;
+            diemBanCoCuaNguoiChoi[8][7] = 125;
 
-        diemBanCoCuaNguoiChoi[1][8] = 30;
-        diemBanCoCuaNguoiChoi[2][8] = 60;
-        diemBanCoCuaNguoiChoi[3][8] = 30;
-        diemBanCoCuaNguoiChoi[4][8] = 60;
-        diemBanCoCuaNguoiChoi[5][8] = 30;
-        diemBanCoCuaNguoiChoi[6][8] = 60;
-        diemBanCoCuaNguoiChoi[7][8] = 30;
-        diemBanCoCuaNguoiChoi[8][8] = 60;
+            diemBanCoCuaNguoiChoi[1][8] = 30;
+            diemBanCoCuaNguoiChoi[2][8] = 60;
+            diemBanCoCuaNguoiChoi[3][8] = 30;
+            diemBanCoCuaNguoiChoi[4][8] = 60;
+            diemBanCoCuaNguoiChoi[5][8] = 30;
+            diemBanCoCuaNguoiChoi[6][8] = 60;
+            diemBanCoCuaNguoiChoi[7][8] = 30;
+            diemBanCoCuaNguoiChoi[8][8] = 60;
+        } else {
+            diemBanCoCuaMay[1][1] = 60;
+            diemBanCoCuaMay[2][1] = 30;
+            diemBanCoCuaMay[3][1] = 60;
+            diemBanCoCuaMay[4][1] = 30;
+            diemBanCoCuaMay[5][1] = 60;
+            diemBanCoCuaMay[6][1] = 30;
+            diemBanCoCuaMay[7][1] = 60;
+            diemBanCoCuaMay[8][1] = 30;
+
+            diemBanCoCuaMay[1][2] = 125;
+            diemBanCoCuaMay[2][2] = 60;
+            diemBanCoCuaMay[3][2] = 125;
+            diemBanCoCuaMay[4][2] = 60;
+            diemBanCoCuaMay[5][2] = 125;
+            diemBanCoCuaMay[6][2] = 60;
+            diemBanCoCuaMay[7][2] = 125;
+            diemBanCoCuaMay[8][2] = 60;
+
+            diemBanCoCuaMay[1][3] = 60;
+            diemBanCoCuaMay[2][3] = 125;
+            diemBanCoCuaMay[3][3] = 60;
+            diemBanCoCuaMay[4][3] = 125;
+            diemBanCoCuaMay[5][3] = 60;
+            diemBanCoCuaMay[6][3] = 125;
+            diemBanCoCuaMay[7][3] = 60;
+            diemBanCoCuaMay[8][3] = 125;
+
+            diemBanCoCuaMay[1][4] = 125;
+            diemBanCoCuaMay[2][4] = 250;
+            diemBanCoCuaMay[3][4] = 125;
+            diemBanCoCuaMay[4][4] = 250;
+            diemBanCoCuaMay[5][4] = 125;
+            diemBanCoCuaMay[6][4] = 250;
+            diemBanCoCuaMay[7][4] = 125;
+            diemBanCoCuaMay[8][4] = 60;
+
+            diemBanCoCuaMay[1][5] = 250;
+            diemBanCoCuaMay[2][5] = 125;
+            diemBanCoCuaMay[3][5] = 250;
+            diemBanCoCuaMay[4][5] = 125;
+            diemBanCoCuaMay[5][5] = 250;
+            diemBanCoCuaMay[6][5] = 125;
+            diemBanCoCuaMay[7][5] = 250;
+            diemBanCoCuaMay[8][5] = 125;
+
+            diemBanCoCuaMay[1][6] = 125;
+            diemBanCoCuaMay[2][6] = 60;
+            diemBanCoCuaMay[3][6] = 500;
+            diemBanCoCuaMay[4][6] = 250;
+            diemBanCoCuaMay[5][6] = 500;
+            diemBanCoCuaMay[6][6] = 60;
+            diemBanCoCuaMay[7][6] = 125;
+            diemBanCoCuaMay[8][6] = 250;
+
+            diemBanCoCuaMay[1][7] = 250;
+            diemBanCoCuaMay[2][7] = 500;
+            diemBanCoCuaMay[3][7] = 250;
+            diemBanCoCuaMay[4][7] = 125;
+            diemBanCoCuaMay[5][7] = 250;
+            diemBanCoCuaMay[6][7] = 500;
+            diemBanCoCuaMay[7][7] = 250;
+            diemBanCoCuaMay[8][7] = 125;
+
+            diemBanCoCuaMay[1][8] = 125;
+            diemBanCoCuaMay[2][8] = 250;
+            diemBanCoCuaMay[3][8] = 125;
+            diemBanCoCuaMay[4][8] = 2000;
+            diemBanCoCuaMay[5][8] = 300;
+            diemBanCoCuaMay[6][8] = 250;
+            diemBanCoCuaMay[7][8] = 125;
+            diemBanCoCuaMay[8][8] = 250;
+
+            diemBanCoCuaNguoiChoi[1][1] = 250;
+            diemBanCoCuaNguoiChoi[2][1] = 125;
+            diemBanCoCuaNguoiChoi[3][1] = 250;
+            diemBanCoCuaNguoiChoi[4][1] = 300;
+            diemBanCoCuaNguoiChoi[5][1] = 2000;
+            diemBanCoCuaNguoiChoi[6][1] = 125;
+            diemBanCoCuaNguoiChoi[7][1] = 250;
+            diemBanCoCuaNguoiChoi[8][1] = 125;
+
+            diemBanCoCuaNguoiChoi[1][2] = 125;
+            diemBanCoCuaNguoiChoi[2][2] = 250;
+            diemBanCoCuaNguoiChoi[3][2] = 500;
+            diemBanCoCuaNguoiChoi[4][2] = 250;
+            diemBanCoCuaNguoiChoi[5][2] = 125;
+            diemBanCoCuaNguoiChoi[6][2] = 250;
+            diemBanCoCuaNguoiChoi[7][2] = 500;
+            diemBanCoCuaNguoiChoi[8][2] = 250;
+
+            diemBanCoCuaNguoiChoi[1][3] = 250;
+            diemBanCoCuaNguoiChoi[2][3] = 125;
+            diemBanCoCuaNguoiChoi[3][3] = 60;
+            diemBanCoCuaNguoiChoi[4][3] = 500;
+            diemBanCoCuaNguoiChoi[5][3] = 250;
+            diemBanCoCuaNguoiChoi[6][3] = 500;
+            diemBanCoCuaNguoiChoi[7][3] = 60;
+            diemBanCoCuaNguoiChoi[8][3] = 125;
+
+            diemBanCoCuaNguoiChoi[1][4] = 125;
+            diemBanCoCuaNguoiChoi[2][4] = 250;
+            diemBanCoCuaNguoiChoi[3][4] = 125;
+            diemBanCoCuaNguoiChoi[4][4] = 250;
+            diemBanCoCuaNguoiChoi[5][4] = 125;
+            diemBanCoCuaNguoiChoi[6][4] = 250;
+            diemBanCoCuaNguoiChoi[7][4] = 125;
+            diemBanCoCuaNguoiChoi[8][4] = 250;
+
+            diemBanCoCuaNguoiChoi[1][5] = 60;
+            diemBanCoCuaNguoiChoi[2][5] = 125;
+            diemBanCoCuaNguoiChoi[3][5] = 250;
+            diemBanCoCuaNguoiChoi[4][5] = 125;
+            diemBanCoCuaNguoiChoi[5][5] = 250;
+            diemBanCoCuaNguoiChoi[6][5] = 125;
+            diemBanCoCuaNguoiChoi[7][5] = 250;
+            diemBanCoCuaNguoiChoi[8][5] = 125;
+
+            diemBanCoCuaNguoiChoi[1][6] = 125;
+            diemBanCoCuaNguoiChoi[2][6] = 60;
+            diemBanCoCuaNguoiChoi[3][6] = 125;
+            diemBanCoCuaNguoiChoi[4][6] = 60;
+            diemBanCoCuaNguoiChoi[5][6] = 125;
+            diemBanCoCuaNguoiChoi[6][6] = 60;
+            diemBanCoCuaNguoiChoi[7][6] = 125;
+            diemBanCoCuaNguoiChoi[8][6] = 60;
+
+            diemBanCoCuaNguoiChoi[1][7] = 60;
+            diemBanCoCuaNguoiChoi[2][7] = 125;
+            diemBanCoCuaNguoiChoi[3][7] = 60;
+            diemBanCoCuaNguoiChoi[4][7] = 125;
+            diemBanCoCuaNguoiChoi[5][7] = 60;
+            diemBanCoCuaNguoiChoi[6][7] = 125;
+            diemBanCoCuaNguoiChoi[7][7] = 60;
+            diemBanCoCuaNguoiChoi[8][7] = 125;
+
+            diemBanCoCuaNguoiChoi[1][8] = 30;
+            diemBanCoCuaNguoiChoi[2][8] = 60;
+            diemBanCoCuaNguoiChoi[3][8] = 30;
+            diemBanCoCuaNguoiChoi[4][8] = 60;
+            diemBanCoCuaNguoiChoi[5][8] = 30;
+            diemBanCoCuaNguoiChoi[6][8] = 60;
+            diemBanCoCuaNguoiChoi[7][8] = 30;
+            diemBanCoCuaNguoiChoi[8][8] = 60;
+        }
     }
 
     public int tinhDiem(ArrayList<Chess> chessTemp) {
@@ -230,32 +390,88 @@ public class SetupAi {
 
 
     //Ham cho gamemanager goi
-    public void khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
+    public String khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
+        this.arryChess.clear();
+        arryChessNhos.clear();
+        System.out.println("Số quân cả mảng: " + aryChess.size());
+        this.arryChess.addAll(aryChess);
         Nut nut = new Nut();
-        nut.setChesses(aryChess);
+        nut.setChesses(this.arryChess);
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
         nut.setGiaTri(0);
-        nuts.clear();
+        nut.setTempLevel(0);
+//        nuts.clear();
 
+        taoCayTroChoi(nut);
+        System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
-        duyetCay(taoCayTroChoi(nut));
+        Nut bestNut = duyetCay(nut);
+        return layRaNuocDiChuyenToiUu(nut, bestNut);
+
     }
 
+    private String layRaNuocDiChuyenToiUu(Nut nutGoc, Nut bestNut) {
+        Nut nutFarther = timNutCha(bestNut);
+        ArrayList<Chess> beforArrChesses = nutGoc.getChesses();
+        ArrayList<Chess> afterArrChesses = new ArrayList<>();
+        if (nutFarther != null) {
+            afterArrChesses = nutFarther.getChesses();
+        }
+        int[] temp = new int[2];
+        int a = 0;
+        for (Chess beforChess : beforArrChesses) {
+            String typeOfBeforChess = beforChess.getType();
+            for (int j = 0; j < afterArrChesses.size(); j++) {
+                Chess afterChess = afterArrChesses.get(j);
+                if (afterChess.getType().equals(typeOfBeforChess)) {
+                    if (beforChess.getX() != afterChess.getX() || beforChess.getY() != afterChess.getY()) {
+                        temp[a] = j;
+                        a++;
+                    }
+                }
+            }
+        }
+        if (a == 1) {
+            Chess chess1 = afterArrChesses.get(temp[0]);
+            return chess1.getType() + "_" + chuyen_X_Ve_So_Thu_Tu(chess1.getX()) + "_" + chuyen_y_ve_so_thu_tu(chess1.getY());
+        } else if (a == 0) {
+            return null;
+        } else {
+            Chess chess1 = afterArrChesses.get(temp[0]);
+            String s1 = chess1.getType() + "_" + chess1.getX() + "_" + chess1.getY();
+            Chess chess2 = afterArrChesses.get(temp[1]);
+            String s2 = chess2.getType() + "_" + chess2.getX() + "_" + chess2.getY();
+            System.out.println("Két qua tra ve: " + s1 + "_" + s2);
+            return s1 + "_" + s2;
+        }
+    }
+
+
+//    private boolean isRun = true;
+
+    private Nut timNutCha(Nut bestNut) {
+        Nut nutFarther = bestNut.getNutFather();
+        if (nutFarther.getTempLevel() == 1) {
+            return nutFarther;
+        }
+        timNutCha(nutFarther);
+        return null;
+    }
 
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
         //TODO
         Nut bestNut = null;
-        if (nut != null){
+        if (nut != null) {
             bestNut = nut;
-            if (nut.getNuts() == null){
-                 if (nut.getGiaTri() > bestNut.getGiaTri()){
-                     bestNut = nut;
-                 }
+            if (nut.getNuts() == null) {
+                if (nut.getGiaTri() > bestNut.getGiaTri()) {
+                    bestNut = nut;
+                }
             } else {
-                for (Nut n : nut.getNuts()){
+                for (Nut n : nut.getNuts()) {
                     Nut kq = duyetCay(n);
-                    if (kq.getGiaTri() > bestNut.getGiaTri()){
+                    if (kq.getGiaTri() > bestNut.getGiaTri()) {
                         bestNut = kq;
                     }
                 }
@@ -264,78 +480,309 @@ public class SetupAi {
         return bestNut;
     }
 
-    private Nut taoCayTroChoi(Nut nuted) {
+    private void taoCayTroChoi(Nut nuted) {
+        System.out.println("chay ai");
+        switch (level) {
+            case GameManager.LEVEL_DE:
+                if (nuted.getTempLevel() == 2) {
+                    return;
+                }
+                break;
+            case GameManager.LEVEL_TRUNG_BINH:
+                if (nuted.getTempLevel() == 4) {
+                    return;
+                }
+                break;
+            case GameManager.LEVEL_KHO:
+                if (nuted.getTempLevel() == 6) {
+                    return;
+                }
+                break;
+            default:
+                break;
+        }
         String mauQuanSeDiChuyen = nuted.getMauQuanDiChuyen();
-        arryChess.clear();
-        arryChessNhos.clear();
         this.arryChess = nuted.getChesses();
         arryChessNhos = nuted.getChesses();
 
         tachQuanTrangVsDen();
         int temp = 0;
+
+        // Lấy ra só lượng quân có thẻ di chuyển
         if (mauQuanSeDiChuyen.equals(Chess.WHITE)) {
             temp = quanTrang.size();
         } else temp = quanDen.size();
         lanLayCapQuan = 1;
 
+        System.out.println(1);
+        System.out.println("So luong quan Trang: " + quanTrang.size());
         //Tạo vòng lặp để lấy hết các tổ hợp chọn ra 2 quân trong 3 quân
+        ArrayList<Chess> nhoChoCacLanLayCapQuan = new ArrayList<>(arryChess);
         for (int l = 0; l < temp; l++) {
+//            System.out.println(2);
+            if (temp == 2 && l == 1) {
+                System.out.println(3);
+                break;
+            }
+            arryChess=nhoChoCacLanLayCapQuan;
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
+//            if (capQuanSeDiChuyen[0]!=null&&capQuanSeDiChuyen[2]!=null) {
+//                System.out.println(capQuanSeDiChuyen[0].getType() + " -- " + capQuanSeDiChuyen[1].getType());
+//            }
             lanLayQuanTuMang = 1;
             int temp2 = 0;
+
+            int x = 0;
+            int y = 0;
+            //Số quân đã được lấy ra có thể di chuyển
             if (capQuanSeDiChuyen[1] == null) {
                 temp2 = 1;
-            } else temp = 2;
+            } else {
+                temp2 = 2;
+                x = capQuanSeDiChuyen[1].getX();
+                y = capQuanSeDiChuyen[1].getY();
+            }
 
-            //Tạo vòng lặp để lấy lần lượt từng quân trong một lượt đi
+            /*Tạo vòng lặp để lấy lần lượt từng quân trong một lượt đi. lấy từ bộ 2 quân đã chọn ra được từ
+                phương thức layRaCapQuanDiChuyen();
+            */
+            System.out.println("Số quân lấy được: " + temp2);
+            ArrayList<Chess> tempChess = new ArrayList<>();
+            Chess quanDiChuyen1 = layRaQuanDiChuyen();
+            tempChess.clear();
+            if (capQuanSeDiChuyen[1] != null) {
+                tempChess.add(capQuanSeDiChuyen[1]);
+            }
+//            System.out.println("Các quân lấy được: " + quanDiChuyen1.getType() + " --- " + capQuanSeDiChuyen[1].getType());
             for (int k = 0; k < temp2; k++) {
-                Chess quanDiChuyen = layRaQuanDiChuyen();
-
-                //Tạo ra các trường hợp, các con của nut.
-                if (k != 1) {
-                    sinhNuocDi(quanDiChuyen);
+                System.out.println("sinhnuoc di: " + k);
+                //Tạo ra các trường hợp, các con  của nut,
+                if (k == 0) {
+                    taoLuotDi(arryChess, quanDiChuyen1);
+                    arryChess = arryChessNhos;
                 } else {
-                    for (AryChessIsRun aryChessIsRun : aryChessIsRuns) {
-                        arryChess = aryChessIsRun.getChess();
-                        arryChessNhos = aryChessIsRun.getChess();
-                        sinhNuocDi(quanDiChuyen);
+                    // Di hết 2 quân lượt mình mới chuyển lượt
+                    Chess quanDiChuyen2 = layRaQuanDiChuyen();
+                    ArrayList<AryChessIsRun> arrTempChess = new ArrayList<>();
+                    arrTempChess.addAll(aryChessIsRuns);
+//                    arrTempChessIsRun2 = aryChessIsRuns;
+                    System.out.println("aryChessIsRuns Size: " + aryChessIsRuns.size());
+                    System.out.println("arrChessTemp Size: " + arrTempChess.size());
+                    aryChessIsRuns.clear();
+                    System.out.println("arrChessTemp Size: " + arrTempChess.size());
+                    for (int j = 0; j < arrTempChess.size(); j++) {
+                        arryChess = arrTempChess.get(j).getChess();
+                        Chess chessTemp = null;
+                        for (int n = 0; n < arryChess.size(); n++) {
+                            if (arryChess.get(n).getType().equals(capQuanSeDiChuyen[1].getType())) {
+                                arryChess.get(n).setX(x);
+                                arryChess.get(n).setY(y);
+                                chessTemp = arryChess.get(n);
+                                break;
+                            }
+                        }
+////                        arryChess.clear();
+//                        arryChessNhos.clear();
+////                        arryChess.addAll(arrTempChess.get(j).getChess());
+//                        arryChessNhos.addAll(arrTempChess.get(j).getChess());
+//                        arryChess=arryChessNhos;
+                        System.out.println("ArrayChess Size: " + arryChess.size());
+                        System.out.println("chạy lần 2");
+                        quanDiChuyen2 = tempChess.get(0);
+                        System.out.println("Type " + quanDiChuyen2.getType() + "_"
+                                + chuyen_X_Ve_So_Thu_Tu(quanDiChuyen2.getX()) + "-"
+                                + chuyen_y_ve_so_thu_tu(quanDiChuyen2.getY()));
+                        taoLuotDi(arrTempChess.get(j).getChess(), chessTemp);
+                        arryChess = arrTempChess.get(j).getChess();
                     }
-                }
 
+                }
+            }
+            arryChess = arryChessNhos;
+            arrTempChessIsRun.addAll(aryChessIsRuns);
+            aryChessIsRuns.clear();
+        }
+
+//        aryChessIsRuns.addAll(arrTempChessIsRun);
+//        System.out.println(aryChessIsRuns.size());
+        //Tạo ra các nut con của nuted truyền vào
+        ArrayList<Nut> nutCon = new ArrayList<>();
+        for (int i = 0; i < arrTempChessIsRun.size(); i++) {
+            AryChessIsRun aryChessIsRun = arrTempChessIsRun.get(i);
+            Nut nut = new Nut();
+            nut.setChesses(aryChessIsRun.getChess());
+            nut.setGiaTri(tinhDiem(aryChessIsRun.getChess()));
+            nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
+            nut.setTempLevel(nuted.getTempLevel() + 1);
+            nut.setNutFather(nuted);
+            nutCon.add(nut);
+        }
+        System.out.println("Nut con Size: " + nutCon.size());
+        nuted.setNuts(nutCon);
+//        nuted.setNuts(nuts);
+
+
+        for (int i = 0; i < nutCon.size(); i++) {
+            arrTempChessIsRun.clear();
+            taoCayTroChoi(nutCon.get(i));
+        }
+
+//        doSau--;
+//        if (doSau == 0) {
+//            return null;
+//        }
+//
+//        countArray = nuts.size();
+//        //Kiểm tra nước đi tiếp theo của quân đối phương. sau đây mới kết thúc một độ sâu tìm kiếm
+//        for (int i = 0; i < nuts.size(); i++) {
+//            taoCayTroChoi(nuts.get(i));
+//        }
+////        return nuted;
+    }
+
+
+    private void taoLuotDi(ArrayList<Chess> mangQuanHienCo, Chess quanCoDiChuyen) {
+        System.out.println("Quân cờ di chuyển: " + quanCoDiChuyen.getType() + "_"
+                + chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX()) + "_" + chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY()));
+        System.out.println("Số quân trong mảng truyển: " + mangQuanHienCo.size());
+        for (int a = 0; a < mangQuanHienCo.size(); a++) {
+            System.out.println(mangQuanHienCo.get(a).getType() + "---"
+                    + chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+        }
+        ArrayList<Chess> arrChessRemember = mangQuanHienCo;
+        int x = chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
+        int y = chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
+        int indexSelect = -1;
+        for (int i = 0; i < mangQuanHienCo.size(); i++) {
+            Chess tempChess = mangQuanHienCo.get(i);
+            if (tempChess.getType().equals(quanCoDiChuyen.getType())) {
+                indexSelect = i;
+                //Thà chạy sai còn hơn là lỗi
+            } else {
+                System.out.println("Lỗi di chuyển quân");
+//                return;
             }
         }
 
-        for (int i = 0; i < aryChessIsRuns.size(); i++) {
-            AryChessIsRun aryChessIsRun = aryChessIsRuns.get(i);
-            Nut nut = new Nut();
-            nut.setChesses(aryChessIsRun.getChess());
-            nut.setGiaTri(tinhDiem(nut.getChesses()));
-            nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
-            nuts.add(nut);
+        int huongLen = kiemTraHuongLen(quanCoDiChuyen);
+        System.out.println("huongLen: " + huongLen);
+        switch (huongLen) {
+            case 1:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 2:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 12:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                mangQuanHienCo = arrChessRemember;
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            default:
+                break;
         }
-        nuted.setNuts(nuts);
 
-
-        doSau--;
-        if (doSau == 0) {
-            return null;
+        mangQuanHienCo = arrChessRemember;
+        int sangPhai = kiemTraHuongPhai(quanCoDiChuyen);
+        System.out.println("sang phair: " + sangPhai);
+        switch (sangPhai) {
+            case 1:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 2:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 12:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                mangQuanHienCo = arrChessRemember;
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            default:
+                break;
         }
 
-        countArray= nuts.size();
-        //Kiểm tra nước đi tiếp theo của quân đối phương. sau đây mới kết thúc một độ sâu tìm kiếm
-        for (int i = 0; i < nuts.size(); i++) {
-            taoCayTroChoi(nuts.get(i));
+        mangQuanHienCo = arrChessRemember;
+        int xuongDuoi = kiemTraHuongXuong(quanCoDiChuyen);
+        System.out.println("huong xuong: " + xuongDuoi);
+        switch (xuongDuoi) {
+            case 1:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 2:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 12:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                mangQuanHienCo = arrChessRemember;
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            default:
+                break;
         }
-        return nuted;
+
+        mangQuanHienCo = arrChessRemember;
+        int sangTrai = kiemTraHuongTrai(quanCoDiChuyen);
+        System.out.println("sang trai: " + sangTrai);
+        switch (sangTrai) {
+            case 1:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 2:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            case 12:
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                mangQuanHienCo = arrChessRemember;
+                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                break;
+            default:
+                break;
+        }
+//        arryChess.clear();
+        System.out.println("ArrChessIsRun Size:" + aryChessIsRuns.size());
     }
 
     private void sinhNuocDi(Chess quanCoDiChuyen) {
+        System.out.println("arryChess.size(): " + arryChess.size());
+        arryChess = arryChessNhos;
         int x = chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
         int y = chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
         String type = quanCoDiChuyen.getType();
         int indexSelect = -1;
         for (int i = 0; i < arryChess.size(); i++) {
-            if (arryChess.get(i).getType().equals(quanCoDiChuyen.getType())) {
+            if (arryChess.get(i).getType().equals(type)) {
                 indexSelect = i;
 
                 //Thà chạy sai còn hơn là lỗi
@@ -344,6 +791,7 @@ public class SetupAi {
         aryChessIsRuns.clear();
 
         int huongLen = kiemTraHuongLen(quanCoDiChuyen);
+        System.out.println("huongLen: " + huongLen);
         switch (huongLen) {
             case 1:
                 arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
@@ -371,6 +819,7 @@ public class SetupAi {
 
         arryChess = arryChessNhos;
         int sangPhai = kiemTraHuongPhai(quanCoDiChuyen);
+        System.out.println("sang phair: " + sangPhai);
         switch (sangPhai) {
             case 1:
                 arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
@@ -397,7 +846,8 @@ public class SetupAi {
         }
 
         arryChess = arryChessNhos;
-        int xuongDuoi = kiemTraHuongXuống(quanCoDiChuyen);
+        int xuongDuoi = kiemTraHuongXuong(quanCoDiChuyen);
+        System.out.println("huong xuong: " + xuongDuoi);
         switch (xuongDuoi) {
             case 1:
                 arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
@@ -425,7 +875,8 @@ public class SetupAi {
 
         arryChess = arryChessNhos;
         int sangTrai = kiemTraHuongTrai(quanCoDiChuyen);
-        switch (sangPhai) {
+        System.out.println("sang trai");
+        switch (sangTrai) {
             case 1:
                 arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
                 arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
@@ -460,13 +911,23 @@ public class SetupAi {
         quanDen.clear();
         quanTrang.clear();
         for (int i = 0; i < arryChess.size(); i++) {
+//            System.out.println("chuyeenr");
+//            System.out.println(arryChess.get(i).getType());
             if (kiemTraQuanCoTrang(arryChess.get(i))) {
                 quanTrang.add(arryChess.get(i));
-            } else quanDen.add(arryChess.get(i));
+//                System.out.println("Trang");
+            } else {
+                quanDen.add(arryChess.get(i));
+//                System.out.println("Den");
+            }
         }
+//        System.out.println(quanTrang.size());
     }
 
     private void layRaCapQuanDiChuyen(String mauCuaQuanCo) {
+        for (int i = 0; i < capQuanSeDiChuyen.length; i++) {
+            capQuanSeDiChuyen[i] = null;
+        }
         if (mauCuaQuanCo.equals(Chess.WHITE)) {
             if (quanTrang.size() == 3) {
                 if (lanLayCapQuan == 1) {
@@ -484,9 +945,11 @@ public class SetupAi {
             } else if (quanTrang.size() == 2) {
                 capQuanSeDiChuyen[0] = quanTrang.get(0);
                 capQuanSeDiChuyen[1] = quanTrang.get(1);
+                return;
             } else {
                 capQuanSeDiChuyen[0] = quanTrang.get(0);
                 capQuanSeDiChuyen[1] = null;
+                return;
             }
         } else {
             if (quanDen.size() == 3) {
@@ -505,9 +968,11 @@ public class SetupAi {
             } else if (quanDen.size() == 2) {
                 capQuanSeDiChuyen[0] = quanDen.get(0);
                 capQuanSeDiChuyen[1] = quanDen.get(1);
+                return;
             } else {
                 capQuanSeDiChuyen[0] = quanDen.get(0);
                 capQuanSeDiChuyen[1] = null;
+                return;
             }
         }
     }
@@ -843,7 +1308,7 @@ public class SetupAi {
         }
     }
 
-    private int kiemTraHuongXuống(Chess chess) {
+    private int kiemTraHuongXuong(Chess chess) {
         int x = chuyen_X_Ve_So_Thu_Tu(chess.getX());
         int y = chuyen_y_ve_so_thu_tu(chess.getY());
         if (y > 6) {
@@ -948,36 +1413,35 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (x1 != 0) {
-                        if (xChess == x1 && yChess == yTemp) {
-                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
-                                vi_tri_1 = false;
-                                //Tiết kiệm lần duyệt cho những vòng for sau
-                                x1 = 0;
-                            } else {
-                                arryChess.remove(i);
-                            }
+                if (x1 != 0) {
+                    if (xChess == x1 && yChess == yTemp) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                            vi_tri_1 = false;
+                            //Tiết kiệm lần duyệt cho những vòng for sau
+                            x1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (x2 != 0) {
-                        if (xChess == x2 && yChess == yTemp) {
-                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
-                                vi_tri_2 = false;
-                                //Tiết kiệm lần duyệt cho những vòng for sau
-                                x2 = 0;
-                            } else {
-                                arryChess.remove(i);
-                            }
+                if (x2 != 0) {
+                    if (xChess == x2 && yChess == yTemp) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                            vi_tri_2 = false;
+                            //Tiết kiệm lần duyệt cho những vòng for sau
+                            x2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
-
+                    }
+                } else vi_tri_2 = false;
 
 
             }
@@ -1035,35 +1499,35 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (y1 != 0) {
-                        if (xChess == xTemp && yChess == y1) {
-                            if (kiemTraQuanCoTrang(arryChess.get(i))) {
-                                vi_tri_1 = false;
-                                //Tiết kiệm lần duyệt cho những vòng for sau
-                                y1 = 0;
-                            }else {
-                                arryChess.remove(i);
-                            }
+                if (y1 != 0) {
+                    if (xChess == xTemp && yChess == y1) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
+                            vi_tri_1 = false;
+                            //Tiết kiệm lần duyệt cho những vòng for sau
+                            y1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (y2 != 0) {
-                        if (xChess == xTemp && yChess == y2) {
-                            if (kiemTraQuanCoTrang(arryChess.get(i))) {
-                                vi_tri_2 = false;
-                                //Tiết kiệm lần duyệt cho những vòng for sau
-                                y2 = 0;
-                            }else {
-                                arryChess.remove(i);
-                            }
+                if (y2 != 0) {
+                    if (xChess == xTemp && yChess == y2) {
+                        if (kiemTraQuanCoTrang(arryChess.get(i))) {
+                            vi_tri_2 = false;
+                            //Tiết kiệm lần duyệt cho những vòng for sau
+                            y2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
 
             }
@@ -1102,35 +1566,35 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                    int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                    int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
                      */
-                    if (y1 != 0) {
-                        if (xChess == xTemp && yChess == y1) {
-                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
-                                vi_tri_1 = false;
-                                //Tiết kiệm lần duyệt cho những vòng for sau
-                                y1 = 0;
-                            }else {
-                                arryChess.remove(i);
-                            }
+                if (y1 != 0) {
+                    if (xChess == xTemp && yChess == y1) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                            vi_tri_1 = false;
+                            //Tiết kiệm lần duyệt cho những vòng for sau
+                            y1 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_1 = false;
+                    }
+                } else vi_tri_1 = false;
 
-                    if (y2 != 0) {
-                        if (xChess == xTemp && yChess == y2) {
-                            if (!kiemTraQuanCoTrang(arryChess.get(i))) {
-                                vi_tri_2 = false;
-                                //Tiết kiệm lần duyệt cho những vòng for sau
-                                y2 = 0;
-                            }else {
-                                arryChess.remove(i);
-                            }
+                if (y2 != 0) {
+                    if (xChess == xTemp && yChess == y2) {
+                        if (!kiemTraQuanCoTrang(arryChess.get(i))) {
+                            vi_tri_2 = false;
+                            //Tiết kiệm lần duyệt cho những vòng for sau
+                            y2 = 0;
+                        } else {
+                            arryChess.remove(i);
                         }
-                    } else vi_tri_2 = false;
+                    }
+                } else vi_tri_2 = false;
 
 
             }
@@ -1268,11 +1732,9 @@ public class SetupAi {
     <------------------------------------------------------------------------->
      */
     private boolean kiemTraQuanCoTrang(Chess chess) {
-        if (chess.getType().equals(Chess.WHITE_K)
+        return chess.getType().equals(Chess.WHITE_K)
                 || chess.getType().equals(Chess.WHITE_L)
-                || chess.getType().equals(Chess.WHITE_M)) {
-            return true;
-        } else return false;
+                || chess.getType().equals(Chess.WHITE_M);
     }
 
     private String layRaMauCuaQuan(Chess chess) {

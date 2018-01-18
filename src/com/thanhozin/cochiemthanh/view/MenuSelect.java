@@ -1,5 +1,6 @@
 package com.thanhozin.cochiemthanh.view;
 
+import com.thanhozin.cochiemthanh.manager.GameManager;
 import com.thanhozin.cochiemthanh.manager.ImageStore;
 
 import java.awt.*;
@@ -10,6 +11,8 @@ import java.awt.event.MouseEvent;
  * Created by ThanhND on 11/18/2017.
  */
 public class MenuSelect extends BasePanel implements Setup {
+    public static int kieuChoi = 0;
+    public static int level = 0;
     private OnScreenSwitchListener onScreenSwitchListener;
     private boolean flagPeVsCo;
     private boolean flagCoIsFirt;
@@ -83,6 +86,13 @@ public class MenuSelect extends BasePanel implements Setup {
 
                     }
                     if (x > 475 && x < 552 && y > 420 && y < 446) {
+                        if (checkClickPlay == 2) {
+                            kieuChoi = GameManager.MAY_DANH_TRUOC;
+                        }
+                        if (checkClickPlay == 3) {
+                            kieuChoi = GameManager.NGUOI_DANH_TRUOC;
+                        }
+                        level = GameManager.LEVEL_DE;
                         onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_PLAY);
                     }
 
@@ -114,15 +124,37 @@ public class MenuSelect extends BasePanel implements Setup {
                     }
                     if (x > 565 && x < 771 && y > 582 && y < 638) {
 //                    flagPlay = true;
-                        if (checkClickPlay <=1) {
+                        if (checkClickPlay <= 1) {
                             flagTBChonLoaiChoi = true;
                         } else if (checkClickPlay != 4) {
                             if (checkClickLevel == 0) {
                                 flagTBChonLevel = true;
-                            } else
+                            } else {
+                                if (checkClickPlay == 2) {
+                                    kieuChoi = GameManager.MAY_DANH_TRUOC;
+                                }
+                                if (checkClickPlay == 3) {
+                                    kieuChoi = GameManager.NGUOI_DANH_TRUOC;
+                                }
+                                switch (checkClickLevel) {
+                                    case 1:
+                                        level = GameManager.LEVEL_DE;
+                                        break;
+                                    case 2:
+                                        level = GameManager.LEVEL_TRUNG_BINH;
+                                        break;
+                                    case 3:
+                                        level = GameManager.LEVEL_KHO;
+                                        break;
+                                    default:
+                                        break;
+                                }
                                 onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_PLAY);
-                        } else
+                            }
+                        } else {
+                            kieuChoi = GameManager.HAI_NGUOI_CHOI;
                             onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_PLAY);
+                        }
                     }
                 }
                 repaint();

@@ -47,7 +47,7 @@ public class Chess {
     }
 
     public String getType() {
-        return String.valueOf(coverType(type));
+        return String.valueOf(type);
     }
 
     public void setX(int x) {
