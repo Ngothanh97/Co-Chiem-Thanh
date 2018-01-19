@@ -3,6 +3,7 @@ package com.thanhozin.cochiemthanh.manager;
 import com.thanhozin.cochiemthanh.model.AryChessIsRun;
 import com.thanhozin.cochiemthanh.model.Chess;
 import com.thanhozin.cochiemthanh.model.Nut;
+import com.thanhozin.cochiemthanh.model.ToaDo;
 import com.thanhozin.cochiemthanh.view.MenuSelect;
 
 import java.util.ArrayList;
@@ -524,7 +525,7 @@ public class SetupAi {
                 System.out.println(3);
                 break;
             }
-            arryChess=nhoChoCacLanLayCapQuan;
+            arryChess = nhoChoCacLanLayCapQuan;
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
 //            if (capQuanSeDiChuyen[0]!=null&&capQuanSeDiChuyen[2]!=null) {
 //                System.out.println(capQuanSeDiChuyen[0].getType() + " -- " + capQuanSeDiChuyen[1].getType());
@@ -563,15 +564,29 @@ public class SetupAi {
                 } else {
                     // Di hết 2 quân lượt mình mới chuyển lượt
                     Chess quanDiChuyen2 = layRaQuanDiChuyen();
-                    ArrayList<AryChessIsRun> arrTempChess = new ArrayList<>();
-                    arrTempChess.addAll(aryChessIsRuns);
+                    ArrayList<AryChessIsRun> arrTempChess = new ArrayList<>(aryChessIsRuns);
 //                    arrTempChessIsRun2 = aryChessIsRuns;
                     System.out.println("aryChessIsRuns Size: " + aryChessIsRuns.size());
                     System.out.println("arrChessTemp Size: " + arrTempChess.size());
-                    aryChessIsRuns.clear();
+//                    aryChessIsRuns.clear();
                     System.out.println("arrChessTemp Size: " + arrTempChess.size());
+
+                    //Kieemr tra, k cos gias tri
+//                    int c = 0;
+//                    for (int a = 0; a < aryChessIsRuns.size(); a++) {
+//                        ArrayList<Chess> ad = aryChessIsRuns.get(a).getChess();
+//                        c++;
+//                        System.out.println("Mang: " + c);
+//                        for (int b = 0; b < ad.size(); b++) {
+//                            System.out.println(ad.get(b).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
+//                                    + " " + chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
+//                        }
+//                    }
+
+
+                    arryChess.clear();
                     for (int j = 0; j < arrTempChess.size(); j++) {
-                        arryChess = arrTempChess.get(j).getChess();
+                        arryChess.addAll(arrTempChess.get(j).getChess());
                         Chess chessTemp = null;
                         for (int n = 0; n < arryChess.size(); n++) {
                             if (arryChess.get(n).getType().equals(capQuanSeDiChuyen[1].getType())) {
@@ -588,12 +603,13 @@ public class SetupAi {
 //                        arryChess=arryChessNhos;
                         System.out.println("ArrayChess Size: " + arryChess.size());
                         System.out.println("chạy lần 2");
-                        quanDiChuyen2 = tempChess.get(0);
-                        System.out.println("Type " + quanDiChuyen2.getType() + "_"
-                                + chuyen_X_Ve_So_Thu_Tu(quanDiChuyen2.getX()) + "-"
-                                + chuyen_y_ve_so_thu_tu(quanDiChuyen2.getY()));
-                        taoLuotDi(arrTempChess.get(j).getChess(), chessTemp);
-                        arryChess = arrTempChess.get(j).getChess();
+//                        quanDiChuyen2 = tempChess.get(0);
+                        System.out.println("Type " + chessTemp.getType() + "_"
+                                + chuyen_X_Ve_So_Thu_Tu(chessTemp.getX()) + "-"
+                                + chuyen_y_ve_so_thu_tu(chessTemp.getY()));
+                        taoLuotDi(arryChess, chessTemp);
+                        arryChess.clear();
+//                        arryChess = arrTempChess.get(j).getChess();
                     }
 
                 }
@@ -664,60 +680,89 @@ public class SetupAi {
             }
         }
 
+        aryChessIsRuns.clear();
+        arryChess = mangQuanHienCo;
         int huongLen = kiemTraHuongLen(quanCoDiChuyen);
         System.out.println("huongLen: " + huongLen);
+        ArrayList<ToaDo> toaDos = new ArrayList<>();
         switch (huongLen) {
             case 1:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x - 1, y - 2));
                 break;
             case 2:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x + 1, y - 2));
                 break;
             case 12:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
-                mangQuanHienCo = arrChessRemember;
+                toaDos.add(new ToaDo(x - 1, y - 2));
+//                mangQuanHienCo = arrChessRemember;
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x + 1, y - 2));
                 break;
             default:
                 break;
         }
+        for (int a = 0; a < mangQuanHienCo.size(); a++) {
+            System.out.println(mangQuanHienCo.get(a).getType() + "---"
+                    + chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+        }
 
+
+        ArrayList<Chess> df = new ArrayList<>();
         mangQuanHienCo = arrChessRemember;
+        arryChess = mangQuanHienCo;
         int sangPhai = kiemTraHuongPhai(quanCoDiChuyen);
         System.out.println("sang phair: " + sangPhai);
         switch (sangPhai) {
             case 1:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                df.addAll(mangQuanHienCo);
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x + 2, y - 1));
                 break;
             case 2:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                System.out.println(x + 2 + " " + (y + 1) + " dsagdfgdfgfgdf");
+                ToaDo toaDo = new ToaDo((x + 2), (y + 1));
+                System.out.println(toaDo.getX() + " " + toaDo.getY() + " qwertyuiop");
+                toaDos.add(toaDo);
+                df.addAll(mangQuanHienCo);
                 break;
             case 12:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
-                mangQuanHienCo = arrChessRemember;
+                toaDos.add(new ToaDo(x + 2, y - 1));
+                df.addAll(mangQuanHienCo);
+//                mangQuanHienCo = arrChessRemember;
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x + 2, y + 1));
                 break;
             default:
                 break;
         }
+        for (int a = 0; a < mangQuanHienCo.size(); a++) {
+            System.out.println(mangQuanHienCo.get(a).getType() + "---"
+                    + chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+        }
 
         mangQuanHienCo = arrChessRemember;
+        arryChess = mangQuanHienCo;
         int xuongDuoi = kiemTraHuongXuong(quanCoDiChuyen);
         System.out.println("huong xuong: " + xuongDuoi);
         switch (xuongDuoi) {
@@ -725,20 +770,28 @@ public class SetupAi {
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x - 1, y + 2));
                 break;
             case 2:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x + 1, y + 2));
+
                 break;
             case 12:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x - 1, y + 2));
+
+                df.addAll(mangQuanHienCo);
                 mangQuanHienCo = arrChessRemember;
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x + 1, y + 2));
+
                 break;
             default:
                 break;
@@ -746,32 +799,75 @@ public class SetupAi {
 
         mangQuanHienCo = arrChessRemember;
         int sangTrai = kiemTraHuongTrai(quanCoDiChuyen);
+        arryChess = mangQuanHienCo;
         System.out.println("sang trai: " + sangTrai);
         switch (sangTrai) {
             case 1:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x - 2, y - 1));
                 break;
             case 2:
                 mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
                 mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                toaDos.add(new ToaDo(x - 2, y + 1));
+
                 break;
             case 12:
-                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
-                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
-                mangQuanHienCo = arrChessRemember;
-                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
-                aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
+                ArrayList<Chess> tem9p = new ArrayList<>(mangQuanHienCo);
+                tem9p.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
+                tem9p.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                aryChessIsRuns.add(new AryChessIsRun(tem9p));
+                toaDos.add(new ToaDo(x - 2, y - 1));
+                tem9p.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
+                tem9p.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                aryChessIsRuns.add(new AryChessIsRun(tem9p));
+                toaDos.add(new ToaDo(x - 2, y + 1));
                 break;
             default:
                 break;
         }
 //        arryChess.clear();
         System.out.println("ArrChessIsRun Size:" + aryChessIsRuns.size());
+
+        System.out.println("Toa do fafdsagfgsdgsdgsdgdsagsdgsdgs");
+        for (int b = 0; b < toaDos.size(); b++) {
+            System.out.println(toaDos.get(b).getX() + " " + toaDos.get(b).getY());
+        }
+        System.out.println("Toa do fafdsagfgsdgsdgsdgdsagsdgsdgs");
+
+        //
+//        for (int v = 0; v < df.size(); v++) {
+//            System.out.println(df.get(v).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(df.get(v).getX()) + " " + chuyen_y_ve_so_thu_tu(df
+//                    .get(v).getY()));
+//        }
+//        System.out.println("Fafgfgs");
+
+        System.out.println(aryChessIsRuns.size() + " " + toaDos.size());
+        int c = 0;
+        for (int a = 0; a < aryChessIsRuns.size(); a++) {
+            ArrayList<Chess> ad = aryChessIsRuns.get(a).getChess();
+            ToaDo toaDo = toaDos.get(a);
+            ad.get(indexSelect).setX(toaDo.getX());
+            ad.get(indexSelect).setY(toaDo.getY());
+//            c++;
+//            System.out.println("Mang: " + c);
+//            for (int b = 0; b < ad.size(); b++) {
+//                System.out.println(ad.get(b).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
+//                        + " " + chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
+//            }
+        }
+        for (int a = 0; a < aryChessIsRuns.size(); a++) {
+            ArrayList<Chess> ad = aryChessIsRuns.get(a).getChess();
+            c++;
+            System.out.println("Mang: " + c);
+            for (int b = 0; b < ad.size(); b++) {
+                System.out.println(ad.get(b).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
+                        + " " + chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
+            }
+        }
     }
 
     private void sinhNuocDi(Chess quanCoDiChuyen) {
