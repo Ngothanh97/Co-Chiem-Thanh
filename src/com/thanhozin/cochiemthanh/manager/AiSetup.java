@@ -502,8 +502,6 @@ public class AiSetup {
      */
     private void taoTruongHopBuocLen(int x, int y, Chess chessDiChuyen, String typeOfChess, int luotdi) {
         int a = kiemTraKhaNangBuocHuongLen(chessDiChuyen);
-        System.out.println(chessDiChuyen.getType());
-//        System.out.println(a);
         switch (a) {
             case 1:
                 Chess chess1 = new Chess(unCoverXVeToaDoMay(x - 1), unCoverYVeToaDoMay(y - 2), typeOfChess);

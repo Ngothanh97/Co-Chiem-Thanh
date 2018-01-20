@@ -8,7 +8,7 @@ public class Nut {
     private int giaTri;
     private ArrayList<Chess> chesses;
     private String mauQuanDiChuyen;  // Màu của quân sẽ di chuyển ở lượt xét nut tiếp theo
-    private Nut nutFather;
+    private Nut nutFather;  // father
 
     public Nut(){
 

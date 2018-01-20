@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
  */
 public class GuideAndAboutPanel extends BasePanel implements Setup {
     private OnScreenSwitchListener onScreenSwitchListener;
-    public int countHuongDan;
+    private int countHuongDan;
     private boolean flagOnClickTroVe;
     private boolean flagOnClickBack;
     private boolean flagOnClickNext;
@@ -24,7 +24,6 @@ public class GuideAndAboutPanel extends BasePanel implements Setup {
         flagOnClickTroVe = false;
         flagOnClickBack = false;
         flagOnClickNext = false;
-        System.out.println(countHuongDan);
     }
 
     @Override
