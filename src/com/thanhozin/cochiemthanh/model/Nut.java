@@ -23,7 +23,7 @@ public class Nut {
 
     }
 
-    public ArrayList<Nut> getNuts() {
+    public ArrayList<Nut> getNutsCon() {
         return nuts;
     }
 
