@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/SetupAi.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/SetupAi.java" />
       <change beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java" />
-      <change beforePath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/Nut.java" afterPath="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/Nut.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,17 +27,16 @@
       <file leaf-file-name="SetupAi.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/SetupAi.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="495" column="0" lean-forward="true" selection-start-line="495" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
+            <state relative-caret-position="137">
+              <caret line="497" column="0" lean-forward="false" selection-start-line="497" selection-start-column="0" selection-end-line="497" selection-end-column="0" />
               <folding>
                 <element signature="method#setDiemBanCo#0;class#SetupAi#0" expanded="false" />
-                <element signature="method#tinhDiem#0;class#SetupAi#0" expanded="false" />
+                <element signature="method#khoiChayAi#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#layRaNuocDiChuyenToiUu#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#timNutCha#0;class#SetupAi#0" expanded="false" />
-                <element signature="method#taoCayTroChoi#0;class#SetupAi#0" expanded="false" />
+                <element signature="method#layRaConCuoi#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#taoLuotDi#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#ghiFile#0;class#SetupAi#0" expanded="false" />
-                <element signature="method#docFile#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#sinhNuocDi#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#tachQuanTrangVsDen#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#layRaCapQuanDiChuyen#0;class#SetupAi#0" expanded="false" />
@@ -53,6 +51,18 @@
                 <element signature="method#chuyen_y_ve_toa_do_may#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#kiemTraQuanCoTrang#0;class#SetupAi#0" expanded="false" />
                 <element signature="method#layRaMauCuaQuan#0;class#SetupAi#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArrayList.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/ArrayList.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="81">
+              <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
+              <folding>
+                <element signature="e#15635#15636#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -78,8 +88,8 @@
       <file leaf-file-name="NhoCacKhaNangThanhCong.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="137">
+              <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -132,7 +142,7 @@
       <file leaf-file-name="GameManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
+            <state relative-caret-position="1019">
               <caret line="104" column="21" lean-forward="false" selection-start-line="104" selection-start-column="21" selection-end-line="104" selection-end-column="21" />
               <folding>
                 <element signature="method#GameManager#0;class#GameManager#0" expanded="false" />
@@ -168,16 +178,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MenuSelect.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/MenuSelect.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1343">
-              <caret line="90" column="25" lean-forward="false" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="OnScreenSwitchListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/OnScreenSwitchListener.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -200,9 +200,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>mỗi lượt</find>
-      <find>mỗi lượ</find>
-      <find>mỗi lư</find>
       <find>mỗi l</find>
       <find>mỗi</find>
       <find>mỗ</find>
@@ -218,7 +215,6 @@
       <find>main</find>
       <find>thuchei</find>
       <find>remove</find>
-      <find>print</find>
       <find>SCREEN_GAME_PLAY</find>
       <find>Nut con Size</find>
       <find>chay ai</find>
@@ -227,9 +223,13 @@
       <find>dfjsdakjhglsjhgs.gkfhiapytrbjvuyab jk  afsdsg vsaksfs ufov safgsdf gif</find>
       <find>ghi</find>
       <find>doc</find>
-      <find>Không thể truy cập trang web này</find>
       <find>xo</find>
       <find>xoa</find>
+      <find>print</find>
+      <find>Nhà cầm quân người Hàn Quốc xúc động sau khi đội bóng</find>
+      <find>arrStringChessValue</find>
+      <find>arrStringChessValue.get(arrStringChessValue.size()</find>
+      <find>Không thể truy cập trang web này</find>
     </findStrings>
     <replaceStrings>
       <replace>WHITE</replace>
@@ -269,8 +269,8 @@
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/view/MenuSelect.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/AryChessIsRun.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/ToaDo.java" />
-        <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/Nut.java" />
+        <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java" />
         <option value="$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/SetupAi.java" />
       </list>
     </option>
@@ -1472,7 +1472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1516549680644</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="ghhh">
+      <created>1516607609463</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1516607609463</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -1490,7 +1497,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.50292826" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21461898" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28615862" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7060653" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972136" sideWeight="0.49707174" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1560,7 +1567,8 @@
     <MESSAGE value="ngu ai" />
     <MESSAGE value="gh" />
     <MESSAGE value="acccc" />
-    <option name="LAST_COMMIT_MESSAGE" value="acccc" />
+    <MESSAGE value="ghhh" />
+    <option name="LAST_COMMIT_MESSAGE" value="ghhh" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1602,7 +1610,7 @@
           <option name="timeStamp" value="36" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="37" />
+      <option name="time" value="38" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1840,14 +1848,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/ArrayList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="106" column="13" lean-forward="false" selection-start-line="106" selection-start-column="13" selection-end-line="106" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/AiSetup.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1003">
@@ -1898,28 +1898,6 @@
         <state relative-caret-position="102">
           <caret line="6" column="33" lean-forward="false" selection-start-line="6" selection-start-column="33" selection-end-line="6" selection-end-column="33" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="104" column="21" lean-forward="false" selection-start-line="104" selection-start-column="21" selection-end-line="104" selection-end-column="21" />
-          <folding>
-            <element signature="method#GameManager#0;class#GameManager#0" expanded="false" />
-            <element signature="method#khoiChayAi#0;class#GameManager#0" expanded="false" />
-            <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#coverYLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#unCoverYLocation#0;class#GameManager#0" expanded="false" />
-            <element signature="method#initalizeChess#0;class#GameManager#0" expanded="false" />
-            <element signature="method#drawChess#0;class#GameManager#0" expanded="false" />
-            <element signature="method#drawAbility#0;class#GameManager#0" expanded="false" />
-            <element signature="method#checkType#0;class#GameManager#0" expanded="false" />
-            <element signature="method#initalizeAbility#0;class#GameManager#0" expanded="false" />
-            <element signature="method#checkColor#0;class#GameManager#0" expanded="false" />
-            <element signature="method#supreAbility#0;class#GameManager#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1974,14 +1952,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/Nut.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1997,19 +1967,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/GameManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1019">
+          <caret line="104" column="21" lean-forward="false" selection-start-line="104" selection-start-column="21" selection-end-line="104" selection-end-column="21" />
+          <folding>
+            <element signature="method#GameManager#0;class#GameManager#0" expanded="false" />
+            <element signature="method#khoiChayAi#0;class#GameManager#0" expanded="false" />
+            <element signature="method#coverXLocation#0;class#GameManager#0" expanded="false" />
+            <element signature="method#unCoverXLocation#0;class#GameManager#0" expanded="false" />
+            <element signature="method#coverYLocation#0;class#GameManager#0" expanded="false" />
+            <element signature="method#unCoverYLocation#0;class#GameManager#0" expanded="false" />
+            <element signature="method#initalizeChess#0;class#GameManager#0" expanded="false" />
+            <element signature="method#drawChess#0;class#GameManager#0" expanded="false" />
+            <element signature="method#drawAbility#0;class#GameManager#0" expanded="false" />
+            <element signature="method#checkType#0;class#GameManager#0" expanded="false" />
+            <element signature="method#initalizeAbility#0;class#GameManager#0" expanded="false" />
+            <element signature="method#checkColor#0;class#GameManager#0" expanded="false" />
+            <element signature="method#supreAbility#0;class#GameManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_151/src.zip!/java/util/ArrayList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="81">
+          <caret line="421" column="0" lean-forward="false" selection-start-line="421" selection-start-column="0" selection-end-line="421" selection-end-column="0" />
+          <folding>
+            <element signature="e#15635#15636#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/model/NhoCacKhaNangThanhCong.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="17" column="0" lean-forward="true" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/thanhozin/cochiemthanh/manager/SetupAi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="495" column="0" lean-forward="true" selection-start-line="495" selection-start-column="0" selection-end-line="495" selection-end-column="0" />
+        <state relative-caret-position="137">
+          <caret line="497" column="0" lean-forward="false" selection-start-line="497" selection-start-column="0" selection-end-line="497" selection-end-column="0" />
           <folding>
             <element signature="method#setDiemBanCo#0;class#SetupAi#0" expanded="false" />
-            <element signature="method#tinhDiem#0;class#SetupAi#0" expanded="false" />
+            <element signature="method#khoiChayAi#0;class#SetupAi#0" expanded="false" />
             <element signature="method#layRaNuocDiChuyenToiUu#0;class#SetupAi#0" expanded="false" />
             <element signature="method#timNutCha#0;class#SetupAi#0" expanded="false" />
-            <element signature="method#taoCayTroChoi#0;class#SetupAi#0" expanded="false" />
+            <element signature="method#layRaConCuoi#0;class#SetupAi#0" expanded="false" />
             <element signature="method#taoLuotDi#0;class#SetupAi#0" expanded="false" />
             <element signature="method#ghiFile#0;class#SetupAi#0" expanded="false" />
-            <element signature="method#docFile#0;class#SetupAi#0" expanded="false" />
             <element signature="method#sinhNuocDi#0;class#SetupAi#0" expanded="false" />
             <element signature="method#tachQuanTrangVsDen#0;class#SetupAi#0" expanded="false" />
             <element signature="method#layRaCapQuanDiChuyen#0;class#SetupAi#0" expanded="false" />
