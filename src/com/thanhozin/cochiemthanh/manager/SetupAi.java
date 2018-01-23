@@ -222,20 +222,24 @@ public class SetupAi {
             return null;
         }
 
-        int bestScore = 0;
         Nut temp = getYoungestNut(nut);
+        int bestScore = temp.getGiaTri();
 
         Nut bestNut = nut.getNutsCon().get(0);
 
-        for (Nut mere : nut.getNutsCon()){
-            // todo
-        }
-
-        for (Nut n : temp.getNutFather().getNutsCon()) {
-            if (n.getGiaTri() > bestScore) {
-                bestScore = n.getGiaTri();
-                bestNut = getBestNut(n);
+        // kiểm tra nếu nó không fai là nút hiện tại (nut hiện tại không có cha)
+        while (temp.getNutFather() != null){
+            Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
+            if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
+                for (Nut tempNut : father.getNutsCon()){
+                    if (tempNut.getGiaTri() > bestScore) {
+                        bestScore = tempNut.getGiaTri();
+                        bestNut = getBestNut(tempNut);
+                    }
+                }
+                father.getNutFather().getNutsCon().remove(father); // xóa nhánh đã duyệt
             }
+            temp = getYoungestNut(temp);
         }
 
         System.out.println(bestNut);
