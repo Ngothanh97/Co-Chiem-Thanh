@@ -1,5 +1,6 @@
 package com.thanhozin.cochiemthanh.manager;
 
+import com.thanhozin.cochiemthanh.helper.Utils;
 import com.thanhozin.cochiemthanh.model.*;
 import com.thanhozin.cochiemthanh.view.MenuSelect;
 
@@ -404,8 +405,8 @@ public class SetupAi {
     private int tinhDiem(ArrayList<Chess> chessTemp) {
         int score = 0;
         for (Chess aChessTemp : chessTemp) {
-            int x = chuyen_X_Ve_So_Thu_Tu(aChessTemp.getX());
-            int y = chuyen_y_ve_so_thu_tu(aChessTemp.getY());
+            int x = Utils.chuyen_X_Ve_So_Thu_Tu(aChessTemp.getX());
+            int y = Utils.chuyen_y_ve_so_thu_tu(aChessTemp.getY());
             if (computerIsFirst) {
                 if (kiemTraQuanCoTrang(aChessTemp)) {
                     score += diemBanCoCuaMay[x][y];
@@ -463,7 +464,7 @@ public class SetupAi {
         }
         if (a == 1) {
             Chess chess1 = afterArrChesses.get(temp[0]);
-            return chess1.getType() + "_" + chuyen_X_Ve_So_Thu_Tu(chess1.getX()) + "_" + chuyen_y_ve_so_thu_tu(chess1.getY());
+            return chess1.getType() + "_" + Utils.chuyen_X_Ve_So_Thu_Tu(chess1.getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(chess1.getY());
         } else if (a == 0) {
             return null;
         } else {
@@ -499,7 +500,7 @@ public class SetupAi {
         int bestScore = 0;
         Nut temp = getYoungestNut(nut);
 
-        Nut bestNut = temp;
+        Nut bestNut = nut.getNutsCon().get(0);
 
         for (Nut n : temp.getNutFather().getNutsCon()){
             if (n.getGiaTri() > bestScore){
@@ -526,17 +527,6 @@ public class SetupAi {
             n = n.getNutFather();
         }
         return n;
-    }
-
-    ArrayList<Nut> arrNutKetQua = new ArrayList<>();
-
-    private void layRaConCuoi(Nut nut) {
-        ArrayList<Nut> nutTemp = nut.getNutsCon();
-        for (int i = 0; i < nutTemp.size(); i++) {
-            if (nutTemp.get(i).getNutsCon() == null) {
-                return;
-            }
-        }
     }
 
     private void taoCayTroChoi(Nut nuted) {
@@ -602,7 +592,7 @@ public class SetupAi {
 //            System.out.println("dfjsdakjhglsjhgs.gkfhiapytrbjvuyab jk  afsdsg vsaksfs ufov safgsdf gif");
 //            for (int a = 0; a < arryChess.size(); a++) {
 //                System.out.println(arryChess.get(a).getType() + " "
-//                        + chuyen_X_Ve_So_Thu_Tu(arryChess.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(arryChess.get(a).getY()));
+//                        + Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(arryChess.get(a).getY()));
 //            }
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
             lanLayQuanTuMang = 1;
@@ -671,8 +661,8 @@ public class SetupAi {
                     System.out.println("chạy lần 2");
 //                        quanDiChuyen2 = tempChess.get(0);
 //                        System.out.println("Type " + chessTemp.getType() + "_"
-//                                + chuyen_X_Ve_So_Thu_Tu(chessTemp.getX()) + "-"
-//                                + chuyen_y_ve_so_thu_tu(chessTemp.getY()));
+//                                + Utils.chuyen_X_Ve_So_Thu_Tu(chessTemp.getX()) + "-"
+//                                + Utils.chuyen_y_ve_so_thu_tu(chessTemp.getY()));
 
                     for (int i = 0; i < countArr; i++) {
                         aryChessIsRuns.clear();
@@ -706,8 +696,8 @@ public class SetupAi {
                                 chessValue.remove(0);
 //                                System.out.println(" TRước chessValue.get(0)" + "--" + chessValue.get(0) + "--");
                                 System.out.println("Type " + chess.getType() + "_"
-                                        + chuyen_X_Ve_So_Thu_Tu(chess.getX()) + "-"
-                                        + chuyen_y_ve_so_thu_tu(chess.getY()));
+                                        + Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX()) + "-"
+                                        + Utils.chuyen_y_ve_so_thu_tu(chess.getY()));
                             }
                         }
 
@@ -719,13 +709,13 @@ public class SetupAi {
                         chessTemp.setX(x);
                         chessTemp.setY(y);
 //                        System.out.println("Type " + chessTemp.getType() + "_"
-//                                + chuyen_X_Ve_So_Thu_Tu(chessTemp.getX()) + "-"
-//                                + chuyen_y_ve_so_thu_tu(chessTemp.getY()));
+//                                + Utils.chuyen_X_Ve_So_Thu_Tu(chessTemp.getX()) + "-"
+//                                + Utils.chuyen_y_ve_so_thu_tu(chessTemp.getY()));
 
                         arryChess.clear();
                         arryChess.addAll(arrChessSeDiChuyen);
                         if (chessValue.get(0) == null) {
-                            System.out.println("Nhà cầm quân người Hàn Quốc xúc động sau khi đội bóng của ông bất ngờ quật ngã Iraq để đoạt vé vào bán kết giải U23 châu Á.:  " + chessValue.size());
+                            System.out.println("Chess value size:  " + chessValue.size());
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, true);
                         } else {
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, false);
@@ -735,8 +725,6 @@ public class SetupAi {
 //                        arryChess = arrTempChess.get(j).getChess();
                 }
             }
-
-
             ArrayList<String> chessValue = docFile();
             xoaDuLieuTrongFile();
             NhoCacKhaNangThanhCong nhoCacKhaNangThanhCong = new NhoCacKhaNangThanhCong(chessValue);
@@ -817,11 +805,11 @@ public class SetupAi {
     private void taoLuotDi(ArrayList<Chess> mangQuanHienCo, Chess quanCoDiChuyen, int luot, boolean end) {
         String typeQuanCoDiChuyen = quanCoDiChuyen.getType();
         System.out.println("Quân cờ di chuyển: " + quanCoDiChuyen.getType() + "_"
-                + chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX()) + "_" + chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY()));
+                + Utils.chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY()));
 //        System.out.println("Số quân trong mảng truyển: " + mangQuanHienCo.size());
         for (int a = 0; a < mangQuanHienCo.size(); a++) {
             System.out.println(mangQuanHienCo.get(a).getType() + "---"
-                    + chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
         }
 
 
@@ -829,8 +817,8 @@ public class SetupAi {
             countNumberArray = 0;
         }
         ArrayList<Chess> arrChessRemember = new ArrayList<>(mangQuanHienCo);
-        int x = chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
-        int y = chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
+        int x = Utils.chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
+        int y = Utils.chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
 //        int indexSelect = -1;
 //        for (int i = 0; i < mangQuanHienCo.size(); i++) {
 //            Chess tempChess = mangQuanHienCo.get(i);
@@ -855,8 +843,8 @@ public class SetupAi {
         switch (huongLen) {
             case 1:
                 int indexSelect = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
-                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
-                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                mangQuanHienCo.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -864,8 +852,8 @@ public class SetupAi {
                 break;
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
-                mangQuanHienCo.get(indexSelect2).setX(chuyen_x_ve_toa_do_may(x + 1));
-                mangQuanHienCo.get(indexSelect2).setY(chuyen_y_ve_toa_do_may(y - 2));
+                mangQuanHienCo.get(indexSelect2).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect2).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -877,8 +865,8 @@ public class SetupAi {
 
                 int indexSelect3 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x - 1));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y - 2));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -886,8 +874,8 @@ public class SetupAi {
 
                 toaDos.add(new ToaDo(x - 1, y - 2));
 //                mangQuanHienCo = arrChessRemember;
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x + 1));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y - 2));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -900,7 +888,7 @@ public class SetupAi {
         }
         for (int a = 0; a < mangQuanHienCo.size(); a++) {
             System.out.println(mangQuanHienCo.get(a).getType() + "---"
-                    + chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
         }
 
 
@@ -913,8 +901,8 @@ public class SetupAi {
             case 1:
                 int indexSelect = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
-                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                mangQuanHienCo.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
 //                df.addAll(mangQuanHienCo);
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
@@ -926,8 +914,8 @@ public class SetupAi {
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect2).setX(chuyen_x_ve_toa_do_may(x + 2));
-                mangQuanHienCo.get(indexSelect2).setY(chuyen_y_ve_toa_do_may(y + 1));
+                mangQuanHienCo.get(indexSelect2).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect2).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -942,8 +930,8 @@ public class SetupAi {
             case 12:
                 int indexSelect3 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x + 2));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y - 1));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -952,8 +940,8 @@ public class SetupAi {
                 toaDos.add(new ToaDo(x + 2, y - 1));
 //                df.addAll(mangQuanHienCo);
 //                mangQuanHienCo = arrChessRemember;
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x + 2));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y + 1));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -966,7 +954,7 @@ public class SetupAi {
         }
         for (int a = 0; a < mangQuanHienCo.size(); a++) {
             System.out.println(mangQuanHienCo.get(a).getType() + "---"
-                    + chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
         }
 
         mangQuanHienCo = arrChessRemember;
@@ -977,8 +965,8 @@ public class SetupAi {
             case 1:
                 int indexSelect = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
-                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                mangQuanHienCo.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -989,8 +977,8 @@ public class SetupAi {
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect2).setX(chuyen_x_ve_toa_do_may(x + 1));
-                mangQuanHienCo.get(indexSelect2).setY(chuyen_y_ve_toa_do_may(y + 2));
+                mangQuanHienCo.get(indexSelect2).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect2).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -1002,8 +990,8 @@ public class SetupAi {
             case 12:
                 int indexSelect3 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x - 1));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y + 2));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -1013,8 +1001,8 @@ public class SetupAi {
 
 //                df.addAll(mangQuanHienCo);
                 mangQuanHienCo = arrChessRemember;
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x + 1));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y + 2));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -1035,8 +1023,8 @@ public class SetupAi {
             case 1:
                 int indexSelect = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                mangQuanHienCo.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                mangQuanHienCo.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -1047,8 +1035,8 @@ public class SetupAi {
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect2).setX(chuyen_x_ve_toa_do_may(x - 2));
-                mangQuanHienCo.get(indexSelect2).setY(chuyen_y_ve_toa_do_may(y + 1));
+                mangQuanHienCo.get(indexSelect2).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect2).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
 
@@ -1061,14 +1049,14 @@ public class SetupAi {
             case 12:
                 int indexSelect3 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
 
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x - 2));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y - 1));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                mangQuanHienCo.get(indexSelect3).setX(chuyen_x_ve_toa_do_may(x - 2));
-                mangQuanHienCo.get(indexSelect3).setY(chuyen_y_ve_toa_do_may(y + 1));
+                mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
@@ -1106,7 +1094,7 @@ public class SetupAi {
 //
 //        //
 ////        for (int v = 0; v < df.size(); v++) {
-////            System.out.println(df.get(v).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(df.get(v).getX()) + " " + chuyen_y_ve_so_thu_tu(df
+////            System.out.println(df.get(v).getType() + "_" + Utils.chuyen_X_Ve_So_Thu_Tu(df.get(v).getX()) + " " + Utils.chuyen_y_ve_so_thu_tu(df
 ////                    .get(v).getY()));
 ////        }
 ////        System.out.println("Fafgfgs");
@@ -1118,27 +1106,27 @@ public class SetupAi {
 //            ToaDo toaDo = toaDos.get(arrTempChessIsRun.size() - a);
 //            System.out.println("Kiem tra toa do: " + toaDo.getX() + " " + toaDo.getY());
 //            System.out.println("index: " + indexSelect + " Chess" + ad.get(indexSelect).getType());
-//            ad.get(arrTempChessIsRun.size() - indexSelect).setX(chuyen_x_ve_toa_do_may(toaDo.getX()));
-//            ad.get(arrTempChessIsRun.size() - indexSelect).setY(chuyen_y_ve_toa_do_may(toaDo.getY()));
+//            ad.get(arrTempChessIsRun.size() - indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(toaDo.getX()));
+//            ad.get(arrTempChessIsRun.size() - indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(toaDo.getY()));
 ////            ArrayList<Chess> temp=new ArrayList<>(ad);
 ////            arrTempChessIsRun.get(a).setChess(temp);
 ////            c++;
 ////            System.out.println("Mang: " + c);
 ////            for (int b = 0; b < ad.size(); b++) {
-////                System.out.println(ad.get(b).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
-////                        + " " + chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
+////                System.out.println(ad.get(b).getType() + "_" + Utils.chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
+////                        + " " + Utils.chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
 ////            }
 //            System.out.println(" Chess " + ad.get(indexSelect).getType() + ": "
-//                    + chuyen_X_Ve_So_Thu_Tu(ad.get(indexSelect).getX()) + " "
-//                    + chuyen_y_ve_so_thu_tu(ad.get(indexSelect).getY()));
+//                    + Utils.chuyen_X_Ve_So_Thu_Tu(ad.get(indexSelect).getX()) + " "
+//                    + Utils.chuyen_y_ve_so_thu_tu(ad.get(indexSelect).getY()));
 //        }
 //        for (int a = 0; a < aryChessIsRuns.size(); a++) {
 //            ArrayList<Chess> ad = aryChessIsRuns.get(a).getChess();
 //            c++;
 //            System.out.println("Mang: " + c);
 //            for (int b = 0; b < ad.size(); b++) {
-//                System.out.println(ad.get(b).getType() + "_" + chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
-//                        + " " + chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
+//                System.out.println(ad.get(b).getType() + "_" + Utils.chuyen_X_Ve_So_Thu_Tu(ad.get(b).getX())
+//                        + " " + Utils.chuyen_y_ve_so_thu_tu(ad.get(b).getY()));
 //            }
 //        }
     }
@@ -1197,8 +1185,8 @@ public class SetupAi {
     private void sinhNuocDi(Chess quanCoDiChuyen) {
         System.out.println("arryChess.size(): " + arryChess.size());
         arryChess = arryChessNhos;
-        int x = chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
-        int y = chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
+        int x = Utils.chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
+        int y = Utils.chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
         String type = quanCoDiChuyen.getType();
         int indexSelect = -1;
         for (int i = 0; i < arryChess.size(); i++) {
@@ -1214,23 +1202,23 @@ public class SetupAi {
         System.out.println("huongLen: " + huongLen);
         switch (huongLen) {
             case 1:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 2:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 12:
                 ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 arryChess = temp;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             default:
@@ -1242,23 +1230,23 @@ public class SetupAi {
         System.out.println("sang phair: " + sangPhai);
         switch (sangPhai) {
             case 1:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 2:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 12:
                 ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 arryChess = temp;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             default:
@@ -1270,23 +1258,23 @@ public class SetupAi {
         System.out.println("huong xuong: " + xuongDuoi);
         switch (xuongDuoi) {
             case 1:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 2:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 12:
                 ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 arryChess = temp;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 2));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             default:
@@ -1298,23 +1286,23 @@ public class SetupAi {
         System.out.println("sang trai");
         switch (sangTrai) {
             case 1:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 2:
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             case 12:
                 ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y - 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 arryChess = temp;
-                arryChess.get(indexSelect).setX(chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(chuyen_y_ve_toa_do_may(y + 1));
+                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
+                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(arryChess));
                 break;
             default:
@@ -1417,15 +1405,15 @@ public class SetupAi {
     <------------------------------------------------------------------->
      */
     private int kiemTraHuongLen(Chess chess) {
-        int x = chuyen_X_Ve_So_Thu_Tu(chess.getX());
-        int y = chuyen_y_ve_so_thu_tu(chess.getY());
+        int x = Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX());
+        int y = Utils.chuyen_y_ve_so_thu_tu(chess.getY());
         if (y < 3) {
             return 0;
         }
         for (int i = 0; i < arryChess.size(); i++) {
             //Kiểm tra vị trí liền kề hướng lên
-            int tempX = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-            int tempY = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+            int tempX = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+            int tempY = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
             if (tempX == x && tempY == y - 1) {
                 return 0;
             }
@@ -1453,8 +1441,8 @@ public class SetupAi {
             boolean vi_tri_1 = true;
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1527,8 +1515,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1576,15 +1564,15 @@ public class SetupAi {
     }
 
     private int kiemTraHuongPhai(Chess chess) {
-        int x = chuyen_X_Ve_So_Thu_Tu(chess.getX());
-        int y = chuyen_y_ve_so_thu_tu(chess.getY());
+        int x = Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX());
+        int y = Utils.chuyen_y_ve_so_thu_tu(chess.getY());
         if (x > 6) {
             return 0;
         }
         for (int i = 0; i < arryChess.size(); i++) {
             //Kiểm tra vị trí liền kề hướng lên
-            int tempX = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-            int tempY = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+            int tempX = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+            int tempY = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
             if (tempX == x + 1 && tempY == y) {
                 return 0;
             }
@@ -1613,8 +1601,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1680,8 +1668,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1729,15 +1717,15 @@ public class SetupAi {
     }
 
     private int kiemTraHuongXuong(Chess chess) {
-        int x = chuyen_X_Ve_So_Thu_Tu(chess.getX());
-        int y = chuyen_y_ve_so_thu_tu(chess.getY());
+        int x = Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX());
+        int y = Utils.chuyen_y_ve_so_thu_tu(chess.getY());
         if (y > 6) {
             return 0;
         }
         for (int i = 0; i < arryChess.size(); i++) {
             //Kiểm tra vị trí liền kề hướng lên
-            int tempX = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-            int tempY = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+            int tempX = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+            int tempY = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
             if (tempX == x && tempY == y + 1) {
                 return 0;
             }
@@ -1766,8 +1754,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1833,8 +1821,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1882,15 +1870,15 @@ public class SetupAi {
     }
 
     private int kiemTraHuongTrai(Chess chess) {
-        int x = chuyen_X_Ve_So_Thu_Tu(chess.getX());
-        int y = chuyen_y_ve_so_thu_tu(chess.getY());
+        int x = Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX());
+        int y = Utils.chuyen_y_ve_so_thu_tu(chess.getY());
         if (x < 3) {
             return 0;
         }
         for (int i = 0; i < arryChess.size(); i++) {
             //Kiểm tra vị trí liền kề hướng lên
-            int tempX = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-            int tempY = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+            int tempX = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+            int tempY = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
             if (tempX == x - 1 && tempY == y) {
                 return 0;
             }
@@ -1919,8 +1907,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ trắng thi chỉ xét quân trắng
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -1986,8 +1974,8 @@ public class SetupAi {
             boolean vi_tri_2 = true;
             for (int i = 0; i < arryChess.size(); i++) {
                 //Quân di chuyển là quân cờ đen thi chỉ xét quân đen
-                int xChess = chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
-                int yChess = chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
+                int xChess = Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(i).getX());
+                int yChess = Utils.chuyen_y_ve_so_thu_tu(arryChess.get(i).getY());
 
                     /*Nếu không có nước đi trả vê false
                       Nếu không tồn tại quân cùng màu trả về false
@@ -2036,116 +2024,6 @@ public class SetupAi {
     /*
      <==========================================================================>
     */
-
-
-    /*
-    Cover chuyển đổi tọa độ quân cờ
-    <------------------------------------------------------------------------>
-     */
-    private int chuyen_X_Ve_So_Thu_Tu(int xLocation) {
-        if (xLocation >= 34 && xLocation < 111) {
-            return 1;
-        }
-        if (xLocation >= 114 && xLocation < 188) {
-            return 2;
-        }
-        if (xLocation >= 192 && xLocation < 268) {
-            return 3;
-        }
-        if (xLocation >= 271 && xLocation < 348) {
-            return 4;
-        }
-        if (xLocation >= 351 && xLocation < 428) {
-            return 5;
-        }
-        if (xLocation >= 430 && xLocation < 508) {
-            return 6;
-        }
-        if (xLocation >= 510 && xLocation < 584) {
-            return 7;
-        }
-        if (xLocation >= 587 && xLocation < 665) {
-            return 8;
-        }
-        return 0;
-    }
-
-    private int chuyen_y_ve_so_thu_tu(int yLocation) {
-        if (yLocation >= 35 && yLocation < 110) {
-            return 1;
-        }
-        if (yLocation >= 113 && yLocation < 191) {
-            return 2;
-        }
-        if (yLocation >= 193 && yLocation < 270) {
-            return 3;
-        }
-        if (yLocation >= 272 && yLocation < 349) {
-            return 4;
-        }
-        if (yLocation >= 352 && yLocation < 428) {
-            return 5;
-        }
-        if (yLocation >= 430 && yLocation < 507) {
-            return 6;
-        }
-        if (yLocation >= 510 && yLocation < 585) {
-            return 7;
-        }
-        if (yLocation >= 588 && yLocation < 665) {
-            return 8;
-        }
-        return 0;
-    }
-
-    private int chuyen_x_ve_toa_do_may(int numberOfX) {
-        switch (numberOfX) {
-            case 1:
-                return 36;
-            case 2:
-                return 116;
-            case 3:
-                return 194;
-            case 4:
-                return 273;
-            case 5:
-                return 353;
-            case 6:
-                return 432;
-            case 7:
-                return 512;
-            case 8:
-                return 589;
-            default:
-                return 0;
-        }
-    }
-
-    private int chuyen_y_ve_toa_do_may(int intY) {
-        switch (intY) {
-            case 1:
-                return 37;
-            case 2:
-                return 115;
-            case 3:
-                return 195;
-            case 4:
-                return 274;
-            case 5:
-                return 354;
-            case 6:
-                return 432;
-            case 7:
-                return 512;
-            case 8:
-                return 590;
-            default:
-                return 0;
-        }
-    }
-    /*
-    <==========================================================================>
-     */
 
 
     /*

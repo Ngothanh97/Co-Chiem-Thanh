@@ -32,7 +32,6 @@ public class GameManager {
     private ArrayList<Ability> abilities;
     private Chess chessRemember;
     private Chess chessIsLastMove;
-    private AiSetup aiSetup;
     private char[] listXLocation = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     private boolean flagsFly;
     public int luotdi;
