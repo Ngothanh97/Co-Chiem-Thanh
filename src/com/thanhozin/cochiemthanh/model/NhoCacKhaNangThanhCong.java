@@ -10,9 +10,12 @@ public class NhoCacKhaNangThanhCong {
     }
 
     public ArrayList<Chess> getArrChess() {
-        System.out.println("arrStringChessValue.get(arrStringChessValue.size() - 2)" + arrStringChessValue.get(arrStringChessValue.size() - 2));
-        int countArr = Integer.parseInt(arrStringChessValue.get(arrStringChessValue.size() - 2));
-        arrStringChessValue.remove(arrStringChessValue.size() - 2);
+        int countArr = 0;
+        if (arrStringChessValue.size() >= 2){
+            System.out.println("arrStringChessValue.get(arrStringChessValue.size() - 2)" + arrStringChessValue.get(arrStringChessValue.size() - 2));
+            countArr = Integer.parseInt(arrStringChessValue.get(arrStringChessValue.size() - 2));
+            arrStringChessValue.remove(arrStringChessValue.size() - 2);
+        } else countArr = arrStringChessValue.size();
 
         System.out.println("arrStringChessValue.get(0)"+arrStringChessValue.get(0));
 
