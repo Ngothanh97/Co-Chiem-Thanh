@@ -40,7 +40,7 @@ public class SetupAi {
     private int lanLayQuanTuMang;
     private int level;
     private ArrayList<AryChessIsRun> arrTempChessIsRun = new ArrayList<>();
-    private int minValueOfNut= Integer.MAX_VALUE;
+    private int minValueOfNut = Integer.MAX_VALUE;
 
 
     int countNumberArray = 0;
@@ -439,8 +439,8 @@ public class SetupAi {
         taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
-//        Nut bestNut = duyetCay(nut);
-        String mauDiChuyen= bestNut.getMauQuanDiChuyen();
+        Nut bestNut = duyetCay(nut);
+        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
         return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
 
     }
@@ -453,28 +453,39 @@ public class SetupAi {
 //        if (nutFarther != null) {
 //            afterArrChesses = nutFarther.getChesses();
 //        }
-        afterArrChesses= bestNut.getChesses();
+
+        char mauSeDiChuyen;
+        if (mauQuanDiChuyen.equals(Chess.WHITE)) {
+            mauSeDiChuyen = 'B';
+        } else {
+            mauSeDiChuyen = 'W';
+        }
+        afterArrChesses = bestNut.getChesses();
         int[] temp = new int[2];
         int a = 0;
 
         System.out.println("Truoc");
-        for (int i=0;i<beforArrChesses.size();i++){
-            System.out.println(beforArrChesses.get(i).getType()+"__"+ beforArrChesses.get(i).getX()+ "__"+ beforArrChesses.get(i).getY());
+        for (int i = 0; i < beforArrChesses.size(); i++) {
+            System.out.println(beforArrChesses.get(i).getType() + "__" + beforArrChesses.get(i).getCoverX()+ "__" + beforArrChesses.get(i).getCoverY());
         }
         System.out.println("Sau");
-        for (int i=0;i<afterArrChesses.size();i++){
-            System.out.println(afterArrChesses.get(i).getType()+"__"+ afterArrChesses.get(i).getX()+ "__"+ afterArrChesses.get(i).getY());
+        for (int i = 0; i < afterArrChesses.size(); i++) {
+            System.out.println(afterArrChesses.get(i).getType() + "__" + afterArrChesses.get(i).getCoverX() + "__" + afterArrChesses.get(i).getCoverY());
         }
         for (Chess beforChess : beforArrChesses) {
-            boolean isBest= false;
-//            if (beforChess.coverType(beforChess.getType())).)
+            boolean isBest = false;
+            if (beforChess.coverType(beforChess.getType()) == mauSeDiChuyen) {
+                isBest = true;
+            } else isBest = false;
             String typeOfBeforChess = beforChess.getType();
-            for (int j = 0; j < afterArrChesses.size(); j++) {
-                Chess afterChess = afterArrChesses.get(j);
-                if (afterChess.getType().equals(typeOfBeforChess)) {
-                    if (beforChess.getX() != afterChess.getX() || beforChess.getY() != afterChess.getY()) {
-                        temp[a] = j;
-                        a++;
+            if (isBest) {
+                for (int j = 0; j < afterArrChesses.size(); j++) {
+                    Chess afterChess = afterArrChesses.get(j);
+                    if (afterChess.getType().equals(typeOfBeforChess)) {
+                        if (beforChess.getX() != afterChess.getX() || beforChess.getY() != afterChess.getY()) {
+                            temp[a] = j;
+                            a++;
+                        }
                     }
                 }
             }
@@ -512,7 +523,7 @@ public class SetupAi {
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
         //TODO
-        if (nut == null){
+        if (nut == null) {
             System.out.println("AI does not have any step");
             return null;
         }
@@ -522,8 +533,8 @@ public class SetupAi {
 
         Nut bestNut = nut.getNutsCon().get(0);
 
-        for (Nut n : temp.getNutFather().getNutsCon()){
-            if (n.getGiaTri() > bestScore){
+        for (Nut n : temp.getNutFather().getNutsCon()) {
+            if (n.getGiaTri() > bestScore) {
                 bestScore = n.getGiaTri();
                 bestNut = getBestNut(n);
             }
@@ -534,16 +545,16 @@ public class SetupAi {
         return bestNut;
     }
 
-    private Nut getYoungestNut(Nut n){
-        while(n.getNutsCon() != null){
+    private Nut getYoungestNut(Nut n) {
+        while (n.getNutsCon() != null) {
             n = n.getNutsCon().get(0);
         }
         return n;
     }
 
-    private Nut getBestNut(Nut n){
+    private Nut getBestNut(Nut n) {
         if (n == null || n.getNutFather() == null) return null;
-        while (n.getNutFather().getNutFather() != null){
+        while (n.getNutFather().getNutFather() != null) {
             n = n.getNutFather();
         }
         return n;
@@ -715,9 +726,9 @@ public class SetupAi {
                                 arrChessSeDiChuyen.add(chess);
                                 chessValue.remove(0);
 //                                System.out.println(" TRước chessValue.get(0)" + "--" + chessValue.get(0) + "--");
-                                System.out.println("Type " + chess.getType() + "_"
-                                        + Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX()) + "-"
-                                        + Utils.chuyen_y_ve_so_thu_tu(chess.getY()));
+//                                System.out.println("Type " + chess.getType() + "_"
+//                                        + Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX()) + "-"
+//                                        + Utils.chuyen_y_ve_so_thu_tu(chess.getY()));
                             }
                         }
 
@@ -756,7 +767,6 @@ public class SetupAi {
         }
 
 
-
 //        int number = 0;
         //Tạo ra các nut con của nuted truyền vào
         ArrayList<Nut> nutCon = new ArrayList<>();
@@ -766,17 +776,19 @@ public class SetupAi {
             NhoCacKhaNangThanhCong remember = nhoCacKhaNangThanhCongs.get(i);
             System.out.println(remember);
             arryChess = remember.getArrChess();
+            System.out.println("Mang quan nut con");
+            for (int a=0;a<arryChess.size();a++){
+                Chess abc=arryChess.get(a);
+                System.out.println(abc.getType()+" "+ abc.getCoverX()+" "+abc.getCoverY());
+            }
             Nut nut = new Nut();
             nut.setChesses(arryChess);
             nut.setGiaTri(tinhDiem(arryChess));
             nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
             nut.setTempLevel(nuted.getTempLevel() + 1);
             nut.setNutFather(nuted);
-            if (nut.getTempLevel()<minValueOfNut){
-                minValueOfNut=nut.getTempLevel();
-                bestNut=nut;
-            }
             nutCon.add(nut);
+
         }
         nuted.setNuts(nutCon);
 
@@ -832,10 +844,10 @@ public class SetupAi {
         System.out.println("Quân cờ di chuyển: " + quanCoDiChuyen.getType() + "_"
                 + Utils.chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY()));
 //        System.out.println("Số quân trong mảng truyển: " + mangQuanHienCo.size());
-        for (int a = 0; a < mangQuanHienCo.size(); a++) {
-            System.out.println(mangQuanHienCo.get(a).getType() + "---"
-                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
-        }
+//        for (int a = 0; a < mangQuanHienCo.size(); a++) {
+//            System.out.println(mangQuanHienCo.get(a).getType() + "---"
+//                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+//        }
 
 
         if (luot == 0) {
@@ -911,10 +923,10 @@ public class SetupAi {
             default:
                 break;
         }
-        for (int a = 0; a < mangQuanHienCo.size(); a++) {
-            System.out.println(mangQuanHienCo.get(a).getType() + "---"
-                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
-        }
+//        for (int a = 0; a < mangQuanHienCo.size(); a++) {
+//            System.out.println(mangQuanHienCo.get(a).getType() + "---"
+//                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+//        }
 
 
 //        ArrayList<Chess> df = new ArrayList<>();
@@ -977,10 +989,10 @@ public class SetupAi {
             default:
                 break;
         }
-        for (int a = 0; a < mangQuanHienCo.size(); a++) {
-            System.out.println(mangQuanHienCo.get(a).getType() + "---"
-                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
-        }
+//        for (int a = 0; a < mangQuanHienCo.size(); a++) {
+//            System.out.println(mangQuanHienCo.get(a).getType() + "---"
+//                    + Utils.chuyen_X_Ve_So_Thu_Tu(mangQuanHienCo.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(mangQuanHienCo.get(a).getY()));
+//        }
 
         mangQuanHienCo = arrChessRemember;
         arryChess = mangQuanHienCo;
