@@ -88,6 +88,8 @@ public class Chess {
         }
     }
 
+
+
     public char coverType(String type) {
         switch (type) {
             case WHITE_K:

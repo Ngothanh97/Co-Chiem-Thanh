@@ -39,6 +39,7 @@ public class SetupAi {
     private int lanLayQuanTuMang;
     private int level;
     private ArrayList<AryChessIsRun> arrTempChessIsRun = new ArrayList<>();
+    private int minValueOfNut= Integer.MAX_VALUE;
 
 
     int countNumberArray = 0;
@@ -56,6 +57,7 @@ public class SetupAi {
     private int doSau;
     private int countArray;
     private MenuSelect menuSelect;
+    private Nut bestNut;
 
 //    ArrayList<Nut> nuts = new ArrayList<>(); // Cây trò chơi
 
@@ -419,6 +421,7 @@ public class SetupAi {
         return score;
     }
 
+
     //Ham cho gamemanager goi
     public String khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         this.arryChess.clear();
@@ -435,21 +438,35 @@ public class SetupAi {
         taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
-        Nut bestNut = duyetCay(nut);
-        return layRaNuocDiChuyenToiUu(nut, bestNut);
+//        Nut bestNut = duyetCay(nut);
+        String mauDiChuyen= bestNut.getMauQuanDiChuyen();
+        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
 
     }
 
-    private String layRaNuocDiChuyenToiUu(Nut nutGoc, Nut bestNut) {
-        Nut nutFarther = timNutCha(bestNut);
+    private String layRaNuocDiChuyenToiUu(Nut nutGoc, Nut bestNut, String mauQuanDiChuyen) {
+        System.out.println("Tim nuoc di");
+//        Nut nutFarther = timNutCha(bestNut);
         ArrayList<Chess> beforArrChesses = nutGoc.getChesses();
         ArrayList<Chess> afterArrChesses = new ArrayList<>();
-        if (nutFarther != null) {
-            afterArrChesses = nutFarther.getChesses();
-        }
+//        if (nutFarther != null) {
+//            afterArrChesses = nutFarther.getChesses();
+//        }
+        afterArrChesses= bestNut.getChesses();
         int[] temp = new int[2];
         int a = 0;
+
+        System.out.println("Truoc");
+        for (int i=0;i<beforArrChesses.size();i++){
+            System.out.println(beforArrChesses.get(i).getType()+"__"+ beforArrChesses.get(i).getX()+ "__"+ beforArrChesses.get(i).getY());
+        }
+        System.out.println("Sau");
+        for (int i=0;i<afterArrChesses.size();i++){
+            System.out.println(afterArrChesses.get(i).getType()+"__"+ afterArrChesses.get(i).getX()+ "__"+ afterArrChesses.get(i).getY());
+        }
         for (Chess beforChess : beforArrChesses) {
+            boolean isBest= false;
+//            if (beforChess.coverType(beforChess.getType())).)
             String typeOfBeforChess = beforChess.getType();
             for (int j = 0; j < afterArrChesses.size(); j++) {
                 Chess afterChess = afterArrChesses.get(j);
@@ -463,8 +480,10 @@ public class SetupAi {
         }
         if (a == 1) {
             Chess chess1 = afterArrChesses.get(temp[0]);
+            System.out.println("hsgasg");
             return chess1.getType() + "_" + chuyen_X_Ve_So_Thu_Tu(chess1.getX()) + "_" + chuyen_y_ve_so_thu_tu(chess1.getY());
         } else if (a == 0) {
+            System.out.println("Thoat");
             return null;
         } else {
             Chess chess1 = afterArrChesses.get(temp[0]);
@@ -481,6 +500,7 @@ public class SetupAi {
 
     private Nut timNutCha(Nut bestNut) {
         if (bestNut == null) return null;
+        System.out.println("TÌm cha");
         Nut nutFarther = bestNut.getNutFather();
         if (nutFarther != null && nutFarther.getTempLevel() == 1) {
             return nutFarther;
@@ -735,6 +755,7 @@ public class SetupAi {
                     }
 //                        arryChess = arrTempChess.get(j).getChess();
                 }
+
             }
 
 
@@ -742,19 +763,18 @@ public class SetupAi {
             xoaDuLieuTrongFile();
             NhoCacKhaNangThanhCong nhoCacKhaNangThanhCong = new NhoCacKhaNangThanhCong(chessValue);
             nhoCacKhaNangThanhCongs.add(nhoCacKhaNangThanhCong);
+
+
         }
+
+
 
 //        int number = 0;
         //Tạo ra các nut con của nuted truyền vào
         ArrayList<Nut> nutCon = new ArrayList<>();
         for (int i = 0; i < nhoCacKhaNangThanhCongs.size(); i++) {
 //            number += nhoCacKhaNangThanhCongs.get(i).getNumberValue();
-            System.out.println("Returns the element at the specified position in this list.\n" +
-                    "     *\n" +
-                    "     * @param  index index of the element to return\n" +
-                    "     * @return the element at the specified position in this list\n" +
-                    "     * @throws IndexOutOfBoundsException {@inheritDoc}\n" +
-                    "     */");
+            System.out.println("Nho cac kha nang thah cong");
             NhoCacKhaNangThanhCong remember = nhoCacKhaNangThanhCongs.get(i);
             System.out.println(remember);
             arryChess = remember.getArrChess();
@@ -764,6 +784,10 @@ public class SetupAi {
             nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
             nut.setTempLevel(nuted.getTempLevel() + 1);
             nut.setNutFather(nuted);
+            if (nut.getTempLevel()<minValueOfNut){
+                minValueOfNut=nut.getTempLevel();
+                bestNut=nut;
+            }
             nutCon.add(nut);
         }
         nuted.setNuts(nutCon);
@@ -774,6 +798,7 @@ public class SetupAi {
             arryChess.clear();
             taoCayTroChoi(nutCon.get(i));
         }
+
 
         ArrayList<String> chessValue = docFile();
         xoaDuLieuTrongFile();
@@ -803,11 +828,13 @@ public class SetupAi {
         System.out.println("Nut con Size: " + nutCon.size());
         nuted.setNuts(nutCon);
 
+
         for (int i = 0; i < nutCon.size(); i++) {
             aryChessIsRuns.clear();
             arrTempChessIsRun.clear();
             taoCayTroChoi(nutCon.get(i));
         }
+
 
         /*
         Tạo Cây trò chơi
