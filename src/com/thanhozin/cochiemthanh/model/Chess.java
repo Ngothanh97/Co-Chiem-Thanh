@@ -47,6 +47,14 @@ public class Chess {
         return y;
     }
 
+    public int getCoverX(){
+        return Utils.chuyen_X_Ve_So_Thu_Tu(x);
+    }
+
+    public int getCoverY(){
+        return Utils.chuyen_y_ve_so_thu_tu(y);
+    }
+
     public String getType() {
         return String.valueOf(type);
     }
