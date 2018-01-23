@@ -48,7 +48,7 @@ public class Chess {
     }
 
     public int getCoverX(){
-        return Utils.chuyen_X_Ve_So_Thu_Tu(x);
+        return Utils.coverXLocation(x);
     }
 
     public int getCoverY(){

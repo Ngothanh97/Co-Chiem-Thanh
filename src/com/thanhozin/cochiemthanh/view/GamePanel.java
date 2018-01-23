@@ -155,22 +155,7 @@ public class GamePanel extends BasePanel implements Runnable {
 
     @Override
     public void run() {
-        String typeOfChessToSelect = "";
 
-        while (true) {
-            try {
-                gameManager.khoiChayAi();
-//                break;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            repaint();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     private void startGame() {

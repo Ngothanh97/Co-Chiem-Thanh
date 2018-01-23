@@ -106,6 +106,59 @@ public class Utils {
                 return 0;
         }
     }
+
+    //chuyển từ tọa độ x của máy ra ký hiệu tọa độ bàn cờ
+    public static char coverXLocation(int xLocation) {
+        if (xLocation >= 34 && xLocation < 111) {
+            return 'a';
+        }
+        if (xLocation >= 114 && xLocation < 188) {
+            return 'b';
+        }
+        if (xLocation >= 192 && xLocation < 268) {
+            return 'c';
+        }
+        if (xLocation >= 271 && xLocation < 348) {
+            return 'd';
+        }
+        if (xLocation >= 351 && xLocation < 428) {
+            return 'e';
+        }
+        if (xLocation >= 430 && xLocation < 508) {
+            return 'f';
+        }
+        if (xLocation >= 510 && xLocation < 584) {
+            return 'g';
+        }
+        if (xLocation >= 587 && xLocation < 665) {
+            return 'h';
+        }
+        return ' ';
+    }
+
+    //chuyển từ ký hiệu tọa độ trên bàn cờ ra tọa độ máy
+    public static int unCoverXLocation(char charX) {
+        switch (charX) {
+            case 'a':
+                return 36;
+            case 'b':
+                return 116;
+            case 'c':
+                return 194;
+            case 'd':
+                return 273;
+            case 'e':
+                return 353;
+            case 'f':
+                return 432;
+            case 'g':
+                return 512;
+            case 'h':
+                return 589;
+            default:
+                return 0;
+        }
+    }
     /*
     <==========================================================================>
      */
