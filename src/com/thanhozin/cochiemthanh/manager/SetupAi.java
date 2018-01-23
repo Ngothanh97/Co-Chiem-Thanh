@@ -491,7 +491,6 @@ public class SetupAi {
 
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
-        //TODO
         if (nut == null){
             System.out.println("AI does not have any step");
             return null;
@@ -508,6 +507,8 @@ public class SetupAi {
                 bestNut = getBestNut(n);
             }
         }
+
+        System.out.println(bestNut);
 
         return bestNut;
     }
@@ -535,8 +536,6 @@ public class SetupAi {
             if (nutTemp.get(i).getNutsCon() == null) {
                 return;
             }
-
-
         }
     }
 

@@ -23,6 +23,15 @@ public class Nut {
 
     }
 
+    @Override
+    public String toString() {
+        String name = "";
+        for (Chess chess:chesses) {
+            name += chess.toString();
+        }
+        return name;
+    }
+
     public ArrayList<Nut> getNutsCon() {
         return nuts;
     }
