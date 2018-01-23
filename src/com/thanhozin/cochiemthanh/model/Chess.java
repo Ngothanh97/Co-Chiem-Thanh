@@ -1,5 +1,6 @@
 package com.thanhozin.cochiemthanh.model;
 
+import com.thanhozin.cochiemthanh.helper.Utils;
 import com.thanhozin.cochiemthanh.manager.ImageStore;
 
 import java.awt.*;
@@ -35,7 +36,7 @@ public class Chess {
 
     @Override
     public String toString() {
-        return "\nChess type: " + type + " x:" + x + " y:" + y;
+        return "\nChess type: " + type + " x:" + Utils.chuyen_X_Ve_So_Thu_Tu(x) + " y:" + Utils.chuyen_y_ve_so_thu_tu(y) + "\n";
     }
 
     public int getX() {
