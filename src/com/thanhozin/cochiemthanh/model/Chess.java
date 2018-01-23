@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public class Chess {
     public static final int SIZE = 70;
-    public static final String WHITE ="white";
-    public static final String BLACK ="black";
+    public static final String WHITE = "white";
+    public static final String BLACK = "black";
     public static final String WHITE_K = "k1";
     public static final String WHITE_L = "l1";
     public static final String WHITE_M = "m1";
@@ -47,11 +47,11 @@ public class Chess {
         return y;
     }
 
-    public int getCoverX(){
+    public char getCoverX() {
         return Utils.coverXLocation(x);
     }
 
-    public int getCoverY(){
+    public int getCoverY() {
         return Utils.chuyen_y_ve_so_thu_tu(y);
     }
 
@@ -96,7 +96,6 @@ public class Chess {
 
         }
     }
-
 
 
     public char coverType(String type) {

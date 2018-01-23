@@ -136,12 +136,16 @@ public class SetupAi {
         this.arryChess.clear();
         arryChessNhos.clear();
 //        System.out.println("Số quân cả mảng: " + aryChess.size());
+
+        System.out.println("Mang goc ban dau ");
+        printArrayChess(aryChess);
         this.arryChess.addAll(aryChess);
         Nut nut = new Nut();
         nut.setChesses(this.arryChess);
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
         nut.setGiaTri(0);
         nut.setTempLevel(0);
+
 //        nuts.clear();
 
         taoCayTroChoi(nut);
@@ -149,8 +153,19 @@ public class SetupAi {
         // get next best nut
         Nut bestNut = duyetCay(nut);
         String mauDiChuyen = bestNut.getMauQuanDiChuyen();
+        System.out.println("mang sau khi tao cay" +
+                "");
+        printArrayChess(nut.getChesses());
         return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
 
+    }
+
+    private void printArrayChess(ArrayList<Chess> chesses){
+        String name = "";
+        for (Chess chess:chesses) {
+            name += chess.toString();
+        }
+        System.out.println(name);
     }
 
     private String layRaNuocDiChuyenToiUu(Nut nutGoc, Nut bestNut, String mauQuanDiChuyen) {
