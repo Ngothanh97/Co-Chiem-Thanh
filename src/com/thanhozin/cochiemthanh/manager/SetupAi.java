@@ -172,7 +172,7 @@ public class SetupAi {
         System.out.println("Tim nuoc di");
 //        Nut nutFarther = timNutCha(bestNut);
         ArrayList<Chess> beforArrChesses = nutGoc.getChesses();
-        ArrayList<Chess> afterArrChesses = new ArrayList<>();
+
 //        if (nutFarther != null) {
 //            afterArrChesses = nutFarther.getChesses();
 //        }
@@ -183,31 +183,33 @@ public class SetupAi {
         } else {
             mauSeDiChuyen = 'W';
         }
-        afterArrChesses = bestNut.getChesses();
+
+        ArrayList<Chess> afterArrChesses = bestNut.getChesses();
         int[] temp = new int[2];
         int a = 0;
 
         System.out.println("Truoc");
-        for (int i = 0; i < beforArrChesses.size(); i++) {
-            System.out.println(beforArrChesses.get(i).getType() + "__" + beforArrChesses.get(i).getCoverX()+ "__" + beforArrChesses.get(i).getCoverY());
-        }
+        printArrayChess(beforArrChesses);
+
         System.out.println("Sau");
-        for (int i = 0; i < afterArrChesses.size(); i++) {
-            System.out.println(afterArrChesses.get(i).getType() + "__" + afterArrChesses.get(i).getCoverX() + "__" + afterArrChesses.get(i).getCoverY());
-        }
+        printArrayChess(afterArrChesses);
+
         for (Chess beforChess : beforArrChesses) {
             boolean isBest = false;
             if (beforChess.coverType(beforChess.getType()) == mauSeDiChuyen) {
                 isBest = true;
-            } else isBest = false;
+            }
             String typeOfBeforChess = beforChess.getType();
+
             if (isBest) {
                 for (int j = 0; j < afterArrChesses.size(); j++) {
                     Chess afterChess = afterArrChesses.get(j);
                     if (afterChess.getType().equals(typeOfBeforChess)) {
                         if (beforChess.getX() != afterChess.getX() || beforChess.getY() != afterChess.getY()) {
-                            temp[a] = j;
-                            a++;
+                            if (a < 2){
+                                temp[a] = j;
+                                a++;
+                            }
                         }
                     }
                 }
@@ -215,15 +217,15 @@ public class SetupAi {
         }
         if (a == 1) {
             Chess chess1 = afterArrChesses.get(temp[0]);
-            return chess1.getType() + "_" + Utils.chuyen_X_Ve_So_Thu_Tu(chess1.getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(chess1.getY());
+            return chess1.getType() + "_" + chess1.getCoverX() + "_" + Utils.chuyen_y_ve_so_thu_tu(chess1.getY());
         } else if (a == 0) {
             System.out.println("Thoat");
             return null;
         } else {
             Chess chess1 = afterArrChesses.get(temp[0]);
-            String s1 = chess1.getType() + "_" + chess1.getX() + "_" + chess1.getY();
+            String s1 = chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
             Chess chess2 = afterArrChesses.get(temp[1]);
-            String s2 = chess2.getType() + "_" + chess2.getX() + "_" + chess2.getY();
+            String s2 = chess2.getType() + "_" + chess2.getCoverX() + "_" + chess2.getCoverY();
             System.out.println("Két qua tra ve: " + s1 + "_" + s2);
             return s1 + "_" + s2;
         }
@@ -244,6 +246,7 @@ public class SetupAi {
 
         // kiểm tra nếu nó không fai là nút hiện tại (nut hiện tại không có cha)
         while (temp.getNutFather() != null){
+            System.out.println("Duyệt cây");
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
             if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
                 for (Nut tempNut : father.getNutsCon()){
@@ -252,9 +255,11 @@ public class SetupAi {
                         bestNut = getBestNut(tempNut);
                     }
                 }
-                father.getNutFather().getNutsCon().remove(father); // xóa nhánh đã duyệt
+                if (father.getNutFather() != null) {
+                    father.getNutFather().getNutsCon().remove(father); // xóa nhánh đã duyệt
+                }
             }
-            temp = getYoungestNut(temp);
+            temp = temp.getNutFather();
         }
 
         System.out.println(bestNut);

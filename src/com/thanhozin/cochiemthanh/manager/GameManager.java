@@ -77,16 +77,14 @@ public class GameManager {
 
 
     private void chayAi() {
-        String kq = null;
+        String kq;
         if (kieuChoi == MAY_DANH_TRUOC) {
             kq = ai.khoiChayAi(chesses, Chess.WHITE);
         } else {
             kq = ai.khoiChayAi(chesses, Chess.BLACK);
         }
 
-        if (kq == null) {
-            return;
-        } else {
+        if (kq != null) {
             String[] value = kq.split("_");
             String type1 = value[0];
             String type2 = null;
