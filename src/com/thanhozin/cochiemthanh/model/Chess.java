@@ -36,7 +36,7 @@ public class Chess {
 
     @Override
     public String toString() {
-        return "\nChess type: " + type + " x:" + Utils.chuyen_X_Ve_So_Thu_Tu(x) + " y:" + Utils.chuyen_y_ve_so_thu_tu(y) + "\n";
+        return "\nChess type: " + type + " x:" + getCoverX() + " y:" + getCoverY() + "\n";
     }
 
     public int getX() {

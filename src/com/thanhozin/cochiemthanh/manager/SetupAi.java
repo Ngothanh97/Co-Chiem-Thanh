@@ -112,298 +112,6 @@ public class SetupAi {
         }
     }
 
-    private void setDiemBanCo() {
-        if (computerIsFirst) {
-            diemBanCoCuaMay[1][1] = 60;
-            diemBanCoCuaMay[2][1] = 30;
-            diemBanCoCuaMay[3][1] = 60;
-            diemBanCoCuaMay[4][1] = 30;
-            diemBanCoCuaMay[5][1] = 60;
-            diemBanCoCuaMay[6][1] = 30;
-            diemBanCoCuaMay[7][1] = 60;
-            diemBanCoCuaMay[8][1] = 30;
-
-            diemBanCoCuaMay[1][2] = 125;
-            diemBanCoCuaMay[2][2] = 60;
-            diemBanCoCuaMay[3][2] = 125;
-            diemBanCoCuaMay[4][2] = 60;
-            diemBanCoCuaMay[5][2] = 125;
-            diemBanCoCuaMay[6][2] = 60;
-            diemBanCoCuaMay[7][2] = 125;
-            diemBanCoCuaMay[8][2] = 60;
-
-            diemBanCoCuaMay[1][3] = 60;
-            diemBanCoCuaMay[2][3] = 125;
-            diemBanCoCuaMay[3][3] = 60;
-            diemBanCoCuaMay[4][3] = 125;
-            diemBanCoCuaMay[5][3] = 60;
-            diemBanCoCuaMay[6][3] = 125;
-            diemBanCoCuaMay[7][3] = 60;
-            diemBanCoCuaMay[8][3] = 125;
-
-            diemBanCoCuaMay[1][4] = 125;
-            diemBanCoCuaMay[2][4] = 250;
-            diemBanCoCuaMay[3][4] = 125;
-            diemBanCoCuaMay[4][4] = 250;
-            diemBanCoCuaMay[5][4] = 125;
-            diemBanCoCuaMay[6][4] = 250;
-            diemBanCoCuaMay[7][4] = 125;
-            diemBanCoCuaMay[8][4] = 60;
-
-            diemBanCoCuaMay[1][5] = 250;
-            diemBanCoCuaMay[2][5] = 125;
-            diemBanCoCuaMay[3][5] = 250;
-            diemBanCoCuaMay[4][5] = 125;
-            diemBanCoCuaMay[5][5] = 250;
-            diemBanCoCuaMay[6][5] = 125;
-            diemBanCoCuaMay[7][5] = 250;
-            diemBanCoCuaMay[8][5] = 125;
-
-            diemBanCoCuaMay[1][6] = 125;
-            diemBanCoCuaMay[2][6] = 60;
-            diemBanCoCuaMay[3][6] = 500;
-            diemBanCoCuaMay[4][6] = 250;
-            diemBanCoCuaMay[5][6] = 500;
-            diemBanCoCuaMay[6][6] = 60;
-            diemBanCoCuaMay[7][6] = 125;
-            diemBanCoCuaMay[8][6] = 250;
-
-            diemBanCoCuaMay[1][7] = 250;
-            diemBanCoCuaMay[2][7] = 500;
-            diemBanCoCuaMay[3][7] = 250;
-            diemBanCoCuaMay[4][7] = 125;
-            diemBanCoCuaMay[5][7] = 250;
-            diemBanCoCuaMay[6][7] = 500;
-            diemBanCoCuaMay[7][7] = 250;
-            diemBanCoCuaMay[8][7] = 125;
-
-            diemBanCoCuaMay[1][8] = 125;
-            diemBanCoCuaMay[2][8] = 250;
-            diemBanCoCuaMay[3][8] = 125;
-            diemBanCoCuaMay[4][8] = 2000;
-            diemBanCoCuaMay[5][8] = 300;
-            diemBanCoCuaMay[6][8] = 250;
-            diemBanCoCuaMay[7][8] = 125;
-            diemBanCoCuaMay[8][8] = 250;
-
-            diemBanCoCuaNguoiChoi[1][1] = 250;
-            diemBanCoCuaNguoiChoi[2][1] = 125;
-            diemBanCoCuaNguoiChoi[3][1] = 250;
-            diemBanCoCuaNguoiChoi[4][1] = 300;
-            diemBanCoCuaNguoiChoi[5][1] = 2000;
-            diemBanCoCuaNguoiChoi[6][1] = 125;
-            diemBanCoCuaNguoiChoi[7][1] = 250;
-            diemBanCoCuaNguoiChoi[8][1] = 125;
-
-            diemBanCoCuaNguoiChoi[1][2] = 125;
-            diemBanCoCuaNguoiChoi[2][2] = 250;
-            diemBanCoCuaNguoiChoi[3][2] = 500;
-            diemBanCoCuaNguoiChoi[4][2] = 250;
-            diemBanCoCuaNguoiChoi[5][2] = 125;
-            diemBanCoCuaNguoiChoi[6][2] = 250;
-            diemBanCoCuaNguoiChoi[7][2] = 500;
-            diemBanCoCuaNguoiChoi[8][2] = 250;
-
-            diemBanCoCuaNguoiChoi[1][3] = 250;
-            diemBanCoCuaNguoiChoi[2][3] = 125;
-            diemBanCoCuaNguoiChoi[3][3] = 60;
-            diemBanCoCuaNguoiChoi[4][3] = 500;
-            diemBanCoCuaNguoiChoi[5][3] = 250;
-            diemBanCoCuaNguoiChoi[6][3] = 500;
-            diemBanCoCuaNguoiChoi[7][3] = 60;
-            diemBanCoCuaNguoiChoi[8][3] = 125;
-
-            diemBanCoCuaNguoiChoi[1][4] = 125;
-            diemBanCoCuaNguoiChoi[2][4] = 250;
-            diemBanCoCuaNguoiChoi[3][4] = 125;
-            diemBanCoCuaNguoiChoi[4][4] = 250;
-            diemBanCoCuaNguoiChoi[5][4] = 125;
-            diemBanCoCuaNguoiChoi[6][4] = 250;
-            diemBanCoCuaNguoiChoi[7][4] = 125;
-            diemBanCoCuaNguoiChoi[8][4] = 250;
-
-            diemBanCoCuaNguoiChoi[1][5] = 60;
-            diemBanCoCuaNguoiChoi[2][5] = 125;
-            diemBanCoCuaNguoiChoi[3][5] = 250;
-            diemBanCoCuaNguoiChoi[4][5] = 125;
-            diemBanCoCuaNguoiChoi[5][5] = 250;
-            diemBanCoCuaNguoiChoi[6][5] = 125;
-            diemBanCoCuaNguoiChoi[7][5] = 250;
-            diemBanCoCuaNguoiChoi[8][5] = 125;
-
-            diemBanCoCuaNguoiChoi[1][6] = 125;
-            diemBanCoCuaNguoiChoi[2][6] = 60;
-            diemBanCoCuaNguoiChoi[3][6] = 125;
-            diemBanCoCuaNguoiChoi[4][6] = 60;
-            diemBanCoCuaNguoiChoi[5][6] = 125;
-            diemBanCoCuaNguoiChoi[6][6] = 60;
-            diemBanCoCuaNguoiChoi[7][6] = 125;
-            diemBanCoCuaNguoiChoi[8][6] = 60;
-
-            diemBanCoCuaNguoiChoi[1][7] = 60;
-            diemBanCoCuaNguoiChoi[2][7] = 125;
-            diemBanCoCuaNguoiChoi[3][7] = 60;
-            diemBanCoCuaNguoiChoi[4][7] = 125;
-            diemBanCoCuaNguoiChoi[5][7] = 60;
-            diemBanCoCuaNguoiChoi[6][7] = 125;
-            diemBanCoCuaNguoiChoi[7][7] = 60;
-            diemBanCoCuaNguoiChoi[8][7] = 125;
-
-            diemBanCoCuaNguoiChoi[1][8] = 30;
-            diemBanCoCuaNguoiChoi[2][8] = 60;
-            diemBanCoCuaNguoiChoi[3][8] = 30;
-            diemBanCoCuaNguoiChoi[4][8] = 60;
-            diemBanCoCuaNguoiChoi[5][8] = 30;
-            diemBanCoCuaNguoiChoi[6][8] = 60;
-            diemBanCoCuaNguoiChoi[7][8] = 30;
-            diemBanCoCuaNguoiChoi[8][8] = 60;
-        } else {
-            diemBanCoCuaMay[8][8] = 60;
-            diemBanCoCuaMay[7][8] = 30;
-            diemBanCoCuaMay[6][8] = 60;
-            diemBanCoCuaMay[5][8] = 30;
-            diemBanCoCuaMay[4][8] = 60;
-            diemBanCoCuaMay[3][8] = 30;
-            diemBanCoCuaMay[2][8] = 60;
-            diemBanCoCuaMay[1][8] = 30;
-
-            diemBanCoCuaMay[8][7] = 125;
-            diemBanCoCuaMay[7][7] = 60;
-            diemBanCoCuaMay[6][7] = 125;
-            diemBanCoCuaMay[5][7] = 60;
-            diemBanCoCuaMay[4][7] = 125;
-            diemBanCoCuaMay[3][7] = 60;
-            diemBanCoCuaMay[2][7] = 125;
-            diemBanCoCuaMay[1][7] = 60;
-
-            diemBanCoCuaMay[8][6] = 60;
-            diemBanCoCuaMay[7][6] = 125;
-            diemBanCoCuaMay[6][6] = 60;
-            diemBanCoCuaMay[5][6] = 125;
-            diemBanCoCuaMay[4][6] = 60;
-            diemBanCoCuaMay[3][6] = 125;
-            diemBanCoCuaMay[2][6] = 60;
-            diemBanCoCuaMay[1][6] = 125;
-
-            diemBanCoCuaMay[8][5] = 125;
-            diemBanCoCuaMay[7][5] = 250;
-            diemBanCoCuaMay[6][5] = 125;
-            diemBanCoCuaMay[5][5] = 250;
-            diemBanCoCuaMay[4][5] = 125;
-            diemBanCoCuaMay[3][5] = 250;
-            diemBanCoCuaMay[2][5] = 125;
-            diemBanCoCuaMay[1][5] = 60;
-
-            diemBanCoCuaMay[8][4] = 250;
-            diemBanCoCuaMay[7][4] = 125;
-            diemBanCoCuaMay[6][4] = 250;
-            diemBanCoCuaMay[5][4] = 125;
-            diemBanCoCuaMay[4][4] = 250;
-            diemBanCoCuaMay[3][4] = 125;
-            diemBanCoCuaMay[2][4] = 250;
-            diemBanCoCuaMay[1][4] = 125;
-
-            diemBanCoCuaMay[8][3] = 125;
-            diemBanCoCuaMay[7][3] = 60;
-            diemBanCoCuaMay[6][3] = 500;
-            diemBanCoCuaMay[5][3] = 250;
-            diemBanCoCuaMay[4][3] = 500;
-            diemBanCoCuaMay[3][3] = 60;
-            diemBanCoCuaMay[2][3] = 125;
-            diemBanCoCuaMay[1][3] = 250;
-
-            diemBanCoCuaMay[8][2] = 250;
-            diemBanCoCuaMay[7][2] = 500;
-            diemBanCoCuaMay[6][2] = 250;
-            diemBanCoCuaMay[5][2] = 125;
-            diemBanCoCuaMay[4][2] = 250;
-            diemBanCoCuaMay[3][2] = 500;
-            diemBanCoCuaMay[2][2] = 250;
-            diemBanCoCuaMay[1][2] = 125;
-
-            diemBanCoCuaMay[8][1] = 125;
-            diemBanCoCuaMay[7][1] = 250;
-            diemBanCoCuaMay[6][1] = 125;
-            diemBanCoCuaMay[5][1] = 2000;
-            diemBanCoCuaMay[4][1] = 300;
-            diemBanCoCuaMay[3][1] = 250;
-            diemBanCoCuaMay[2][1] = 125;
-            diemBanCoCuaMay[1][1] = 250;
-
-            diemBanCoCuaNguoiChoi[1][1] = 60;
-            diemBanCoCuaNguoiChoi[2][1] = 30;
-            diemBanCoCuaNguoiChoi[3][1] = 60;
-            diemBanCoCuaNguoiChoi[4][1] = 30;
-            diemBanCoCuaNguoiChoi[5][1] = 60;
-            diemBanCoCuaNguoiChoi[6][1] = 30;
-            diemBanCoCuaNguoiChoi[7][1] = 60;
-            diemBanCoCuaNguoiChoi[8][1] = 30;
-
-            diemBanCoCuaNguoiChoi[1][2] = 125;
-            diemBanCoCuaNguoiChoi[2][2] = 60;
-            diemBanCoCuaNguoiChoi[3][2] = 125;
-            diemBanCoCuaNguoiChoi[4][2] = 60;
-            diemBanCoCuaNguoiChoi[5][2] = 125;
-            diemBanCoCuaNguoiChoi[6][2] = 60;
-            diemBanCoCuaNguoiChoi[7][2] = 125;
-            diemBanCoCuaNguoiChoi[8][2] = 60;
-
-            diemBanCoCuaNguoiChoi[1][3] = 60;
-            diemBanCoCuaNguoiChoi[2][3] = 125;
-            diemBanCoCuaNguoiChoi[3][3] = 60;
-            diemBanCoCuaNguoiChoi[4][3] = 125;
-            diemBanCoCuaNguoiChoi[5][3] = 60;
-            diemBanCoCuaNguoiChoi[6][3] = 125;
-            diemBanCoCuaNguoiChoi[7][3] = 60;
-            diemBanCoCuaNguoiChoi[8][3] = 125;
-
-            diemBanCoCuaNguoiChoi[1][4] = 125;
-            diemBanCoCuaNguoiChoi[2][4] = 250;
-            diemBanCoCuaNguoiChoi[3][4] = 125;
-            diemBanCoCuaNguoiChoi[4][4] = 250;
-            diemBanCoCuaNguoiChoi[5][4] = 125;
-            diemBanCoCuaNguoiChoi[6][4] = 250;
-            diemBanCoCuaNguoiChoi[7][4] = 125;
-            diemBanCoCuaNguoiChoi[8][4] = 60;
-
-            diemBanCoCuaNguoiChoi[1][5] = 250;
-            diemBanCoCuaNguoiChoi[2][5] = 125;
-            diemBanCoCuaNguoiChoi[3][5] = 250;
-            diemBanCoCuaNguoiChoi[4][5] = 125;
-            diemBanCoCuaNguoiChoi[5][5] = 250;
-            diemBanCoCuaNguoiChoi[6][5] = 125;
-            diemBanCoCuaNguoiChoi[7][5] = 250;
-            diemBanCoCuaNguoiChoi[8][5] = 125;
-
-            diemBanCoCuaNguoiChoi[1][6] = 125;
-            diemBanCoCuaNguoiChoi[2][6] = 60;
-            diemBanCoCuaNguoiChoi[3][6] = 500;
-            diemBanCoCuaNguoiChoi[4][6] = 250;
-            diemBanCoCuaNguoiChoi[5][6] = 500;
-            diemBanCoCuaNguoiChoi[6][6] = 60;
-            diemBanCoCuaNguoiChoi[7][6] = 125;
-            diemBanCoCuaNguoiChoi[8][6] = 250;
-
-            diemBanCoCuaNguoiChoi[1][7] = 250;
-            diemBanCoCuaNguoiChoi[2][7] = 500;
-            diemBanCoCuaNguoiChoi[3][7] = 250;
-            diemBanCoCuaNguoiChoi[4][7] = 125;
-            diemBanCoCuaNguoiChoi[5][7] = 250;
-            diemBanCoCuaNguoiChoi[6][7] = 500;
-            diemBanCoCuaNguoiChoi[7][7] = 250;
-            diemBanCoCuaNguoiChoi[8][7] = 125;
-
-            diemBanCoCuaNguoiChoi[1][8] = 125;
-            diemBanCoCuaNguoiChoi[2][8] = 250;
-            diemBanCoCuaNguoiChoi[3][8] = 125;
-            diemBanCoCuaNguoiChoi[4][8] = 2000;
-            diemBanCoCuaNguoiChoi[5][8] = 300;
-            diemBanCoCuaNguoiChoi[6][8] = 250;
-            diemBanCoCuaNguoiChoi[7][8] = 125;
-            diemBanCoCuaNguoiChoi[8][8] = 250;
-        }
-    }
-
     private int tinhDiem(ArrayList<Chess> chessTemp) {
         int score = 0;
         for (Chess aChessTemp : chessTemp) {
@@ -506,20 +214,6 @@ public class SetupAi {
         }
     }
 
-
-//    private boolean isRun = true;
-
-    private Nut timNutCha(Nut bestNut) {
-        if (bestNut == null) return null;
-        System.out.println("TÌm cha");
-        Nut nutFarther = bestNut.getNutFather();
-        if (nutFarther != null && nutFarther.getTempLevel() == 1) {
-            return nutFarther;
-        }
-        timNutCha(nutFarther);
-        return null;
-    }
-
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
         //TODO
@@ -532,6 +226,10 @@ public class SetupAi {
         Nut temp = getYoungestNut(nut);
 
         Nut bestNut = nut.getNutsCon().get(0);
+
+        for (Nut mere : nut.getNutsCon()){
+            // todo
+        }
 
         for (Nut n : temp.getNutFather().getNutsCon()) {
             if (n.getGiaTri() > bestScore) {
@@ -2086,4 +1784,297 @@ public class SetupAi {
     /*
     <=========================================================================>
      */
+
+    private void setDiemBanCo() {
+        if (computerIsFirst) {
+            diemBanCoCuaMay[1][1] = 60;
+            diemBanCoCuaMay[2][1] = 30;
+            diemBanCoCuaMay[3][1] = 60;
+            diemBanCoCuaMay[4][1] = 30;
+            diemBanCoCuaMay[5][1] = 60;
+            diemBanCoCuaMay[6][1] = 30;
+            diemBanCoCuaMay[7][1] = 60;
+            diemBanCoCuaMay[8][1] = 30;
+
+            diemBanCoCuaMay[1][2] = 125;
+            diemBanCoCuaMay[2][2] = 60;
+            diemBanCoCuaMay[3][2] = 125;
+            diemBanCoCuaMay[4][2] = 60;
+            diemBanCoCuaMay[5][2] = 125;
+            diemBanCoCuaMay[6][2] = 60;
+            diemBanCoCuaMay[7][2] = 125;
+            diemBanCoCuaMay[8][2] = 60;
+
+            diemBanCoCuaMay[1][3] = 60;
+            diemBanCoCuaMay[2][3] = 125;
+            diemBanCoCuaMay[3][3] = 60;
+            diemBanCoCuaMay[4][3] = 125;
+            diemBanCoCuaMay[5][3] = 60;
+            diemBanCoCuaMay[6][3] = 125;
+            diemBanCoCuaMay[7][3] = 60;
+            diemBanCoCuaMay[8][3] = 125;
+
+            diemBanCoCuaMay[1][4] = 125;
+            diemBanCoCuaMay[2][4] = 250;
+            diemBanCoCuaMay[3][4] = 125;
+            diemBanCoCuaMay[4][4] = 250;
+            diemBanCoCuaMay[5][4] = 125;
+            diemBanCoCuaMay[6][4] = 250;
+            diemBanCoCuaMay[7][4] = 125;
+            diemBanCoCuaMay[8][4] = 60;
+
+            diemBanCoCuaMay[1][5] = 250;
+            diemBanCoCuaMay[2][5] = 125;
+            diemBanCoCuaMay[3][5] = 250;
+            diemBanCoCuaMay[4][5] = 125;
+            diemBanCoCuaMay[5][5] = 250;
+            diemBanCoCuaMay[6][5] = 125;
+            diemBanCoCuaMay[7][5] = 250;
+            diemBanCoCuaMay[8][5] = 125;
+
+            diemBanCoCuaMay[1][6] = 125;
+            diemBanCoCuaMay[2][6] = 60;
+            diemBanCoCuaMay[3][6] = 500;
+            diemBanCoCuaMay[4][6] = 250;
+            diemBanCoCuaMay[5][6] = 500;
+            diemBanCoCuaMay[6][6] = 60;
+            diemBanCoCuaMay[7][6] = 125;
+            diemBanCoCuaMay[8][6] = 250;
+
+            diemBanCoCuaMay[1][7] = 250;
+            diemBanCoCuaMay[2][7] = 500;
+            diemBanCoCuaMay[3][7] = 250;
+            diemBanCoCuaMay[4][7] = 125;
+            diemBanCoCuaMay[5][7] = 250;
+            diemBanCoCuaMay[6][7] = 500;
+            diemBanCoCuaMay[7][7] = 250;
+            diemBanCoCuaMay[8][7] = 125;
+
+            diemBanCoCuaMay[1][8] = 125;
+            diemBanCoCuaMay[2][8] = 250;
+            diemBanCoCuaMay[3][8] = 125;
+            diemBanCoCuaMay[4][8] = 2000;
+            diemBanCoCuaMay[5][8] = 300;
+            diemBanCoCuaMay[6][8] = 250;
+            diemBanCoCuaMay[7][8] = 125;
+            diemBanCoCuaMay[8][8] = 250;
+
+            diemBanCoCuaNguoiChoi[1][1] = 250;
+            diemBanCoCuaNguoiChoi[2][1] = 125;
+            diemBanCoCuaNguoiChoi[3][1] = 250;
+            diemBanCoCuaNguoiChoi[4][1] = 300;
+            diemBanCoCuaNguoiChoi[5][1] = 2000;
+            diemBanCoCuaNguoiChoi[6][1] = 125;
+            diemBanCoCuaNguoiChoi[7][1] = 250;
+            diemBanCoCuaNguoiChoi[8][1] = 125;
+
+            diemBanCoCuaNguoiChoi[1][2] = 125;
+            diemBanCoCuaNguoiChoi[2][2] = 250;
+            diemBanCoCuaNguoiChoi[3][2] = 500;
+            diemBanCoCuaNguoiChoi[4][2] = 250;
+            diemBanCoCuaNguoiChoi[5][2] = 125;
+            diemBanCoCuaNguoiChoi[6][2] = 250;
+            diemBanCoCuaNguoiChoi[7][2] = 500;
+            diemBanCoCuaNguoiChoi[8][2] = 250;
+
+            diemBanCoCuaNguoiChoi[1][3] = 250;
+            diemBanCoCuaNguoiChoi[2][3] = 125;
+            diemBanCoCuaNguoiChoi[3][3] = 60;
+            diemBanCoCuaNguoiChoi[4][3] = 500;
+            diemBanCoCuaNguoiChoi[5][3] = 250;
+            diemBanCoCuaNguoiChoi[6][3] = 500;
+            diemBanCoCuaNguoiChoi[7][3] = 60;
+            diemBanCoCuaNguoiChoi[8][3] = 125;
+
+            diemBanCoCuaNguoiChoi[1][4] = 125;
+            diemBanCoCuaNguoiChoi[2][4] = 250;
+            diemBanCoCuaNguoiChoi[3][4] = 125;
+            diemBanCoCuaNguoiChoi[4][4] = 250;
+            diemBanCoCuaNguoiChoi[5][4] = 125;
+            diemBanCoCuaNguoiChoi[6][4] = 250;
+            diemBanCoCuaNguoiChoi[7][4] = 125;
+            diemBanCoCuaNguoiChoi[8][4] = 250;
+
+            diemBanCoCuaNguoiChoi[1][5] = 60;
+            diemBanCoCuaNguoiChoi[2][5] = 125;
+            diemBanCoCuaNguoiChoi[3][5] = 250;
+            diemBanCoCuaNguoiChoi[4][5] = 125;
+            diemBanCoCuaNguoiChoi[5][5] = 250;
+            diemBanCoCuaNguoiChoi[6][5] = 125;
+            diemBanCoCuaNguoiChoi[7][5] = 250;
+            diemBanCoCuaNguoiChoi[8][5] = 125;
+
+            diemBanCoCuaNguoiChoi[1][6] = 125;
+            diemBanCoCuaNguoiChoi[2][6] = 60;
+            diemBanCoCuaNguoiChoi[3][6] = 125;
+            diemBanCoCuaNguoiChoi[4][6] = 60;
+            diemBanCoCuaNguoiChoi[5][6] = 125;
+            diemBanCoCuaNguoiChoi[6][6] = 60;
+            diemBanCoCuaNguoiChoi[7][6] = 125;
+            diemBanCoCuaNguoiChoi[8][6] = 60;
+
+            diemBanCoCuaNguoiChoi[1][7] = 60;
+            diemBanCoCuaNguoiChoi[2][7] = 125;
+            diemBanCoCuaNguoiChoi[3][7] = 60;
+            diemBanCoCuaNguoiChoi[4][7] = 125;
+            diemBanCoCuaNguoiChoi[5][7] = 60;
+            diemBanCoCuaNguoiChoi[6][7] = 125;
+            diemBanCoCuaNguoiChoi[7][7] = 60;
+            diemBanCoCuaNguoiChoi[8][7] = 125;
+
+            diemBanCoCuaNguoiChoi[1][8] = 30;
+            diemBanCoCuaNguoiChoi[2][8] = 60;
+            diemBanCoCuaNguoiChoi[3][8] = 30;
+            diemBanCoCuaNguoiChoi[4][8] = 60;
+            diemBanCoCuaNguoiChoi[5][8] = 30;
+            diemBanCoCuaNguoiChoi[6][8] = 60;
+            diemBanCoCuaNguoiChoi[7][8] = 30;
+            diemBanCoCuaNguoiChoi[8][8] = 60;
+        } else {
+            diemBanCoCuaMay[8][8] = 60;
+            diemBanCoCuaMay[7][8] = 30;
+            diemBanCoCuaMay[6][8] = 60;
+            diemBanCoCuaMay[5][8] = 30;
+            diemBanCoCuaMay[4][8] = 60;
+            diemBanCoCuaMay[3][8] = 30;
+            diemBanCoCuaMay[2][8] = 60;
+            diemBanCoCuaMay[1][8] = 30;
+
+            diemBanCoCuaMay[8][7] = 125;
+            diemBanCoCuaMay[7][7] = 60;
+            diemBanCoCuaMay[6][7] = 125;
+            diemBanCoCuaMay[5][7] = 60;
+            diemBanCoCuaMay[4][7] = 125;
+            diemBanCoCuaMay[3][7] = 60;
+            diemBanCoCuaMay[2][7] = 125;
+            diemBanCoCuaMay[1][7] = 60;
+
+            diemBanCoCuaMay[8][6] = 60;
+            diemBanCoCuaMay[7][6] = 125;
+            diemBanCoCuaMay[6][6] = 60;
+            diemBanCoCuaMay[5][6] = 125;
+            diemBanCoCuaMay[4][6] = 60;
+            diemBanCoCuaMay[3][6] = 125;
+            diemBanCoCuaMay[2][6] = 60;
+            diemBanCoCuaMay[1][6] = 125;
+
+            diemBanCoCuaMay[8][5] = 125;
+            diemBanCoCuaMay[7][5] = 250;
+            diemBanCoCuaMay[6][5] = 125;
+            diemBanCoCuaMay[5][5] = 250;
+            diemBanCoCuaMay[4][5] = 125;
+            diemBanCoCuaMay[3][5] = 250;
+            diemBanCoCuaMay[2][5] = 125;
+            diemBanCoCuaMay[1][5] = 60;
+
+            diemBanCoCuaMay[8][4] = 250;
+            diemBanCoCuaMay[7][4] = 125;
+            diemBanCoCuaMay[6][4] = 250;
+            diemBanCoCuaMay[5][4] = 125;
+            diemBanCoCuaMay[4][4] = 250;
+            diemBanCoCuaMay[3][4] = 125;
+            diemBanCoCuaMay[2][4] = 250;
+            diemBanCoCuaMay[1][4] = 125;
+
+            diemBanCoCuaMay[8][3] = 125;
+            diemBanCoCuaMay[7][3] = 60;
+            diemBanCoCuaMay[6][3] = 500;
+            diemBanCoCuaMay[5][3] = 250;
+            diemBanCoCuaMay[4][3] = 500;
+            diemBanCoCuaMay[3][3] = 60;
+            diemBanCoCuaMay[2][3] = 125;
+            diemBanCoCuaMay[1][3] = 250;
+
+            diemBanCoCuaMay[8][2] = 250;
+            diemBanCoCuaMay[7][2] = 500;
+            diemBanCoCuaMay[6][2] = 250;
+            diemBanCoCuaMay[5][2] = 125;
+            diemBanCoCuaMay[4][2] = 250;
+            diemBanCoCuaMay[3][2] = 500;
+            diemBanCoCuaMay[2][2] = 250;
+            diemBanCoCuaMay[1][2] = 125;
+
+            diemBanCoCuaMay[8][1] = 125;
+            diemBanCoCuaMay[7][1] = 250;
+            diemBanCoCuaMay[6][1] = 125;
+            diemBanCoCuaMay[5][1] = 2000;
+            diemBanCoCuaMay[4][1] = 300;
+            diemBanCoCuaMay[3][1] = 250;
+            diemBanCoCuaMay[2][1] = 125;
+            diemBanCoCuaMay[1][1] = 250;
+
+            diemBanCoCuaNguoiChoi[1][1] = 60;
+            diemBanCoCuaNguoiChoi[2][1] = 30;
+            diemBanCoCuaNguoiChoi[3][1] = 60;
+            diemBanCoCuaNguoiChoi[4][1] = 30;
+            diemBanCoCuaNguoiChoi[5][1] = 60;
+            diemBanCoCuaNguoiChoi[6][1] = 30;
+            diemBanCoCuaNguoiChoi[7][1] = 60;
+            diemBanCoCuaNguoiChoi[8][1] = 30;
+
+            diemBanCoCuaNguoiChoi[1][2] = 125;
+            diemBanCoCuaNguoiChoi[2][2] = 60;
+            diemBanCoCuaNguoiChoi[3][2] = 125;
+            diemBanCoCuaNguoiChoi[4][2] = 60;
+            diemBanCoCuaNguoiChoi[5][2] = 125;
+            diemBanCoCuaNguoiChoi[6][2] = 60;
+            diemBanCoCuaNguoiChoi[7][2] = 125;
+            diemBanCoCuaNguoiChoi[8][2] = 60;
+
+            diemBanCoCuaNguoiChoi[1][3] = 60;
+            diemBanCoCuaNguoiChoi[2][3] = 125;
+            diemBanCoCuaNguoiChoi[3][3] = 60;
+            diemBanCoCuaNguoiChoi[4][3] = 125;
+            diemBanCoCuaNguoiChoi[5][3] = 60;
+            diemBanCoCuaNguoiChoi[6][3] = 125;
+            diemBanCoCuaNguoiChoi[7][3] = 60;
+            diemBanCoCuaNguoiChoi[8][3] = 125;
+
+            diemBanCoCuaNguoiChoi[1][4] = 125;
+            diemBanCoCuaNguoiChoi[2][4] = 250;
+            diemBanCoCuaNguoiChoi[3][4] = 125;
+            diemBanCoCuaNguoiChoi[4][4] = 250;
+            diemBanCoCuaNguoiChoi[5][4] = 125;
+            diemBanCoCuaNguoiChoi[6][4] = 250;
+            diemBanCoCuaNguoiChoi[7][4] = 125;
+            diemBanCoCuaNguoiChoi[8][4] = 60;
+
+            diemBanCoCuaNguoiChoi[1][5] = 250;
+            diemBanCoCuaNguoiChoi[2][5] = 125;
+            diemBanCoCuaNguoiChoi[3][5] = 250;
+            diemBanCoCuaNguoiChoi[4][5] = 125;
+            diemBanCoCuaNguoiChoi[5][5] = 250;
+            diemBanCoCuaNguoiChoi[6][5] = 125;
+            diemBanCoCuaNguoiChoi[7][5] = 250;
+            diemBanCoCuaNguoiChoi[8][5] = 125;
+
+            diemBanCoCuaNguoiChoi[1][6] = 125;
+            diemBanCoCuaNguoiChoi[2][6] = 60;
+            diemBanCoCuaNguoiChoi[3][6] = 500;
+            diemBanCoCuaNguoiChoi[4][6] = 250;
+            diemBanCoCuaNguoiChoi[5][6] = 500;
+            diemBanCoCuaNguoiChoi[6][6] = 60;
+            diemBanCoCuaNguoiChoi[7][6] = 125;
+            diemBanCoCuaNguoiChoi[8][6] = 250;
+
+            diemBanCoCuaNguoiChoi[1][7] = 250;
+            diemBanCoCuaNguoiChoi[2][7] = 500;
+            diemBanCoCuaNguoiChoi[3][7] = 250;
+            diemBanCoCuaNguoiChoi[4][7] = 125;
+            diemBanCoCuaNguoiChoi[5][7] = 250;
+            diemBanCoCuaNguoiChoi[6][7] = 500;
+            diemBanCoCuaNguoiChoi[7][7] = 250;
+            diemBanCoCuaNguoiChoi[8][7] = 125;
+
+            diemBanCoCuaNguoiChoi[1][8] = 125;
+            diemBanCoCuaNguoiChoi[2][8] = 250;
+            diemBanCoCuaNguoiChoi[3][8] = 125;
+            diemBanCoCuaNguoiChoi[4][8] = 2000;
+            diemBanCoCuaNguoiChoi[5][8] = 300;
+            diemBanCoCuaNguoiChoi[6][8] = 250;
+            diemBanCoCuaNguoiChoi[7][8] = 125;
+            diemBanCoCuaNguoiChoi[8][8] = 250;
+        }
+    }
+
 }
