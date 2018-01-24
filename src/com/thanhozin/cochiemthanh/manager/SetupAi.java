@@ -185,7 +185,7 @@ public class SetupAi {
         }
 
         ArrayList<Chess> afterArrChesses = bestNut.getChesses();
-        int[] temp = new int[2];
+        int[] temp = new int[3];
         int a = 0;
 
         System.out.println("Truoc");
@@ -206,10 +206,8 @@ public class SetupAi {
                     Chess afterChess = afterArrChesses.get(j);
                     if (afterChess.getType().equals(typeOfBeforChess)) {
                         if (beforChess.getX() != afterChess.getX() || beforChess.getY() != afterChess.getY()) {
-                            if (a < 2){
-                                temp[a] = j;
-                                a++;
-                            }
+                            temp[a] = j;
+                            a++;
                         }
                     }
                 }
@@ -217,16 +215,16 @@ public class SetupAi {
         }
         if (a == 1) {
             Chess chess1 = afterArrChesses.get(temp[0]);
-            return chess1.getType() + "_" + chess1.getCoverX() + "_" + Utils.chuyen_y_ve_so_thu_tu(chess1.getY());
+            return chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
         } else if (a == 0) {
             System.out.println("Thoat");
             return null;
         } else {
             Chess chess1 = afterArrChesses.get(temp[0]);
-            String s1 = chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
+            String s1 = chess1.getType() + ": " + chess1.getCoverX() + "_" + chess1.getCoverY();
             Chess chess2 = afterArrChesses.get(temp[1]);
-            String s2 = chess2.getType() + "_" + chess2.getCoverX() + "_" + chess2.getCoverY();
-            System.out.println("Két qua tra ve: " + s1 + "_" + s2);
+            String s2 = chess2.getType() + ": " + chess2.getCoverX() + "_" + chess2.getCoverY();
+            System.out.println("Két qua tra ve: " + s1 + " " + s2);
             return s1 + "_" + s2;
         }
     }
