@@ -83,7 +83,8 @@ public class GameManager {
         } else {
             kq = ai.khoiChayAi(chesses, Chess.BLACK);
         }
-
+        System.out.println("Thoat ai");
+        System.out.println("Ket qua: "+ kq);
         if (kq != null) {
             String[] value = kq.split("_");
             String type1 = value[0];
@@ -104,13 +105,21 @@ public class GameManager {
                 }
             }
             if (chess1 != null) {
+                System.out.println("di quan 1");
                 chessRemember = chess1;
-                moveChess(Utils.coverXLocation(Integer.parseInt(value[1])), Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[2])));
+                System.out.println(value[1]+" "+value[2]);
+                System.out.println("value[1].charAt(0), Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[2]))"
+                        +value[1].charAt(0)+ (Integer.parseInt(value[2])));
+                moveChess(value[1].charAt(0), (Integer.parseInt(value[2])));
             }
 //        Thread.sleep(3000);
             if (chess2 != null) {
+                System.out.println("di quan 2");
                 chessRemember = chess2;
-                moveChess(Utils.coverXLocation(Integer.parseInt(value[4])), Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[5])));
+                System.out.println(value[4]+" "+value[5]);
+                moveChess(value[4].charAt(0), (Integer.parseInt(value[5])));
+                System.out.println("value[1].charAt(0), Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[2]))"
+                        +value[4].charAt(0)+ Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[5])));
             }
         }
     }
@@ -594,7 +603,7 @@ public class GameManager {
         }
         chessIsLastMove = chessRemember;
         anQuan();
-        System.out.println("Lượt đi: "+luotdi);
+//        System.out.println("Lượt đi: "+luotdi);
         if (kieuChoi != HAI_NGUOI_CHOI) {
             ai = new SetupAi();
             if (kieuChoi == MAY_DANH_TRUOC) {
@@ -671,6 +680,7 @@ public class GameManager {
             if (chess1.getX() == chessRemember.getX() && chess1.getY() == chessRemember.getY()
                     && !chesses.get(i).getType().equals(chessRemember.getType())) {
                 chesses.remove(i);
+                System.out.println("an quan");
             }
 
         }
