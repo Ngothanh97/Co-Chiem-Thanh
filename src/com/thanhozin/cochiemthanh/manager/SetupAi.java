@@ -147,22 +147,25 @@ public class SetupAi {
         nut.setTempLevel(0);
 
 //        nuts.clear();
-
+        String chuoiMangGoc = chuyenMangChessVeString(arryChess);
         taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
         Nut bestNut = duyetCay(nut);
         String mauDiChuyen = bestNut.getMauQuanDiChuyen();
+
+        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
+        nut.setChesses(chessGoc);
         System.out.println("mang sau khi tao cay" +
                 "");
-        printArrayChess(nut.getChesses());
+//        printđArrayChess(nut.getChesses());
         return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
 
     }
 
-    private void printArrayChess(ArrayList<Chess> chesses){
+    private void printArrayChess(ArrayList<Chess> chesses) {
         String name = "";
-        for (Chess chess:chesses) {
+        for (Chess chess : chesses) {
             name += chess.toString();
         }
         System.out.println(name);
@@ -243,11 +246,11 @@ public class SetupAi {
         Nut bestNut = nut.getNutsCon().get(0);
 
         // kiểm tra nếu nó không fai là nút hiện tại (nut hiện tại không có cha)
-        while (temp.getNutFather() != null){
+        while (temp.getNutFather() != null) {
             System.out.println("Duyệt cây");
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
             if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
-                for (Nut tempNut : father.getNutsCon()){
+                for (Nut tempNut : father.getNutsCon()) {
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
                         bestNut = getBestNut(tempNut);
@@ -260,7 +263,7 @@ public class SetupAi {
             temp = temp.getNutFather();
         }
 
-        System.out.println("bestNut: " + bestNut);
+        System.out.println(bestNut);
 
         return bestNut;
     }
@@ -278,6 +281,27 @@ public class SetupAi {
             n = n.getNutFather();
         }
         return n;
+    }
+
+    private String chuyenMangChessVeString(ArrayList<Chess> chessChuyens) {
+        String ketqua = "";
+        for (int a = 0; a < chessChuyens.size(); a++) {
+            String s = chessChuyens.get(a).getType() + "_" + chessChuyens.get(a).getX() + "_" + chessChuyens.get(a).getY();
+            ketqua = ketqua + "_" + s;
+        }
+        return ketqua;
+    }
+
+    private ArrayList<Chess> layArrayListChessTuString(String stringTemp) {
+        ArrayList<Chess> arrayList = new ArrayList<>();
+        String[] arrStringChess = stringTemp.split("_");
+        int n = 1;
+        while (n != arrStringChess.length) {
+            Chess chess = new Chess(Integer.parseInt(arrStringChess[n + 1]), Integer.parseInt(arrStringChess[n + 2]), arrStringChess[n]);
+            n += 3;
+            arrayList.add(chess);
+        }
+        return arrayList;
     }
 
     private void taoCayTroChoi(Nut nuted) {
@@ -550,7 +574,9 @@ public class SetupAi {
         for (int i = 0; i < nutCon.size(); i++) {
             aryChessIsRuns.clear();
             arrTempChessIsRun.clear();
+            String tempStringArrayChess= chuyenMangChessVeString(nutCon.get(i).getChesses());
             taoCayTroChoi(nutCon.get(i));
+            nutCon.get(i).setChesses(layArrayListChessTuString(tempStringArrayChess));
         }
 
         /*
@@ -888,6 +914,8 @@ public class SetupAi {
 //        }
     }
 
+
+    // Lấy lại giá trị index của quân cờ đã được chọn sẽ di chuyển
     private int capNhatTrangThaiSauKhiXetHuong(ArrayList<Chess> mangSauXet, String type) {
         int index = -1;
         for (int i = 0; i < mangSauXet.size(); i++) {
@@ -939,133 +967,6 @@ public class SetupAi {
         return temp;
     }
 
-    private void sinhNuocDi(Chess quanCoDiChuyen) {
-        System.out.println("arryChess.size(): " + arryChess.size());
-        arryChess = arryChessNhos;
-        int x = Utils.chuyen_X_Ve_So_Thu_Tu(quanCoDiChuyen.getX());
-        int y = Utils.chuyen_y_ve_so_thu_tu(quanCoDiChuyen.getY());
-        String type = quanCoDiChuyen.getType();
-        int indexSelect = -1;
-        for (int i = 0; i < arryChess.size(); i++) {
-            if (arryChess.get(i).getType().equals(type)) {
-                indexSelect = i;
-
-                //Thà chạy sai còn hơn là lỗi
-            } else return;
-        }
-        aryChessIsRuns.clear();
-
-        int huongLen = kiemTraHuongLen(quanCoDiChuyen);
-        System.out.println("huongLen: " + huongLen);
-        switch (huongLen) {
-            case 1:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 2:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 12:
-                ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                arryChess = temp;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            default:
-                break;
-        }
-
-        arryChess = arryChessNhos;
-        int sangPhai = kiemTraHuongPhai(quanCoDiChuyen);
-        System.out.println("sang phair: " + sangPhai);
-        switch (sangPhai) {
-            case 1:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 2:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 12:
-                ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                arryChess = temp;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            default:
-                break;
-        }
-
-        arryChess = arryChessNhos;
-        int xuongDuoi = kiemTraHuongXuong(quanCoDiChuyen);
-        System.out.println("huong xuong: " + xuongDuoi);
-        switch (xuongDuoi) {
-            case 1:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 2:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 12:
-                ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                arryChess = temp;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            default:
-                break;
-        }
-
-        arryChess = arryChessNhos;
-        int sangTrai = kiemTraHuongTrai(quanCoDiChuyen);
-        System.out.println("sang trai");
-        switch (sangTrai) {
-            case 1:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 2:
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            case 12:
-                ArrayList<Chess> temp = arryChess;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y - 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                arryChess = temp;
-                arryChess.get(indexSelect).setX(Utils.chuyen_x_ve_toa_do_may(x - 2));
-                arryChess.get(indexSelect).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
-                aryChessIsRuns.add(new AryChessIsRun(arryChess));
-                break;
-            default:
-                break;
-        }
-    }
 
 
     /*

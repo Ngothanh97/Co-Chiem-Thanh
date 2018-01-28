@@ -14,7 +14,6 @@ import java.util.BitSet;
 public class GamePanel extends BasePanel implements Runnable {
     private OnScreenSwitchListener onScreenSwitchListener;
     private GameManager gameManager;
-    private BitSet bitSet;
     private boolean flagTamDung;
     private boolean flagVanMoi;
     private boolean flagHome;
@@ -49,108 +48,115 @@ public class GamePanel extends BasePanel implements Runnable {
 
     @Override
     public void registerListener() {
-        MouseAdapter mouseAdapter = new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-                if (flagShowTB) {
-                    if (x > 350 && x < 430 && y > 420 && y < 446) {
-                        flagShowTB = false;
-                    }
-                    if (x > 475 && x < 552 && y > 420 && y < 446) {
-                        if (flagTamDung) {
 
-                        }
-                        if (flagVanMoi) {
-                            gameManager = new GameManager();
-                            flagShowTB = false;
-                            flagOkInTB = false;
-                        }
-                        if (flagHome) {
-                            onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_TO_MENU_PANEL);
-                        }
-                        if (flagThoat) {
-                            System.exit(0);
-                        }
-                    }
-                } else if (gameManager.checkWin() != 0) {
-                    if (x > 350 && x < 430 && y > 420 && y < 446) {
-                        System.exit(0);
-                    }
-                    if (x > 475 && x < 552 && y > 420 && y < 446) {
-                        gameManager = new GameManager();
-                        flagOkInTB = false;
-                    }
-                } else if (flagFrameTamDung) {
-                    if (x > 295 && x < 456 && y > 498 && y < 550) {
-                        flagFrameTamDung = false;
-                    }
-                } else {
-                    if (x > 715 && x < 835 && y > 630 && y < 666) {
-                        flagShowTB = true;
-                    }
-                    if (x > 715 && x < 835 && y > 570 && y < 606) {
-                        flagShowTB = true;
-                    }
-                    if (x > 715 && x < 835 && y > 510 && y < 546) {
-                        flagShowTB = true;
-                    }
-                    if (x > 715 && x < 835 && y > 450 && y < 486) {
-                        flagFrameTamDung = true;
-                    }
-                }
-                gameManager.checkOnClick(e.getX(), e.getY());
-                repaint();
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-                if (flagShowTB) {
-                    if (x > 350 && x < 430 && y > 420 && y < 446) {
-                        flagBackInTB = true;
-                    } else flagBackInTB = false;
-                    if (x > 475 && x < 552 && y > 420 && y < 446) {
-                        flagOkInTB = true;
-                    } else flagOkInTB = false;
-                } else if (gameManager.checkWin() != 0) {
-                    if (x > 350 && x < 430 && y > 420 && y < 446) {
-                        flagBackInTB = true;
-                    } else flagBackInTB = false;
-                    if (x > 475 && x < 552 && y > 420 && y < 446) {
-                        flagOkInTB = true;
-                    } else flagOkInTB = false;
-                } else if (flagFrameTamDung) {
-                    if (x > 295 && x < 456 && y > 498 && y < 550) {
-                        flagTiepTuc = true;
-                    } else flagTiepTuc = false;
-                } else {
-                    if (x > 715 && x < 835 && y > 630 && y < 666) {
-                        flagThoat = true;
-                    } else flagThoat = false;
-                    if (x > 715 && x < 835 && y > 570 && y < 606) {
-                        flagHome = true;
-                    } else flagHome = false;
-                    if (x > 715 && x < 835 && y > 510 && y < 546) {
-                        flagVanMoi = true;
-                    } else flagVanMoi = false;
-                    if (x > 715 && x < 835 && y > 450 && y < 486) {
-                        flagTamDung = true;
-                    } else flagTamDung = false;
-                }
-                repaint();
-            }
-        };
-        addMouseListener(mouseAdapter);
-        addMouseMotionListener(mouseAdapter);
     }
 
     @Override
     public void initalizeComponents() {
         gameManager = new GameManager();
-        bitSet = new BitSet();
+        Runnable runnable= new Runnable() {
+            @Override
+            public void run() {
+                MouseAdapter mouseAdapter = new MouseAdapter() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        int x = e.getX();
+                        int y = e.getY();
+                        if (flagShowTB) {
+                            if (x > 350 && x < 430 && y > 420 && y < 446) {
+                                flagShowTB = false;
+                            }
+                            if (x > 475 && x < 552 && y > 420 && y < 446) {
+                                if (flagTamDung) {
+
+                                }
+                                if (flagVanMoi) {
+                                    gameManager = new GameManager();
+                                    flagShowTB = false;
+                                    flagOkInTB = false;
+                                }
+                                if (flagHome) {
+                                    onScreenSwitchListener.switchScreen(Gui.SCREEN_GAME_TO_MENU_PANEL);
+                                }
+                                if (flagThoat) {
+                                    System.exit(0);
+                                }
+                            }
+                        } else if (gameManager.checkWin() != 0) {
+                            if (x > 350 && x < 430 && y > 420 && y < 446) {
+                                System.exit(0);
+                            }
+                            if (x > 475 && x < 552 && y > 420 && y < 446) {
+                                gameManager = new GameManager();
+                                flagOkInTB = false;
+                            }
+                        } else if (flagFrameTamDung) {
+                            if (x > 295 && x < 456 && y > 498 && y < 550) {
+                                flagFrameTamDung = false;
+                            }
+                        } else {
+                            if (x > 715 && x < 835 && y > 630 && y < 666) {
+                                flagShowTB = true;
+                            }
+                            if (x > 715 && x < 835 && y > 570 && y < 606) {
+                                flagShowTB = true;
+                            }
+                            if (x > 715 && x < 835 && y > 510 && y < 546) {
+                                flagShowTB = true;
+                            }
+                            if (x > 715 && x < 835 && y > 450 && y < 486) {
+                                flagFrameTamDung = true;
+                            }
+                        }
+                        gameManager.checkOnClick(e.getX(), e.getY());
+                        repaint();
+                    }
+
+                    @Override
+                    public void mouseMoved(MouseEvent e) {
+                        int x = e.getX();
+                        int y = e.getY();
+                        if (flagShowTB) {
+                            if (x > 350 && x < 430 && y > 420 && y < 446) {
+                                flagBackInTB = true;
+                            } else flagBackInTB = false;
+                            if (x > 475 && x < 552 && y > 420 && y < 446) {
+                                flagOkInTB = true;
+                            } else flagOkInTB = false;
+                        } else if (gameManager.checkWin() != 0) {
+                            if (x > 350 && x < 430 && y > 420 && y < 446) {
+                                flagBackInTB = true;
+                            } else flagBackInTB = false;
+                            if (x > 475 && x < 552 && y > 420 && y < 446) {
+                                flagOkInTB = true;
+                            } else flagOkInTB = false;
+                        } else if (flagFrameTamDung) {
+                            if (x > 295 && x < 456 && y > 498 && y < 550) {
+                                flagTiepTuc = true;
+                            } else flagTiepTuc = false;
+                        } else {
+                            if (x > 715 && x < 835 && y > 630 && y < 666) {
+                                flagThoat = true;
+                            } else flagThoat = false;
+                            if (x > 715 && x < 835 && y > 570 && y < 606) {
+                                flagHome = true;
+                            } else flagHome = false;
+                            if (x > 715 && x < 835 && y > 510 && y < 546) {
+                                flagVanMoi = true;
+                            } else flagVanMoi = false;
+                            if (x > 715 && x < 835 && y > 450 && y < 486) {
+                                flagTamDung = true;
+                            } else flagTamDung = false;
+                        }
+                        repaint();
+                    }
+                };
+                addMouseListener(mouseAdapter);
+                addMouseMotionListener(mouseAdapter);
+            }
+        };
+        Thread thread= new Thread(runnable);
+        thread.start();
     }
 
     @Override
