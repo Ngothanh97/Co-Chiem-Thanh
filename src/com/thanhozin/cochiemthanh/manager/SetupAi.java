@@ -221,9 +221,9 @@ public class SetupAi {
             return null;
         } else {
             Chess chess1 = afterArrChesses.get(temp[0]);
-            String s1 = chess1.getType() + ": " + chess1.getCoverX() + "_" + chess1.getCoverY();
+            String s1 = chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
             Chess chess2 = afterArrChesses.get(temp[1]);
-            String s2 = chess2.getType() + ": " + chess2.getCoverX() + "_" + chess2.getCoverY();
+            String s2 = chess2.getType() + "_" + chess2.getCoverX() + "_" + chess2.getCoverY();
             System.out.println("Két qua tra ve: " + s1 + " " + s2);
             return s1 + "_" + s2;
         }
@@ -260,7 +260,7 @@ public class SetupAi {
             temp = temp.getNutFather();
         }
 
-        System.out.println(bestNut);
+        System.out.println("bestNut: " + bestNut);
 
         return bestNut;
     }

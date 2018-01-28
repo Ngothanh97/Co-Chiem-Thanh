@@ -105,12 +105,12 @@ public class GameManager {
             }
             if (chess1 != null) {
                 chessRemember = chess1;
-                moveChess(Utils.coverXLocation(Integer.parseInt(value[1])), Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[2])));
+                moveChess(value[1].charAt(0), Integer.parseInt(value[2]));
             }
 //        Thread.sleep(3000);
             if (chess2 != null) {
                 chessRemember = chess2;
-                moveChess(Utils.coverXLocation(Integer.parseInt(value[4])), Utils.chuyen_y_ve_so_thu_tu(Integer.parseInt(value[5])));
+                moveChess(value[4].charAt(0), Integer.parseInt(value[5]));
             }
         }
     }
