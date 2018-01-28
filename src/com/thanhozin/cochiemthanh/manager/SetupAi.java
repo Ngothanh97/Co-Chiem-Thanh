@@ -191,7 +191,7 @@ public class SetupAi {
         int[] temp = new int[3];
         int a = 0;
 
-//        System.out.println("Truoc");
+        System.out.println("Truoc");
 //        printArrayChess(beforArrChesses);
 
 //        System.out.println("Sau");
