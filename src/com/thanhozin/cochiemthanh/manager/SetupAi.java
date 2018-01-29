@@ -156,11 +156,9 @@ public class SetupAi {
 
         ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
         nut.setChesses(chessGoc);
-        System.out.println("mang sau khi tao cay" +
-                "");
+        System.out.println("mang sau khi tao cay");
 //        printđArrayChess(nut.getChesses());
         return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
-
     }
 
     private void printArrayChess(ArrayList<Chess> chesses) {
