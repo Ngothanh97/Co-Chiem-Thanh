@@ -15,9 +15,9 @@ public class Chess {
     public static final String WHITE_K = "k1";
     public static final String WHITE_L = "l1";
     public static final String WHITE_M = "m1";
-    public static final String BLACK_O = "o1";
-    public static final String BLACK_P = "p1";
-    public static final String BLACK_Q = "q1";
+    public static final String BLACK_O = "o2";
+    public static final String BLACK_P = "p2";
+    public static final String BLACK_Q = "q2";
     private int x;
     private int y;
     private String type;
@@ -99,17 +99,9 @@ public class Chess {
 
 
     public char coverType(String type) {
-        switch (type) {
-            case WHITE_K:
-            case WHITE_L:
-            case WHITE_M:
-                return 'W';
-            case BLACK_O:
-            case BLACK_P:
-            case BLACK_Q:
-                return 'B';
-            default:
-                return ' ';
-        }
+        if (type == null || type.isEmpty()) return ' ';
+        if (type.contains("1")) return 'W';
+        if (type.contains("2")) return 'B';
+        return ' ';
     }
 }
