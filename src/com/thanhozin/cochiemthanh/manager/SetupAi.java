@@ -49,10 +49,6 @@ public class SetupAi {
 
     private File file;
 
-
-    private Nut nutDuocChonDiChuyen; // dùng cho lúc tìm nut cha
-
-
     //Mảng chứa các nhánh của cây, lưu trữ các
     private ArrayList<AryChessIsRun> aryChessIsRuns;
     private int doSau;
@@ -72,7 +68,6 @@ public class SetupAi {
         diemBanCoCuaNguoiChoi = new int[9][9];
         capQuanSeDiChuyen = new Chess[2];
         setDiemBanCo();
-        menuSelect = new MenuSelect();
         int templevel = MenuSelect.level;
         if (templevel == GameManager.LEVEL_DE) {
             doSau = 2;
@@ -135,7 +130,6 @@ public class SetupAi {
     public String khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         this.arryChess.clear();
         arryChessNhos.clear();
-//        System.out.println("Số quân cả mảng: " + aryChess.size());
 
         System.out.println("Mang goc ban dau ");
         printArrayChess(aryChess);
@@ -232,7 +226,6 @@ public class SetupAi {
 
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
-        //TODO
         if (nut == null) {
             System.out.println("AI does not have any step");
             return null;
@@ -243,7 +236,7 @@ public class SetupAi {
 
         Nut bestNut = nut.getNutsCon().get(0);
 
-        // kiểm tra nếu nó không fai là nút hiện tại (nut hiện tại không có cha)
+        // kiểm tra nếu nó không fai là nút hiện tại (nut hiện tại là nut to nhất đang diễn ra trên màn hình)
         while (temp.getNutFather() != null) {
             System.out.println("Duyệt cây");
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
@@ -251,7 +244,10 @@ public class SetupAi {
                 for (Nut tempNut : father.getNutsCon()) {
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
-                        bestNut = getBestNut(tempNut);
+                        System.out.println(tempNut);
+                        if (getBestNut(tempNut) != null) {
+                            bestNut = getBestNut(tempNut);
+                        }
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -267,14 +263,14 @@ public class SetupAi {
     }
 
     private Nut getYoungestNut(Nut n) {
-        while (n.getNutsCon() != null) {
+        while (n.getNutsCon() != null && !n.getNutsCon().isEmpty()) {
             n = n.getNutsCon().get(0);
         }
         return n;
     }
 
     private Nut getBestNut(Nut n) {
-        if (n == null || n.getNutFather() == null) return null;
+        if (n == null || n.getChesses().isEmpty() || n.getNutFather() == null) return null;
         while (n.getNutFather().getNutFather() != null) {
             n = n.getNutFather();
         }
@@ -303,7 +299,6 @@ public class SetupAi {
     }
 
     private void taoCayTroChoi(Nut nuted) {
-        System.out.println("chay ai");
         switch (level) {
             case GameManager.LEVEL_DE:
                 if (nuted.getTempLevel() == 2) {
@@ -336,8 +331,6 @@ public class SetupAi {
         } else temp = quanDen.size();
         lanLayCapQuan = 1;
 
-//        System.out.println(1);
-//        System.out.println("So luong quan Trang: " + quanTrang.size());
         //Tạo vòng lặp để lấy hết các tổ hợp chọn ra 2 quân trong 3 quân
         String nhoArrayChessGoc = "";
         for (int a = 0; a < arryChess.size(); a++) {
@@ -360,13 +353,8 @@ public class SetupAi {
                 n += 3;
                 arrChessGoc.add(chess);
             }
-//            System.out.println(arrChessGoc.size());
+
             arryChess = arrChessGoc;
-//            System.out.println("dfjsdakjhglsjhgs.gkfhiapytrbjvuyab jk  afsdsg vsaksfs ufov safgsdf gif");
-//            for (int a = 0; a < arryChess.size(); a++) {
-//                System.out.println(arryChess.get(a).getType() + " "
-//                        + Utils.chuyen_X_Ve_So_Thu_Tu(arryChess.get(a).getX()) + "_" + Utils.chuyen_y_ve_so_thu_tu(arryChess.get(a).getY()));
-//            }
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
             lanLayQuanTuMang = 1;
             int temp2 = 0;
@@ -382,12 +370,6 @@ public class SetupAi {
                 y = capQuanSeDiChuyen[1].getY();
             }
 
-
-//            System.out.println("Số quân lấy được: " + temp2);
-//            System.out.println("Các quân lấy được: " + quanDiChuyen1.getType() + " --- " + capQuanSeDiChuyen[1].getType());
-
-
-
             /*Tạo vòng lặp để lấy lần lượt từng quân trong một lượt đi. lấy từ bộ 2 quân đã chọn ra được từ
                 phương thức layRaCapQuanDiChuyen();
             */
@@ -402,16 +384,14 @@ public class SetupAi {
                     ArrayList<String> chessValue = docFile();
                     xoaDuLieuTrongFile();
 
-//                    System.out.println("ChessValueSize: " + chessValue.size());
                     int countArr = Integer.parseInt(chessValue.get(chessValue.size() - 2));
                     chessValue.remove(chessValue.size() - 2);
-//                    chessValue.remove(chessValue.size() - 2);
                     System.out.println("jkdjlasfjgsafsajflhasfsafsafsajfsafsafsafsa: " + countArr);
                     System.out.println("ChessValueSize: " + chessValue.size() + " " + chessValue.get(0));
 
                     // Di hết 2 quân lượt mình mới chuyển lượt
                     Chess quanDiChuyen2 = layRaQuanDiChuyen();
-                    ArrayList<AryChessIsRun> arrTempChess = new ArrayList<>(aryChessIsRuns);
+//                    ArrayList<AryChessIsRun> arrTempChess = new ArrayList<>(aryChessIsRuns);
 //                    arrTempChessIsRun2 = aryChessIsRuns;
 //                    System.out.println("aryChessIsRuns Size: " + aryChessIsRuns.size());
 //                    System.out.println("arrChessTemp Size: " + arrTempChess.size());
@@ -514,7 +494,7 @@ public class SetupAi {
         ArrayList<Nut> nutCon = new ArrayList<>();
         for (int i = 0; i < nhoCacKhaNangThanhCongs.size(); i++) {
 //            number += nhoCacKhaNangThanhCongs.get(i).getNumberValue();
-            System.out.println("Nho cac kha nang thah cong");
+            System.out.print("Nho cac kha nang thah cong: ");
             NhoCacKhaNangThanhCong remember = nhoCacKhaNangThanhCongs.get(i);
             System.out.println(remember);
             arryChess = remember.getArrChess();
@@ -854,7 +834,6 @@ public class SetupAi {
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             if (luot == 0 || (luot == 1 && end)) {
-                System.out.println("Không thể truy cập trang web này");
                 bufferedWriter.write(String.valueOf(countNumberArray));
             }
 //            bufferedWriter.newLine();
@@ -1707,7 +1686,7 @@ public class SetupAi {
      */
 
     private void setDiemBanCo() {
-        if (computerIsFirst) {
+//        if (computerIsFirst) {
             diemBanCoCuaMay[1][1] = 60;
             diemBanCoCuaMay[2][1] = 30;
             diemBanCoCuaMay[3][1] = 60;
@@ -1851,151 +1830,151 @@ public class SetupAi {
             diemBanCoCuaNguoiChoi[6][8] = 60;
             diemBanCoCuaNguoiChoi[7][8] = 30;
             diemBanCoCuaNguoiChoi[8][8] = 60;
-        } else {
-            diemBanCoCuaMay[8][8] = 60;
-            diemBanCoCuaMay[7][8] = 30;
-            diemBanCoCuaMay[6][8] = 60;
-            diemBanCoCuaMay[5][8] = 30;
-            diemBanCoCuaMay[4][8] = 60;
-            diemBanCoCuaMay[3][8] = 30;
-            diemBanCoCuaMay[2][8] = 60;
-            diemBanCoCuaMay[1][8] = 30;
-
-            diemBanCoCuaMay[8][7] = 125;
-            diemBanCoCuaMay[7][7] = 60;
-            diemBanCoCuaMay[6][7] = 125;
-            diemBanCoCuaMay[5][7] = 60;
-            diemBanCoCuaMay[4][7] = 125;
-            diemBanCoCuaMay[3][7] = 60;
-            diemBanCoCuaMay[2][7] = 125;
-            diemBanCoCuaMay[1][7] = 60;
-
-            diemBanCoCuaMay[8][6] = 60;
-            diemBanCoCuaMay[7][6] = 125;
-            diemBanCoCuaMay[6][6] = 60;
-            diemBanCoCuaMay[5][6] = 125;
-            diemBanCoCuaMay[4][6] = 60;
-            diemBanCoCuaMay[3][6] = 125;
-            diemBanCoCuaMay[2][6] = 60;
-            diemBanCoCuaMay[1][6] = 125;
-
-            diemBanCoCuaMay[8][5] = 125;
-            diemBanCoCuaMay[7][5] = 250;
-            diemBanCoCuaMay[6][5] = 125;
-            diemBanCoCuaMay[5][5] = 250;
-            diemBanCoCuaMay[4][5] = 125;
-            diemBanCoCuaMay[3][5] = 250;
-            diemBanCoCuaMay[2][5] = 125;
-            diemBanCoCuaMay[1][5] = 60;
-
-            diemBanCoCuaMay[8][4] = 250;
-            diemBanCoCuaMay[7][4] = 125;
-            diemBanCoCuaMay[6][4] = 250;
-            diemBanCoCuaMay[5][4] = 125;
-            diemBanCoCuaMay[4][4] = 250;
-            diemBanCoCuaMay[3][4] = 125;
-            diemBanCoCuaMay[2][4] = 250;
-            diemBanCoCuaMay[1][4] = 125;
-
-            diemBanCoCuaMay[8][3] = 125;
-            diemBanCoCuaMay[7][3] = 60;
-            diemBanCoCuaMay[6][3] = 500;
-            diemBanCoCuaMay[5][3] = 250;
-            diemBanCoCuaMay[4][3] = 500;
-            diemBanCoCuaMay[3][3] = 60;
-            diemBanCoCuaMay[2][3] = 125;
-            diemBanCoCuaMay[1][3] = 250;
-
-            diemBanCoCuaMay[8][2] = 250;
-            diemBanCoCuaMay[7][2] = 500;
-            diemBanCoCuaMay[6][2] = 250;
-            diemBanCoCuaMay[5][2] = 125;
-            diemBanCoCuaMay[4][2] = 250;
-            diemBanCoCuaMay[3][2] = 500;
-            diemBanCoCuaMay[2][2] = 250;
-            diemBanCoCuaMay[1][2] = 125;
-
-            diemBanCoCuaMay[8][1] = 125;
-            diemBanCoCuaMay[7][1] = 250;
-            diemBanCoCuaMay[6][1] = 125;
-            diemBanCoCuaMay[5][1] = 2000;
-            diemBanCoCuaMay[4][1] = 300;
-            diemBanCoCuaMay[3][1] = 250;
-            diemBanCoCuaMay[2][1] = 125;
-            diemBanCoCuaMay[1][1] = 250;
-
-            diemBanCoCuaNguoiChoi[1][1] = 60;
-            diemBanCoCuaNguoiChoi[2][1] = 30;
-            diemBanCoCuaNguoiChoi[3][1] = 60;
-            diemBanCoCuaNguoiChoi[4][1] = 30;
-            diemBanCoCuaNguoiChoi[5][1] = 60;
-            diemBanCoCuaNguoiChoi[6][1] = 30;
-            diemBanCoCuaNguoiChoi[7][1] = 60;
-            diemBanCoCuaNguoiChoi[8][1] = 30;
-
-            diemBanCoCuaNguoiChoi[1][2] = 125;
-            diemBanCoCuaNguoiChoi[2][2] = 60;
-            diemBanCoCuaNguoiChoi[3][2] = 125;
-            diemBanCoCuaNguoiChoi[4][2] = 60;
-            diemBanCoCuaNguoiChoi[5][2] = 125;
-            diemBanCoCuaNguoiChoi[6][2] = 60;
-            diemBanCoCuaNguoiChoi[7][2] = 125;
-            diemBanCoCuaNguoiChoi[8][2] = 60;
-
-            diemBanCoCuaNguoiChoi[1][3] = 60;
-            diemBanCoCuaNguoiChoi[2][3] = 125;
-            diemBanCoCuaNguoiChoi[3][3] = 60;
-            diemBanCoCuaNguoiChoi[4][3] = 125;
-            diemBanCoCuaNguoiChoi[5][3] = 60;
-            diemBanCoCuaNguoiChoi[6][3] = 125;
-            diemBanCoCuaNguoiChoi[7][3] = 60;
-            diemBanCoCuaNguoiChoi[8][3] = 125;
-
-            diemBanCoCuaNguoiChoi[1][4] = 125;
-            diemBanCoCuaNguoiChoi[2][4] = 250;
-            diemBanCoCuaNguoiChoi[3][4] = 125;
-            diemBanCoCuaNguoiChoi[4][4] = 250;
-            diemBanCoCuaNguoiChoi[5][4] = 125;
-            diemBanCoCuaNguoiChoi[6][4] = 250;
-            diemBanCoCuaNguoiChoi[7][4] = 125;
-            diemBanCoCuaNguoiChoi[8][4] = 60;
-
-            diemBanCoCuaNguoiChoi[1][5] = 250;
-            diemBanCoCuaNguoiChoi[2][5] = 125;
-            diemBanCoCuaNguoiChoi[3][5] = 250;
-            diemBanCoCuaNguoiChoi[4][5] = 125;
-            diemBanCoCuaNguoiChoi[5][5] = 250;
-            diemBanCoCuaNguoiChoi[6][5] = 125;
-            diemBanCoCuaNguoiChoi[7][5] = 250;
-            diemBanCoCuaNguoiChoi[8][5] = 125;
-
-            diemBanCoCuaNguoiChoi[1][6] = 125;
-            diemBanCoCuaNguoiChoi[2][6] = 60;
-            diemBanCoCuaNguoiChoi[3][6] = 500;
-            diemBanCoCuaNguoiChoi[4][6] = 250;
-            diemBanCoCuaNguoiChoi[5][6] = 500;
-            diemBanCoCuaNguoiChoi[6][6] = 60;
-            diemBanCoCuaNguoiChoi[7][6] = 125;
-            diemBanCoCuaNguoiChoi[8][6] = 250;
-
-            diemBanCoCuaNguoiChoi[1][7] = 250;
-            diemBanCoCuaNguoiChoi[2][7] = 500;
-            diemBanCoCuaNguoiChoi[3][7] = 250;
-            diemBanCoCuaNguoiChoi[4][7] = 125;
-            diemBanCoCuaNguoiChoi[5][7] = 250;
-            diemBanCoCuaNguoiChoi[6][7] = 500;
-            diemBanCoCuaNguoiChoi[7][7] = 250;
-            diemBanCoCuaNguoiChoi[8][7] = 125;
-
-            diemBanCoCuaNguoiChoi[1][8] = 125;
-            diemBanCoCuaNguoiChoi[2][8] = 250;
-            diemBanCoCuaNguoiChoi[3][8] = 125;
-            diemBanCoCuaNguoiChoi[4][8] = 2000;
-            diemBanCoCuaNguoiChoi[5][8] = 300;
-            diemBanCoCuaNguoiChoi[6][8] = 250;
-            diemBanCoCuaNguoiChoi[7][8] = 125;
-            diemBanCoCuaNguoiChoi[8][8] = 250;
-        }
+//        } else {
+//            diemBanCoCuaMay[8][8] = 60;
+//            diemBanCoCuaMay[7][8] = 30;
+//            diemBanCoCuaMay[6][8] = 60;
+//            diemBanCoCuaMay[5][8] = 30;
+//            diemBanCoCuaMay[4][8] = 60;
+//            diemBanCoCuaMay[3][8] = 30;
+//            diemBanCoCuaMay[2][8] = 60;
+//            diemBanCoCuaMay[1][8] = 30;
+//
+//            diemBanCoCuaMay[8][7] = 125;
+//            diemBanCoCuaMay[7][7] = 60;
+//            diemBanCoCuaMay[6][7] = 125;
+//            diemBanCoCuaMay[5][7] = 60;
+//            diemBanCoCuaMay[4][7] = 125;
+//            diemBanCoCuaMay[3][7] = 60;
+//            diemBanCoCuaMay[2][7] = 125;
+//            diemBanCoCuaMay[1][7] = 60;
+//
+//            diemBanCoCuaMay[8][6] = 60;
+//            diemBanCoCuaMay[7][6] = 125;
+//            diemBanCoCuaMay[6][6] = 60;
+//            diemBanCoCuaMay[5][6] = 125;
+//            diemBanCoCuaMay[4][6] = 60;
+//            diemBanCoCuaMay[3][6] = 125;
+//            diemBanCoCuaMay[2][6] = 60;
+//            diemBanCoCuaMay[1][6] = 125;
+//
+//            diemBanCoCuaMay[8][5] = 125;
+//            diemBanCoCuaMay[7][5] = 250;
+//            diemBanCoCuaMay[6][5] = 125;
+//            diemBanCoCuaMay[5][5] = 250;
+//            diemBanCoCuaMay[4][5] = 125;
+//            diemBanCoCuaMay[3][5] = 250;
+//            diemBanCoCuaMay[2][5] = 125;
+//            diemBanCoCuaMay[1][5] = 60;
+//
+//            diemBanCoCuaMay[8][4] = 250;
+//            diemBanCoCuaMay[7][4] = 125;
+//            diemBanCoCuaMay[6][4] = 250;
+//            diemBanCoCuaMay[5][4] = 125;
+//            diemBanCoCuaMay[4][4] = 250;
+//            diemBanCoCuaMay[3][4] = 125;
+//            diemBanCoCuaMay[2][4] = 250;
+//            diemBanCoCuaMay[1][4] = 125;
+//
+//            diemBanCoCuaMay[8][3] = 125;
+//            diemBanCoCuaMay[7][3] = 60;
+//            diemBanCoCuaMay[6][3] = 500;
+//            diemBanCoCuaMay[5][3] = 250;
+//            diemBanCoCuaMay[4][3] = 500;
+//            diemBanCoCuaMay[3][3] = 60;
+//            diemBanCoCuaMay[2][3] = 125;
+//            diemBanCoCuaMay[1][3] = 250;
+//
+//            diemBanCoCuaMay[8][2] = 250;
+//            diemBanCoCuaMay[7][2] = 500;
+//            diemBanCoCuaMay[6][2] = 250;
+//            diemBanCoCuaMay[5][2] = 125;
+//            diemBanCoCuaMay[4][2] = 250;
+//            diemBanCoCuaMay[3][2] = 500;
+//            diemBanCoCuaMay[2][2] = 250;
+//            diemBanCoCuaMay[1][2] = 125;
+//
+//            diemBanCoCuaMay[8][1] = 125;
+//            diemBanCoCuaMay[7][1] = 250;
+//            diemBanCoCuaMay[6][1] = 125;
+//            diemBanCoCuaMay[5][1] = 2000;
+//            diemBanCoCuaMay[4][1] = 300;
+//            diemBanCoCuaMay[3][1] = 250;
+//            diemBanCoCuaMay[2][1] = 125;
+//            diemBanCoCuaMay[1][1] = 250;
+//
+//            diemBanCoCuaNguoiChoi[1][1] = 60;
+//            diemBanCoCuaNguoiChoi[2][1] = 30;
+//            diemBanCoCuaNguoiChoi[3][1] = 60;
+//            diemBanCoCuaNguoiChoi[4][1] = 30;
+//            diemBanCoCuaNguoiChoi[5][1] = 60;
+//            diemBanCoCuaNguoiChoi[6][1] = 30;
+//            diemBanCoCuaNguoiChoi[7][1] = 60;
+//            diemBanCoCuaNguoiChoi[8][1] = 30;
+//
+//            diemBanCoCuaNguoiChoi[1][2] = 125;
+//            diemBanCoCuaNguoiChoi[2][2] = 60;
+//            diemBanCoCuaNguoiChoi[3][2] = 125;
+//            diemBanCoCuaNguoiChoi[4][2] = 60;
+//            diemBanCoCuaNguoiChoi[5][2] = 125;
+//            diemBanCoCuaNguoiChoi[6][2] = 60;
+//            diemBanCoCuaNguoiChoi[7][2] = 125;
+//            diemBanCoCuaNguoiChoi[8][2] = 60;
+//
+//            diemBanCoCuaNguoiChoi[1][3] = 60;
+//            diemBanCoCuaNguoiChoi[2][3] = 125;
+//            diemBanCoCuaNguoiChoi[3][3] = 60;
+//            diemBanCoCuaNguoiChoi[4][3] = 125;
+//            diemBanCoCuaNguoiChoi[5][3] = 60;
+//            diemBanCoCuaNguoiChoi[6][3] = 125;
+//            diemBanCoCuaNguoiChoi[7][3] = 60;
+//            diemBanCoCuaNguoiChoi[8][3] = 125;
+//
+//            diemBanCoCuaNguoiChoi[1][4] = 125;
+//            diemBanCoCuaNguoiChoi[2][4] = 250;
+//            diemBanCoCuaNguoiChoi[3][4] = 125;
+//            diemBanCoCuaNguoiChoi[4][4] = 250;
+//            diemBanCoCuaNguoiChoi[5][4] = 125;
+//            diemBanCoCuaNguoiChoi[6][4] = 250;
+//            diemBanCoCuaNguoiChoi[7][4] = 125;
+//            diemBanCoCuaNguoiChoi[8][4] = 60;
+//
+//            diemBanCoCuaNguoiChoi[1][5] = 250;
+//            diemBanCoCuaNguoiChoi[2][5] = 125;
+//            diemBanCoCuaNguoiChoi[3][5] = 250;
+//            diemBanCoCuaNguoiChoi[4][5] = 125;
+//            diemBanCoCuaNguoiChoi[5][5] = 250;
+//            diemBanCoCuaNguoiChoi[6][5] = 125;
+//            diemBanCoCuaNguoiChoi[7][5] = 250;
+//            diemBanCoCuaNguoiChoi[8][5] = 125;
+//
+//            diemBanCoCuaNguoiChoi[1][6] = 125;
+//            diemBanCoCuaNguoiChoi[2][6] = 60;
+//            diemBanCoCuaNguoiChoi[3][6] = 500;
+//            diemBanCoCuaNguoiChoi[4][6] = 250;
+//            diemBanCoCuaNguoiChoi[5][6] = 500;
+//            diemBanCoCuaNguoiChoi[6][6] = 60;
+//            diemBanCoCuaNguoiChoi[7][6] = 125;
+//            diemBanCoCuaNguoiChoi[8][6] = 250;
+//
+//            diemBanCoCuaNguoiChoi[1][7] = 250;
+//            diemBanCoCuaNguoiChoi[2][7] = 500;
+//            diemBanCoCuaNguoiChoi[3][7] = 250;
+//            diemBanCoCuaNguoiChoi[4][7] = 125;
+//            diemBanCoCuaNguoiChoi[5][7] = 250;
+//            diemBanCoCuaNguoiChoi[6][7] = 500;
+//            diemBanCoCuaNguoiChoi[7][7] = 250;
+//            diemBanCoCuaNguoiChoi[8][7] = 125;
+//
+//            diemBanCoCuaNguoiChoi[1][8] = 125;
+//            diemBanCoCuaNguoiChoi[2][8] = 250;
+//            diemBanCoCuaNguoiChoi[3][8] = 125;
+//            diemBanCoCuaNguoiChoi[4][8] = 2000;
+//            diemBanCoCuaNguoiChoi[5][8] = 300;
+//            diemBanCoCuaNguoiChoi[6][8] = 250;
+//            diemBanCoCuaNguoiChoi[7][8] = 125;
+//            diemBanCoCuaNguoiChoi[8][8] = 250;
+//        }
     }
 
 }

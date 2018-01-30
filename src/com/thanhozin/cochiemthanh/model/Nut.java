@@ -4,22 +4,13 @@ import java.util.ArrayList;
 
 public class Nut {
     private int tempLevel; // đếm số thứ tự của nút trong lượt di chuyển quân bắt đầu từ 0 ở nút gốc
-    private ArrayList<Nut> nuts;  // Các nút con của nut
+    private ArrayList<Nut> nuts = null;  // Các nút con của nut
     private int giaTri;
     private ArrayList<Chess> chesses;
     private String mauQuanDiChuyen;  // Màu của quân sẽ di chuyển ở lượt xét nut tiếp theo
-    private Nut nutFather;  // father
+    private Nut nutFather = null;  // father
 
     public Nut(){
-
-    }
-
-    public Nut(ArrayList<Nut> nuts, int value, ArrayList<Chess> chessesValue, String mau, int tempLevel){
-        this.nuts= nuts;
-        this.giaTri= value;
-        this.chesses= chessesValue;
-        this.mauQuanDiChuyen=mau;
-        this.tempLevel= tempLevel;
 
     }
 
