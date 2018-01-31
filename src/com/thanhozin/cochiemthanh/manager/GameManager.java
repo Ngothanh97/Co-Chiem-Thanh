@@ -55,7 +55,6 @@ public class GameManager {
         if (kieuChoi != HAI_NGUOI_CHOI) {
             ai = new SetupAi();
             if (kieuChoi == MAY_DANH_TRUOC) {
-                System.out.println("Mays ddanh truoc");
                 Chess chess1 = null;
                 Chess chess2 = null;
                 for (int i = 0; i < chesses.size(); i++) {
@@ -164,13 +163,9 @@ public class GameManager {
         char coordinatesOfX = Utils.coverXLocation(xOnClick);
         int coordinatesOfY = Utils.chuyen_y_ve_so_thu_tu(yOnClick);
 
-        System.out.println(coordinatesOfX + "__" + coordinatesOfY);
-
-
         for (int i = 0; i < abilities.size(); i++) {
             Ability ability = abilities.get(i);
             if (coordinatesOfX == Utils.coverXLocation(ability.getX()) && coordinatesOfY == Utils.chuyen_y_ve_so_thu_tu(ability.getY())) {
-//                System.out.println("O kha nang");
                 clickIsAbilitie = true;
                 break;
             }
@@ -182,14 +177,12 @@ public class GameManager {
                 if (chessIsLastMove != null) {
                     if (!chessIsLastMove.getType().equals(chess.getType())) {
                         //Lượt đi lớn hơn 2 là quân trắng
-                        System.out.println(luotdi);
                         if (luotdi > 2 || luotdi == 0) {
                             boolean a;
                             if (kieuChoi == MAY_DANH_TRUOC) {
                                 return;
                             } else if (kieuChoi == NGUOI_DANH_TRUOC) {
                                 if (kiemTraQuanCoTrang(chess)) {
-//                                    System.out.println("dgfajkdashljgfdkatufdaef");
                                     clickIsChess = true;
                                     tempIndexChess = i;
                                 }
@@ -215,7 +208,7 @@ public class GameManager {
                             } else if (kieuChoi == NGUOI_DANH_TRUOC) {
                                 return;
                             } else {
-                                //Lượt đi nhở hơn 2 là quân đen
+                                //Lượt đi < 2 là quân đen
                                 if (!kiemTraQuanCoTrang(chess)) {
                                     clickIsChess = true;
                                     tempIndexChess = i;
@@ -254,7 +247,6 @@ public class GameManager {
 
         //Kiểm tra xem vị trí vừa click chứa quân cờ hay khả năng di chuyển
         if (clickIsChess && clickIsAbilitie) {
-//            System.out.println("Xoa quan co" + tempIndexChess);
             /*Nếu vị trí vừa click chứa quân cờ và ô khả năng
             -> Thì thay chỗ quân cò đối phương bằng quân cờ được lưu tại chessRemember
             -> Và xóa hết tất cả các ô khă năng (Ability)
@@ -265,11 +257,6 @@ public class GameManager {
             moveChess(coordinatesOfX, coordinatesOfY);
 //            anQuan();
         } else {
-//            if (tempChess != -1) {
-//                if (!flagsFly) {
-//                    chessRemember = chesses.get(tempChess);
-//                }
-//            }
             if (clickIsChess) {
             /*
             Nếu vị trí click là 1 quân cờ
@@ -339,14 +326,14 @@ public class GameManager {
                 // Các phần code dưới tương tự
                 if (tempXNorth != 'a') {
                     char xAbility = listXLocation[tempIndexOfX - 1];
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
                 }
                 if (tempXNorth != 'h') {
                     char xAbility = listXLocation[tempIndexOfX + 1];
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
@@ -370,14 +357,14 @@ public class GameManager {
                 char xAbility = listXLocation[tempIndexOfX + 2];
                 if (tempYEast != 1) {
                     int yAbility = tempYEast - 1;
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
                 }
                 if (tempYEast != 8) {
                     int yAbility = tempYEast + 1;
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
@@ -401,14 +388,14 @@ public class GameManager {
                 int yAbility = tempYSouth + 1;
                 if (tempXSouth != 'a') {
                     char xAbility = listXLocation[tempIndexOfX - 1];
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
                 }
                 if (tempXSouth != 'h') {
                     char xAbility = listXLocation[tempIndexOfX + 1];
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
@@ -432,14 +419,14 @@ public class GameManager {
                 char xAbility = listXLocation[tempIndexOfX - 2];
                 if (tempYEast != 1) {
                     int yAbility = tempYEast - 1;
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
                 }
                 if (tempYEast != 8) {
                     int yAbility = tempYEast + 1;
-                    if (!checkColor(chessRemember.coverType(chessRemember.getType()), xAbility, yAbility)) {
+                    if (!checkColor(chessRemember.coverType(), xAbility, yAbility)) {
                         Ability ability = new Ability(Utils.unCoverXLocation(xAbility) - 2, Utils.chuyen_y_ve_toa_do_may(yAbility) - 2);
                         abilities.add(ability);
                     }
@@ -458,7 +445,7 @@ public class GameManager {
             }
         }
         if (temp >= 0) {
-            if (chesses.get(temp).coverType(chesses.get(temp).getType()) == typeChess) {
+            if (chesses.get(temp).coverType() == typeChess) {
                 return true;
             }
         }
@@ -470,22 +457,17 @@ public class GameManager {
         String type = chessRemember.getType();
         for (int i = 0; i < chesses.size(); i++) {
             if (chesses.get(i).getType().equals(type)) {
-                System.out.println(chesses.get(i).getType() + " thuchei");
                 tempChess = i;
-
                 break;
             }
         }
         if (tempChess != -1) {
-//            Chess chess = new Chess(Utils.unCoverXLocation(coordinatesOfX), Utils.chuyen_y_ve_toa_do_may(coordinatesOfY), tempType);
-//            System.out.println(chesses.get(tempChess).getType() + "  aFFAFFAFFFSAF");
-//            chesses.set(tempChess, chess);
             chesses.get(tempChess).setX(Utils.unCoverXLocation(coordinatesOfX));
             chesses.get(tempChess).setY(Utils.chuyen_y_ve_toa_do_may(coordinatesOfY));
         }
 
         if (coordinatesOfX == 'd' && coordinatesOfY == 1) {
-            if (chessRemember.coverType(chessRemember.getType()) == 'B') {
+            if (chessRemember.coverType() == 'B') {
                 abilities.clear();
                 supreAbility();
                 Ability ability1 = new Ability(Utils.unCoverXLocation('c') - 2, Utils.chuyen_y_ve_toa_do_may(6) - 2);
@@ -514,7 +496,7 @@ public class GameManager {
             }
         }
         if (coordinatesOfX == 'e' && coordinatesOfY == 8) {
-            if (chessRemember.coverType(chessRemember.getType()) == 'W') {
+            if (chessRemember.coverType() == 'W') {
                 abilities.clear();
                 supreAbility();
                 Ability ability1 = new Ability(Utils.unCoverXLocation('e') - 2, Utils.chuyen_y_ve_toa_do_may(1) - 2);
@@ -594,7 +576,6 @@ public class GameManager {
         }
         chessIsLastMove = chessRemember;
         anQuan();
-        System.out.println("Lượt đi: "+luotdi);
         if (kieuChoi != HAI_NGUOI_CHOI) {
             ai = new SetupAi();
             if (kieuChoi == MAY_DANH_TRUOC) {

@@ -11,7 +11,7 @@ public class NhoCacKhaNangThanhCong {
 
     public ArrayList<Chess> getArrChess() {
         int countArr = arrStringChessValue.size();
-        if (countArr >= 2){
+        if (countArr >= 2) {
             countArr = Integer.parseInt(arrStringChessValue.get(countArr - 2));
             arrStringChessValue.remove(arrStringChessValue.size() - 2);
         }
@@ -30,9 +30,7 @@ public class NhoCacKhaNangThanhCong {
                     arrStringChessValue.remove(0);
                 }
             }
-
         }
         return arrChessSeDaChuyen;
     }
-
 }

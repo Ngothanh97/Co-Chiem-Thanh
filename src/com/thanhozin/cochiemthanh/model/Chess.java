@@ -41,19 +41,23 @@ public class Chess {
 
     public int getX() {
         return x;
-    }
+    } // machine
 
     public int getY() {
         return y;
+    }  // machine
+
+    public int getXstt(){
+        return Utils.chuyen_X_Ve_So_Thu_Tu(x);  // coder
     }
 
     public char getCoverX() {
         return Utils.coverXLocation(x);
-    }
+    }  // user
 
     public int getCoverY() {
         return Utils.chuyen_y_ve_so_thu_tu(y);
-    }
+    } // user
 
     public String getType() {
         return String.valueOf(type);
@@ -97,8 +101,8 @@ public class Chess {
         }
     }
 
-
-    public char coverType(String type) {
+    // get chess's team
+    public char coverType() {
         if (type == null || type.isEmpty()) return ' ';
         if (type.contains("1")) return 'W';
         if (type.contains("2")) return 'B';
