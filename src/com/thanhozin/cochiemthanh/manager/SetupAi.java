@@ -95,8 +95,8 @@ public class SetupAi {
     private int tinhDiem(ArrayList<Chess> chessTemp) {
         int score = 0;
         for (Chess aChessTemp : chessTemp) {
-            int x = Utils.chuyen_X_Ve_So_Thu_Tu(aChessTemp.getX());
-            int y = Utils.chuyen_y_ve_so_thu_tu(aChessTemp.getY());
+            int x = aChessTemp.getXstt();
+            int y = aChessTemp.getCoverY();
             if (computerIsFirst) {
                 if (kiemTraQuanCoTrang(aChessTemp)) {
                     score += diemBanCoCuaMay[x][y];
@@ -192,12 +192,31 @@ public class SetupAi {
         }
     }
 
+    private void debugNut(Nut nut){
+        System.out.println("\nnut: " + nut);
+        if (nut.getNutsCon() == null){
+            return;
+        }
+
+        for (Nut n : nut.getNutsCon()){
+            System.out.println(n);
+            if (n.getNutsCon() == null){
+                System.out.println("nut score: " + n.getGiaTri());
+            } else {
+                System.out.println("\nnut con size: " + n.getNutsCon().size());
+            }
+            debugNut(n);
+        }
+    }
+
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
         if (nut == null) {
             System.out.println("AI does not have any step");
             return null;
         }
+
+        debugNut(nut);
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
@@ -285,7 +304,7 @@ public class SetupAi {
         }
 
         String mauQuanSeDiChuyen = nuted.getMauQuanDiChuyen();
-        this.arryChess = nuted.getChesses();
+        arryChess = nuted.getChesses();
         arryChessNhos = nuted.getChesses();
 
         tachQuanTrangVsDen();
@@ -318,7 +337,7 @@ public class SetupAi {
             arryChess = arrChessGoc;
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
             lanLayQuanTuMang = 1;
-            int temp2 = 0;
+            int temp2;
 
             int x = 0;
             int y = 0;
@@ -347,8 +366,6 @@ public class SetupAi {
 
                     int countArr = Integer.parseInt(chessValue.get(chessValue.size() - 2));
                     chessValue.remove(chessValue.size() - 2);
-                    System.out.println("countArr: " + countArr);
-                    System.out.println("ChessValueSize: " + chessValue.size() + " " + chessValue.get(0));
 
                     for (int i = 0; i < countArr; i++) {
                         aryChessIsRuns.clear();
@@ -364,7 +381,7 @@ public class SetupAi {
                                 a++;
                                 String chessString = chessValue.get(0);
                                 String[] thanhPhanChess = chessString.split("_");
-                                System.out.println("chessValue.get(0)" + "--" + chessValue.get(0) + "--");
+//                                System.out.println("chessValue.get(0)" + "--" + chessValue.get(0) + "--");
 
                                 Chess chess = new Chess(
                                         Integer.parseInt(thanhPhanChess[1]),
@@ -461,8 +478,6 @@ public class SetupAi {
 
     private void taoLuotDi(ArrayList<Chess> mangQuanHienCo, Chess quanCoDiChuyen, int luot, boolean end) {
         String typeQuanCoDiChuyen = quanCoDiChuyen.getType();
-        System.out.println("Quân cờ di chuyển: " + quanCoDiChuyen.getType() + "_"
-                + quanCoDiChuyen.getCoverX() + "_" + quanCoDiChuyen.getCoverY());
 
         if (luot == 0) {
             countNumberArray = 0;
@@ -671,8 +686,6 @@ public class SetupAi {
                 break;
         }
 
-        System.out.println("countNumberArray :" + countNumberArray);
-
         try {
             FileWriter fileWriter = new FileWriter(file, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -819,8 +832,8 @@ public class SetupAi {
     <------------------------------------------------------------------->
      */
     private int kiemTraHuongLen(Chess chess) {
-        int x = Utils.chuyen_X_Ve_So_Thu_Tu(chess.getX());
-        int y = Utils.chuyen_y_ve_so_thu_tu(chess.getY());
+        int x = chess.getXstt();
+        int y = chess.getCoverY();
         if (y < 3) {
             return 0;
         }
@@ -835,7 +848,6 @@ public class SetupAi {
 
         //Kiểm tra có thể bước đến 2 vị trí bên trái và bên phải hay không
         if (kiemTraQuanCoTrang(chess)) {
-
             int x1;
             int x2;
             /*
@@ -849,7 +861,6 @@ public class SetupAi {
             if (x <= 7) {
                 x2 = x + 1;
             } else x2 = 0;
-
 
             int yTemp = y - 2;
             boolean vi_tri_1 = true;
@@ -868,7 +879,6 @@ public class SetupAi {
                             vi_tri_1 = false;
                             //Tiết kiệm lần duyệt cho những vòng for sau
                             x1 = 0;
-
 
                             //Nếu nó là quân đen thì thịt nó.
                         } else {
@@ -1445,12 +1455,6 @@ public class SetupAi {
      */
     private boolean kiemTraQuanCoTrang(Chess chess) {
         return chess.coverType() == 'W';
-    }
-
-    private String layRaMauCuaQuan(Chess chess) {
-        if (kiemTraQuanCoTrang(chess)) {
-            return Chess.WHITE;
-        } else return Chess.BLACK;
     }
 
     private String daoMauQuan(String mauQuanHienTai) {
