@@ -150,7 +150,7 @@ public class GameManager {
             for (int i = 0; i < chesses.size(); i++) {
                 if (chesses.get(i).getType() == type) {
                     chessRemember = chesses.get(i);
-                    initalizeAbility();
+                    abilities = initalizeAbility();
                 }
             }
         }
@@ -265,7 +265,7 @@ public class GameManager {
                 if (!flagsFly) {
                     chessRemember = chesses.get(tempIndexChess);
                     abilities.clear();
-                    initalizeAbility();
+                    abilities = initalizeAbility();
                 }
 
             } else if (clickIsAbilitie) {
@@ -293,9 +293,10 @@ public class GameManager {
     }
 
     //Kiểm tra tạo ra các ô khả năng
-    private void initalizeAbility() {
-        char xOfChessOnSelect = Utils.coverXLocation(chessRemember.getX());
-        int yOfChessOnSelect = Utils.chuyen_y_ve_so_thu_tu(chessRemember.getY());
+    private ArrayList<Ability> initalizeAbility() {
+        ArrayList<Ability> abilities = new ArrayList<>();
+        char xOfChessOnSelect = chessRemember.getCoverX();
+        int yOfChessOnSelect = chessRemember.getCoverY();
         int indexOfXInList = -2;
 
         //truyền dãy các chữ cái vào 1 mảng để có thể dễ dàng tiến lùi vị trí của ô cần sét
@@ -314,7 +315,7 @@ public class GameManager {
             int tempYNorth = yOfChessOnSelect - 1;
             int tempCount = 0;
             for (int i = 0; i < chesses.size(); i++) {
-                if (Utils.coverXLocation(chesses.get(i).getX()) == tempXNorth && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == tempYNorth) {
+                if (chesses.get(i).getCoverX() == tempXNorth && chesses.get(i).getCoverY() == tempYNorth) {
                     tempCount++;
                     break;
                 }
@@ -347,7 +348,7 @@ public class GameManager {
             int tempYEast = yOfChessOnSelect;
             int tempCount = 0;
             for (int i = 0; i < chesses.size(); i++) {
-                if (Utils.coverXLocation(chesses.get(i).getX()) == tempXEast && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == tempYEast) {
+                if (chesses.get(i).getCoverX() == tempXEast && chesses.get(i).getCoverY() == tempYEast) {
                     tempCount++;
                     break;
                 }
@@ -378,7 +379,7 @@ public class GameManager {
             int tempYSouth = yOfChessOnSelect + 1;
             int tempCount = 0;
             for (int i = 0; i < chesses.size(); i++) {
-                if (Utils.coverXLocation(chesses.get(i).getX()) == tempXSouth && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == tempYSouth) {
+                if (chesses.get(i).getCoverX() == tempXSouth && chesses.get(i).getCoverY() == tempYSouth) {
                     tempCount++;
                     break;
                 }
@@ -409,7 +410,7 @@ public class GameManager {
             int tempYEast = yOfChessOnSelect;
             int tempCount = 0;
             for (int i = 0; i < chesses.size(); i++) {
-                if (Utils.coverXLocation(chesses.get(i).getX()) == tempXEast && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == tempYEast) {
+                if (chesses.get(i).getCoverX() == tempXEast && chesses.get(i).getCoverY() == tempYEast) {
                     tempCount++;
                     break;
                 }
@@ -432,13 +433,14 @@ public class GameManager {
                 }
             }
         }
+        return abilities;
     }
 
     //Kiểm tra màu của quân cờ ở vị trí ô khả năng
-    public boolean checkColor(char typeChess, char x, int y) {
+    private boolean checkColor(char typeChess, char x, int y) {
         int temp = -1;
         for (int i = 0; i < chesses.size(); i++) {
-            if (Utils.coverXLocation(chesses.get(i).getX()) == x && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == y) {
+            if (chesses.get(i).getCoverX() == x && chesses.get(i).getCoverY() == y) {
                 temp = i;
                 break;
             }
@@ -482,8 +484,8 @@ public class GameManager {
                 abilities.add(ability5);
                 abilities.add(ability6);
                 for (int i = 0; i < chesses.size(); i++) {
-                    char xChess = Utils.coverXLocation(chesses.get(i).getX());
-                    int yChess = Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY());
+                    char xChess = chesses.get(i).getCoverX();
+                    int yChess = chesses.get(i).getCoverY();
                     for (int j = 0; j < abilities.size(); j++) {
                         if (Utils.coverXLocation(abilities.get(j).getX()) == xChess && Utils.chuyen_y_ve_so_thu_tu(abilities.get(j).getY()) == yChess) {
                             abilities.remove(j);
@@ -513,8 +515,8 @@ public class GameManager {
 
                 //Xóa bỏ các ô có quân cờ
                 for (int i = 0; i < chesses.size(); i++) {
-                    char xChess = Utils.coverXLocation(chesses.get(i).getX());
-                    int yChess = Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY());
+                    char xChess = chesses.get(i).getCoverX();
+                    int yChess = chesses.get(i).getCoverY();
                     for (int j = 0; j < abilities.size(); j++) {
                         if (Utils.coverXLocation(abilities.get(j).getX()) == xChess && Utils.chuyen_y_ve_so_thu_tu(abilities.get(j).getY()) == yChess) {
                             abilities.remove(j);
@@ -531,8 +533,8 @@ public class GameManager {
         if (!flagsFly) {
             int countTrang = 0;
             int countDen = 0;
-            for (int i = 0; i < chesses.size(); i++) {
-                if (kiemTraQuanCoTrang(chesses.get(i))) {
+            for (Chess chess : chesses) {
+                if (kiemTraQuanCoTrang(chess)) {
                     countTrang++;
                 } else {
                     countDen++;
@@ -590,7 +592,7 @@ public class GameManager {
         }
     }
 
-    public void supreAbility() {
+    private void supreAbility() {
         for (int y = 1; y <= 8; y++) {
             for (int x = 0; x < 8; x++) {
                 char tempx = listXLocation[x];
@@ -604,13 +606,10 @@ public class GameManager {
                 }
             }
         }
-
-
     }
 
-    public boolean kiemTraQuanCoTrang(Chess chess) {
-        return chess.getType().equals(Chess.WHITE_K) || chess.getType().equals(Chess.WHITE_L)
-                || chess.getType().equals(Chess.WHITE_M);
+    private boolean kiemTraQuanCoTrang(Chess chess) {
+        return chess.coverType() == 'W';
     }
 
     public int checkWin() {
@@ -618,12 +617,12 @@ public class GameManager {
         int countDen = 0;
 
         for (int i = 0; i < chesses.size(); i++) {
-            if (Utils.coverXLocation(chesses.get(i).getX()) == 'e' && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == 1) {
+            if (chesses.get(i).getCoverX() == 'e' && chesses.get(i).getCoverY() == 1) {
                 if (!kiemTraQuanCoTrang(chesses.get(i))) {
                     return 2;
                 }
             }
-            if (Utils.coverXLocation(chesses.get(i).getX()) == 'd' && Utils.chuyen_y_ve_so_thu_tu(chesses.get(i).getY()) == 8) {
+            if (chesses.get(i).getCoverX() == 'd' && chesses.get(i).getCoverY() == 8) {
                 if (kiemTraQuanCoTrang(chesses.get(i))) {
                     return 1;
                 }
