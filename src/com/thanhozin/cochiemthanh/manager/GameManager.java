@@ -173,7 +173,7 @@ public class GameManager {
 
         for (int i = 0; i < chesses.size(); i++) {
             Chess chess = chesses.get(i);
-            if (coordinatesOfX == Utils.coverXLocation(chess.getX()) && coordinatesOfY == Utils.chuyen_y_ve_so_thu_tu(chess.getY())) {
+            if (coordinatesOfX == chess.getCoverX() && coordinatesOfY == chess.getCoverY()) {
                 if (chessIsLastMove != null) {
                     if (!chessIsLastMove.getType().equals(chess.getType())) {
                         //Lượt đi lớn hơn 2 là quân trắng
@@ -198,7 +198,6 @@ public class GameManager {
                                     }
                                 }
                             }
-
                         } else {
                             if (kieuChoi == MAY_DANH_TRUOC) {
                                 if (!kiemTraQuanCoTrang(chess)) {

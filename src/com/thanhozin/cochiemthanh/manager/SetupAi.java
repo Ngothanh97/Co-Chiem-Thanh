@@ -169,21 +169,24 @@ public class SetupAi {
                 for (int j = 0; j < afterArrChesses.size(); j++) {
                     Chess afterChess = afterArrChesses.get(j);
                     if (afterChess.getType().equals(typeOfBeforChess)) {
-                        if (beforChess.getX() != afterChess.getX() || beforChess.getY() != afterChess.getY()) {
-                            temp[a] = j;
-                            a++;
+                        if (beforChess.getX() != afterChess.getX() && a < 2) {
+                            temp[a++] = j;
+                            System.out.println("chess di chuyển: " + typeOfBeforChess);
                         }
                     }
                 }
             }
         }
-        if (a == 1) {
+        // luÔn cộng thêm 1 giá trị cho a sau khi thêm
+        if (a == 1) {  // chỉ di chuyển 1 quân
+            System.out.println("Di chuyen 1 quan");
             Chess chess1 = afterArrChesses.get(temp[0]);
             return chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
-        } else if (a == 0) {
+        } else if (a == 0) {  // không còn quân để di chuyển
             System.out.println("Thoat " + a);
             return null;
-        } else {
+        } else {  // di chuyển 2 quân
+            System.out.println("Di chuyen 2 quan");
             Chess chess1 = afterArrChesses.get(temp[0]);
             String s1 = chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
             Chess chess2 = afterArrChesses.get(temp[1]);
@@ -193,7 +196,7 @@ public class SetupAi {
     }
 
     private void debugNut(Nut nut){
-        System.out.println("\nnut: " + nut);
+        System.out.print("\nnut: ");
         if (nut.getNutsCon() == null){
             return;
         }
@@ -201,10 +204,11 @@ public class SetupAi {
         for (Nut n : nut.getNutsCon()){
             System.out.println(n);
             if (n.getNutsCon() == null){
-                System.out.println("nut score: " + n.getGiaTri());
+                System.out.println("nut con score: " + n.getGiaTri());
             } else {
                 System.out.println("\nnut con size: " + n.getNutsCon().size());
             }
+            System.out.println("nut con: ");
             debugNut(n);
         }
     }
@@ -216,10 +220,14 @@ public class SetupAi {
             return null;
         }
 
-        debugNut(nut);
+        System.out.println("duyet nut: " + nut);
+        System.out.println("nut con: " + nut.getNutsCon());
+
+//        debugNut(nut);
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
+        System.out.println("best score initiate: " + bestScore);
 
         Nut bestNut = nut.getNutsCon().get(0);
 
@@ -230,9 +238,11 @@ public class SetupAi {
                 for (Nut tempNut : father.getNutsCon()) {
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
+                        System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
+                        System.out.println("new best nut: " + bestNut);
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -315,26 +325,12 @@ public class SetupAi {
         lanLayCapQuan = 1;
 
         //Tạo vòng lặp để lấy hết các tổ hợp chọn ra 2 quân trong 3 quân
-        String nhoArrayChessGoc = "";
-        for (int a = 0; a < arryChess.size(); a++) {
-            String s = arryChess.get(a).getType() + "_" + arryChess.get(a).getX() + "_" + arryChess.get(a).getY();
-            nhoArrayChessGoc += "_" + s;
-        }
         ArrayList<NhoCacKhaNangThanhCong> nhoCacKhaNangThanhCongs = new ArrayList<>();
         for (int l = 0; l < temp; l++) {
             if (temp == 2 && l == 1) {
                 break;
             }
-            String[] arrStringChess = nhoArrayChessGoc.split("_");
-            int n = 1;
-            ArrayList<Chess> arrChessGoc = new ArrayList<>();
-            while (n != arrStringChess.length) {
-                Chess chess = new Chess(Integer.parseInt(arrStringChess[n + 1]), Integer.parseInt(arrStringChess[n + 2]), arrStringChess[n]);
-                n += 3;
-                arrChessGoc.add(chess);
-            }
 
-            arryChess = arrChessGoc;
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
             lanLayQuanTuMang = 1;
             int temp2;
@@ -355,7 +351,6 @@ public class SetupAi {
             */
             Chess quanDiChuyen1 = layRaQuanDiChuyen();
             for (int k = 0; k < temp2; k++) {
-                System.out.println("sinhnuoc di: " + k);
                 //Tạo ra các trường hợp, các con  của nut,
                 if (k == 0) {
                     taoLuotDi(arryChess, quanDiChuyen1, k, true);
@@ -381,7 +376,6 @@ public class SetupAi {
                                 a++;
                                 String chessString = chessValue.get(0);
                                 String[] thanhPhanChess = chessString.split("_");
-//                                System.out.println("chessValue.get(0)" + "--" + chessValue.get(0) + "--");
 
                                 Chess chess = new Chess(
                                         Integer.parseInt(thanhPhanChess[1]),
@@ -399,7 +393,6 @@ public class SetupAi {
                         arryChess.clear();
                         arryChess.addAll(arrChessSeDiChuyen);
                         if (chessValue.get(0) == null) {
-                            System.out.println("Chess value size:  " + chessValue.size());
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, true);
                         } else {
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, false);
@@ -460,7 +453,6 @@ public class SetupAi {
             nut.setNutFather(nuted);
             nutCon.add(nut);
         }
-        System.out.println("Nut con Size: " + nutCon.size());
         nuted.setNuts(nutCon);
 
         for (int i = 0; i < nutCon.size(); i++) {
