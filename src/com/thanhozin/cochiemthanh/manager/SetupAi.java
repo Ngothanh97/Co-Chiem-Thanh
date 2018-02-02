@@ -140,6 +140,7 @@ public class SetupAi {
     }
 
     private void printArrayChess(ArrayList<Chess> chesses) {
+        System.out.println(chesses.size());
         String name = "";
         for (Chess chess : chesses) {
             name += chess.toString();
@@ -434,8 +435,13 @@ public class SetupAi {
         for (int i = 0; i < nhoCacKhaNangThanhCongs.size(); i++) {
             NhoCacKhaNangThanhCong remember = nhoCacKhaNangThanhCongs.get(i);
             ArrayList<MangCacArraylistChess> mangCacArraylistChess= remember.getArrChess();
+            int c=1;
             for (int j=0;j<mangCacArraylistChess.size();j++){
+                arryChess.clear();
                 arryChess= mangCacArraylistChess.get(j).getArrayList();
+                System.out.println("Dem nut con "+c);
+                c++;
+                printArrayChess(arryChess);
                 Nut nut = new Nut();
                 nut.setChesses(arryChess);
                 nut.setGiaTri(tinhDiem(arryChess));
