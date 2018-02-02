@@ -3,6 +3,7 @@ package com.thanhozin.cochiemthanh.manager;
 import com.thanhozin.cochiemthanh.helper.Utils;
 import com.thanhozin.cochiemthanh.model.Ability;
 import com.thanhozin.cochiemthanh.model.Chess;
+import com.thanhozin.cochiemthanh.model.Nut;
 import com.thanhozin.cochiemthanh.view.MenuSelect;
 
 import java.awt.*;
@@ -76,45 +77,31 @@ public class GameManager {
 
 
     private void chayAi() {
-        String kq;
+        Nut kq;
+        char aiTeam;
         if (kieuChoi == MAY_DANH_TRUOC) {
+            aiTeam = 'W';
             kq = ai.khoiChayAi(chesses, Chess.WHITE);
         } else {
+            aiTeam = 'B';
             kq = ai.khoiChayAi(chesses, Chess.BLACK);
         }
 
-        if (kq != null) {
-            String[] value = kq.split("_");
-            String type1 = value[0];
-            String type2 = null;
-            if (value.length > 3) {
-                type2 = value[3];
-            }
-            Chess chess1 = null;
-            Chess chess2 = null;
-            for (int i = 0; i < chesses.size(); i++) {
-                if (chesses.get(i).getType().equals(type1)) {
-                    chess1 = chesses.get(i);
-                }
-                if (type2 != null) {
-                    if (chesses.get(i).getType().equals(type2)) {
-                        chess2 = chesses.get(i);
+        ArrayList<Chess> kqChesses = kq.getChesses();
+
+        for (Chess chess : chesses) {
+            if (chess.coverType() == aiTeam) {
+                for (Chess kqChess : kqChesses) {
+                    if (kqChess != null && chess.getType().equalsIgnoreCase(kqChess.getType())) {
+                        chessRemember = chess;
+                        moveChess(kqChess.getCoverX(), kqChess.getCoverY());
                     }
                 }
-            }
-            if (chess1 != null) {
-                chessRemember = chess1;
-                moveChess(value[1].charAt(0), Integer.parseInt(value[2]));
-            }
-//        Thread.sleep(3000);
-            if (chess2 != null) {
-                chessRemember = chess2;
-                moveChess(value[4].charAt(0), Integer.parseInt(value[5]));
             }
         }
     }
 
-    public void initalizeChess() {
+    private void initalizeChess() {
         Chess chessWhileK = new Chess(Utils.unCoverXLocation('a'), Utils.chuyen_y_ve_toa_do_may(1), Chess.WHITE_K);
         chesses.add(chessWhileK);
         Chess chessWhileL = new Chess(Utils.unCoverXLocation('e'), Utils.chuyen_y_ve_toa_do_may(1), Chess.WHITE_L);
@@ -453,7 +440,13 @@ public class GameManager {
         return false;
     }
 
+    // truyền vào giá trị tọa độ trên bàn cờ
     private void moveChess(char coordinatesOfX, int coordinatesOfY) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int tempChess = -1;
         String type = chessRemember.getType();
         for (int i = 0; i < chesses.size(); i++) {

@@ -112,7 +112,7 @@ public class SetupAi {
 
 
     //Ham cho gamemanager goi
-    String khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
+    public Nut khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         this.arryChess.clear();
         arryChessNhos.clear();
 
@@ -135,7 +135,8 @@ public class SetupAi {
 
         ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
         nut.setChesses(chessGoc);
-        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
+//        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
+        return bestNut;
     }
 
     private void printArrayChess(ArrayList<Chess> chesses) {
@@ -251,6 +252,8 @@ public class SetupAi {
             }
             temp = temp.getNutFather();
         }
+
+        System.out.println("best nut: " + bestNut);
 
         return bestNut;
     }
