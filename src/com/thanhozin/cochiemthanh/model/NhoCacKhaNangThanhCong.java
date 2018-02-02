@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 public class NhoCacKhaNangThanhCong {
     private ArrayList<String> arrStringChessValue;
+    private int countArr = 0;
 
     public NhoCacKhaNangThanhCong(ArrayList<String> arrStringChessValue) {
         this.arrStringChessValue = arrStringChessValue;
     }
 
-    public ArrayList<Chess> getArrChess() {
-        int countArr = arrStringChessValue.size();
+    public ArrayList<MangCacArraylistChess> getArrChess() {
+        ArrayList<MangCacArraylistChess> mangCacArraylistChess = new ArrayList<>();
+        countArr = arrStringChessValue.size();
         if (countArr >= 2) {
             countArr = Integer.parseInt(arrStringChessValue.get(countArr - 2));
             arrStringChessValue.remove(arrStringChessValue.size() - 2);
         }
-
         ArrayList<Chess> arrChessSeDaChuyen = new ArrayList<>();
         for (int i = 0; i < countArr; i++) {
             while (arrStringChessValue.get(0) != null && !arrStringChessValue.get(0).equals("@")) {
@@ -29,8 +30,10 @@ public class NhoCacKhaNangThanhCong {
                     arrChessSeDaChuyen.add(chess);
                     arrStringChessValue.remove(0);
                 }
+                mangCacArraylistChess.add(new MangCacArraylistChess(arrChessSeDaChuyen));
             }
+//            arrStringChessValue.remove(0);
         }
-        return arrChessSeDaChuyen;
+        return mangCacArraylistChess;
     }
 }
