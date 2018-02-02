@@ -40,7 +40,11 @@ public class Chess {
     }
 
     public int getX() {
+        if (x < 40) {
+            return 40;
+        }
         return x;
+
     } // machine
 
     public int getY() {
@@ -48,11 +52,11 @@ public class Chess {
     }  // machine
 
     public int getXstt(){
-        return Utils.chuyen_X_Ve_So_Thu_Tu(x);  // coder
+        return Utils.chuyen_X_Ve_So_Thu_Tu(getX());  // coder
     }
 
     public char getCoverX() {
-        return Utils.coverXLocation(x);
+        return Utils.coverXLocation(getX());
     }  // user
 
     public int getCoverY() {

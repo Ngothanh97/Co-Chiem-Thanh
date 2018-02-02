@@ -43,7 +43,6 @@ public class SetupAi {
     private ArrayList<AryChessIsRun> arrTempChessIsRun = new ArrayList<>();
     private int minValueOfNut = Integer.MAX_VALUE;
 
-
     int countNumberArray = 0;
 
 //    private int countArray;
@@ -117,9 +116,7 @@ public class SetupAi {
         this.arryChess.clear();
         arryChessNhos.clear();
 
-        System.out.println("Mang goc ban dau ");
-        printArrayChess(aryChess);
-        this.arryChess.addAll(aryChess);
+        arryChess.addAll(aryChess);
         Nut nut = new Nut();
         nut.setChesses(this.arryChess);
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
@@ -129,21 +126,17 @@ public class SetupAi {
 //        nuts.clear();
         String chuoiMangGoc = chuyenMangChessVeString(arryChess);
         taoCayTroChoi(nut);
+
+        System.out.println("Mang goc sau khi tao cay: " + aryChess);
+
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
         Nut bestNut = duyetCay(nut);
 
         ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
         nut.setChesses(chessGoc);
-        return bestNut;
-    }
 
-    private void printArrayChess(ArrayList<Chess> chesses) {
-        String name = "";
-        for (Chess chess : chesses) {
-            name += chess.toString();
-        }
-        System.out.println(name);
+        return bestNut;
     }
 
     private void debugNut(Nut nut){
@@ -175,7 +168,6 @@ public class SetupAi {
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
-        System.out.println("best score initiate: " + bestScore);
 
         Nut bestNut = nut.getNutsCon().get(0);
 
@@ -184,14 +176,11 @@ public class SetupAi {
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
             if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
                 for (Nut tempNut : father.getNutsCon()) {
-                    System.out.println("temp nut: " + tempNut);
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
-                        System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
-                        System.out.println("new best nut: " + bestNut + " score: " + bestScore);
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -315,14 +304,10 @@ public class SetupAi {
                         aryChessIsRuns.clear();
                         ArrayList<Chess> arrChessSeDiChuyen = new ArrayList<>();
 
-                        int a = 0;
-                        while (!chessValue.get(0).equals("@")
-                                || chessValue.get(0) != null
-                                ) {
+                        while (!chessValue.get(0).equals("@") || chessValue.get(0) != null) {
                             if (chessValue.get(0).equals("@")) {
                                 break;
                             } else {
-                                a++;
                                 String chessString = chessValue.get(0);
                                 String[] thanhPhanChess = chessString.split("_");
 
@@ -341,11 +326,7 @@ public class SetupAi {
 
                         arryChess.clear();
                         arryChess.addAll(arrChessSeDiChuyen);
-                        if (chessValue.get(0) == null) {
-                            taoLuotDi(arrChessSeDiChuyen, chessTemp, k, true);
-                        } else {
-                            taoLuotDi(arrChessSeDiChuyen, chessTemp, k, false);
-                        }
+                        taoLuotDi(arrChessSeDiChuyen, chessTemp, k, chessValue.get(0) == null);
                     }
                 }
             }
@@ -439,7 +420,7 @@ public class SetupAi {
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
-                toaDos.add(new ToaDo(x - 1, y - 2));
+//                toaDos.add(new ToaDo(x - 1, y - 2));
                 break;
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
@@ -449,7 +430,7 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x + 1, y - 2));
+//                toaDos.add(new ToaDo(x + 1, y - 2));
                 break;
             case 12:
 
@@ -461,14 +442,14 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x - 1, y - 2));
+//                toaDos.add(new ToaDo(x - 1, y - 2));
                 mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
                 mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y - 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x + 1, y - 2));
+//                toaDos.add(new ToaDo(x + 1, y - 2));
                 break;
             default:
                 break;
@@ -488,7 +469,7 @@ public class SetupAi {
                 countNumberArray++;
 
 
-                toaDos.add(new ToaDo(x + 2, y - 1));
+//                toaDos.add(new ToaDo(x + 2, y - 1));
                 break;
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
@@ -501,7 +482,7 @@ public class SetupAi {
 
 
                 ToaDo toaDo = new ToaDo((x + 2), (y + 1));
-                toaDos.add(toaDo);
+//                toaDos.add(toaDo);
                 break;
             case 12:
                 int indexSelect3 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
@@ -513,7 +494,7 @@ public class SetupAi {
                 countNumberArray++;
 
 
-                toaDos.add(new ToaDo(x + 2, y - 1));
+//                toaDos.add(new ToaDo(x + 2, y - 1));
                 mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 2));
                 mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y + 1));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
@@ -521,7 +502,7 @@ public class SetupAi {
                 countNumberArray++;
 
 
-                toaDos.add(new ToaDo(x + 2, y + 1));
+//                toaDos.add(new ToaDo(x + 2, y + 1));
                 break;
             default:
                 break;
@@ -540,8 +521,7 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-
-                toaDos.add(new ToaDo(x - 1, y + 2));
+//                toaDos.add(new ToaDo(x - 1, y + 2));
                 break;
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
@@ -552,7 +532,7 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x + 1, y + 2));
+//                toaDos.add(new ToaDo(x + 1, y + 2));
                 break;
             case 12:
                 int indexSelect3 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
@@ -563,7 +543,7 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x - 1, y + 2));
+//                toaDos.add(new ToaDo(x - 1, y + 2));
 
                 mangQuanHienCo = arrChessRemember;
                 mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
@@ -572,7 +552,7 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x + 1, y + 2));
+//                toaDos.add(new ToaDo(x + 1, y + 2));
 
                 break;
             default:
@@ -592,7 +572,7 @@ public class SetupAi {
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x - 2, y - 1));
+//                toaDos.add(new ToaDo(x - 2, y - 1));
                 break;
             case 2:
                 int indexSelect2 = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
@@ -604,7 +584,7 @@ public class SetupAi {
 
                 countNumberArray++;
 
-                toaDos.add(new ToaDo(x - 2, y + 1));
+//                toaDos.add(new ToaDo(x - 2, y + 1));
 
                 break;
             case 12:
@@ -621,7 +601,7 @@ public class SetupAi {
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
                 ghiFile(mangQuanHienCo);
                 countNumberArray++;
-                toaDos.add(new ToaDo(x - 2, y + 1));
+//                toaDos.add(new ToaDo(x - 2, y + 1));
                 break;
             default:
                 break;

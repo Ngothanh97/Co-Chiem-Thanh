@@ -52,7 +52,6 @@ public class GameManager {
         flagsFly = false;
         initalizeChess();
 
-
         if (kieuChoi != HAI_NGUOI_CHOI) {
             ai = new SetupAi();
             if (kieuChoi == MAY_DANH_TRUOC) {
@@ -67,14 +66,15 @@ public class GameManager {
                     }
                 }
                 chessRemember = chess1;
+                System.out.println("di chuyen quan khi khoi tao ai");
                 moveChess('c', 2);
                 chessRemember = chess2;
+                System.out.println("di chuyen quan khi khoi tao ai");
                 moveChess('g', 3);
 //                System.out.println("Luot di: " + luotdi);
             }
         }
     }
-
 
     private void chayAi() {
         Nut kq;
@@ -93,8 +93,10 @@ public class GameManager {
             if (chess.coverType() == aiTeam) {
                 for (Chess kqChess : kqChesses) {
                     if (kqChess != null && chess.getType().equalsIgnoreCase(kqChess.getType())) {
-                        chessRemember = chess;
-                        moveChess(kqChess.getCoverX(), kqChess.getCoverY());
+                        if (kqChess.getCoverY() != chess.getCoverY()){
+                            chessRemember = chess;
+                            moveChess(kqChess.getCoverX(), kqChess.getCoverY());
+                        }
                     }
                 }
             }
@@ -240,8 +242,8 @@ public class GameManager {
 
             chesses.remove(tempIndexChess);
             abilities.clear();
+            System.out.println("di chuyen quan co den o an quan");
             moveChess(coordinatesOfX, coordinatesOfY);
-//            anQuan();
         } else {
             if (clickIsChess) {
             /*
@@ -265,6 +267,7 @@ public class GameManager {
                     flagsFly = false;
                 }
                 abilities.clear();
+                System.out.println("Di chuyen quan co den o co kha nang");
                 moveChess(coordinatesOfX, coordinatesOfY);
             } else {
             /*
@@ -442,10 +445,13 @@ public class GameManager {
 
     // truyền vào giá trị tọa độ trên bàn cờ
     private void moveChess(char coordinatesOfX, int coordinatesOfY) {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        char aiturn = kieuChoi == MAY_DANH_TRUOC ? 'W' : 'B';
+        if (chessRemember.coverType() == aiturn){
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
         int tempChess = -1;
         String type = chessRemember.getType();
@@ -520,9 +526,8 @@ public class GameManager {
                 flagsFly = true;
             }
         }
-        if (luotdi == 0) {
-            luotdi = 4;
-        }
+        if (luotdi == 0) luotdi = 4;
+        System.out.println("\nluot di hien tai: " + luotdi);
         if (!flagsFly) {
             int countTrang = 0;
             int countDen = 0;
@@ -533,37 +538,25 @@ public class GameManager {
                     countDen++;
                 }
             }
-            System.out.println(countDen + ", " + countTrang);
-            if (luotdi == 4) {
-                if (kiemTraQuanCoTrang(chessRemember)) {
-                    if (countTrang == 1) {
-                        luotdi -= 2;
-                    } else luotdi--;
-                } else {
-                    if (countDen == 1) {
-                        luotdi -= 2;
-                    } else luotdi--;
-                }
-            } else if (luotdi == 2) {
-                if (kiemTraQuanCoTrang(chessRemember)) {
-                    if (countTrang == 1) {
-                        luotdi -= 2;
-                    } else luotdi--;
-                } else {
-                    if (countDen == 1) {
-                        luotdi -= 2;
-                    } else luotdi--;
-                }
-            } else
+            int count = kiemTraQuanCoTrang(chessRemember) ? countTrang : countDen;
+            if (luotdi % 2 == 0 && count == 1) {
+                System.out.println("luot di giam 2");
+                luotdi -= 2;
+            } else {
                 luotdi--;
+            }
+
+            System.out.println("luot di luc sau: " + luotdi);
 
             //Gọi lại Ai khi tới lượt
             if (kieuChoi == MAY_DANH_TRUOC) {
                 if (luotdi == 0) {
+                    System.out.println("luot di bang 0 -> chay ai");
                     chayAi();
                 }
             } else if (kieuChoi == NGUOI_DANH_TRUOC) {
                 if (luotdi == 2) {
+                    System.out.println("luot di bang 2 -> chay ai");
                     chayAi();
                 }
             }
@@ -574,11 +567,13 @@ public class GameManager {
             ai = new SetupAi();
             if (kieuChoi == MAY_DANH_TRUOC) {
                 if (luotdi == 0) {
+                    System.out.println("after: luot di bang 0 -> chay ai");
                     chayAi();
                 }
             }
             if (kieuChoi == NGUOI_DANH_TRUOC) {
                 if (luotdi == 2) {
+                    System.out.println("after: luot di bang 2 -> chay ai");
                     chayAi();
                 }
             }

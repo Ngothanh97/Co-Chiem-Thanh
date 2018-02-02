@@ -1,7 +1,5 @@
 package com.thanhozin.cochiemthanh.model;
 
-import com.thanhozin.cochiemthanh.model.Chess;
-
 import java.util.ArrayList;
 
 public class AryChessIsRun {
