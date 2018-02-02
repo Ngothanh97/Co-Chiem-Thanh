@@ -110,14 +110,11 @@ public class SetupAi {
         return score;
     }
 
-
     //Ham cho gamemanager goi
-    String khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
+    Nut khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         this.arryChess.clear();
         arryChessNhos.clear();
 
-        System.out.println("Mang goc ban dau ");
-        printArrayChess(aryChess);
         this.arryChess.addAll(aryChess);
         Nut nut = new Nut();
         nut.setChesses(this.arryChess);
@@ -128,14 +125,18 @@ public class SetupAi {
 //        nuts.clear();
         String chuoiMangGoc = chuyenMangChessVeString(arryChess);
         taoCayTroChoi(nut);
+
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
         Nut bestNut = duyetCay(nut);
-        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
-
-        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
-        nut.setChesses(chessGoc);
-        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
+        aryChess = layArrayListChessTuString(chuoiMangGoc);
+        System.out.println("sau khi tạo cây: " + aryChess);
+        return bestNut;
+//        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
+//
+//        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
+//        nut.setChesses(chessGoc);
+//        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
     }
 
     private void printArrayChess(ArrayList<Chess> chesses) {
@@ -220,14 +221,10 @@ public class SetupAi {
             return null;
         }
 
-        System.out.println("duyet nut: " + nut);
-        System.out.println("nut con: " + nut.getNutsCon());
-
 //        debugNut(nut);
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
-        System.out.println("best score initiate: " + bestScore);
 
         Nut bestNut = nut.getNutsCon().get(0);
 
@@ -238,11 +235,9 @@ public class SetupAi {
                 for (Nut tempNut : father.getNutsCon()) {
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
-                        System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
-                        System.out.println("new best nut: " + bestNut);
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -319,6 +314,9 @@ public class SetupAi {
 
         tachQuanTrangVsDen();
 
+        System.out.println("Quan trang: " + quanTrang);
+        System.out.println("Quan den: " + quanDen);
+
         // Lấy ra só lượng quân có thẻ di chuyển
         int temp = mauQuanSeDiChuyen.equalsIgnoreCase(Chess.WHITE) ? quanTrang.size() : quanDen.size();
 
@@ -385,6 +383,7 @@ public class SetupAi {
                             }
                         }
 
+
                         chessValue.remove(0);
                         Chess chessTemp = capQuanSeDiChuyen[1];
                         chessTemp.setX(x);
@@ -394,6 +393,10 @@ public class SetupAi {
                         arryChess.addAll(arrChessSeDiChuyen);
                         if (chessValue.get(0) == null) {
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, true);
+                            ArrayList<String> chessValue1 = docFile();
+                            xoaDuLieuTrongFile();
+                            NhoCacKhaNangThanhCong nhoCacKhaNangThanhCong = new NhoCacKhaNangThanhCong(chessValue1);
+                            nhoCacKhaNangThanhCongs.add(nhoCacKhaNangThanhCong);
                         } else {
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, false);
                         }
@@ -401,10 +404,6 @@ public class SetupAi {
                 }
             }
 
-            ArrayList<String> chessValue = docFile();
-            xoaDuLieuTrongFile();
-            NhoCacKhaNangThanhCong nhoCacKhaNangThanhCong = new NhoCacKhaNangThanhCong(chessValue);
-            nhoCacKhaNangThanhCongs.add(nhoCacKhaNangThanhCong);
         }
 
         //Tạo ra các nut con của nuted truyền vào

@@ -3,6 +3,7 @@ package com.thanhozin.cochiemthanh.manager;
 import com.thanhozin.cochiemthanh.helper.Utils;
 import com.thanhozin.cochiemthanh.model.Ability;
 import com.thanhozin.cochiemthanh.model.Chess;
+import com.thanhozin.cochiemthanh.model.Nut;
 import com.thanhozin.cochiemthanh.view.MenuSelect;
 
 import java.awt.*;
@@ -76,40 +77,34 @@ public class GameManager {
 
 
     private void chayAi() {
-        String kq;
+        Nut kq;
+        char aiTeam;
         if (kieuChoi == MAY_DANH_TRUOC) {
+            aiTeam = 'W';
             kq = ai.khoiChayAi(chesses, Chess.WHITE);
         } else {
+            aiTeam = 'B';
             kq = ai.khoiChayAi(chesses, Chess.BLACK);
         }
 
-        if (kq != null) {
-            String[] value = kq.split("_");
-            String type1 = value[0];
-            String type2 = null;
-            if (value.length > 3) {
-                type2 = value[3];
-            }
-            Chess chess1 = null;
-            Chess chess2 = null;
-            for (int i = 0; i < chesses.size(); i++) {
-                if (chesses.get(i).getType().equals(type1)) {
-                    chess1 = chesses.get(i);
-                }
-                if (type2 != null) {
-                    if (chesses.get(i).getType().equals(type2)) {
-                        chess2 = chesses.get(i);
+        ArrayList<Chess> kqChesses = kq.getChesses();
+
+        System.out.println("chesses: " + chesses);
+        System.out.println("kqChesses: " + kqChesses);
+        for (Chess chess : chesses) {
+            if (chess.coverType() == aiTeam) {
+                for (Chess kqChess : kqChesses) {
+                    if (kqChess != null && chess.getType().equalsIgnoreCase(kqChess.getType())) {
+                        if (kqChess.getCoverY() != chess.getCoverY()){
+                            System.out.println("kqChess: " + kqChess.getCoverY());
+                            System.out.println("chess: " + chess.getCoverY());
+                            chessRemember = chess;
+                            System.out.println("\nDi chuyen quan co theo best nut");
+                            moveChess(kqChess.getCoverX(), kqChess.getCoverY());
+                            System.out.println("move chess theo best nut: " + chess);
+                        }
                     }
                 }
-            }
-            if (chess1 != null) {
-                chessRemember = chess1;
-                moveChess(value[1].charAt(0), Integer.parseInt(value[2]));
-            }
-//        Thread.sleep(3000);
-            if (chess2 != null) {
-                chessRemember = chess2;
-                moveChess(value[4].charAt(0), Integer.parseInt(value[5]));
             }
         }
     }
