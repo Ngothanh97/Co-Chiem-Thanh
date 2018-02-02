@@ -6,6 +6,7 @@ import com.thanhozin.cochiemthanh.view.MenuSelect;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.thanhozin.cochiemthanh.view.MenuSelect.level;
 import static java.lang.String.valueOf;
@@ -107,9 +108,9 @@ public class SetupAi {
                 } else score += diemBanCoCuaMay[x][y];
             }
         }
+        score += new Random().nextInt() % 20;
         return score;
     }
-
 
     //Ham cho gamemanager goi
     public Nut khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
@@ -131,11 +132,9 @@ public class SetupAi {
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
         Nut bestNut = duyetCay(nut);
-        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
 
         ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
         nut.setChesses(chessGoc);
-//        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
         return bestNut;
     }
 
@@ -145,55 +144,6 @@ public class SetupAi {
             name += chess.toString();
         }
         System.out.println(name);
-    }
-
-    private String layRaNuocDiChuyenToiUu(Nut nutGoc, Nut bestNut, String mauQuanDiChuyen) {
-        System.out.println("Tim nuoc di");
-        ArrayList<Chess> beforArrChesses = nutGoc.getChesses();
-
-        char mauSeDiChuyen;
-        if (mauQuanDiChuyen.equals(Chess.WHITE)) {
-            mauSeDiChuyen = 'B';
-        } else {
-            mauSeDiChuyen = 'W';
-        }
-
-        ArrayList<Chess> afterArrChesses = bestNut.getChesses();
-        int[] temp = new int[2];
-        int a = 0;
-
-        for (Chess beforChess : beforArrChesses) {
-            boolean isBest = beforChess.coverType() == mauSeDiChuyen;  // kiểm tra quân cờ sẽ di chuyển
-            String typeOfBeforChess = beforChess.getType();  // lấy ra quân cờ
-
-            if (isBest) {
-                for (int j = 0; j < afterArrChesses.size(); j++) {
-                    Chess afterChess = afterArrChesses.get(j);
-                    if (afterChess.getType().equals(typeOfBeforChess)) {
-                        if (beforChess.getX() != afterChess.getX() && a < 2) {
-                            temp[a++] = j;
-                            System.out.println("chess di chuyển: " + typeOfBeforChess);
-                        }
-                    }
-                }
-            }
-        }
-        // luÔn cộng thêm 1 giá trị cho a sau khi thêm
-        if (a == 1) {  // chỉ di chuyển 1 quân
-            System.out.println("Di chuyen 1 quan");
-            Chess chess1 = afterArrChesses.get(temp[0]);
-            return chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
-        } else if (a == 0) {  // không còn quân để di chuyển
-            System.out.println("Thoat " + a);
-            return null;
-        } else {  // di chuyển 2 quân
-            System.out.println("Di chuyen 2 quan");
-            Chess chess1 = afterArrChesses.get(temp[0]);
-            String s1 = chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
-            Chess chess2 = afterArrChesses.get(temp[1]);
-            String s2 = chess2.getType() + "_" + chess2.getCoverX() + "_" + chess2.getCoverY();
-            return s1 + "_" + s2;
-        }
     }
 
     private void debugNut(Nut nut){
@@ -221,9 +171,6 @@ public class SetupAi {
             return null;
         }
 
-        System.out.println("duyet nut: " + nut);
-        System.out.println("nut con: " + nut.getNutsCon());
-
 //        debugNut(nut);
 
         Nut temp = getYoungestNut(nut);
@@ -237,13 +184,14 @@ public class SetupAi {
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
             if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
                 for (Nut tempNut : father.getNutsCon()) {
+                    System.out.println("temp nut: " + tempNut);
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
                         System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
-                        System.out.println("new best nut: " + bestNut);
+                        System.out.println("new best nut: " + bestNut + " score: " + bestScore);
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -252,8 +200,6 @@ public class SetupAi {
             }
             temp = temp.getNutFather();
         }
-
-        System.out.println("best nut: " + bestNut);
 
         return bestNut;
     }
@@ -762,6 +708,7 @@ public class SetupAi {
         for (int i = 0; i < capQuanSeDiChuyen.length; i++) {
             capQuanSeDiChuyen[i] = null;
         }
+
         if (mauCuaQuanCo.equals(Chess.WHITE)) {
             if (quanTrang.size() == 3) {
                 if (lanLayCapQuan == 1) {
