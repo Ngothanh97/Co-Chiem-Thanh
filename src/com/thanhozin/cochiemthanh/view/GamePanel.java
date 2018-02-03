@@ -203,7 +203,6 @@ public class GamePanel extends BasePanel implements Runnable {
         graphics2D.drawImage(ImageStore.IMG_BUTTON_HOME_1, 710, 570, 128, 36, null);
         graphics2D.drawImage(ImageStore.IMG_BUTTON_VANMOI1, 710, 510, 128, 36, null);
         graphics2D.drawImage(ImageStore.IMG_BUTTON_TAM_DUNG_1, 710, 450, 128, 36, null);
-//        System.out.println(flagTamDung);
         if (flagTamDung) {
             graphics2D.drawImage(ImageStore.IMG_BUTTON_TAM_DUNG_2, 710, 450, 128, 36, null);
         }

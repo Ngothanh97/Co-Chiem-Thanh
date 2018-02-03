@@ -70,7 +70,6 @@ public class GameManager {
                 moveChess('c', 2);
                 chessRemember = chess2;
                 moveChess('g', 3);
-//                System.out.println("Luot di: " + luotdi);
             }
         }
     }
@@ -109,7 +108,7 @@ public class GameManager {
         }
     }
 
-    public void initalizeChess() {
+    private void initalizeChess() {
         Chess chessWhileK = new Chess(Utils.unCoverXLocation('a'), Utils.chuyen_y_ve_toa_do_may(1), Chess.WHITE_K);
         chesses.add(chessWhileK);
         Chess chessWhileL = new Chess(Utils.unCoverXLocation('e'), Utils.chuyen_y_ve_toa_do_may(1), Chess.WHITE_L);
@@ -535,7 +534,6 @@ public class GameManager {
                     countDen++;
                 }
             }
-            System.out.println(countDen + ", " + countTrang);
             if (luotdi == 4) {
                 if (kiemTraQuanCoTrang(chessRemember)) {
                     if (countTrang == 1) {
@@ -629,18 +627,15 @@ public class GameManager {
                 countDen++;
             }
         }
-//        System.out.println(countTrang+" "+countDen);
         if (countTrang == 0) {
             return 1;
         } else if (countDen == 0) {
             return 2;
         } else return 0;
-//        return 10;
     }
 
     private void anQuan() {
         for (int i = 0; i < chesses.size(); i++) {
-//            System.out.println("an quan");
             Chess chess1 = chesses.get(i);
             if (chess1.getX() == chessRemember.getX() && chess1.getY() == chessRemember.getY()
                     && !chesses.get(i).getType().equals(chessRemember.getType())) {

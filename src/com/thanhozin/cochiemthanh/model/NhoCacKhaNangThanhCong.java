@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public class NhoCacKhaNangThanhCong {
     private ArrayList<String> arrStringChessValue;
-    private int countArr = 0;
 
     public NhoCacKhaNangThanhCong(ArrayList<String> arrStringChessValue) {
         this.arrStringChessValue = arrStringChessValue;
     }
 
-    public ArrayList<MangCacArraylistChess> getArrChess() {
-        ArrayList<MangCacArraylistChess> mangCacArraylistChess = new ArrayList<>();
-        countArr = arrStringChessValue.size();
+    public ArrayList<Chess> getArrChess() {
+        int countArr = arrStringChessValue.size();
         if (countArr >= 2) {
             countArr = Integer.parseInt(arrStringChessValue.get(countArr - 2));
             arrStringChessValue.remove(arrStringChessValue.size() - 2);
@@ -30,10 +28,8 @@ public class NhoCacKhaNangThanhCong {
                     arrChessSeDaChuyen.add(chess);
                     arrStringChessValue.remove(0);
                 }
-                mangCacArraylistChess.add(new MangCacArraylistChess(arrChessSeDaChuyen));
             }
-//            arrStringChessValue.remove(0);
         }
-        return mangCacArraylistChess;
+        return arrChessSeDaChuyen;
     }
 }
