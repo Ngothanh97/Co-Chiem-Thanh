@@ -40,7 +40,8 @@ public class SetupAi {
     private int lanLayCapQuan;
     private int lanLayQuanTuMang;
     private ArrayList<AryChessIsRun> arrTempChessIsRun = new ArrayList<>();
-    private int minValueOfNut = Integer.MAX_VALUE;
+    private boolean flagIsCount= false;
+
 
 
     int countNumberArray = 0;
@@ -110,11 +111,14 @@ public class SetupAi {
         return score;
     }
 
+
     //Ham cho gamemanager goi
-    Nut khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
+    String khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         this.arryChess.clear();
         arryChessNhos.clear();
 
+        System.out.println("Mang goc ban dau ");
+        printArrayChess(aryChess);
         this.arryChess.addAll(aryChess);
         Nut nut = new Nut();
         nut.setChesses(this.arryChess);
@@ -125,21 +129,18 @@ public class SetupAi {
 //        nuts.clear();
         String chuoiMangGoc = chuyenMangChessVeString(arryChess);
         taoCayTroChoi(nut);
-
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
         Nut bestNut = duyetCay(nut);
-        aryChess = layArrayListChessTuString(chuoiMangGoc);
-        System.out.println("sau khi tạo cây: " + aryChess);
-        return bestNut;
-//        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
-//
-//        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
-//        nut.setChesses(chessGoc);
-//        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
+        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
+
+        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
+        nut.setChesses(chessGoc);
+        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
     }
 
     private void printArrayChess(ArrayList<Chess> chesses) {
+        System.out.println(chesses.size());
         String name = "";
         for (Chess chess : chesses) {
             name += chess.toString();
@@ -221,10 +222,14 @@ public class SetupAi {
             return null;
         }
 
+        System.out.println("duyet nut: " + nut);
+        System.out.println("nut con: " + nut.getNutsCon());
+
 //        debugNut(nut);
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
+        System.out.println("best score initiate: " + bestScore);
 
         Nut bestNut = nut.getNutsCon().get(0);
 
@@ -235,9 +240,11 @@ public class SetupAi {
                 for (Nut tempNut : father.getNutsCon()) {
                     if (tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
+                        System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
+                        System.out.println("new best nut: " + bestNut);
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -287,6 +294,14 @@ public class SetupAi {
     }
 
     private void taoCayTroChoi(Nut nuted) {
+        System.out.println("tempLevel " + nuted.getTempLevel());
+
+
+        System.out.println("Mang quan khi tao cay");
+        printArrayChess(nuted.getChesses());
+        System.out.println("Mang quan khi tao cay\n\n");
+
+
         // kiểm tra level hiện tại
         switch (level) {
             case GameManager.LEVEL_DE:
@@ -307,28 +322,36 @@ public class SetupAi {
             default:
                 break;
         }
+        System.out.println("quan cưa");
 
         String mauQuanSeDiChuyen = nuted.getMauQuanDiChuyen();
         arryChess = nuted.getChesses();
         arryChessNhos = nuted.getChesses();
-
+        String nhoArrayChessGoc = chuyenMangChessVeString(arryChess);
         tachQuanTrangVsDen();
-
-        System.out.println("Quan trang: " + quanTrang);
-        System.out.println("Quan den: " + quanDen);
 
         // Lấy ra só lượng quân có thẻ di chuyển
         int temp = mauQuanSeDiChuyen.equalsIgnoreCase(Chess.WHITE) ? quanTrang.size() : quanDen.size();
 
         lanLayCapQuan = 1;
 
-        //Tạo vòng lặp để lấy hết các tổ hợp chọn ra 2 quân trong 3 quân
+        //Tạo vòng lặp để lấy hết các tổ hợp chọn ra 2 quân trong 3 quâ
         ArrayList<NhoCacKhaNangThanhCong> nhoCacKhaNangThanhCongs = new ArrayList<>();
         for (int l = 0; l < temp; l++) {
             if (temp == 2 && l == 1) {
                 break;
             }
+//            String[] arrStringChess = nhoArrayChessGoc.split("_");
+//            int n = 1;
+            arryChess.clear();
+//            while (n != arrStringChess.length) {
+//                Chess chess = new Chess(Integer.parseInt(arrStringChess[n + 1]), Integer.parseInt(arrStringChess[n + 2]), arrStringChess[n]);
+//                n += 3;
+//                arrChessGoc.add(chess);
+//            }
 
+            arryChess=layArrayListChessTuString(nhoArrayChessGoc);
+            tachQuanTrangVsDen();
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
             lanLayQuanTuMang = 1;
             int temp2;
@@ -347,12 +370,14 @@ public class SetupAi {
             /*Tạo vòng lặp để lấy lần lượt từng quân trong một lượt đi. lấy từ bộ 2 quân đã chọn ra được từ
                 phương thức layRaCapQuanDiChuyen();
             */
-            Chess quanDiChuyen1 = layRaQuanDiChuyen();
             for (int k = 0; k < temp2; k++) {
+                System.out.println("sinhnuoc di: " + k);
                 //Tạo ra các trường hợp, các con  của nut,
                 if (k == 0) {
-                    taoLuotDi(arryChess, quanDiChuyen1, k, true);
-                    arryChess = arryChessNhos;
+                    arryChess.clear();
+                    arryChess.addAll(layArrayListChessTuString(nhoArrayChessGoc));
+                    taoLuotDi(arryChess, capQuanSeDiChuyen[0], k, true);
+                    flagIsCount=false;
                 } else {
                     ArrayList<String> chessValue = docFile();
                     xoaDuLieuTrongFile();
@@ -364,16 +389,13 @@ public class SetupAi {
                         aryChessIsRuns.clear();
                         ArrayList<Chess> arrChessSeDiChuyen = new ArrayList<>();
 
-                        int a = 0;
-                        while (!chessValue.get(0).equals("@")
-                                || chessValue.get(0) != null
-                                ) {
+                        while (!chessValue.get(0).equals("@") || chessValue.get(0) != null) {
                             if (chessValue.get(0).equals("@")) {
                                 break;
                             } else {
-                                a++;
                                 String chessString = chessValue.get(0);
                                 String[] thanhPhanChess = chessString.split("_");
+//                                System.out.println("chessValue.get(0)" + "--" + chessValue.get(0) + "--");
 
                                 Chess chess = new Chess(
                                         Integer.parseInt(thanhPhanChess[1]),
@@ -383,7 +405,6 @@ public class SetupAi {
                             }
                         }
 
-
                         chessValue.remove(0);
                         Chess chessTemp = capQuanSeDiChuyen[1];
                         chessTemp.setX(x);
@@ -392,10 +413,11 @@ public class SetupAi {
                         arryChess.clear();
                         arryChess.addAll(arrChessSeDiChuyen);
                         if (chessValue.get(0) == null) {
+                            System.out.println("Chess value size:  " + chessValue.size());
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, true);
-                            ArrayList<String> chessValue1 = docFile();
+                            ArrayList<String> chessValues = docFile();
                             xoaDuLieuTrongFile();
-                            NhoCacKhaNangThanhCong nhoCacKhaNangThanhCong = new NhoCacKhaNangThanhCong(chessValue1);
+                            NhoCacKhaNangThanhCong nhoCacKhaNangThanhCong = new NhoCacKhaNangThanhCong(chessValues);
                             nhoCacKhaNangThanhCongs.add(nhoCacKhaNangThanhCong);
                         } else {
                             taoLuotDi(arrChessSeDiChuyen, chessTemp, k, false);
@@ -403,63 +425,40 @@ public class SetupAi {
                     }
                 }
             }
+            flagIsCount=false;
 
         }
 
+        System.out.println("Het luot");
         //Tạo ra các nut con của nuted truyền vào
         ArrayList<Nut> nutCon = new ArrayList<>();
         for (int i = 0; i < nhoCacKhaNangThanhCongs.size(); i++) {
             NhoCacKhaNangThanhCong remember = nhoCacKhaNangThanhCongs.get(i);
-            arryChess = remember.getArrChess();
-            Nut nut = new Nut();
-            nut.setChesses(arryChess);
-            nut.setGiaTri(tinhDiem(arryChess));
-            nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
-            nut.setTempLevel(nuted.getTempLevel() + 1);
-            nut.setNutFather(nuted);
-            nutCon.add(nut);
+            ArrayList<MangCacArraylistChess> mangCacArraylistChess= remember.getArrChess();
+            int c=1;
+            for (int j=0;j<mangCacArraylistChess.size();j++){
+                arryChess.clear();
+                arryChess= mangCacArraylistChess.get(j).getArrayList();
+                System.out.println("Dem nut con "+c);
+                c++;
+                printArrayChess(arryChess);
+                Nut nut = new Nut();
+                nut.setChesses(arryChess);
+                nut.setGiaTri(tinhDiem(arryChess));
+                nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
+                nut.setTempLevel(nuted.getTempLevel() + 1);
+                nut.setNutFather(nuted);
+                nutCon.add(nut);
+            }
         }
         nuted.setNuts(nutCon);
+        System.out.println("Nut con Size" + nutCon.size());
 
         for (int i = 0; i < nutCon.size(); i++) {
             aryChessIsRuns.clear();
             arrTempChessIsRun.clear();
             arryChess.clear();
             taoCayTroChoi(nutCon.get(i));
-        }
-
-        ArrayList<String> chessValue = docFile();
-        xoaDuLieuTrongFile();
-        arryChess.clear();
-        arrTempChessIsRun.addAll(aryChessIsRuns);
-
-        for (int i = 0; i < arrTempChessIsRun.size(); i++) {
-            ArrayList<Chess> arrChessSeDiChuyen = new ArrayList<>();
-            while (!chessValue.get(0).equals(" ") || chessValue.get(0) != null) {
-                String chessString = chessValue.get(0);
-                String[] thanhPhanChess = chessString.split("_");
-                Chess chess = new Chess(Integer.parseInt(thanhPhanChess[1]),
-                        Integer.parseInt(thanhPhanChess[2]), thanhPhanChess[0]);
-                arrChessSeDiChuyen.add(chess);
-                chessValue.remove(0);
-            }
-            chessValue.remove(0);
-            Nut nut = new Nut();
-            nut.setChesses(arrChessSeDiChuyen);
-            nut.setGiaTri(tinhDiem(arrChessSeDiChuyen));
-            nut.setMauQuanDiChuyen(daoMauQuan(mauQuanSeDiChuyen));
-            nut.setTempLevel(nuted.getTempLevel() + 1);
-            nut.setNutFather(nuted);
-            nutCon.add(nut);
-        }
-        nuted.setNuts(nutCon);
-
-        for (int i = 0; i < nutCon.size(); i++) {
-            aryChessIsRuns.clear();
-            arrTempChessIsRun.clear();
-            String tempStringArrayChess= chuyenMangChessVeString(nutCon.get(i).getChesses());
-            taoCayTroChoi(nutCon.get(i));
-            nutCon.get(i).setChesses(layArrayListChessTuString(tempStringArrayChess));
         }
 
         /*
@@ -469,16 +468,17 @@ public class SetupAi {
 
     private void taoLuotDi(ArrayList<Chess> mangQuanHienCo, Chess quanCoDiChuyen, int luot, boolean end) {
         String typeQuanCoDiChuyen = quanCoDiChuyen.getType();
+        String nhoArray= chuyenMangChessVeString(mangQuanHienCo);
 
-        if (luot == 0) {
+        if (!flagIsCount) {
             countNumberArray = 0;
+            flagIsCount=true;
         }
-        ArrayList<Chess> arrChessRemember = new ArrayList<>(mangQuanHienCo);
         int x = quanCoDiChuyen.getXstt();
         int y = quanCoDiChuyen.getCoverY();
 
         aryChessIsRuns.clear();
-        arryChess = mangQuanHienCo;
+        arryChess = layArrayListChessTuString(nhoArray);
         int huongLen = kiemTraHuongLen(quanCoDiChuyen);
         ArrayList<ToaDo> toaDos = new ArrayList<>();
         switch (huongLen) {
@@ -524,8 +524,8 @@ public class SetupAi {
                 break;
         }
 
-        mangQuanHienCo = arrChessRemember;
-        arryChess = mangQuanHienCo;
+        mangQuanHienCo = layArrayListChessTuString(nhoArray);
+        arryChess = layArrayListChessTuString(nhoArray);
         int sangPhai = kiemTraHuongPhai(quanCoDiChuyen);
         switch (sangPhai) {
             case 1:
@@ -577,8 +577,8 @@ public class SetupAi {
                 break;
         }
 
-        mangQuanHienCo = arrChessRemember;
-        arryChess = mangQuanHienCo;
+        mangQuanHienCo = layArrayListChessTuString(nhoArray);
+        arryChess = layArrayListChessTuString(nhoArray);
         int xuongDuoi = kiemTraHuongXuong(quanCoDiChuyen);
         switch (xuongDuoi) {
             case 1:
@@ -615,7 +615,6 @@ public class SetupAi {
 
                 toaDos.add(new ToaDo(x - 1, y + 2));
 
-                mangQuanHienCo = arrChessRemember;
                 mangQuanHienCo.get(indexSelect3).setX(Utils.chuyen_x_ve_toa_do_may(x + 1));
                 mangQuanHienCo.get(indexSelect3).setY(Utils.chuyen_y_ve_toa_do_may(y + 2));
                 aryChessIsRuns.add(new AryChessIsRun(mangQuanHienCo));
@@ -629,9 +628,9 @@ public class SetupAi {
                 break;
         }
 
-        mangQuanHienCo = arrChessRemember;
+        mangQuanHienCo = layArrayListChessTuString(nhoArray);
+        arryChess = layArrayListChessTuString(nhoArray);
         int sangTrai = kiemTraHuongTrai(quanCoDiChuyen);
-        arryChess = mangQuanHienCo;
         switch (sangTrai) {
             case 1:
                 int indexSelect = capNhatTrangThaiSauKhiXetHuong(mangQuanHienCo, typeQuanCoDiChuyen);
