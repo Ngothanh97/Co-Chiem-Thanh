@@ -5,7 +5,9 @@ import com.thanhozin.cochiemthanh.model.*;
 import com.thanhozin.cochiemthanh.view.MenuSelect;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static com.thanhozin.cochiemthanh.view.MenuSelect.level;
 import static java.lang.String.valueOf;
@@ -40,19 +42,13 @@ public class SetupAi {
     private int lanLayCapQuan;
     private int lanLayQuanTuMang;
     private ArrayList<AryChessIsRun> arrTempChessIsRun = new ArrayList<>();
-    private int minValueOfNut = Integer.MAX_VALUE;
-
 
     int countNumberArray = 0;
-
-//    private int countArray;
 
     private File file;
 
     //Mảng chứa các nhánh của cây, lưu trữ các
     private ArrayList<AryChessIsRun> aryChessIsRuns;
-
-//    ArrayList<Nut> nuts = new ArrayList<>(); // Cây trò chơi
 
     public SetupAi() {
         arryChess = new ArrayList<>();
@@ -94,30 +90,34 @@ public class SetupAi {
 
     private int tinhDiem(ArrayList<Chess> chessTemp) {
         int score = 0;
+        int numOfChess = 0;
         for (Chess aChessTemp : chessTemp) {
             int x = aChessTemp.getXstt();
             int y = aChessTemp.getCoverY();
             if (computerIsFirst) {
                 if (kiemTraQuanCoTrang(aChessTemp)) {
                     score += diemBanCoCuaMay[x][y];
+                    numOfChess++;
                 } else score -= diemBanCoCuaNguoiChoi[x][y];
             } else {
                 if (kiemTraQuanCoTrang(aChessTemp)) {
                     score -= diemBanCoCuaNguoiChoi[x][y];
-                } else score += diemBanCoCuaMay[x][y];
+                } else {
+                    score += diemBanCoCuaMay[x][y];
+                    numOfChess++;
+                }
             }
         }
-        return score;
+        score -= 60 * (3 - numOfChess);
+        int i = new Random().nextInt() % 20;
+        return score + i;
     }
-
 
     //Ham cho gamemanager goi
     Nut khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         this.arryChess.clear();
         arryChessNhos.clear();
 
-        System.out.println("Mang goc ban dau ");
-        printArrayChess(aryChess);
         this.arryChess.addAll(aryChess);
         Nut nut = new Nut();
         nut.setChesses(this.arryChess);
@@ -126,7 +126,7 @@ public class SetupAi {
         nut.setTempLevel(0);
 
 //        nuts.clear();
-        String chuoiMangGoc = chuyenMangChessVeString(arryChess);
+//        String chuoiMangGoc = chuyenMangChessVeString(arryChess);
         taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
@@ -137,63 +137,6 @@ public class SetupAi {
 //        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
 //        nut.setChesses(chessGoc);
 //        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
-    }
-
-    private void printArrayChess(ArrayList<Chess> chesses) {
-        String name = "";
-        for (Chess chess : chesses) {
-            name += chess.toString();
-        }
-        System.out.println(name);
-    }
-
-    private String layRaNuocDiChuyenToiUu(Nut nutGoc, Nut bestNut, String mauQuanDiChuyen) {
-        System.out.println("Tim nuoc di");
-        ArrayList<Chess> beforArrChesses = nutGoc.getChesses();
-
-        char mauSeDiChuyen;
-        if (mauQuanDiChuyen.equals(Chess.WHITE)) {
-            mauSeDiChuyen = 'B';
-        } else {
-            mauSeDiChuyen = 'W';
-        }
-
-        ArrayList<Chess> afterArrChesses = bestNut.getChesses();
-        int[] temp = new int[2];
-        int a = 0;
-
-        for (Chess beforChess : beforArrChesses) {
-            boolean isBest = beforChess.coverType() == mauSeDiChuyen;  // kiểm tra quân cờ sẽ di chuyển
-            String typeOfBeforChess = beforChess.getType();  // lấy ra quân cờ
-
-            if (isBest) {
-                for (int j = 0; j < afterArrChesses.size(); j++) {
-                    Chess afterChess = afterArrChesses.get(j);
-                    if (afterChess.getType().equals(typeOfBeforChess)) {
-                        if (beforChess.getX() != afterChess.getX() && a < 2) {
-                            temp[a++] = j;
-                            System.out.println("chess di chuyển: " + typeOfBeforChess);
-                        }
-                    }
-                }
-            }
-        }
-        // luÔn cộng thêm 1 giá trị cho a sau khi thêm
-        if (a == 1) {  // chỉ di chuyển 1 quân
-            System.out.println("Di chuyen 1 quan");
-            Chess chess1 = afterArrChesses.get(temp[0]);
-            return chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
-        } else if (a == 0) {  // không còn quân để di chuyển
-            System.out.println("Thoat " + a);
-            return null;
-        } else {  // di chuyển 2 quân
-            System.out.println("Di chuyen 2 quan");
-            Chess chess1 = afterArrChesses.get(temp[0]);
-            String s1 = chess1.getType() + "_" + chess1.getCoverX() + "_" + chess1.getCoverY();
-            Chess chess2 = afterArrChesses.get(temp[1]);
-            String s2 = chess2.getType() + "_" + chess2.getCoverX() + "_" + chess2.getCoverY();
-            return s1 + "_" + s2;
-        }
     }
 
     private void debugNut(Nut nut){
@@ -221,11 +164,6 @@ public class SetupAi {
             return null;
         }
 
-        System.out.println("duyet nut: " + nut);
-        System.out.println("nut con: " + nut.getNutsCon());
-
-//        debugNut(nut);
-
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
         System.out.println("best score initiate: " + bestScore);
@@ -243,7 +181,6 @@ public class SetupAi {
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
-                        System.out.println("new best nut: " + bestNut);
                     }
                 }
                 if (father.getNutFather() != null) {
@@ -294,28 +231,14 @@ public class SetupAi {
 
     private void taoCayTroChoi(Nut nuted) {
         // kiểm tra level hiện tại
-        switch (level) {
-            case GameManager.LEVEL_DE:
-                if (nuted.getTempLevel() == 2) {
-                    return;
-                }
-                break;
-            case GameManager.LEVEL_TRUNG_BINH:
-                if (nuted.getTempLevel() == 4) {
-                    return;
-                }
-                break;
-            case GameManager.LEVEL_KHO:
-                if (nuted.getTempLevel() == 6) {
-                    return;
-                }
-                break;
-            default:
-                break;
+        if (nuted.getTempLevel() == level * 2){
+            return;
         }
 
         String mauQuanSeDiChuyen = nuted.getMauQuanDiChuyen();
-        arryChess = nuted.getChesses();
+        if (nuted.getTempLevel() == 1){
+            arryChess = nuted.getChesses();
+        }
         arryChessNhos = nuted.getChesses();
 
         tachQuanTrangVsDen();
@@ -331,9 +254,12 @@ public class SetupAi {
             String s = arryChess.get(a).getType() + "_" + arryChess.get(a).getX() + "_" + arryChess.get(a).getY();
             nhoArrayChessGoc = nhoArrayChessGoc + "_" + s;
         }
+
+        System.out.println("arrayChess: " + arryChess);
+
         ArrayList<NhoCacKhaNangThanhCong> nhoCacKhaNangThanhCongs = new ArrayList<>();
         for (int l = 0; l < temp; l++) {
-            if (temp == 2 && l == 1) {
+            if (temp == 2 && l == 1) {  // nếu chỉ có hai quân thì chỉ cần chạy 1 lần vì đã chọn cả hai quân r
                 break;
             }
             String[] arrStringChess = nhoArrayChessGoc.split("_");
@@ -346,16 +272,26 @@ public class SetupAi {
             }
 
             arryChess = arrChessGoc;
-            layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
-            lanLayQuanTuMang = 1;
-            int temp2 = 0;
 
+            System.out.println("\nArrayChess for: " + arryChess);
+
+            // truyền các quân có thể đi đc vào mang capQuanSeDiChuyen
+            layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
+
+            // số quân đã lấy ra để di chuyển, bắt đầu từ 1
+            lanLayQuanTuMang = 1;
+
+            // so quan co the di chuyen
+            int temp2;
+
+            // x, y la toa do cua quan thu hai se duoc di chuyen
             int x = 0;
             int y = 0;
-            //Số quân đã được lấy ra có thể di chuyển
-            if (capQuanSeDiChuyen[1] == null) {
+
+            //Số quân đã được lấy ra có thể di chuyển: capQuanSeDiChuyen
+            if (capQuanSeDiChuyen[1] == null) {  // chi di chuyen 1 quan
                 temp2 = 1;
-            } else {
+            } else {  // co the di chuyen 2 quan
                 temp2 = 2;
                 x = capQuanSeDiChuyen[1].getX();
                 y = capQuanSeDiChuyen[1].getY();
@@ -364,9 +300,9 @@ public class SetupAi {
             /*Tạo vòng lặp để lấy lần lượt từng quân trong một lượt đi. lấy từ bộ 2 quân đã chọn ra được từ
                 phương thức layRaCapQuanDiChuyen();
             */
-            Chess quanDiChuyen1 = layRaQuanDiChuyen();
-            for (int k = 0; k < temp2; k++) {
-                //Tạo ra các trường hợp, các con  của nut,
+            Chess quanDiChuyen1 = layRaQuanDiChuyen();  // lấy quân sẽ được di chuyển tiếp theo
+            for (int k = 0; k < temp2; k++) { // duyệt hết số quân có thể di chuyển đc
+                //Tạo ra các trường hợp, các con của nut
                 if (k == 0) {
                     taoLuotDi(arryChess, quanDiChuyen1, k, true);
                     arryChess = arryChessNhos;
@@ -440,6 +376,8 @@ public class SetupAi {
             aryChessIsRuns.clear();
             arrTempChessIsRun.clear();
             arryChess.clear();
+            System.out.println("nut con temp level: " + nutCon.get(i).getTempLevel());
+            System.out.println("nut con chesses: " + nutCon.get(i).getChesses());
             taoCayTroChoi(nutCon.get(i));
         }
 
@@ -484,6 +422,8 @@ public class SetupAi {
 
     private void taoLuotDi(ArrayList<Chess> mangQuanHienCo, Chess quanCoDiChuyen, int luot, boolean end) {
         String typeQuanCoDiChuyen = quanCoDiChuyen.getType();
+
+        System.out.println("mang quan hien co: " + mangQuanHienCo);
 
         if (luot == 0) {
             countNumberArray = 0;
@@ -706,14 +646,12 @@ public class SetupAi {
 
     // Lấy lại giá trị index của quân cờ đã được chọn sẽ di chuyển
     private int capNhatTrangThaiSauKhiXetHuong(ArrayList<Chess> mangSauXet, String type) {
-        int index = -1;
         for (int i = 0; i < mangSauXet.size(); i++) {
             if (mangSauXet.get(i).getType().equals(type)) {
-                index = i;
-                return index;
+                return i;
             }
         }
-        return index;
+        return -1;
     }
 
     private void ghiFile(ArrayList<Chess> arrChessTruyen) {
@@ -773,48 +711,26 @@ public class SetupAi {
         for (int i = 0; i < capQuanSeDiChuyen.length; i++) {
             capQuanSeDiChuyen[i] = null;
         }
-        if (mauCuaQuanCo.equals(Chess.WHITE)) {
-            if (quanTrang.size() == 3) {
-                if (lanLayCapQuan == 1) {
-                    capQuanSeDiChuyen[0] = quanTrang.get(0);
-                    capQuanSeDiChuyen[1] = quanTrang.get(1);
-                    lanLayCapQuan++;
-                } else if (lanLayCapQuan == 2) {
-                    capQuanSeDiChuyen[0] = quanTrang.get(0);
-                    capQuanSeDiChuyen[1] = quanTrang.get(2);
-                    lanLayCapQuan++;
-                } else if (lanLayCapQuan == 3) {
-                    capQuanSeDiChuyen[0] = quanTrang.get(1);
-                    capQuanSeDiChuyen[1] = quanTrang.get(2);
-                }
-            } else if (quanTrang.size() == 2) {
-                capQuanSeDiChuyen[0] = quanTrang.get(0);
-                capQuanSeDiChuyen[1] = quanTrang.get(1);
-            } else {
-                capQuanSeDiChuyen[0] = quanTrang.get(0);
-                capQuanSeDiChuyen[1] = null;
+        ArrayList<Chess> currentChesses = mauCuaQuanCo.equalsIgnoreCase(Chess.WHITE) ? quanTrang : quanDen;
+        if (currentChesses.size() == 3) {
+            if (lanLayCapQuan == 1) {
+                capQuanSeDiChuyen[0] = currentChesses.get(0);
+                capQuanSeDiChuyen[1] = currentChesses.get(1);
+                lanLayCapQuan++;
+            } else if (lanLayCapQuan == 2) {
+                capQuanSeDiChuyen[0] = currentChesses.get(0);
+                capQuanSeDiChuyen[1] = currentChesses.get(2);
+                lanLayCapQuan++;
+            } else if (lanLayCapQuan == 3) {
+                capQuanSeDiChuyen[0] = currentChesses.get(1);
+                capQuanSeDiChuyen[1] = currentChesses.get(2);
             }
+        } else if (currentChesses.size() == 2) {
+            capQuanSeDiChuyen[0] = currentChesses.get(0);
+            capQuanSeDiChuyen[1] = currentChesses.get(1);
         } else {
-            if (quanDen.size() == 3) {
-                if (lanLayCapQuan == 1) {
-                    capQuanSeDiChuyen[0] = quanDen.get(0);
-                    capQuanSeDiChuyen[1] = quanDen.get(1);
-                    lanLayCapQuan++;
-                } else if (lanLayCapQuan == 2) {
-                    capQuanSeDiChuyen[0] = quanDen.get(0);
-                    capQuanSeDiChuyen[1] = quanDen.get(2);
-                    lanLayCapQuan++;
-                } else if (lanLayCapQuan == 3) {
-                    capQuanSeDiChuyen[0] = quanDen.get(1);
-                    capQuanSeDiChuyen[1] = quanDen.get(2);
-                }
-            } else if (quanDen.size() == 2) {
-                capQuanSeDiChuyen[0] = quanDen.get(0);
-                capQuanSeDiChuyen[1] = quanDen.get(1);
-            } else {
-                capQuanSeDiChuyen[0] = quanDen.get(0);
-                capQuanSeDiChuyen[1] = null;
-            }
+            capQuanSeDiChuyen[0] = currentChesses.get(0);
+            capQuanSeDiChuyen[1] = null;
         }
     }
 

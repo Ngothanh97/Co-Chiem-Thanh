@@ -9,7 +9,8 @@ import java.awt.*;
  * gợi ý nước đi
  */
 public class Ability {
-    public static final int SIZE = 76;
+    private static final int SIZE = 76;
+    // x, y theo may
     private int x;
     private int y;
 

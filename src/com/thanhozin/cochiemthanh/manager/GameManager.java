@@ -74,6 +74,20 @@ public class GameManager {
         }
     }
 
+    private ArrayList<Chess> quanDen = new ArrayList<>();
+    private ArrayList<Chess> quanTrang = new ArrayList<>();
+
+    private void tachQuanTrangVsDen(ArrayList<Chess> arryChess) {
+        quanDen.clear();
+        quanTrang.clear();
+        for (Chess arryChes : arryChess) {
+            if (kiemTraQuanCoTrang(arryChes)) {
+                quanTrang.add(arryChes);
+            } else {
+                quanDen.add(arryChes);
+            }
+        }
+    }
 
     private void chayAi() {
         Nut kq;
@@ -86,22 +100,16 @@ public class GameManager {
             kq = ai.khoiChayAi(chesses, Chess.BLACK);
         }
 
+        tachQuanTrangVsDen(chesses);
         ArrayList<Chess> kqChesses = kq.getChesses();
+        ArrayList<Chess> moveChesses = aiTeam == 'W' ? quanTrang : quanDen;
 
-        System.out.println("chesses: " + chesses);
-        System.out.println("kqChesses: " + kqChesses);
-        for (Chess chess : chesses) {
-            if (chess.coverType() == aiTeam) {
-                for (Chess kqChess : kqChesses) {
-                    if (kqChess != null && chess.getType().equalsIgnoreCase(kqChess.getType())) {
-                        if (kqChess.getCoverY() != chess.getCoverY()){
-                            System.out.println("kqChess: " + kqChess.getCoverY());
-                            System.out.println("chess: " + chess.getCoverY());
-                            chessRemember = chess;
-                            System.out.println("\nDi chuyen quan co theo best nut");
-                            moveChess(kqChess.getCoverX(), kqChess.getCoverY());
-                            System.out.println("move chess theo best nut: " + chess);
-                        }
+        for (Chess chess : moveChesses) {
+            for (Chess kqChess : kqChesses) {
+                if (kqChess != null && chess.getType().equalsIgnoreCase(kqChess.getType())) {
+                    if (kqChess.getCoverY() != chess.getCoverY()){
+                        chessRemember = chess;
+                        moveChess(kqChess.getCoverX(), kqChess.getCoverY());
                     }
                 }
             }
