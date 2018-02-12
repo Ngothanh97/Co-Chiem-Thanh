@@ -101,9 +101,9 @@ public class SetupAi {
                 } else score -= diemBanCoCuaNguoiChoi[x][y];
             } else {
                 if (kiemTraQuanCoTrang(aChessTemp)) {
-                    score -= diemBanCoCuaNguoiChoi[x][y];
+                    score += diemBanCoCuaNguoiChoi[x][y];
                 } else {
-                    score += diemBanCoCuaMay[x][y];
+                    score -= diemBanCoCuaMay[x][y];
                     numOfChess++;
                 }
             }
@@ -125,28 +125,21 @@ public class SetupAi {
         nut.setGiaTri(0);
         nut.setTempLevel(0);
 
-//        nuts.clear();
-//        String chuoiMangGoc = chuyenMangChessVeString(arryChess);
         taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
         Nut bestNut = duyetCay(nut);
         return bestNut;
-//        String mauDiChuyen = bestNut.getMauQuanDiChuyen();
-//
-//        ArrayList<Chess> chessGoc= layArrayListChessTuString(chuoiMangGoc);
-//        nut.setChesses(chessGoc);
-//        return layRaNuocDiChuyenToiUu(nut, bestNut, mauDiChuyen);
     }
 
     private void debugNut(Nut nut){
-        System.out.print("\nnut: ");
+        System.out.println("\nnut: " + nut);
         if (nut.getNutsCon() == null){
             return;
         }
 
         for (Nut n : nut.getNutsCon()){
-            System.out.println(n);
+            System.out.println("nut con của nut n: " + n);
             if (n.getNutsCon() == null){
                 System.out.println("nut con score: " + n.getGiaTri());
             } else {
@@ -159,6 +152,8 @@ public class SetupAi {
 
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
+        System.out.println("duyet: ");
+        debugNut(nut);
         if (nut == null) {
             System.out.println("AI does not have any step");
             return null;
@@ -166,7 +161,7 @@ public class SetupAi {
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
-        System.out.println("best score initiate: " + bestScore);
+//        System.out.println("best score initiate: " + bestScore);
 
         Nut bestNut = nut.getNutsCon().get(0);
 
@@ -175,9 +170,11 @@ public class SetupAi {
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
             if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
                 for (Nut tempNut : father.getNutsCon()) {
-                    if (tempNut.getGiaTri() > bestScore) {
+//                    System.out.println("\ntempNut: " + tempNut);
+//                    System.out.println("tempNut gia tri: " + tempNut.getGiaTri());
+                    if (!tempNut.getChesses().isEmpty() && tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
-                        System.out.println("new best score: " + bestScore);
+//                        System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
@@ -255,8 +252,6 @@ public class SetupAi {
             nhoArrayChessGoc = nhoArrayChessGoc + "_" + s;
         }
 
-        System.out.println("arrayChess: " + arryChess);
-
         ArrayList<NhoCacKhaNangThanhCong> nhoCacKhaNangThanhCongs = new ArrayList<>();
         for (int l = 0; l < temp; l++) {
             if (temp == 2 && l == 1) {  // nếu chỉ có hai quân thì chỉ cần chạy 1 lần vì đã chọn cả hai quân r
@@ -272,8 +267,6 @@ public class SetupAi {
             }
 
             arryChess = arrChessGoc;
-
-            System.out.println("\nArrayChess for: " + arryChess);
 
             // truyền các quân có thể đi đc vào mang capQuanSeDiChuyen
             layRaCapQuanDiChuyen(mauQuanSeDiChuyen);
@@ -376,8 +369,6 @@ public class SetupAi {
             aryChessIsRuns.clear();
             arrTempChessIsRun.clear();
             arryChess.clear();
-            System.out.println("nut con temp level: " + nutCon.get(i).getTempLevel());
-            System.out.println("nut con chesses: " + nutCon.get(i).getChesses());
             taoCayTroChoi(nutCon.get(i));
         }
 
@@ -422,8 +413,6 @@ public class SetupAi {
 
     private void taoLuotDi(ArrayList<Chess> mangQuanHienCo, Chess quanCoDiChuyen, int luot, boolean end) {
         String typeQuanCoDiChuyen = quanCoDiChuyen.getType();
-
-        System.out.println("mang quan hien co: " + mangQuanHienCo);
 
         if (luot == 0) {
             countNumberArray = 0;
