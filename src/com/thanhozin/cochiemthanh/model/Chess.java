@@ -40,6 +40,10 @@ public class Chess {
         return "\nChess type: " + type + " x:" + getCoverX() + " y:" + getCoverY() + "\n";
     }
 
+    public String info(){
+        return x + "-" + y + "-" + type;
+    }
+
     public int getX() {
         if (x < 40) {
             return 40;

@@ -19,6 +19,12 @@ public class Ability {
         this.y = y;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        Ability a = (Ability) o;
+        return x == a.getX() && y == a.getY();
+    }
+
     public int getX() {
         return x;
     }

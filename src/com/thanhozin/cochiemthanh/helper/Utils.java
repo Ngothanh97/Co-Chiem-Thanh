@@ -7,24 +7,7 @@ import com.thanhozin.cochiemthanh.model.Nut;
 import java.util.ArrayList;
 
 public class Utils {
-    private static char[] listXLocation = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
-    //Kiểm tra màu của quân cờ ở vị trí ô khả năng
-    private static boolean checkColor(Nut n, char typeChess, char x, int y) {
-        int temp = -1;
-        for (int i = 0; i < n.getChesses().size(); i++) {
-            if (n.getChesses().get(i).getCoverX() == x && n.getChesses().get(i).getCoverY() == y) {
-                temp = i;
-                break;
-            }
-        }
-        if (temp >= 0) {
-            if (n.getChesses().get(temp).coverType() == typeChess) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     /*
     Cover chuyển đổi tọa độ quân cờ

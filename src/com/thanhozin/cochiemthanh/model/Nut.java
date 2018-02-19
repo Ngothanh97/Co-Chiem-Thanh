@@ -1,10 +1,13 @@
 package com.thanhozin.cochiemthanh.model;
 
+import java.io.*;
 import java.util.ArrayList;
 
-public class Nut {
+public class Nut implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private int tempLevel; // đếm số thứ tự của nút trong lượt di chuyển quân bắt đầu từ 0 ở nút gốc
-    private ArrayList<Nut> nuts = null;  // Các nút con của nut
+    private ArrayList<Nut> nuts;  // Các nút con của nut
     private int giaTri;
     private ArrayList<Chess> chesses;
     private String mauQuanDiChuyen;  // Màu của quân sẽ di chuyển ở lượt xét nut tiếp theo
@@ -16,7 +19,34 @@ public class Nut {
     private String BOTTOM = "bottom";
 
     public Nut(){
+        nuts = new ArrayList<>();
+    }
 
+    public Nut(Nut n) {
+        this.chesses = n.chesses;
+        this.nuts = new ArrayList<>();
+    }
+
+    public Nut(ArrayList<Chess> chesses) {
+        this.chesses = new ArrayList<>();
+        this.nuts = new ArrayList<>();
+        String s[]; Chess a;
+
+        for (Chess c : chesses){
+            s = c.info().split("-");
+            a = new Chess(Integer.parseInt(s[0]), Integer.parseInt(s[1]), s[2]);
+            this.chesses.add(a);
+        }
+    }
+
+    @Override
+    public Nut clone(){
+        try {
+            return (Nut) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        return this;
     }
 
     @Override
@@ -35,7 +65,7 @@ public class Nut {
         int xstt = chess.getXstt();
         int ystt = chess.getCoverY();
 
-        // nếu đang ở ô bình thường
+        // nếu đang ở ô sân bay
         if ((xstt == 4 && ystt == 8 && chess.coverType() == 'W') || (xstt == 5 && ystt == 1 && chess.coverType() == 'B')){
             for (int i = 1; i <= 8; i++){
                 for (int j = 1; j <= 8; j++){

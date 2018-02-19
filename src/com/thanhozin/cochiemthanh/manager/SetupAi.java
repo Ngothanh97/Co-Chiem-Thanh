@@ -125,11 +125,97 @@ public class SetupAi {
         nut.setGiaTri(0);
         nut.setTempLevel(0);
 
-        taoCayTroChoi(nut);
+//        taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
-        Nut bestNut = duyetCay(nut);
-        return bestNut;
+        nut = duyetCay(buildTree(nut));
+        return nut;  // todo
+    }
+
+    private Nut buildTree(Nut nut){
+        tachQuanTrangVsDen(arryChess);
+        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+        int chessSize = chesses.size();
+        System.out.println("chess size: " + chessSize);
+        if (chessSize == 1) nut = buildOne(nut);
+        else if (chessSize == 2) {
+            nut = buildTwo(nut, 0, 1);
+            nut = buildTwo(nut, 1, 0);
+        }
+        else if (chessSize == 3) nut = buildAll(nut);
+        return nut;
+    }
+
+    private Nut buildAll(Nut nut) {
+        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+        if (nut == null || nut.getChesses() == null || chesses.size() != 3) return nut;
+
+        nut = buildTwo(nut, 0, 1);
+        nut = buildTwo(nut, 0, 2);
+        nut = buildTwo(nut, 1, 0);
+        nut = buildTwo(nut, 1, 2);
+        nut = buildTwo(nut, 2, 0);
+        nut = buildTwo(nut, 2, 1);
+
+        return nut;
+    }
+
+    private Nut buildTwo(Nut nut, int i, int j) { // di chuyển quân cờ thứ i trước
+        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+        if (nut == null || nut.getChesses() == null || chesses.size() < 2) return nut;
+        if (i > chesses.size() - 1 || j > chesses.size() - 1) return nut;
+
+        for (Ability ai : nut.abilities(chesses.get(i))){
+            Nut n = new Nut(nut.getChesses());
+            Chess ci = n.getChesses().get(i);
+            ci.setX(Utils.chuyen_x_ve_toa_do_may(ai.getX()));
+            ci.setY(Utils.chuyen_y_ve_toa_do_may(ai.getY()));
+
+            for (Ability aj : n.abilities(chesses.get(j))){
+                Nut nut1 = new Nut(n.getChesses());
+
+                Chess cj = nut1.getChesses().get(j);
+                cj.setX(Utils.chuyen_x_ve_toa_do_may(aj.getX()));
+                cj.setY(Utils.chuyen_y_ve_toa_do_may(aj.getY()));
+
+                nut1.setGiaTri(tinhDiem(n.getChesses()));
+                nut1.setNutFather(nut);
+                nut.getNutsCon().add(nut1);
+            }
+        }
+
+        return nut;
+    }
+
+    // when ai just has one chess
+    private Nut buildOne(Nut nut){
+        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+        if (nut == null || nut.getChesses() == null || chesses.size() != 1) return nut;
+        Chess chess = nut.getChesses().get(0);
+        Ability a = computerIsFirst ? new Ability(4, 8) : new Ability(5, 1);
+        for (Ability ability : nut.abilities(chess)){  // nếu có thể thắng thì đi nước thắng
+            if (a.equals(ability)) {
+                Nut n = new Nut(nut.getChesses());
+                Chess c = n.getChesses().get(0);
+                c.setX(Utils.chuyen_x_ve_toa_do_may(a.getX()));
+                c.setY(Utils.chuyen_y_ve_toa_do_may(a.getY()));
+                n.setGiaTri(tinhDiem(n.getChesses()));
+                n.setNutFather(nut);
+                nut.getNutsCon().add(n);
+                return nut;
+            }
+        }
+
+        // nếu không thể thắng thì đi nước nào cũng đc
+        Nut n = new Nut(nut.getChesses());
+        Chess c = n.getChesses().get(0);
+        c.setX(Utils.chuyen_x_ve_toa_do_may(nut.abilities(chess).get(0).getX()));
+        c.setY(Utils.chuyen_y_ve_toa_do_may(nut.abilities(chess).get(0).getY()));
+        n.setGiaTri(tinhDiem(n.getChesses()));
+        n.setNutFather(nut);
+        nut.getNutsCon().add(n);
+
+        return nut;
     }
 
     private void debugNut(Nut nut){
@@ -140,28 +226,26 @@ public class SetupAi {
 
         for (Nut n : nut.getNutsCon()){
             System.out.println("nut con của nut n: " + n);
-            if (n.getNutsCon() == null){
+            if (n.getNutsCon().isEmpty()){
                 System.out.println("nut con score: " + n.getGiaTri());
             } else {
                 System.out.println("\nnut con size: " + n.getNutsCon().size());
             }
-            System.out.println("nut con: ");
-            debugNut(n);
+//            System.out.println("nut con: ");
+//            debugNut(n);
         }
     }
 
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
         System.out.println("duyet: ");
-        debugNut(nut);
-        if (nut == null) {
+        if (nut == null || nut.getNutsCon() == null || nut.getNutsCon().isEmpty()) {
             System.out.println("AI does not have any step");
             return null;
         }
 
         Nut temp = getYoungestNut(nut);
         int bestScore = temp.getGiaTri();
-//        System.out.println("best score initiate: " + bestScore);
 
         Nut bestNut = nut.getNutsCon().get(0);
 
@@ -170,11 +254,8 @@ public class SetupAi {
             Nut father = temp.getNutFather(); // lấy nut cha để duyệt các anh em của nó
             if (!father.getNutsCon().isEmpty()) { // nếu vẫn còn nút con chưa duyệt
                 for (Nut tempNut : father.getNutsCon()) {
-//                    System.out.println("\ntempNut: " + tempNut);
-//                    System.out.println("tempNut gia tri: " + tempNut.getGiaTri());
                     if (!tempNut.getChesses().isEmpty() && tempNut.getGiaTri() > bestScore) {
                         bestScore = tempNut.getGiaTri();
-//                        System.out.println("new best score: " + bestScore);
                         if (getBestNut(tempNut) != null) {
                             bestNut = getBestNut(tempNut);
                         }
@@ -238,7 +319,7 @@ public class SetupAi {
         }
         arryChessNhos = nuted.getChesses();
 
-        tachQuanTrangVsDen();
+        tachQuanTrangVsDen(arryChess);
 
         // Lấy ra só lượng quân có thẻ di chuyển
         int temp = mauQuanSeDiChuyen.equalsIgnoreCase(Chess.WHITE) ? quanTrang.size() : quanDen.size();
@@ -684,14 +765,14 @@ public class SetupAi {
     Lấy ra quân cờ sẽ được di chuyển từ mảng trong NUT
     <-------------------------------------------------------------------->
      */
-    private void tachQuanTrangVsDen() {
+    private void tachQuanTrangVsDen(ArrayList<Chess> chesses) {
         quanDen.clear();
         quanTrang.clear();
-        for (Chess arryChes : arryChess) {
-            if (kiemTraQuanCoTrang(arryChes)) {
-                quanTrang.add(arryChes);
+        for (Chess chess : chesses) {
+            if (kiemTraQuanCoTrang(chess)) {
+                quanTrang.add(chess);
             } else {
-                quanDen.add(arryChes);
+                quanDen.add(chess);
             }
         }
     }
