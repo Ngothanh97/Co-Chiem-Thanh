@@ -50,7 +50,7 @@ public class SetupAi {
     //Mảng chứa các nhánh của cây, lưu trữ các
     private ArrayList<AryChessIsRun> aryChessIsRuns;
 
-    public SetupAi() {
+    SetupAi() {
         arryChess = new ArrayList<>();
         arryChessNhos = new ArrayList<>();
         quanDen = new ArrayList<>();
@@ -108,7 +108,7 @@ public class SetupAi {
                 }
             }
         }
-        score -= 60 * (3 - numOfChess);
+        score -= 100 * (3 - numOfChess);
         int i = new Random().nextInt() % 20;
         return score + i;
     }
@@ -128,8 +128,10 @@ public class SetupAi {
 //        taoCayTroChoi(nut);
         System.out.println("Thoát tạo cây:-----------------------");
         // get next best nut
-        nut = duyetCay(buildTree(nut));
-        return nut;  // todo
+        for (int i = 0; i < level; i++){
+            nut = duyetCay(buildTree(nut));
+        }
+        return nut;
     }
 
     private Nut buildTree(Nut nut){

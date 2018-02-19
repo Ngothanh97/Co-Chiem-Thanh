@@ -53,12 +53,11 @@ public class GameManager {
             if (kieuChoi == MAY_DANH_TRUOC) {
                 Chess chess1 = null;
                 Chess chess2 = null;
-                for (int i = 0; i < chesses.size(); i++) {
-                    if (chesses.get(i).getType().equals(Chess.WHITE_K)) {
-                        chess1 = chesses.get(i);
-                    }
-                    if (chesses.get(i).getType().equals(Chess.WHITE_M)) {
-                        chess2 = chesses.get(i);
+                for (Chess chess : chesses) {
+                    if (chess.getType().equals(Chess.WHITE_K)) {
+                        chess1 = chess;
+                    } else if (chess.getType().equals(Chess.WHITE_M)) {
+                        chess2 = chess;
                     }
                 }
                 chessRemember = chess1;
@@ -512,17 +511,6 @@ public class GameManager {
             abilities.add(ability4);
             abilities.add(ability5);
             abilities.add(ability6);
-            for (int i = 0; i < chesses.size(); i++) {
-                char xChess = chesses.get(i).getCoverX();
-                int yChess = chesses.get(i).getCoverY();
-                for (int j = 0; j < abilities.size(); j++) {
-                    if (Utils.coverXLocation(abilities.get(j).getX()) == xChess && Utils.chuyen_y_ve_so_thu_tu(abilities.get(j).getY()) == yChess) {
-                        abilities.remove(j);
-                        break;
-                    }
-                }
-            }
-            flagsFly = true;
         } else if (coordinatesOfX == 'e' && coordinatesOfY == 8 && chessRemember.coverType() == 'W') {
             abilities.clear();
             supreAbility();
@@ -538,35 +526,35 @@ public class GameManager {
             abilities.add(ability4);
             abilities.add(ability5);
             abilities.add(ability6);
+        } else return;
 
-            //Xóa bỏ các ô có quân cờ
-            for (int i = 0; i < chesses.size(); i++) {
-                char xChess = chesses.get(i).getCoverX();
-                int yChess = chesses.get(i).getCoverY();
-                for (int j = 0; j < abilities.size(); j++) {
-                    if (Utils.coverXLocation(abilities.get(j).getX()) == xChess && Utils.chuyen_y_ve_so_thu_tu(abilities.get(j).getY()) == yChess) {
-                        abilities.remove(j);
-                        break;
-                    }
+        //Xóa bỏ các ô có quân cờ
+        for (Chess chess : chesses) {
+            char xChess = chess.getCoverX();
+            int yChess = chess.getCoverY();
+            for (int j = 0; j < abilities.size(); j++) {
+                if (Utils.coverXLocation(abilities.get(j).getX()) == xChess && Utils.chuyen_y_ve_so_thu_tu(abilities.get(j).getY()) == yChess) {
+                    abilities.remove(j);
+                    break;
                 }
             }
-            flagsFly = true;
         }
+        flagsFly = true;
     }
 
     // add all abilities
     private void supreAbility() {
+        abilities.clear();
         for (int y = 1; y <= 8; y++) {
             for (int x = 0; x < 8; x++) {
                 char tempx = listXLocation[x];
-                if (y == 1 && tempx == 'd' || y == 1 && tempx == 'e' || y == 2 && tempx == 'c' || y == 2 && tempx == 'g' ||
-                        y == 3 && tempx == 'd' || y == 3 && tempx == 'f' || y == 6 && tempx == 'c' || y == 6 && tempx == 'e' ||
-                        y == 7 && tempx == 'b' || y == 7 && tempx == 'f' || y == 8 && tempx == 'd' || y == 8 && tempx == 'e') {
-                    return;
-                }
-
-                Ability ability = new Ability(Utils.unCoverXLocation(tempx) - 2, Utils.chuyen_y_ve_toa_do_may(y) - 2);
-                abilities.add(ability);
+                // kiểm tra ô thành, ô sân bay và các ô có thể đi vào thành
+                if ((y != 1 || tempx != 'd') && (y != 1 || tempx != 'e') && (y != 2 || tempx != 'c') && (y != 2 || tempx != 'g') &&
+                        (y != 3 || tempx != 'd') && (y != 3 || tempx != 'f') && (y != 6 || tempx != 'c') && (y != 6 || tempx != 'e') &&
+                        (y != 7 || tempx != 'b') && (y != 7 || tempx != 'f') && (y != 8 || tempx != 'd') && (y != 8 || tempx != 'e')) {
+                            Ability ability = new Ability(Utils.unCoverXLocation(tempx) - 2, Utils.chuyen_y_ve_toa_do_may(y) - 2);
+                            abilities.add(ability);
+                        }
             }
         }
     }

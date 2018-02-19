@@ -1,5 +1,6 @@
 package com.thanhozin.cochiemthanh.model;
 
+import com.thanhozin.cochiemthanh.helper.Utils;
 import com.thanhozin.cochiemthanh.manager.ImageStore;
 
 import java.awt.*;
@@ -23,6 +24,11 @@ public class Ability {
     public boolean equals(Object o) {
         Ability a = (Ability) o;
         return x == a.getX() && y == a.getY();
+    }
+
+    @Override
+    public String toString() {
+        return "x: " + Utils.chuyen_X_Ve_So_Thu_Tu(x) + " y: " + Utils.chuyen_y_ve_so_thu_tu(y);
     }
 
     public int getX() {

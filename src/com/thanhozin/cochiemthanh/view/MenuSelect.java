@@ -32,7 +32,7 @@ public class MenuSelect extends BasePanel implements Setup {
     private int checkClickPlay;
     private int checkClickLevel;
 
-    public MenuSelect() {
+    MenuSelect() {
         super();
     }
 
@@ -220,13 +220,11 @@ public class MenuSelect extends BasePanel implements Setup {
 
     }
 
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D graphics2D = (Graphics2D) g;
         graphics2D.drawImage(ImageStore.IMG_MENU_SELECT, 0, 0, 850, 709, null);
-//        graphics2D.drawImage(ImageStore.IMG_FRAME,700,0,145,709,null);
 
         if (flagPeVsCo) {
             graphics2D.drawImage(ImageStore.IMG_CHECK_BOX, 43, 110, 44, 37, null);
@@ -316,11 +314,11 @@ public class MenuSelect extends BasePanel implements Setup {
         }
     }
 
-    public void setOnScreenSwitchListener(OnScreenSwitchListener onScreenSwitchListener) {
+    void setOnScreenSwitchListener(OnScreenSwitchListener onScreenSwitchListener) {
         this.onScreenSwitchListener = onScreenSwitchListener;
     }
 
-    public void focus() {
+    void focus() {
         setFocusable(true);
         requestFocusInWindow();
     }
