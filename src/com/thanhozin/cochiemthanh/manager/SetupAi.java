@@ -81,10 +81,23 @@ public class SetupAi {
         nut.setGiaTri(0);
 
         // get next best nut
-        for (int i = 0; i < level; i++){
-            nut = duyetCay(buildTree(nut));
+        nut = buildTree(nut);
+        if (level >= 2){
+            for (Nut n : nut.getNutsCon()){
+                for (Nut nut1 : n.getNutsCon()){
+                    nut1 = buildTree(nut1);
+                    if (level == 3){
+                        for (Nut nut2 : nut1.getNutsCon()){
+                            for (Nut nut3 : nut2.getNutsCon()){
+                                nut3 = buildTree(nut3);
+                            }
+                        }
+                    }
+                }
+            }
         }
-        return nut;
+        debugNut(nut);
+        return duyetCay(nut);
     }
 
     private Nut buildTree(Nut nut){
@@ -173,20 +186,24 @@ public class SetupAi {
     }
 
     private void debugNut(Nut nut){
-        System.out.println("\nnut: " + nut);
-        if (nut.getNutsCon() == null){
-            return;
-        }
-
-        for (Nut n : nut.getNutsCon()){
-            System.out.println("nut con của nut n: " + n);
-            if (n.getNutsCon().isEmpty()){
-                System.out.println("nut con score: " + n.getGiaTri());
-            } else {
-                System.out.println("\nnut con size: " + n.getNutsCon().size());
+        if (!nut.getNutsCon().isEmpty()){
+            System.out.println("\nnut: ");
+            if (nut.getNutsCon() == null){
+                return;
             }
-//            System.out.println("nut con: ");
-//            debugNut(n);
+
+            System.out.println("\nnut con size: " + nut.getNutsCon().size());
+
+            for (Nut n : nut.getNutsCon()){
+//            System.out.println("nut con của nut n: " + n);
+//            if (n.getNutsCon().isEmpty()){
+//                System.out.println("nut con score: " + n.getGiaTri());
+//            } else {
+//                System.out.println("\nnut con size: " + n.getNutsCon().size());
+//            }
+//                System.out.println("nut con: ");
+                debugNut(n);
+            }
         }
     }
 

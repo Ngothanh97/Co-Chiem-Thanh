@@ -160,7 +160,6 @@ public class GameManager {
                     if (!chessIsLastMove.getType().equals(chess.getType())) {
                         //Lượt đi lớn hơn 2 là quân trắng
                         if (luotdi > 2 || luotdi == 0) {
-                            boolean a;
                             if (kieuChoi == MAY_DANH_TRUOC) {
                                 return;
                             } else if (kieuChoi == NGUOI_DANH_TRUOC) {
@@ -236,7 +235,6 @@ public class GameManager {
             chesses.remove(tempIndexChess);
             abilities.clear();
             moveChess(coordinatesOfX, coordinatesOfY);
-//            anQuan();
         } else {
             if (clickIsChess) {
             /*
@@ -442,13 +440,10 @@ public class GameManager {
             chesses.get(tempChess).setY(Utils.chuyen_y_ve_toa_do_may(coordinatesOfY));
         }
 
-        // nếu vào ô sân bay
-        moveToTheAirport(coordinatesOfX, coordinatesOfY);
-
         if (luotdi == 0) {
             luotdi = 4;
         }
-        if (!flagsFly) {
+        if (!moveToTheAirport(coordinatesOfX, coordinatesOfY)) { // kiểm tra xem có vào ô sân bay hay không để trừ lượt đi
             int countTrang = 0;
             int countDen = 0;
             for (Chess chess : chesses) {
@@ -495,7 +490,7 @@ public class GameManager {
         }
     }
 
-    private void moveToTheAirport(char coordinatesOfX, int coordinatesOfY){
+    private boolean moveToTheAirport(char coordinatesOfX, int coordinatesOfY){
         if (coordinatesOfX == 'd' && coordinatesOfY == 1 && chessRemember.coverType() == 'B') {
             abilities.clear();
             supreAbility();
@@ -526,7 +521,7 @@ public class GameManager {
             abilities.add(ability4);
             abilities.add(ability5);
             abilities.add(ability6);
-        } else return;
+        } else return false;
 
         //Xóa bỏ các ô có quân cờ
         for (Chess chess : chesses) {
@@ -539,7 +534,9 @@ public class GameManager {
                 }
             }
         }
+
         flagsFly = true;
+        return true;
     }
 
     // add all abilities
@@ -596,10 +593,10 @@ public class GameManager {
         for (int i = 0; i < chesses.size(); i++) {
             Chess chess1 = chesses.get(i);
             if (chess1.getX() == chessRemember.getX() && chess1.getY() == chessRemember.getY()
-                    && !chesses.get(i).getType().equals(chessRemember.getType())) {
+                    && chesses.get(i).coverType() != chessRemember.coverType()) {
                 chesses.remove(i);
+                break;
             }
-
         }
     }
 }
