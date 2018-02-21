@@ -472,6 +472,10 @@ public class GameManager {
             } else if (kieuChoi == NGUOI_DANH_TRUOC && luotdi == 2) {
                 chayAi();
             }
+        } else {
+            if (kieuChoi != HAI_NGUOI_CHOI){
+                // todo khi ai đi vào ô sân bay nhưng k biết bay
+            }
         }
         chessIsLastMove = chessRemember;
         anQuan();

@@ -80,55 +80,78 @@ public class SetupAi {
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
         nut.setGiaTri(0);
 
-        // get next best nut
-        nut = buildTree(nut);
+        nut = buildTree(nut, true);
         if (level >= 2){
-            for (Nut n : nut.getNutsCon()){
-                for (Nut nut1 : n.getNutsCon()){
-                    nut1 = buildTree(nut1);
-                    if (level == 3){
-                        for (Nut nut2 : nut1.getNutsCon()){
-                            for (Nut nut3 : nut2.getNutsCon()){
-                                nut3 = buildTree(nut3);
+            ArrayList<Nut> ns = new ArrayList<>();
+            for (Nut n : nut.getNutsCon()){ // lượt của người chơi
+                n = buildTree(n, false);
+                ArrayList<Nut> nuts1 = new ArrayList<>();
+                for (Nut nut1 : n.getNutsCon()){  // lượt của máy
+                    nut1 = buildTree(nut1, true);
+
+                    if (level == 3) {
+                        ArrayList<Nut> nuts2 = new ArrayList<>();
+                        for (Nut nut2 : nut1.getNutsCon()) { // lượt của người chơi
+                            nut2 = buildTree(nut2, false);
+                            ArrayList<Nut> nuts3 = new ArrayList<>();
+                            for (Nut nut3 : nut2.getNutsCon()) {
+                                nut3 = buildTree(nut3, true);
+                                nuts3.add(nut3);
                             }
+                            nut2.setNutsCon(nuts3);
+                            nuts2.add(nut2);
                         }
+                        nut1.setNutsCon(nuts2);
                     }
+
+                    nuts1.add(nut1);
                 }
+                n.setNutsCon(nuts1);
+                ns.add(n);
             }
+            nut.setNutsCon(ns);
         }
         debugNut(nut);
         return duyetCay(nut);
     }
 
-    private Nut buildTree(Nut nut){
-        tachQuanTrangVsDen(nut.getChesses());
-        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
-        int chessSize = chesses.size();
-        if (chessSize == 1) nut = buildOne(nut);
-        else if (chessSize == 2) {
-            nut = buildTwo(nut, 0, 1);
-            nut = buildTwo(nut, 1, 0);
+    private Nut buildTree(Nut nut, boolean isComputer){
+        if (nut.getGiaTri() > 10000 || nut.getGiaTri() < -10000) {
+            Nut n = new Nut(nut.getChesses());
+            n.setGiaTri(tinhDiem(nut.getChesses()));
+            n.setNutFather(nut);
+            nut.getNutsCon().add(n);
+            return nut;
         }
-        else if (chessSize == 3) nut = buildAll(nut);
+        tachQuanTrangVsDen(nut.getChesses());
+        ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
+        int chessSize = chesses.size();
+        if (chessSize == 1) nut = buildOne(nut, isComputer);
+        else if (chessSize == 2) {
+            nut = buildTwo(nut, 0, 1, isComputer);
+            nut = buildTwo(nut, 1, 0, isComputer);
+        }
+        else if (chessSize == 3) nut = buildAll(nut, isComputer);
+        System.out.println("new nut con size: " + nut.getNutsCon().size());
         return nut;
     }
 
-    private Nut buildAll(Nut nut) {
-        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+    private Nut buildAll(Nut nut, boolean isComputer) {
+        ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() != 3) return nut;
 
-        nut = buildTwo(nut, 0, 1);
-        nut = buildTwo(nut, 0, 2);
-        nut = buildTwo(nut, 1, 0);
-        nut = buildTwo(nut, 1, 2);
-        nut = buildTwo(nut, 2, 0);
-        nut = buildTwo(nut, 2, 1);
+        nut = buildTwo(nut, 0, 1, isComputer);
+        nut = buildTwo(nut, 0, 2, isComputer);
+        nut = buildTwo(nut, 1, 0, isComputer);
+        nut = buildTwo(nut, 1, 2, isComputer);
+        nut = buildTwo(nut, 2, 0, isComputer);
+        nut = buildTwo(nut, 2, 1, isComputer);
 
         return nut;
     }
 
-    private Nut buildTwo(Nut nut, int i, int j) { // di chuyển quân cờ thứ i trước
-        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+    private Nut buildTwo(Nut nut, int i, int j, boolean isComputer) { // di chuyển quân cờ thứ i trước
+        ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() < 2) return nut;
         if (i > chesses.size() - 1 || j > chesses.size() - 1) return nut;
 
@@ -155,11 +178,11 @@ public class SetupAi {
     }
 
     // when ai just has one chess
-    private Nut buildOne(Nut nut){
-        ArrayList<Chess> chesses = computerIsFirst ? quanTrang : quanDen;
+    private Nut buildOne(Nut nut, boolean isComputer){
+        ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() != 1) return nut;
         Chess chess = nut.getChesses().get(0);
-        Ability a = computerIsFirst ? new Ability(4, 8) : new Ability(5, 1);
+        Ability a = computerIsFirst && isComputer ? new Ability(4, 8) : new Ability(5, 1);
         for (Ability ability : nut.abilities(chess)){  // nếu có thể thắng thì đi nước thắng
             if (a.equals(ability)) {
                 Nut n = new Nut(nut.getChesses());

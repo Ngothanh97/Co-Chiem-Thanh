@@ -1,6 +1,5 @@
 package com.thanhozin.cochiemthanh.model;
 
-import java.io.*;
 import java.util.ArrayList;
 
 public class Nut {
@@ -126,6 +125,10 @@ public class Nut {
             }
         }
         return listAbilities;
+    }
+
+    public void setNutsCon(ArrayList<Nut> nuts) {
+        this.nuts = nuts;
     }
 
     public ArrayList<Nut> getNutsCon() {
