@@ -47,7 +47,7 @@ public class Nut {
         if ((xstt == 4 && ystt == 8 && chess.coverType() == 'W') || (xstt == 5 && ystt == 1 && chess.coverType() == 'B')) {
             for (int i = 1; i <= 8; i++) {
                 for (int j = 1; j <= 8; j++) {
-                    if (isOk(xstt, ystt)) {
+                    if (isOk(i, j)) {
                         abilities.add(new Ability(i, j));
                     }
                 }
@@ -70,7 +70,7 @@ public class Nut {
                 if (xstt < 8) abilities.add(new Ability(xstt + 1, ystt + 2));
             }
         }
-        removeAlready(abilities);
+        abilities = removeAlready(abilities);
         return abilities;
     }
 
