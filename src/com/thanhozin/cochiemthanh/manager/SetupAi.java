@@ -80,22 +80,25 @@ public class SetupAi {
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
         nut.setGiaTri(0);
 
-        nut = buildTree(nut, true);
-        if (level >= 2){
+        if (level == 1){
+            nut = buildTree(nut, true, true);
+        } else if (level >= 2){
+            nut = buildTree(nut, true, false);
+
             ArrayList<Nut> ns = new ArrayList<>();
             for (Nut n : nut.getNutsCon()){ // lượt của người chơi
-                n = buildTree(n, false);
+                n = buildTree(n, false, false);
                 ArrayList<Nut> nuts1 = new ArrayList<>();
                 for (Nut nut1 : n.getNutsCon()){  // lượt của máy
-                    nut1 = buildTree(nut1, true);
+                    nut1 = buildTree(nut1, true, false);
 
                     if (level == 3) {
                         ArrayList<Nut> nuts2 = new ArrayList<>();
                         for (Nut nut2 : nut1.getNutsCon()) { // lượt của người chơi
-                            nut2 = buildTree(nut2, false);
+                            nut2 = buildTree(nut2, false, false);
                             ArrayList<Nut> nuts3 = new ArrayList<>();
                             for (Nut nut3 : nut2.getNutsCon()) {
-                                nut3 = buildTree(nut3, true);
+                                nut3 = buildTree(nut3, true, true);
                                 nuts3.add(nut3);
                             }
                             nut2.setNutsCon(nuts3);
@@ -103,7 +106,6 @@ public class SetupAi {
                         }
                         nut1.setNutsCon(nuts2);
                     }
-
                     nuts1.add(nut1);
                 }
                 n.setNutsCon(nuts1);
@@ -115,7 +117,7 @@ public class SetupAi {
         return duyetCay(nut);
     }
 
-    private Nut buildTree(Nut nut, boolean isComputer){
+    private Nut buildTree(Nut nut, boolean isComputer, boolean compare){
         if (nut.getGiaTri() > 10000 || nut.getGiaTri() < -10000) {
             Nut n = new Nut(nut.getChesses());
             n.setGiaTri(tinhDiem(nut.getChesses()));
@@ -128,29 +130,29 @@ public class SetupAi {
         int chessSize = chesses.size();
         if (chessSize == 1) nut = buildOne(nut, isComputer);
         else if (chessSize == 2) {
-            nut = buildTwo(nut, 0, 1, isComputer);
-            nut = buildTwo(nut, 1, 0, isComputer);
+            nut = buildTwo(nut, 0, 1, isComputer, compare);
+            nut = buildTwo(nut, 1, 0, isComputer, compare);
         }
-        else if (chessSize == 3) nut = buildAll(nut, isComputer);
+        else if (chessSize == 3) nut = buildAll(nut, isComputer, compare);
         System.out.println("new nut con size: " + nut.getNutsCon().size());
         return nut;
     }
 
-    private Nut buildAll(Nut nut, boolean isComputer) {
+    private Nut buildAll(Nut nut, boolean isComputer, boolean compare) {
         ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() != 3) return nut;
 
-        nut = buildTwo(nut, 0, 1, isComputer);
-        nut = buildTwo(nut, 0, 2, isComputer);
-        nut = buildTwo(nut, 1, 0, isComputer);
-        nut = buildTwo(nut, 1, 2, isComputer);
-        nut = buildTwo(nut, 2, 0, isComputer);
-        nut = buildTwo(nut, 2, 1, isComputer);
+        nut = buildTwo(nut, 0, 1, isComputer, compare);
+        nut = buildTwo(nut, 0, 2, isComputer, compare);
+        nut = buildTwo(nut, 1, 0, isComputer, compare);
+        nut = buildTwo(nut, 1, 2, isComputer, compare);
+        nut = buildTwo(nut, 2, 0, isComputer, compare);
+        nut = buildTwo(nut, 2, 1, isComputer, compare);
 
         return nut;
     }
 
-    private Nut buildTwo(Nut nut, int i, int j, boolean isComputer) { // di chuyển quân cờ thứ i trước
+    private Nut buildTwo(Nut nut, int i, int j, boolean isComputer, boolean compare) { // di chuyển quân cờ thứ i trước
         ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() < 2) return nut;
         if (i > chesses.size() - 1 || j > chesses.size() - 1) return nut;
@@ -168,9 +170,21 @@ public class SetupAi {
                 cj.setX(Utils.chuyen_x_ve_toa_do_may(aj.getX()));
                 cj.setY(Utils.chuyen_y_ve_toa_do_may(aj.getY()));
 
-                nut1.setGiaTri(tinhDiem(n.getChesses()));
-                nut1.setNutFather(nut);
-                nut.getNutsCon().add(nut1);
+                if ((computerIsFirst && isComputer && aj.equals(new Ability(5, 8))) ||
+                        (!(computerIsFirst && isComputer) && aj.equals(new Ability(4, 1)))){  // nếu vào ô sân bay
+                    for (Ability aflight : n.abilities(cj)){
+                        cj.setX(Utils.chuyen_x_ve_toa_do_may(aflight.getX()));
+                        cj.setY(Utils.chuyen_y_ve_toa_do_may(aflight.getY()));
+
+                        nut1.setGiaTri(tinhDiem(n.getChesses()));
+                        nut1.setNutFather(nut);
+                        nut.getNutsCon().add(nut1);
+                    }
+                } else {
+                    nut1.setGiaTri(tinhDiem(n.getChesses()));
+                    nut1.setNutFather(nut);
+                    nut.getNutsCon().add(nut1);
+                }
             }
         }
 
@@ -199,8 +213,14 @@ public class SetupAi {
         // nếu không thể thắng thì đi nước nào cũng đc
         Nut n = new Nut(nut.getChesses());
         Chess c = n.getChesses().get(0);
-        c.setX(Utils.chuyen_x_ve_toa_do_may(nut.abilities(chess).get(0).getX()));
-        c.setY(Utils.chuyen_y_ve_toa_do_may(nut.abilities(chess).get(0).getY()));
+        Ability inflight = nut.abilities(chess).get(0);
+        if ((computerIsFirst && isComputer && inflight.equals(new Ability(5, 8))) ||
+                (!(computerIsFirst && isComputer) && inflight.equals(new Ability(4, 1)))){
+            inflight = nut.abilities(chess).get(1);
+        }
+
+        c.setX(Utils.chuyen_x_ve_toa_do_may(inflight.getX()));
+        c.setY(Utils.chuyen_y_ve_toa_do_may(inflight.getY()));
         n.setGiaTri(tinhDiem(n.getChesses()));
         n.setNutFather(nut);
         nut.getNutsCon().add(n);
@@ -232,6 +252,8 @@ public class SetupAi {
 
     //Hàm Duyệt cây
     private Nut duyetCay(Nut nut) {
+        // todo duyet cay cung luc voi tao cay de giam bo nho va thoi gian buildTree
+
         if (nut == null || nut.getNutsCon() == null || nut.getNutsCon().isEmpty()) {
             System.out.println("AI does not have any step");
             return null;
