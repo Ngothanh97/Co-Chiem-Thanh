@@ -30,7 +30,6 @@ nếu vào ô sân bay
 	khi thoát ai, cho nó bước vào ô sân bay và bước đi
  */
 public class SetupAi {
-    private static final String PATH = "chiemthanhfile.txt";
     private int[][] diemBanCoCuaMay;
     private int[][] diemBanCoCuaNguoiChoi;
     private boolean computerIsFirst;
@@ -78,27 +77,24 @@ public class SetupAi {
     Nut khoiChayAi(ArrayList<Chess> aryChess, String mauQuanDiChuyen) {
         Nut nut = new Nut(aryChess);
         nut.setMauQuanDiChuyen(mauQuanDiChuyen);
-        nut.setGiaTri(0);
+        nut.setGiaTri(-10000);
 
-        if (level == 1){
-            nut = buildTree(nut, true, true);
-        } else if (level >= 2){
-            nut = buildTree(nut, true, false);
-
+        nut = buildTree(nut, true);
+        if (level >= 2){
             ArrayList<Nut> ns = new ArrayList<>();
             for (Nut n : nut.getNutsCon()){ // lượt của người chơi
-                n = buildTree(n, false, false);
+                n = buildTree(n, false);
                 ArrayList<Nut> nuts1 = new ArrayList<>();
                 for (Nut nut1 : n.getNutsCon()){  // lượt của máy
-                    nut1 = buildTree(nut1, true, false);
+                    nut1 = buildTree(nut1, true);
 
                     if (level == 3) {
                         ArrayList<Nut> nuts2 = new ArrayList<>();
                         for (Nut nut2 : nut1.getNutsCon()) { // lượt của người chơi
-                            nut2 = buildTree(nut2, false, false);
+                            nut2 = buildTree(nut2, false);
                             ArrayList<Nut> nuts3 = new ArrayList<>();
                             for (Nut nut3 : nut2.getNutsCon()) {
-                                nut3 = buildTree(nut3, true, true);
+                                nut3 = buildTree(nut3, true);
                                 nuts3.add(nut3);
                             }
                             nut2.setNutsCon(nuts3);
@@ -117,8 +113,8 @@ public class SetupAi {
         return duyetCay(nut);
     }
 
-    private Nut buildTree(Nut nut, boolean isComputer, boolean compare){
-        if (nut.getGiaTri() > 10000 || nut.getGiaTri() < -10000) {
+    private Nut buildTree(Nut nut, boolean isComputer){
+        if (nut.getGiaTri() > 10000) {
             Nut n = new Nut(nut.getChesses());
             n.setGiaTri(tinhDiem(nut.getChesses()));
             n.setNutFather(nut);
@@ -130,29 +126,28 @@ public class SetupAi {
         int chessSize = chesses.size();
         if (chessSize == 1) nut = buildOne(nut, isComputer);
         else if (chessSize == 2) {
-            nut = buildTwo(nut, 0, 1, isComputer, compare);
-            nut = buildTwo(nut, 1, 0, isComputer, compare);
+            nut = buildTwo(nut, 0, 1, isComputer);
+            nut = buildTwo(nut, 1, 0, isComputer);
         }
-        else if (chessSize == 3) nut = buildAll(nut, isComputer, compare);
-        System.out.println("new nut con size: " + nut.getNutsCon().size());
+        else if (chessSize == 3) nut = buildAll(nut, isComputer);
         return nut;
     }
 
-    private Nut buildAll(Nut nut, boolean isComputer, boolean compare) {
+    private Nut buildAll(Nut nut, boolean isComputer) {
         ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() != 3) return nut;
 
-        nut = buildTwo(nut, 0, 1, isComputer, compare);
-        nut = buildTwo(nut, 0, 2, isComputer, compare);
-        nut = buildTwo(nut, 1, 0, isComputer, compare);
-        nut = buildTwo(nut, 1, 2, isComputer, compare);
-        nut = buildTwo(nut, 2, 0, isComputer, compare);
-        nut = buildTwo(nut, 2, 1, isComputer, compare);
+        nut = buildTwo(nut, 0, 1, isComputer);
+        nut = buildTwo(nut, 0, 2, isComputer);
+        nut = buildTwo(nut, 1, 0, isComputer);
+        nut = buildTwo(nut, 1, 2, isComputer);
+        nut = buildTwo(nut, 2, 0, isComputer);
+        nut = buildTwo(nut, 2, 1, isComputer);
 
         return nut;
     }
 
-    private Nut buildTwo(Nut nut, int i, int j, boolean isComputer, boolean compare) { // di chuyển quân cờ thứ i trước
+    private Nut buildTwo(Nut nut, int i, int j, boolean isComputer) { // di chuyển quân cờ thứ i trước
         ArrayList<Chess> chesses = computerIsFirst && isComputer ? quanTrang : quanDen;
         if (nut == null || nut.getChesses() == null || chesses.size() < 2) return nut;
         if (i > chesses.size() - 1 || j > chesses.size() - 1) return nut;
@@ -181,9 +176,17 @@ public class SetupAi {
                         nut.getNutsCon().add(nut1);
                     }
                 } else {
-                    nut1.setGiaTri(tinhDiem(n.getChesses()));
-                    nut1.setNutFather(nut);
-                    nut.getNutsCon().add(nut1);
+                    int s = tinhDiem(n.getChesses());
+                    if (s > -10000) {  // nếu điểm < -10000 -> người chơi thắng -> ignore k thêm nó vào
+                        // nếu là ai thì lấy max, người chơi thì lấy min
+                        if ((isComputer && s > nut.getGiaTri()) || (!isComputer && s < nut.getGiaTri())){
+                            nut1.setGiaTri(s);
+                            nut1.setNutFather(nut);
+                            nut.getNutsCon().add(nut1);
+                        } else {
+                            return nut;
+                        }
+                    }
                 }
             }
         }
@@ -214,6 +217,8 @@ public class SetupAi {
         Nut n = new Nut(nut.getChesses());
         Chess c = n.getChesses().get(0);
         Ability inflight = nut.abilities(chess).get(0);
+
+        // nếu nước đầu tiên vào ô sân bay thì chọn nước thứ hai
         if ((computerIsFirst && isComputer && inflight.equals(new Ability(5, 8))) ||
                 (!(computerIsFirst && isComputer) && inflight.equals(new Ability(4, 1)))){
             inflight = nut.abilities(chess).get(1);
