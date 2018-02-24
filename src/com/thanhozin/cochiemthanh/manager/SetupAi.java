@@ -138,10 +138,10 @@ public class SetupAi {
         if (nut == null || nut.getChesses() == null || chesses.size() != 3) return nut;
 
         nut = buildTwo(nut, 0, 1, isComputer);
-        nut = buildTwo(nut, 0, 2, isComputer);
-        nut = buildTwo(nut, 1, 0, isComputer);
         nut = buildTwo(nut, 1, 2, isComputer);
         nut = buildTwo(nut, 2, 0, isComputer);
+        nut = buildTwo(nut, 0, 2, isComputer);
+        nut = buildTwo(nut, 1, 0, isComputer);
         nut = buildTwo(nut, 2, 1, isComputer);
 
         return nut;
