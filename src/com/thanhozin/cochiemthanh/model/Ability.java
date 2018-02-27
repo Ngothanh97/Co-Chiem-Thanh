@@ -28,7 +28,7 @@ public class Ability {
 
     @Override
     public String toString() {
-        return "x: " + Utils.chuyen_X_Ve_So_Thu_Tu(x) + " y: " + Utils.chuyen_y_ve_so_thu_tu(y);
+        return "x: " + Utils.chuyenXVeSoThuTu(x) + " y: " + Utils.chuyenYVeSoThuTu(y);
     }
 
     public int getX() {

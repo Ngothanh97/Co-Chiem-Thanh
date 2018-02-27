@@ -4,7 +4,6 @@ import com.thanhozin.cochiemthanh.helper.Utils;
 import com.thanhozin.cochiemthanh.manager.ImageStore;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Created by ThanhND on 10/23/2017.
@@ -57,7 +56,7 @@ public class Chess {
     }  // machine
 
     public int getXstt(){
-        return Utils.chuyen_X_Ve_So_Thu_Tu(getX());  // coder
+        return Utils.chuyenXVeSoThuTu(getX());  // coder
     }
 
     public char getCoverX() {
@@ -65,7 +64,7 @@ public class Chess {
     }  // user
 
     public int getCoverY() {
-        return Utils.chuyen_y_ve_so_thu_tu(y);
+        return Utils.chuyenYVeSoThuTu(y);
     } // user
 
     public String getType() {

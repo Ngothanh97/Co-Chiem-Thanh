@@ -13,7 +13,7 @@ public class Utils {
     Cover chuyển đổi tọa độ quân cờ
     <------------------------------------------------------------------------>
      */
-    public static int chuyen_X_Ve_So_Thu_Tu(int xLocation) {
+    public static int chuyenXVeSoThuTu(int xLocation) {
         if (xLocation >= 34 && xLocation < 111) {
             return 1;
         }
@@ -41,7 +41,7 @@ public class Utils {
         return 0;
     }
 
-    public static int chuyen_y_ve_so_thu_tu(int yLocation) {
+    public static int chuyenYVeSoThuTu(int yLocation) {
         if (yLocation >= 35 && yLocation < 110) {
             return 1;
         }
@@ -69,7 +69,7 @@ public class Utils {
         return 0;
     }
 
-    public static int chuyen_x_ve_toa_do_may(int numberOfX) {
+    public static int chuyenXVeToaDoMay(int numberOfX) {
         switch (numberOfX) {
             case 1:
                 return 36;
@@ -92,7 +92,7 @@ public class Utils {
         }
     }
 
-    public static int chuyen_y_ve_toa_do_may(int intY) {
+    public static int chuyenYVeToaDoMay(int intY) {
         switch (intY) {
             case 1:
                 return 37;
